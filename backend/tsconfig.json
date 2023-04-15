@@ -8,7 +8,6 @@
     ],
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "strict": false,
     "skipLibCheck": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
