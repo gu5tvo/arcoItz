@@ -6,5 +6,29 @@
   "repository": "https://github.com/IFMA-ENGETECH/arcoItz",
   "author": "SQUAD-1-ENGETECH",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "scripts": {
+    "start": "node dist/server.js",
+    "dev": "tsx src/server.ts",
+    "build": "tsc",
+    "test": "jest"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.0.3",
+    "uuid": "^9.0.0",
+    "yup": "^1.1.1"
+  },
+  "devDependencies": {
+    "jest": "^29.5.0",
+    "supertest": "^6.3.3",
+    "ts-jest": "^29.1.0",
+    "tsx": "^3.12.6",
+    "typescript": "^5.0.4"
+  }
 }
