@@ -1,0 +1,10 @@
+{
+  "name": "curricular-api",
+  "version": "1.0.0",
+  "description": "API do sistema curricular.",
+  "main": "src/server.ts",
+  "repository": "https://github.com/IFMA-ENGETECH/arcoItz",
+  "author": "SQUAD-1-ENGETECH",
+  "license": "MIT",
+  "private": true
+}
