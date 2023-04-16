@@ -1,0 +1,1 @@
+export const saveUser = async (user)=> await user.save()
