@@ -1,7 +1,6 @@
 import * as yup from 'yup'
 
 // Esquemas de validadação de ENTRADA
-
 export const registerSchema = yup.object().shape({
     name: yup.string().required().matches(/^[a-zA-Z ]+$/, 'Nome deve conter apenas letras'),
     email: yup.string().required().email(),
@@ -9,7 +8,6 @@ export const registerSchema = yup.object().shape({
 })
 
 // Esquemas de validação de SAÍDA
-
 export const registerSerializer = yup.object().shape({
     id: yup.string().required(),
     avatar: yup.string(),
