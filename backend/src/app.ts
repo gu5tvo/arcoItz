@@ -9,7 +9,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-// mapeamento da rota '/login' para o roteador loginRouter (operação do tipo POST)
+// mapeamento da rota '/login' para o roteador loginRouter
 app.use('/login', loginRouter)
 
 app.use(errorHandler)
