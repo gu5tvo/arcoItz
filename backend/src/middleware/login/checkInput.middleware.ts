@@ -1,28 +1,24 @@
 import { Request, Response, NextFunction } from 'express'
 import AppError from '../../errors'
-import { loginSchema } from '../../schemas/login.schema'
 import User from '../../model/user.model'
 import bcrypt from 'bcryptjs'
 
 // verificação de email e senha, comparação com os dados do banco de dados
 export default async function checkInputLoginMiddleware(req: Request, res: Response, next: NextFunction): Promise<void> {
 
-    // validate() joga um erro se o body for inválido, é preciso do try catch
-    try {
-        const { email, password } = await loginSchema.validate(req.body)
-        
-        const user = await User.findOne({ email: email })
-        if (!user) throw new Error
+    const { email, password } = req.body
+    if (!email || !password) throw new AppError('Email e senha são obrigatórios', 400)
 
-        const checkPassword = await bcrypt.compare(password, user.password)
+    // verifica se o email é válido
+    const user = await User.findOne({ email })
+    if (!user) throw new AppError('Email ou senha incorretos', 400)
 
-        if (!checkPassword) throw new Error
+    // verifica se a senha é válida
+    const checkPassword = await bcrypt.compare(password, user.password)
+    if (!checkPassword) throw new AppError('Email ou senha incorretos', 400)
 
-        // transmite o id para a próxima etapa, para ser armazenado no token
-        req.body.id = user.id;
-        return next();
+    // adiciona o id do usuário na requisição
+    req.user.id = user.id;
 
-    } catch(err) {
-        throw new AppError('Credenciais de login inválidas', 400)
-    }
+    return next();
 }
