@@ -20,7 +20,7 @@ export default async function registerController(req: Request, res: Response) {
 
     saveUser(user)
     
-    const sanitizedUser = await registerSerializer.validate({ ...user, password: undefined })
+    const validatedUser = await registerSerializer.validate({...user.toObject(), password: undefined})
     
-    return res.status(201).json({ user })
+    return res.status(201).json({ sanitizedUser: validatedUser })
 }
