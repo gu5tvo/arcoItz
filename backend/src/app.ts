@@ -8,30 +8,10 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
+//Essa linha de código adiciona um roteador para a aplicação Express na rota /register,
+// o que significa que as solicitações feitas nessa rota serão tratadas 
+//pelo conjunto de manipuladores de rota e middleware associados ao registerRouter.
 app.use('/register', registerRouter)
-
-// http://localhost:5173/register
-
-// {
-//     "name":"edgar",
-//     "email":"nada1@hotmail.com",
-//     "password":"edgar123"
-// }
-
-
-
-/*
-
-{
-	"user": {
-		"id": "62fba418-5113-4319-aa63-e6d8bc5fd2a6",
-		"name": "edgar",
-		"email": "nada23@hotmail.com",
-		"password": "$2a$12$4nnYXHrtM0.9FsmX/Jw0FuVTcGUlbjICgnHHnYT6zEmLPfK5cLMeK",
-		"_id": "643b5b672c21a5b8149b3a78"
-	}
-}
-*/
 
 app.use(errorHandler)
 export default app;
