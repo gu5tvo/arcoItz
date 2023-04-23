@@ -2,15 +2,18 @@ import express from 'express'
 import 'express-async-errors'
 import cors from 'cors'
 
-import loginRouter from './routes/loginRouter'
-
 import { errorHandler } from './errors'
+
+import loginRouter from './routes/loginRouter'
+import registerRouter from './routes/registerRouter'
+
 const app = express()
 app.use(cors())
 app.use(express.json())
 
-// mapeamento da rota '/login' para o roteador loginRouter
+// Rotas
 app.use('/login', loginRouter)
+app.use('/register', registerRouter)
 
 app.use(errorHandler)
 export default app;
