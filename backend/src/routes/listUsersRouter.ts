@@ -1,7 +1,7 @@
-import express from 'express'
+import {Router} from 'express'
 import listUsersController from '../controllers/listUsers.controller'
 
-const listUsersRouter = express()
+const listUsersRouter = Router()
 
 listUsersRouter.get('', listUsersController)
 
