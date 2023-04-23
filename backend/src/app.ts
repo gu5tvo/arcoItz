@@ -8,9 +8,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-//Essa linha de código adiciona um roteador para a aplicação Express na rota /register,
-// o que significa que as solicitações feitas nessa rota serão tratadas 
-//pelo conjunto de manipuladores de rota e middleware associados ao registerRouter.
+// Rotas
 app.use('/register', registerRouter)
 
 app.use(errorHandler)
