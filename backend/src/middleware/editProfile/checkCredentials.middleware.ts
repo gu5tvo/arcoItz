@@ -13,7 +13,7 @@ export default async function checkCredentialsMiddleware(req: Request, res: Resp
     if (path != id) throw new AppError("Credenciais para edição de perfil inválidas", 403)
 
     // Armazena o id para ser usado no controller
-    req.body.id = id
+    req.user = id
 
     next()
 }
