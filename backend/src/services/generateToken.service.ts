@@ -10,4 +10,4 @@ export const generateTokenService = (userId: string) => {
     return token;
 }
 
-// Service para a rota '/login', responsável por gerar o token de autenticação do usuário.
+/// Service para a rota '/login', responsável por gerar o token de autenticação do usuário.
