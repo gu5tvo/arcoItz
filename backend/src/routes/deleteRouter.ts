@@ -7,6 +7,6 @@ import checkUserExistenceMiddleware from '../middleware/delete/checkUserExistenc
 
 const deleteRouter = Router()
 
-deleteRouter.delete('', verifyShape(deleteSchema), checkCredentialsMiddleware, checkUserExistenceMiddleware, deleteController)
+deleteRouter.delete('/:id', verifyShape(deleteSchema), checkCredentialsMiddleware, checkUserExistenceMiddleware, deleteController)
 
 export default deleteRouter

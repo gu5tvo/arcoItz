@@ -18,11 +18,8 @@ export default async function checkInputLoginMiddleware(req: Request, res: Respo
     const checkPassword = await bcrypt.compare(password, user.password)
     if (!checkPassword) throw new AppError('Email ou senha incorretos', 400)
     
-    console.log(req.user)
     // adiciona o id do usuário na requisição
     req.user =  { id: user.id }
-    
-    console.log(req.user)
 
     return next();
 }

@@ -15,7 +15,7 @@ app.use(express.json())
 // Rotas
 app.use('/login', loginRouter)
 app.use('/register', registerRouter)
-app.use('/delete/:id', deleteRouter)
+app.use('/delete', deleteRouter)
 
 app.use(errorHandler)
 export default app;
