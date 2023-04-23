@@ -8,12 +8,12 @@ export default async function checkCredentialsMiddleware(req: Request, res: Resp
     const path = req.originalUrl.split('/')[2]
     
     const { token } = req.body
-    const { id } = await jwt.verify(token, process.env.SECRET_KEY)
-
+    const { id } = await jwt.verify(token, process.env.SECRET_KEY)   
+    
     if (path != id) throw new AppError("Credenciais para deleção inválidas", 403)
 
     // Armazena o id para ser usado no controller
-    req.body.id = id
+    req.user = { id }
 
     next()
 }
