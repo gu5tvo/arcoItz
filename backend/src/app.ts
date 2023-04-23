@@ -7,7 +7,6 @@ import { errorHandler } from './errors'
 import loginRouter from './routes/loginRouter'
 import registerRouter from './routes/registerRouter'
 import deleteRouter from './routes/deleteRouter'
-import listUsersRouter from './routes/listUsersRouter'
 
 const app = express()
 app.use(cors())
@@ -16,8 +15,7 @@ app.use(express.json())
 // Rotas
 app.use('/login', loginRouter)
 app.use('/register', registerRouter)
-app.use('/delete/:id', deleteRouter)
-app.use('/listUsers', listUsersRouter)
+app.use('/delete', deleteRouter)
 
 app.use(errorHandler)
 export default app;
