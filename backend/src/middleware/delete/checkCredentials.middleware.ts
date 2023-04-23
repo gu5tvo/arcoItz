@@ -18,10 +18,3 @@ export default async function checkCredentialsMiddleware(req: Request, res: Resp
     next()
 }
 
-/*
-1- Coletar o path da requisição através de req.originalUrl (para ter acesso ao id do usuário que se deseja deletar)
-2- Coletar o token dentro de req.body
-3- Do token, coletar o id armazenado
-4- Verificar se o id é igual ao path
-5- User.deleteOne({ id: id })
-6- return res.status(204).send() */
