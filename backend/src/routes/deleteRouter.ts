@@ -1,8 +1,8 @@
-import express from 'express'
+import { Router } from 'express'
 import checkCredentialsMiddleware from '../middleware/delete/checkCredentials.middleware'
 import deleteController from '../controllers/delete.controller'
 
-const deleteRouter = express()
+const deleteRouter = Router()
 
 deleteRouter.delete('', checkCredentialsMiddleware, deleteController)
 
