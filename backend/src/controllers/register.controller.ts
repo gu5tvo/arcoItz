@@ -1,12 +1,11 @@
 import bcrypt from 'bcryptjs'
-import User from "../../model/user.model";
+import User from "../model/user.model";
 import { Request, Response } from 'express'
-import { registerSerializer } from "../../schemas/register.schema";
-import { saveUser } from "../../service/register/saveUser.service";
+import { registerSerializer } from "../schemas/register.schema";
+import { saveUser } from "../service/register/saveUser.service";
 
 export default async function registerController(req: Request, res: Response):Promise<Response> {
-    
-    const userBody = req.body.user;
+    const userBody = req.body;
 
     const { email, name } = userBody;
 
