@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express'
 import AppError from '../../errors'
 
 export default async function checkUserExistenceMiddleware (req: Request, res: Response, next: NextFunction) {
-    const { id } = req.body
+    const { id } = req.user
 
     const user = await User.exists({ id })
 

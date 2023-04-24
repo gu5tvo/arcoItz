@@ -19,7 +19,7 @@ export default async function checkInputLoginMiddleware(req: Request, res: Respo
     if (!checkPassword) throw new AppError('Email ou senha incorretos', 400)
     
     // adiciona o id do usuário na requisição
-    req.body.id = user.id;
+    req.user =  { id: user.id }
 
     return next();
 }

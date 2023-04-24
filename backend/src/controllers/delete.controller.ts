@@ -3,7 +3,7 @@ import User from '../model/user.model'
 
 export default async function deleteController(req : Request, res: Response) : Promise<Response>{
     
-    const { id } = req.body
+    const { id } = req.user
 
     await User.deleteOne({ id: id })    
 
