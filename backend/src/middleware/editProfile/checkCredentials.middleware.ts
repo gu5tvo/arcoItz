@@ -8,12 +8,16 @@ export default async function checkCredentialsMiddleware(req: Request, res: Resp
     const { id } = req.params
     
     const { token } = req.body
-    const { tokenId } = await jwt.verify(token, process.env.SECRET_KEY)
+    const verifiedToken = await jwt.verify(token, process.env.SECRET_KEY)
+    const tokenId = verifiedToken.id
 
+    console.log(req.body)
+    console.log(id);
+    
     if (tokenId != id) throw new AppError("Credenciais para edição de perfil inválidas", 403)
 
     // Armazena o id para ser usado no controller
-    req.user.id = id
+    req.user =  { id }
 
     next()
 }

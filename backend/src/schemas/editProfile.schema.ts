@@ -3,10 +3,9 @@ import * as yup from 'yup'
 // Esquemas de validação de ENTRADA
 export const editProfileSchema = yup.object().shape({
     token: yup.string().required(),
-    id: yup.string().required(),
     avatar: yup.string(),
-    name: yup.string().required(),
-    email: yup.string().required().email(),
+    name: yup.string(),
+    email: yup.string().email(),
     bio: yup.string(),
     area: yup.string(),
     address: yup.string(),
