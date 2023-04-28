@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 import { v4 as uuidv4 } from 'uuid'
+import { hash } from 'bcryptjs'
 
 const userSchema = new mongoose.Schema({
     id: {
@@ -46,6 +47,10 @@ const userSchema = new mongoose.Schema({
     pronnouns: {
         type: String,
         required: false
+    },
+    isActive: {
+        type: Boolean,
+        default: true
     }
 })
 
