@@ -48,9 +48,29 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: false
     },
+    city:{
+        type: String,
+        required: false
+    },
     isActive: {
         type: Boolean,
         default: true
+    },
+    isBanned: {
+        type: Boolean,
+        default: false
+    },
+    isVerified: {
+        type: Boolean,
+        default: false
+    },
+    createdAt: {
+        type: Date,
+        default: new Date()
+    },
+    updatedAt: {
+        type: Date,
+        default: new Date()
     }
 })
 

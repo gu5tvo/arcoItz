@@ -25,3 +25,13 @@ export const returnSchema = yup.object().shape({
     createdAt: yup.date().required(),
     updatedAt: yup.date().required()
 })
+
+export const updateSchema = yup.object().shape({
+    name: yup.string().min(3).max(80),
+    email: yup.string().email(),
+    bio: yup.string().min(3).max(1000),
+    area: yup.string().min(3).max(100),
+    address: yup.string().min(3).max(100),
+    title: yup.string().min(3).max(100),
+    isActive: yup.boolean(),
+})

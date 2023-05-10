@@ -29,6 +29,17 @@ export interface iUserReturn {
     updatedAt: Date;
 }
 
+export interface iUserUpdate {
+    name: string;
+    email: string;
+    password: string;
+    bio: string;
+    area: string;
+    address: string;
+    title: string;
+    isActive: boolean;
+}
+
 export interface iRegister{
     name: string;
     email: string;

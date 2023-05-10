@@ -12,5 +12,7 @@ export default async function checkExistenceMiddleware(req: Request, res: Respon
     const user = await User.findOne({id});
     if(!user) throw new AppError('Usuário não encontrado', 404);
 
+    if(!user.isActive) throw new AppError('Este usuário não quer exibir seu perfil', 403);
+
     return next();
 }
