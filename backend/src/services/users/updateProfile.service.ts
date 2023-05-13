@@ -1,14 +1,21 @@
 import User from "../../model/user.model";
 import { iUserUpdate } from "../../interfaces/user.interface";
+import { hash } from "bcryptjs";
 
-export default async function updateProfileService(id: string, data: iUserUpdate){
+export default async function updateProfileService(id: string, data: iUserUpdate) {
     const user = await User.findOne({ id });
 
     if(data.name) user.name = data.name;
+    if(data.avatar) user.avatar = data.avatar; 
     if(data.email) user.email = data.email;
-    if(data.password) user.password = data.password;
+    if(data.email) user.isActive = false;
+    if(data.password) user.password = await hash(data.password, 10);
+    if(data.city) user.city = data.city;
     if(data.bio) user.bio = data.bio;
     if(data.area) user.area = data.area;
+    if(data.gender) user.gender = data.gender;
+    if(data.pronnouns) user.pronnouns = data.pronnouns;
+    if(data.number) user.number = data.number;
     if(data.address) user.address = data.address;
     if(data.title) user.title = data.title;
     if(data.isActive) user.isActive = data.isActive;
@@ -17,5 +24,5 @@ export default async function updateProfileService(id: string, data: iUserUpdate
 
     const response = await user.save();
 
-    return response;
+    return { ...response.toObject(), password: undefined, __v: undefined, _id: undefined};
 }

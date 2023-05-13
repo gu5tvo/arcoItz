@@ -10,7 +10,7 @@ export default async function checkTokenMiddleware(req: Request, res: Response, 
 
     //Verifica se o token é válido.
     const [, token] = authorization.split(' ');
-    const { id } = jwt.verify(token, process.env.JWT_SECRET) as { id: string };
+    const { id } = jwt.verify(token, process.env.SECRET_KEY) as { id: string };
     if(!id) throw new AppError('Token inválido', 401);
 
     //Verifica se o usuário existe.
@@ -21,7 +21,12 @@ export default async function checkTokenMiddleware(req: Request, res: Response, 
     if(!user.isActive) throw new AppError('Usuário inativo, contate um administrador.', 403);
 
     //Se tudo estiver correto, adiciona o id do usuário na requisição.
-    req.user.id = id;
+    req.user = {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+    }
+
     return next();
 
 }

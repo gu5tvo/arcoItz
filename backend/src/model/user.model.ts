@@ -1,6 +1,5 @@
 import mongoose from 'mongoose'
 import { v4 as uuidv4 } from 'uuid'
-import { hash } from 'bcryptjs'
 
 const userSchema = new mongoose.Schema({
     id: {
@@ -9,11 +8,12 @@ const userSchema = new mongoose.Schema({
     },
     avatar: {
         type: String,
-        required: false
+        required: false,
+        default: "https://res.cloudinary.com/dg5lakmem/image/upload/v1623686213/avatars/default-avatar.png"
     },
     name: {
         type: String,
-        required: true
+        required: true,
     },
     email: {
         type: String,
@@ -25,32 +25,44 @@ const userSchema = new mongoose.Schema({
     },
     bio: {
         type: String,
-        required: false
+        required: false,
+        default: null
     },
     area: {
         type: String,
         required: false,
-        ref: 'Areas'
+        ref: 'Areas',
+        default: null
     },
     address: {
         type: String,
-        required: false
+        required: false,
+        default: null
     },
     title: {
         type: String,
-        required: false
+        required: false,
+        default: null
+    },
+    number: {
+        type: String,
+        required: false,
+        default: null
     },
     gender: {
         type: String,
-        required: false
+        required: false,
+        default: null
     },
     pronnouns: {
         type: String,
-        required: false
+        required: false,
+        default: null
     },
     city:{
         type: String,
-        required: false
+        required: false,
+        default: null
     },
     isActive: {
         type: Boolean,

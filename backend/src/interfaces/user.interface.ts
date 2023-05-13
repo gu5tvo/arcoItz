@@ -14,6 +14,8 @@ export interface iUserReturn {
     id: string;
     name: string;
     email: string;
+    password: undefined;
+    avatar: string;
     bio: string;
     area: string;
     address: string;
@@ -33,6 +35,11 @@ export interface iUserUpdate {
     name: string;
     email: string;
     password: string;
+    avatar: string;
+    gender: string;
+    pronnouns: string;
+    city: string;
+    number: string;
     bio: string;
     area: string;
     address: string;

@@ -17,11 +17,17 @@ export const errorHandler = (err: Error, req: Request, res: Response, next: Next
         return res.status(err.status).json({ message: err.message });
     }
 
-    fs.appendFile('errors.log', err.stack, (err) => {
+    fs.appendFile('errors.log',
+     `[ERRO] Exceção ocorrida em ${new Date()}.\n[TITULO]: ${err.name}\n`+ 
+     `[MENSAGEM]: ${err.stack}.\n` + 
+     `[IP]: IP do usuário: ${req.ip}\n\n\n`,
+    (err) => {
         if (err) {
             console.log(err);
         }
     });
+
+    console.log(err);
 
     return res.status(500).json({
         message: 'Internal server error',
