@@ -10,6 +10,7 @@ export default async function checkTokenMiddleware(req: Request, res: Response, 
 
     //Verifica se o token é válido.
     const [, token] = authorization.split(' ');
+    if(token.length < 14) throw new AppError('Token inválido', 401);
     const { id } = jwt.verify(token, process.env.SECRET_KEY) as { id: string };
     if(!id) throw new AppError('Token inválido', 401);
 

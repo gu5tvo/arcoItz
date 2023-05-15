@@ -7,13 +7,12 @@ import checkTokenMiddleware from '../middleware/login/checkToken.middleware';
 import verifyMailMiddleware from '../middleware/users/verifyMail.middleware';
 import sanitizePagesMiddleware from '../middleware/users/sanitizePages.middleware';
 //Schemas
-import { registerSchema, updateSchema, documentSchema } from '../schemas/users.schema';
+import { registerSchema, updateSchema } from '../schemas/users.schema';
 //Controllers
 import { 
     displaySelfController, displayProfileController,
     registerUserController, deleteProfileController,
-    updateProfileController, displayAllUsersController,
-    insertDocumentController
+    updateProfileController, displayAllUsersController
 } from '../controllers/users.controllers'
 
 const userRouter = Router();
@@ -22,12 +21,10 @@ const userRouter = Router();
 userRouter.get('', checkTokenMiddleware, displaySelfController)
 //Lista todos os usuários
 userRouter.get('/all', sanitizePagesMiddleware, displayAllUsersController)
-//Lista um perfil específico
-userRouter.get('/:id', checkExistenceMiddleware, displayProfileController)
 //Cadastra um usuário
 userRouter.post('', verifyShape(registerSchema), checkRegisterMiddleware, registerUserController)
-//Adiciona um documento
-userRouter.put('/document', verifyShape(documentSchema),checkTokenMiddleware, insertDocumentController)
+//Lista um perfil específico
+userRouter.get('/:id', checkExistenceMiddleware, displayProfileController)
 //Atualiza o próprio perfil
 userRouter.patch('', verifyShape(updateSchema), checkTokenMiddleware, verifyMailMiddleware, updateProfileController)
 //Remove o próprio usuário

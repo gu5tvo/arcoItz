@@ -8,6 +8,10 @@ import Admin from './model/admin.model'
 import loginRouter from './routes/login.routes'
 import userRouter from './routes/user.routes'
 import adminRouter from './routes/admin.routes'
+import documentsRouter from './routes/documents.routes'
+import skillRouter from './routes/skills.routes'
+import experienceRouter from './routes/experience.routes'
+import coursesRouter from './routes/courses.routes'
 
 const app = express()
 app.use(cors())
@@ -16,17 +20,10 @@ app.use(express.json())
 app.use('/login', loginRouter)
 app.use('/users', userRouter)
 app.use('/admin', adminRouter)
-
-app.get('/clean', (req, res)=>{
-    User.deleteMany({}).then(()=>{
-        new Admin({
-            name: 'admin',
-            email: 'admin@mail.com',
-            password: '321nimda'
-        })
-    })
-})
-
+app.use('/document', documentsRouter)
+app.use('/skill', skillRouter)
+app.use('/experience', experienceRouter)
+app.use('/course', coursesRouter)
 
 app.use(errorHandler)
 export default app;

@@ -1,6 +1,7 @@
 import User from "../../model/user.model";
+import { iUserReturn } from "../../interfaces/user.interface";
 
-export async function verifyMailService(id: string) {
+export async function verifyMailService(id: string): Promise<iUserReturn> {
     const user = await User.findById(id);
 
     user.isActive = true;
