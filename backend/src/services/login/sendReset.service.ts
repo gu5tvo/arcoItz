@@ -27,7 +27,5 @@ export default async function sendResetService(email, ip){
         console.log(info);
     })
 
-    console.log(token)
-
     return {message: "E-mail enviado com sucesso!"}
 }
