@@ -19,6 +19,9 @@ export default async function updateProfileService(id: string, data: iUserUpdate
     if(data.address) user.address = data.address;
     if(data.title) user.title = data.title;
     if(data.isActive) user.isActive = data.isActive;
+    if(data.instagram) user.instagram = data.instagram;
+    if(data.linkedin) user.linkedin = data.linkedin;
+    if(data.portfolio) user.portfolio = data.portfolio;
 
     user.updatedAt = new Date();
 
