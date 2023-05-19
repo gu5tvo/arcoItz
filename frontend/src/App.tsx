@@ -5,8 +5,8 @@ function App() {
 
   return (
     <>
-        <RouterApp/>
-        <GlobalStyle/>
+      <RouterApp/>
+      <GlobalStyle/>
     </>
   )
 }
