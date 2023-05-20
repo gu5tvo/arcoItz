@@ -20,6 +20,9 @@ export const updateSchema = yup.object().shape({
     pronnouns: yup.string().min(3).max(100),
     city: yup.string().min(3).max(100),
     isActive: yup.boolean(),
+    instagram: yup.string().min(3).max(100),
+    linkedin: yup.string().min(3).max(100),
+    portfolio: yup.string().min(3).max(100),
 })
 
 export const documentSchema = yup.object().shape({

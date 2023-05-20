@@ -47,6 +47,9 @@ export interface iUserUpdate {
     address: string;
     title: string;
     isActive: boolean;
+    instagram: string;
+    linkedin: string;
+    portfolio: string;
 }
 
 export interface iRegister{

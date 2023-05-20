@@ -64,6 +64,21 @@ const userSchema = new mongoose.Schema({
         required: false,
         default: null
     },
+    instagram:{
+        type: String,
+        required: false,
+        default: null
+    },
+    linkedin:{
+        type: String,
+        required: false,
+        default: null
+    },
+    portfolio:{
+        type: String,
+        required: false,
+        default: null
+    },
     isActive: {
         type: Boolean,
         default: true
