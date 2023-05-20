@@ -13,3 +13,16 @@ export const HomepageButtons = [
     }
 ]
 
+export const LoginButtons = [
+    {
+        textContent: "Início",
+        buttonStyle: ButtonStyle.TransparentBg,
+        linkPath: "/"
+    },   
+    {
+        textContent: "Cadastre-se",
+        buttonStyle: ButtonStyle.SolidBorder,
+        linkPath: "/register"
+    }
+]
+
