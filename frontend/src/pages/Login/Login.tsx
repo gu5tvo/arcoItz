@@ -1,9 +1,10 @@
-import Input from '../../components/Input/Input';
 import { Header } from '../../layouts/Header';
 import { LoginButtons } from '../../utils/HeaderButtons';
 import { BorderStyle } from "../../utils/Input";
+import Button from './components/Button';
 import Checkbox from './components/Checkbox';
 import InputArea from './components/InputArea';
+import LoginFooter from './components/LoginFooter';
 import { LoginContainer } from './style';
 
 function Login() {
@@ -21,11 +22,9 @@ function Login() {
                     <div className="lembrar-acesso">
                         <Checkbox id="checkbox" label="Lembrar acesso"/>
                     </div>
-                    <button>Entrar</button>
-                    <div>
-                        <span>Não possui uma conta? Cadastre-se.</span>
-                        <span>Esqueceu sua senha? Clique aqui.</span>
-                    </div>
+                    <Button onClick={()=> ()=> {}} content="Entrar"/>
+
+                    <LoginFooter/>
                 </div>
             </LoginContainer>
         </>

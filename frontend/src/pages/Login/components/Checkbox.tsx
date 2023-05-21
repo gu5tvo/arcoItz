@@ -1,4 +1,4 @@
-import { GenerateCheckbox } from "./style";
+import { CheckboxElement } from "./style";
 
 interface CheckBoxProps {
     label: string;
@@ -8,11 +8,9 @@ interface CheckBoxProps {
 export default function Checkbox(props: CheckBoxProps) {
     const { id, label } = props
 
-    const CheckboxElement = GenerateCheckbox(id)
-
     return (
         <div style={{ position: "relative" }}>
-            <CheckboxElement />
+            <CheckboxElement id={id}/>
             <label htmlFor={id}>{label}</label>
         </div>
     )

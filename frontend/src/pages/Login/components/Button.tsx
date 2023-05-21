@@ -1,8 +1,14 @@
-function Button() {
+import { ButtonElement } from "./style"
 
-    return <>
+interface ButtonProps {
+    content: string,
+    onClick: ()=>{}
+}
 
-    </>
+function Button(props: ButtonProps) {
+
+    
+    return <ButtonElement onClick={props.onClick}>{props.content}</ButtonElement>
 }
 
 export default Button
