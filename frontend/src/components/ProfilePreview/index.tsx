@@ -1,4 +1,6 @@
 import  ProfilePreviewDiv from './style'
+import CardImage from '../../assets/images/vector.png'
+
 
 interface ProfilePreviewInt{
     image: string,
@@ -8,14 +10,17 @@ interface ProfilePreviewInt{
     gender: string
 }
 
-export function ProfilePreview(props: ProfilePreviewInt){
-    const {image , fullname, area, pronouns , gender} = props
+export function ProfilePreview({image , fullname, area, pronouns , gender}: ProfilePreviewInt){
 
     return(
-        <>
-            <ProfilePreviewDiv>
-                
-            </ProfilePreviewDiv>
-        </>
+        <ProfilePreviewDiv>
+            <img src={image? image:CardImage} className="photo"/>
+            <div className="middle-div">
+              <p className="fullname-paragraph">{fullname}</p>
+              <p className="area-paragraph">{area}</p>
+              <p>{pronouns}</p>
+            </div>
+            <p className="final-paragraph">{gender}</p> 
+        </ProfilePreviewDiv>
     )
 }

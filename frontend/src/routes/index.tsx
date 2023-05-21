@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import { Home } from '../pages/Home';
+import { SearchProfile } from '../pages/SearchProfile';
 
 export default function MakeRoutes(){
     return (
@@ -7,6 +8,7 @@ export default function MakeRoutes(){
             <Route path="/" element={ <Home/> }/>
             <Route path="/about" element={<h1>About</h1>} />
             <Route path="/dashboard" element={<h1>Dashboard</h1>} />
+            <Route path="/searchprofile" element={<SearchProfile/>} />
         </Routes>
     )
 }

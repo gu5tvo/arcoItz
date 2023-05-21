@@ -8,4 +8,8 @@ export const Button = styled.button`
   background-color: var(--BLUE);
   color: white;
 
+  &:hover{
+    filter: brightness(0.9);
+  }
+
 `
