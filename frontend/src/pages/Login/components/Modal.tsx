@@ -21,10 +21,6 @@ function Modal(props: ModalProps) {
 
     const { forgotPassword } = useUser()
 
-    const onForgotPassword = ()=> {
-        return forgotPassword(value)
-    }
-
     const onChange = (e: EventType)=> {
         setValue(e.target.value)
     }
@@ -61,9 +57,10 @@ function Modal(props: ModalProps) {
             onClick={toggleModal}
         >
         <ModalWrapper>
+            <span className="close-icon" onClick={toggleModal}>&#10005;</span>
             <h2>Esqueceu sua senha?</h2>
             <Input placeholder="Insira seu e-mail" value={value} onChange={onChange} type="email" style={BorderStyle.SolidBorder}/>
-            <Button content="Enviar" onClick={}/>
+            <Button content="Enviar" onClick={async ()=> forgotPassword(value)}/>
         </ModalWrapper>
         </ReactModal>
     );

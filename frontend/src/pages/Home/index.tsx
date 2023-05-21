@@ -5,7 +5,7 @@ export function Home() {
 
   return (
     <>
-      <Header header={HomepageButtons}/>
+      <Header header={HomepageButtons} position="relative"/>
     </>
   )
 }

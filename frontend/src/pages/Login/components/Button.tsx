@@ -2,13 +2,13 @@ import { ButtonElement } from "./style"
 
 interface ButtonProps {
     content: string,
-    onClick: ()=>{}
+    type: "button" | "submit" | "reset"
 }
 
 function Button(props: ButtonProps) {
 
     
-    return <ButtonElement onClick={props.onClick}>{props.content}</ButtonElement>
+    return <ButtonElement type={props.type} >{props.content}</ButtonElement>
 }
 
 export default Button

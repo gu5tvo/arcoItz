@@ -1,5 +1,13 @@
 import styled from 'styled-components'
 
+export const CenterFullpage = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: min(30%, 60px) 0;
+`
+
 export const LoginContainer = styled.div`
     background-color: #fff;
     width: min(450px, 80%);

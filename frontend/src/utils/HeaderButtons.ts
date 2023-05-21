@@ -13,7 +13,7 @@ export const HomepageButtons = [
     }
 ]
 
-export const LoginButtons = [
+export const LoginHeader = [
     {
         textContent: "Início",
         buttonStyle: ButtonStyle.TransparentBg,

@@ -4,7 +4,7 @@ import Modal from './Modal'
 import { useState } from 'react';
 
 function LoginFooter() {
-    const [modalIsOpen, setModalIsOpen] = useState(true);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const toggleModal = ()=> {
         setModalIsOpen(!modalIsOpen)

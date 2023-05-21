@@ -6,16 +6,18 @@ interface InputAreaProps {
     title: string,
     placeholder: string,
     type: string,
-    border: BorderStyle
+    border: BorderStyle,
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    value: string;
 }
 
 function InputArea(props: InputAreaProps) {
-    const { title, placeholder, type, border } = props
+    const { title, placeholder, type, border, value, onChange } = props
 
     return (
         <InputAreaContainer>
             <h2>{title}</h2>
-            <Input placeholder={placeholder} type={type} style={border}/>
+            <Input placeholder={placeholder} onChange={onChange} value={value} type={type} style={border}/>
         </InputAreaContainer>)
 }
 

@@ -78,4 +78,13 @@ export const ModalWrapper = styled.div`
         font-size: clamp(0.8rem, 1vw, 1.4rem);
         font-weight: bold;
     }
+
+    .close-icon {
+        position: absolute;
+        color: red;
+        right: clamp(30px, 7vw, 40px);
+        top: clamp(30px, 7vw, 40px);
+        width: clamp(1rem, 3vw, 2rem);
+        cursor: pointer;
+    }
 `
