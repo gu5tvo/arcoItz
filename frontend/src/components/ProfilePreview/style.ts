@@ -4,12 +4,13 @@ import { styled } from "styled-components";
 const ProfilePreviewDiv = styled.div`
     display: flex;
     justify-content: space-between;
-    align-items: flex-start; 
+    align-items: center; 
     background-color: white;
     border-radius: 15px;
     padding: 10px;
     min-height: 100px;
     min-width: 540px;
+    margin: 0px 0px 37px 41px;
 
     .photo {
         margin-left: 10px;
@@ -18,20 +19,17 @@ const ProfilePreviewDiv = styled.div`
     }
     
     .middle-div {
-        margin-left: 20px; 
+        margin-left: 24px; 
         margin-right: auto;
-        margin-top: 6px
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 68px;
     }
 
     .middle-div .fullname-paragraph{
-        margin-top: 2px;
-        font-weight: bold;
         font-size: 16px;
-    }
-    
-    .middle-div .area-paragraph{
-        margin-top: 9px;
-        margin-bottom: 9px;
+        font-weight: bold;
     }
 
     .middle-div p{
@@ -39,13 +37,12 @@ const ProfilePreviewDiv = styled.div`
     }
 
     .area-paragraph, .final-paragraph {
-        font-weight: medium; 
+        font-weight: 500; 
         font-size: 14px;
     }
 
     .final-paragraph {
-        margin-top: 8px;
-        margin-right: 10px;
+        margin: 1px 0px 0px 88px;
     }
 `
 

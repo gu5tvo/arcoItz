@@ -20,7 +20,9 @@ export function ProfilePreview({image , fullname, area, pronouns , gender}: Prof
               <p className="area-paragraph">{area}</p>
               <p>{pronouns}</p>
             </div>
-            <p className="final-paragraph">{gender}</p> 
+            <div className="middle-div">
+              <p className="final-paragraph">{gender}</p> 
+            </div>
         </ProfilePreviewDiv>
     )
 }
