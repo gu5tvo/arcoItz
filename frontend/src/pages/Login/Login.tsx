@@ -36,9 +36,9 @@ function Login() {
             <Header header={ LoginHeader } />        
             <CenterFullpage>
                 <LoginContainer>
+                    <h1>Entrar</h1>
+                    
                     <form onSubmit={onLogin}>
-                        <h1>Entrar</h1>
-                        <div>
                             <InputArea value={email} onChange={onChangeEmail} title="E-mail" placeholder="Insira seu e-mail" type="email" border={BorderStyle.SolidBorder}/>
 
                             <InputArea title="Senha" value={password} onChange={onChangePassword} placeholder="Insira sua senha" type="password" border={BorderStyle.SolidBorder}/>
@@ -46,11 +46,11 @@ function Login() {
                             <div className="lembrar-acesso">
                                 <Checkbox id="checkbox" label="Lembrar acesso"/>
                             </div>
-                            <Button type="submit" content="Entrar"/>
 
-                            <LoginFooter/>
-                        </div>
+                            <Button type="submit" content="Entrar"/>
                     </form>
+
+                    <LoginFooter/>
                 </LoginContainer>
             </CenterFullpage>
         </>

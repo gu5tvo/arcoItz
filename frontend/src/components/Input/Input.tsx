@@ -7,8 +7,8 @@ function borderStyle(style: BorderStyle) {
 }
 
 export default function Input(props: InputProps) {
-    const { placeholder, type, style, value, onChange } = props
+    const { placeholder, type, style, value, onChange, name } = props
 
 
-    return <InputElement type={type} value={value} onChange={onChange} placeholder={placeholder} style={{border: borderStyle(style)}}/>
+    return <InputElement type={type} value={value} name={name} onChange={onChange} placeholder={placeholder} style={{border: borderStyle(style)}}/>
 }
