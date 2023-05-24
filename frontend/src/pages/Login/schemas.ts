@@ -1,12 +1,12 @@
 import * as yup from 'yup';
 
 export const loginSchema = yup.object().shape({
-    email: yup.string().email().required(),
+    email: yup.string().email("Insira um e-mail válido").required("O e-mail é um campo obrigatório"),
     password: yup.string().required()
 })
 
 export const forgotSchema = yup.object().shape({
-    email: yup.string().email().required("Insira um email válido")
+    email: yup.string().email("Insira um e-mail válido").required("O e-mail é um campo obrigatório")
 })
 
 export const resetSchema = yup.object().shape({

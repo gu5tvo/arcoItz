@@ -3,7 +3,7 @@ import { ButtonElement } from "./style"
 interface ButtonProps {
     content: string,
     type: "button" | "submit" | "reset",
-    onClick?: () => any
+    onClick?: any
 }
 
 function Button(props: ButtonProps) {

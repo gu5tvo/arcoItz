@@ -7,6 +7,8 @@ import Button from './Button';
 import Input from '../../../components/Input/Input';
 import { BorderStyle } from '../../../utils/Input';
 
+import React from 'react'
+
 import { forgotSchema } from '../schemas';
 import { Form } from './style';
 
@@ -21,29 +23,28 @@ function LoginFooter() {
     const [email, setEmail] = useState("")
     const { forgotPassword } = useUser()
 
-    const { register, handleSubmit, formState: { errors }, trigger, reset  } = useForm({
+    const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(forgotSchema)
     });
 
     const sendEmail = async (e: SubmitForm)=> { 
         e.preventDefault()
         e.stopPropagation() // otherwise, it tries to login
+        
 
         const formFields = { 
-            email: e.target[0].value
+            email: email
         }
 
-        const isValid = await forgotSchema.isValid(formFields)
-        
+        const isValid = await forgotSchema.isValid(formFields);
+
         if (!isValid) return;
         
-        reset()
         await forgotPassword(formFields.email) 
     }
-
+        
     const changeEmail = (e: InputChange)=> { 
         setEmail(e.target.value)
-        
     }
 
     const toggleModal = ()=> {
@@ -59,10 +60,13 @@ function LoginFooter() {
                 <h2>Esqueceu sua senha?</h2>
 
                 <Form onSubmit={handleSubmit(sendEmail)}>
-                    <Input placeholder="Insira seu e-mail" name={"email"} value={email} onChange={changeEmail} style={BorderStyle.SolidBorder} ref={register}/>
+
+                    <Input register={register} placeholder="Insira seu e-mail" name={"email"} value={email} onChange={changeEmail} style={BorderStyle.SolidBorder} />
             
-                    <p className="error-message">{ errors.email && <> { errors.email?.message } </>}</p>
+                    { errors.email?.message && <p className="error-message"><>{ errors.email.message }</></p>}
+                    
                     <Button content="Enviar" type="submit"/>
+
                 </Form>
             </Modal>
             
@@ -71,3 +75,5 @@ function LoginFooter() {
 }
 
 export default LoginFooter
+
+//
