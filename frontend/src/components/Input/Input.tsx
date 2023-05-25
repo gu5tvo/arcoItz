@@ -1,4 +1,3 @@
-import React, { forwardRef } from 'react';
 import InputElement from './style';
 import { BorderStyle, InputProps } from '../../utils/Input';
 

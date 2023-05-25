@@ -23,14 +23,15 @@ function LoginFooter() {
     const [email, setEmail] = useState("")
     const { forgotPassword } = useUser()
 
+    const [emailSent, setEmailSent] = useState(false);
+
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(forgotSchema)
     });
 
-    const sendEmail = async (e: SubmitForm)=> { 
-        e.preventDefault()
-        e.stopPropagation() // otherwise, it tries to login
+    const sendEmail = async (e: SubmitForm)=> {
         
+        setEmailSent(true)
 
         const formFields = { 
             email: email
@@ -39,7 +40,7 @@ function LoginFooter() {
         const isValid = await forgotSchema.isValid(formFields);
 
         if (!isValid) return;
-        
+    
         await forgotPassword(formFields.email) 
     }
         
@@ -49,6 +50,8 @@ function LoginFooter() {
 
     const toggleModal = ()=> {
         setModalIsOpen(!modalIsOpen)
+        setEmailSent(false)
+        setEmail("")
     }
 
     return (
@@ -57,7 +60,13 @@ function LoginFooter() {
             <span>Esqueceu sua senha? <span onClick={toggleModal} className="link">Clique aqui</span>.</span>
 
             <Modal modalIsOpen={modalIsOpen} toggleModal={toggleModal}>
-                <h2>Esqueceu sua senha?</h2>
+                {emailSent ? 
+                
+                (<h2>Enviamos um e-mail para você. Por favor, aguarde o e-mail e siga as instruções para a recuperação da sua conta.</h2>) 
+                
+                : 
+                
+                (<><h2>Esqueceu sua senha?</h2>
 
                 <Form onSubmit={handleSubmit(sendEmail)}>
 
@@ -67,7 +76,10 @@ function LoginFooter() {
                     
                     <Button content="Enviar" type="submit"/>
 
-                </Form>
+                </Form></>) }
+
+
+
             </Modal>
             
         </FooterContainer>
@@ -75,5 +87,3 @@ function LoginFooter() {
 }
 
 export default LoginFooter
-
-//

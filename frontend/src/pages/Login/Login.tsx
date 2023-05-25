@@ -16,7 +16,7 @@ import { Form } from './components/style'
 type EventType = React.ChangeEvent<HTMLInputElement>;
 
 function Login() {
-    const { login, token } = useUser()
+    const { login } = useUser()
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -34,7 +34,7 @@ function Login() {
     }
 
     const onLogin = async ()=> {
-        console.log(await login({ email, password }));
+        await login({ email, password })
     }
 
     return (
