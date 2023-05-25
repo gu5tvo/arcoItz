@@ -8,7 +8,10 @@ export const ProfilePreviewDivCollection = styled.div`
 
 export const MainSearchProfileDiv = styled.div`
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    flex-direction: row;
+    gap: 1%;
+
 `
 
 
