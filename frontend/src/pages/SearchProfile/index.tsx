@@ -1,39 +1,68 @@
 import {ProfilePreview} from "../../components/ProfilePreview";
-import  ProfilePreviewDivCollection from './style'
+import {EditResults} from './EditResults'
+import { ProfilePreviewDivCollection, MainSearchProfileDiv } from './style'
+
+const profiles = 
+[{
+  image: '',
+  fullname: 'Marcele da Silva Soares',
+  area: 'Vendedor',
+  pronouns: 'Elu/Delu',
+  gender: 'Não Binárie',
+},
+{
+  image: '',
+  fullname: 'Marcele da Silva Soares',
+  area: 'Vendedor',
+  pronouns: 'Elu/Delu',
+  gender: 'Não Binárie',
+},
+{
+  image: '',
+  fullname: 'Marcele da Silva Soares',
+  area: 'Vendedor',
+  pronouns: 'Elu/Delu',
+  gender: 'Não Binárie',
+},
+{
+  image: '',
+  fullname: 'Marcele da Silva Soares',
+  area: 'Vendedor',
+  pronouns: 'Elu/Delu',
+  gender: 'Não Binárie',
+},
+{
+  image: '',
+  fullname: 'Marcele da Silva Soares',
+  area: 'Vendedor',
+  pronouns: 'Elu/Delu',
+  gender: 'Não Binárie',
+},
+{
+  image: '',
+  fullname: 'Marcele da Silva Soares',
+  area: 'Vendedor',
+  pronouns: 'Elu/Delu',
+  gender: 'Não Binárie',
+},
+]
+
 
 export function SearchProfile() {
     
     return (
-      <ProfilePreviewDivCollection>
-        <ProfilePreview 
-          image={''} 
-          fullname={'Marcele da Silva Soares'} 
-          area={'Vendedor'} 
-          pronouns={'Elu/Delu'}
-          gender={'Não Binárie'} 
-        />
-        <ProfilePreview 
-          image={''} 
-          fullname={'Marcele da Silva Soares'} 
-          area={'Vendedor'} 
-          pronouns={'Elu/Delu'}
-          gender={'Não Binárie'} 
-        />
-        <ProfilePreview 
-          image={''} 
-          fullname={'Marcele da Silva Soares'} 
-          area={'Vendedor'} 
-          pronouns={'Elu/Delu'}
-          gender={'Não Binárie'} 
-        />
-        <ProfilePreview 
-          image={''} 
-          fullname={'Marcele da Silva Soares'} 
-          area={'Vendedor'} 
-          pronouns={'Elu/Delu'}
-          gender={'Não Binárie'} 
-        />
-      </ProfilePreviewDivCollection>
-        
+      <MainSearchProfileDiv>
+        <EditResults/>
+        <ProfilePreviewDivCollection>
+          {profiles?.map((profile) => (
+            <ProfilePreview 
+            image={profile.image} 
+            fullname={profile.fullname}
+            area={profile.area} 
+            pronouns={profile.pronouns} 
+            gender={profile.gender}/>
+          ))}
+        </ProfilePreviewDivCollection>
+      </MainSearchProfileDiv>
     )
 }

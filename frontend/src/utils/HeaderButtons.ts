@@ -13,3 +13,12 @@ export const HomepageButtons = [
     }
 ]
 
+export const PainelButtons = [
+    {
+        textContent: "Sair",
+        buttonStyle: ButtonStyle.SolidBg,
+        linkPath: "/logout"
+    }
+]
+
+
