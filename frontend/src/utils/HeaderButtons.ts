@@ -21,4 +21,22 @@ export const PainelButtons = [
     }
 ]
 
+export const SearchProfileButtons = [
+    {
+        textContent: "Início",
+        buttonStyle: ButtonStyle.TransparentBg,
+        linkPath: "/"
+    },   
+    {
+        textContent: "Entrar",
+        buttonStyle: ButtonStyle.TransparentBg,
+        linkPath: "/login"
+    },   
+    {
+        textContent: "Cadastre-se",
+        buttonStyle: ButtonStyle.SolidBorder,
+        linkPath: "/register"
+    }
+]
+
 

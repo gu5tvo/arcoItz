@@ -1,4 +1,6 @@
 import {EditResultsDiv} from './style'
+import leftArrowIcon from '../../../assets/images/leftArrow.png'
+import rightArrowIcon from '../../../assets/images/rightArrow.png'
 
 export function EditResults(){
     return(
@@ -21,9 +23,9 @@ export function EditResults(){
             <p>Navegar entre páginas:</p>
         </div>
         <div className='NavEditResultsDiv'>
-            <button>  </button>
+            <button><img src={leftArrowIcon} alt="" /></button>
             <span> 1 </span>
-            <button>  </button>
+            <button><img src={rightArrowIcon} alt="" /></button>
         </div>
         </EditResultsDiv>
     )

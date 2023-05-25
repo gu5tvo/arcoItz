@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const EditResultsDiv = styled.div`
+   
     padding: 19px 30px 20px 30px;
     display: flex;
     flex-direction: column;

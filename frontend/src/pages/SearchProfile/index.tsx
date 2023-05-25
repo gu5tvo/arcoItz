@@ -1,6 +1,10 @@
 import {ProfilePreview} from "../../components/ProfilePreview";
 import {EditResults} from './EditResults'
 import { ProfilePreviewDivCollection, MainSearchProfileDiv } from './style'
+import { Header } from "../../layouts/Header";
+import { SearchProfileButtons } from "../../utils/HeaderButtons";
+import { Container } from "../Painel/style";
+
 
 const profiles = 
 [{
@@ -47,10 +51,11 @@ const profiles =
 },
 ]
 
-
 export function SearchProfile() {
     
     return (
+      <Container>
+      <Header header={SearchProfileButtons}/>
       <MainSearchProfileDiv>
         <EditResults/>
         <ProfilePreviewDivCollection>
@@ -64,5 +69,6 @@ export function SearchProfile() {
           ))}
         </ProfilePreviewDivCollection>
       </MainSearchProfileDiv>
+      </Container>
     )
 }

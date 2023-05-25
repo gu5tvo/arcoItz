@@ -11,7 +11,8 @@ export const MainSearchProfileDiv = styled.div`
     justify-content: center;
     flex-direction: row;
     gap: 1%;
-
+    padding-left: 7%;
+    padding-top: 4%;
 `
 
 
