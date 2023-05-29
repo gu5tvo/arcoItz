@@ -1,0 +1,18 @@
+import styled from "styled-components"
+
+export const ProfilePreviewDivCollection = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    flex: 4;
+`
+
+export const MainSearchProfileDiv = styled.div`
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    gap: 1%;
+    padding-left: 7%;
+    padding-top: 4%;
+`
+
+
