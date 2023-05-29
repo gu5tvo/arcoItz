@@ -13,11 +13,25 @@ export const HomepageButtons = [
     }
 ]
 
-export const LoginHeader = [
+
+export const PainelButtons = [
+    {
+        textContent: "Sair",
+        buttonStyle: ButtonStyle.SolidBg,
+        linkPath: "/logout"
+    }
+]
+
+export const SearchProfileButtons = [
     {
         textContent: "Início",
         buttonStyle: ButtonStyle.TransparentBg,
         linkPath: "/"
+    },   
+    {
+        textContent: "Entrar",
+        buttonStyle: ButtonStyle.TransparentBg,
+        linkPath: "/login"
     },   
     {
         textContent: "Cadastre-se",
@@ -25,4 +39,3 @@ export const LoginHeader = [
         linkPath: "/register"
     }
 ]
-
