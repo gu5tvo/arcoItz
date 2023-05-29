@@ -2,7 +2,6 @@ import { Header } from "../../layouts/Header"
 import { HomepageButtons } from "../../utils/HeaderButtons"
 import { ContentSection, Container, CoverSection, AboutSection } from "./style"
 import { Button } from "../../components/Button"
-
 import coverImage from "../../assets/images/cover.png"
 import strongImage from "../../assets/images/strong.png"
 import { AboutBox } from "../../components/AboutBox"

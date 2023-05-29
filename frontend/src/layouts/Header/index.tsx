@@ -17,7 +17,7 @@ const getStyle = (style: ButtonStyle)=> {
   }
 }
 
-export function Header({header}: HeaderProps){
+export function Header({ header }: HeaderProps){
 
   return(
     <Container>

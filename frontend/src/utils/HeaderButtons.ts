@@ -13,6 +13,7 @@ export const HomepageButtons = [
     }
 ]
 
+
 export const PainelButtons = [
     {
         textContent: "Sair",
@@ -38,5 +39,3 @@ export const SearchProfileButtons = [
         linkPath: "/register"
     }
 ]
-
-
