@@ -8,6 +8,7 @@ import { CoursesProvider } from './context/courses.context'
 import { SkillsProvider } from './context/skills.context'
 import { ExperienceProvider } from './context/experience.context'
 import { DocumentsProvider } from './context/documents.context'
+import { ModalProvider } from './context/modal.context'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -18,7 +19,9 @@ ReactDOM.render(
             <SkillsProvider>
               <ExperienceProvider>
                 <DocumentsProvider>
-                  <App />
+                  <ModalProvider>
+                    <App />
+                  </ModalProvider>
                 </DocumentsProvider>
               </ExperienceProvider>
             </SkillsProvider>

@@ -3,7 +3,7 @@ import { useUser } from "../hooks/contexts";
 import api from "../utils/axios";
 import { iCourses } from "../interfaces/users";
 import { AxiosError } from "axios";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 
 export const CoursesContext = createContext({
     registerCourse: (data: iCourses) => {},

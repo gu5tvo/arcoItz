@@ -3,7 +3,7 @@ import { useUser } from "../hooks/contexts";
 import api from "../utils/axios";
 import { iExperiences } from "../interfaces/users";
 import { AxiosError } from "axios";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 
 export const ExperienceContext = createContext({
     registerExperience: (data: iExperiences) => {},

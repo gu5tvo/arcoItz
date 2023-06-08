@@ -1,5 +1,5 @@
 import React, { useCallback, createContext, useEffect } from "react";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { iUserSimple } from "../interfaces/users";
 import { iAdmin, iAdminLogin, iAdminRegister, iSectors, iCity } from "../interfaces/admin";

@@ -10,23 +10,26 @@ export interface iRegister {
 }
 
 export interface iUserSimple{
-    id: string;
-    avatar: string;
-    name: string;
-    email: string;
-    bio: string | null;
-    area: string | null;
-    address: string | null;
-    title: string | null;
-    number: string | null;
-    gender: string | null;
-    pronnouns: string | null;
-    city: string | null;
-    isActive: boolean;
-    isVerified: boolean;
-    isBanned: boolean;
-    createdAt: Date;
-    updatedAt: Date;
+    id?: string;
+    avatar?: string;
+    name?: string;
+    email?: string;
+    bio?: string | null;
+    area?: string | null;
+    address?: string | null;
+    title?: string | null;
+    number?: string | null;
+    gender?: string | null;
+    pronnouns?: string | null;
+    city?: string | null;
+    isActive?: boolean;
+    isVerified?: boolean;
+    isBanned?: boolean;
+    instagram?: string | null;
+    linkedin?: string | null;
+    portfolio?: string | null;
+    createdAt?: Date;
+    updatedAt?: Date;
 }
 
 export interface iDocuments {

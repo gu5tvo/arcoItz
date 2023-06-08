@@ -1,5 +1,5 @@
 import React, { useState, useCallback, createContext, useEffect } from 'react';
-import { toast } from 'react-hot-toast';
+import { toast } from"react-toastify";
 import { useNavigate } from 'react-router-dom';
 import { 
   iUserComplete, iUserSimple, iLogin, iRegister, iCourses, iDocuments, iExperiences, iSkills
@@ -22,16 +22,18 @@ export const UserContext = createContext<{
   setToken: React.Dispatch<React.SetStateAction<string>>;
   isAuthenticated: boolean;
   setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
+  usersList: iUserSimple[];
   login: (data: iLogin) => void;
   logout: () => void;
-  register: (data: iRegister) => void;
+  registerUser: (data: iRegister) => void;
   profile: () => void;
   displayProfile: (id: string) => void;
   updateProfile: (data: iUserSimple) => void;
   deleteSelf: () => void;
-  listUsersPage: (page: number, amount: number, city: string) => void;
+  listUsersPage: (page: string | number, amount: string | number, city: string) => void;
   forgotPassword: (email: string) => void;
   resetPassword: (token: string, password: string) => void;
+  setUsersList: React.Dispatch<React.SetStateAction<iUserSimple[]>>;
 }>({
   user: undefined,
   setUser: () => {},
@@ -47,14 +49,16 @@ export const UserContext = createContext<{
   setToken: () => {},
   isAuthenticated: false,
   setIsAuthenticated: () => {},
+  usersList: [],
+  setUsersList: () => {},
   login: () => {},
   logout: () => {},
-  register: () => {},
+  registerUser: () => {},
   profile: () => {},
   displayProfile: () => {},
   updateProfile: () => {},
   deleteSelf: () => {},
-  listUsersPage: () => {},
+  listUsersPage: () => new Promise(() => []),
   forgotPassword: () => {},
   resetPassword: () => {}
 });
@@ -67,6 +71,7 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
   const [documents, setDocuments] = useState<iDocuments[] | undefined>(undefined);
   const [token, setToken] = useState<string>('');
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [usersList, setUsersList] = useState<iUserSimple[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -75,6 +80,7 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
       setToken(storedToken);
       setIsAuthenticated(true);
       api.defaults.headers.Authorization = `Bearer ${storedToken}`;
+      profile();
     }
   }, []);
 
@@ -130,9 +136,9 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
     }
   },[])
 
-  const register = useCallback(async (data: iRegister) => {
+  const registerUser = useCallback(async (data: iRegister) => {
     try {
-      await api.post('/register', data);
+      await api.post('/users', data);
       toast.success('Cadastro realizado com sucesso!');
       login({ email: data.email, password: data.password });
     } catch (err: AxiosError | unknown) {
@@ -178,6 +184,7 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
     try {
       const response = await api.patch('/users', data);
       toast.success('Seu perfil foi atualizado!');
+      console.log(response.data);
       setUser((prevUser) => prevUser ? { ...prevUser, ...response.data } : undefined);
     } catch (err: AxiosError | unknown) {
       if (err instanceof AxiosError) {
@@ -206,8 +213,8 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
   const listUsersPage = useCallback(async (page: number = 1, amount: number = 10, city: string) => {
     try {
       const query = city ? `?page=${page}&amount=${amount}&city=${city}` : `?page=${page}&amount=${amount}`;
-      const response = await api.get(`/users${query}`);
-      return response.data;
+      const response = await api.get(`/users/all${query}`);
+      setUsersList(response.data.content);
     } catch (err: AxiosError | unknown) {
       if (err instanceof AxiosError) {
         toast.error(err.response?.data.message as string);
@@ -236,14 +243,16 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
         setIsAuthenticated,
         login,
         logout,
-        register,
+        registerUser,
         profile,
         displayProfile,
         updateProfile,
         deleteSelf,
         listUsersPage,
         forgotPassword,
-        resetPassword
+        resetPassword,
+        usersList,
+        setUsersList
       }}
     >
       {children}
