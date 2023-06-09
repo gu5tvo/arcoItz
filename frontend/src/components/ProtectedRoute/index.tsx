@@ -5,7 +5,7 @@ import { Navigate, Route, useNavigate, RouteProps } from "react-router-dom";
 interface ProtectedRouteProps extends Omit<RouteProps, 'component'> {
   isPrivate?: boolean;
   redirectTo?: string;
-  component: React.ElementType;
+  component?: React.ElementType;
 }
 
 export default function ProtectedRoute({ isPrivate, redirectTo, component: Component, ...rest }: ProtectedRouteProps): JSX.Element {
@@ -23,5 +23,5 @@ export default function ProtectedRoute({ isPrivate, redirectTo, component: Compo
   }, [user, navigate, isPrivate, redirectTo]);
 
   if (!isAuthenticated && isPrivate) return <Navigate to={redirectTo || '/login'} />;
-  return <Route {...rest} element={<Component />} />;
+  return <Route {...rest} element={<Component />} index={false} />;
 }
