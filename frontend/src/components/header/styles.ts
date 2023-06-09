@@ -9,15 +9,18 @@ export const Header = styled.header`
     justify-content: space-between;
     align-items: center;
     background-color: #48A7FF;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Inter', sans-serif;
+    position: relative;
 
-    nav{
-        gap: 15px;
-        font-size: 1.2em;
-        color: #ffffff;
+    img {
+        display: none;
     }
 
-    .desktop{
+    nav{
+        gap: 1.9vw;
+        font-size: 1.01rem;
+        color: #ffffff;
+
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -28,6 +31,10 @@ export const Header = styled.header`
         display: none;
     }
 
+    a{
+        text-decoration: none;
+    }
+
     h1{
         font-size: 1.8em;
         color: #ffffff;
@@ -36,19 +43,45 @@ export const Header = styled.header`
 
     @media (max-width: 768px){
 
-        .desktop{
-            display: none;
-        }
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
 
         h1{
-            font-size: 1.2em;
+            font-size: 1.7em;
         }
 
-        .mobile{
-            display: flex;
+        nav{
             flex-direction: column;
             align-items: center;
             gap: 15px;
+        }
+
+        span {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: 0.15s linear;
+        }
+
+        .show {
+            margin-top: 1.5rem;
+            grid-template-rows: 1fr;
+        }
+
+        nav {
+            overflow: hidden;
+        }
+
+        
+        background-color: ${props => props.color};
+
+        img {
+            display: inline;
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
         }
 
     }
@@ -57,7 +90,7 @@ export const Header = styled.header`
 export const FilledBtn = styled.button`
     padding: 0.5em 1em;
     border: none;
-    border-radius: 5px;
+    border-radius: 0.8rem;
     background-color: #ffffff;
     color: #48A7FF;
     font-size: 1em;
@@ -74,7 +107,7 @@ export const FilledBtn = styled.button`
 export const OutlinedLink = styled(Link)`
     padding: 0.5em 1em;
     border: 1px solid #ffffff;
-    border-radius: 5px;
+    border-radius: 0.8rem;
     background-color: transparent;
     color: #ffffff;
     font-size: 1em;
@@ -92,7 +125,7 @@ export const OutlinedLink = styled(Link)`
 export const FilledLink = styled(Link)`
     padding: 0.5em 1em;
     border: none;
-    border-radius: 5px;
+    border-radius: 0.8rem;
     background-color: #ffffff;
     color: #48A7FF;
     font-size: 1em;
