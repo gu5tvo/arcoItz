@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import loginSchema from "../../schemas/login";
 import { useUser } from "../../hooks/contexts";
 import { Link } from "react-router-dom";
+import LoginFooter from "./Footer";
 
 export default function LoginPage(): JSX.Element{
 
@@ -49,10 +50,7 @@ export default function LoginPage(): JSX.Element{
                             <label>Lembrar-me</label>
                         </div>
                     <button type="submit">Entrar</button>
-                    <nav>
-                        <p>Esqueceu sua senha? Clique aqui</p>
-                        <p>Não possui uma conta? <Link to="/register">Cadastre-se</Link>!</p>
-                    </nav>
+                    <LoginFooter/>
                 </LoginForm>
             </LoginContainer>
         </>

@@ -5,4 +5,8 @@ export const loginSchema = yup.object().shape({
     password: yup.string().required('Este campo é obrigatório'),
 });
 
+export const forgotSchema = yup.object().shape({
+    email: yup.string().email("Insira um e-mail válido").required("Este campo é obrigatório")
+})
+
 export default loginSchema;

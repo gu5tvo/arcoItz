@@ -76,3 +76,33 @@ export const ErrorText = styled.p`
     margin-top: 0.5rem;
     text-align: center;
 `
+
+export const Form = styled.form`
+    text-align: center;
+    gap: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 20px;
+    
+    .error-message {
+        color: red;
+    }
+`
+
+export const FooterContainer = styled.nav`
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(0.4rem, 0.8vh, 0.8rem);
+    line-height: clamp(1rem, 2vh, 2.5rem);
+
+    .link {
+        text-decoration: none;
+        color: #48A7FF;
+        cursor: pointer;
+    }
+`
