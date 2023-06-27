@@ -1,8 +1,32 @@
 import { createGlobalStyle } from 'styled-components';
 
 //Reset CSS:
+
+// color: var(--PINK);
+
 export const GlobalStyle = createGlobalStyle`
-    html, body, div, span, applet, object, iframe,
+
+:root {
+ 
+	--WHITE: #fff;
+	--AQUABLUE: #3F8FCC;
+
+	--GRIZZLY: #eee;
+	--CYAN: #89DDFF;
+
+	--PALE-BLUE: #D7ECFF;
+   --PINK: #FFCCE4;
+    --RED: #B70000;
+
+    --GRAY: #F2F2F2;
+    --GRAY-DARK: #C6C6C6;
+
+    --BLUE: #48A7FF;
+    --BLUE-DARK: #0A2A5E;
+
+    --GRADIENTE :linear-gradient(180deg, #0077B6 0%, rgba(0, 119, 182, 0) 100%);
+}
+   html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
@@ -21,6 +45,7 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	box-sizing: border-box;
 }
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
@@ -28,7 +53,11 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	background-color: #F5F5F5;
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(0.8rem, 1vw, 2rem)
 }
+
 ol, ul {
 	list-style: none;
 }
@@ -45,9 +74,8 @@ table {
 	border-spacing: 0;
 }
 
-body{
-	background-color: #f2f2f2;
-	font-family: 'Roboto', sans-serif;
+button {
+    cursor: pointer;
 }
 
 `

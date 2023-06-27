@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const PinkSection = styled.section`
-    background-color: ${props => props.colors};
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -12,6 +11,7 @@ export const PinkSection = styled.section`
     
     .content { 
         width: min(100vw, 2200px);
+        background-color: #FFCCE4;
         position: relative;
         display: flex;
         justify-content: space-around;
@@ -81,16 +81,15 @@ export const PinkSection = styled.section`
 
 export const DisclaimerSection = styled.section`
     width: 100vw;
-
-    background-color: #FFFFFF;
     padding: 1rem 2rem;    
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
     .content {
-        width: min(100vw, 1700px);
+        width: min(100vw, 2200px);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        background-color: #FFF;
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;

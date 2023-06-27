@@ -9,7 +9,7 @@ export const SearchContainer = styled.div`
 export const SearchForm = styled.form`
     display: flex;
     flex-direction: column;
-    width: 380px;
+    width: 16vw;
     background-color: #fff;
     padding: 2em;
     border-radius: 0.5rem;
@@ -17,20 +17,22 @@ export const SearchForm = styled.form`
     height: fit-content;
 
     label{
-        margin-top: 1.5rem;
+        margin-bottom: 0.3rem;
     }
 
     h3{
         margin-bottom: 1.5rem;
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         text-align: center;
-        font-weight: 600;
+        font-weight: 700;
     }
 
     select{
-        padding: 1em;
+        padding: 0.9rem;
         border: none;
         border-radius: 0.5rem;
+        font-size: 0.82rem;
+        margin-bottom: 1rem;
     }
 
     button{

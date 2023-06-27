@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import DinamicHeader from "../../components/header";
 import {LoginContainer, LoginForm, ErrorText} from "./styles";
 import { useForm } from "react-hook-form";
@@ -9,8 +9,27 @@ import { Link } from "react-router-dom";
 
 export default function LoginPage(): JSX.Element{
 
-    const { register, handleSubmit, formState: { errors } } = useForm({resolver: yupResolver(loginSchema)});
-    const { login } = useUser();
+    const { login } = useUser()
+
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+
+    const { register, trigger, handleSubmit, formState: { errors } } = useForm({
+        resolver: yupResolver(loginSchema)
+    });
+
+    const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>)=> {
+        setEmail(e.target.value);
+    }
+
+    const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>)=> {
+        setPassword(e.target.value);
+    }
+
+    const onLogin = ()=> {
+        login({ email, password })
+    }
+
     document.title = "Entrar | DiversiTrampos";
     return (
         <>
@@ -19,11 +38,11 @@ export default function LoginPage(): JSX.Element{
                 <LoginForm onSubmit={handleSubmit(login)}>
                     <h2>Entrar</h2>
                     <label>Email</label>
-                    <input type="email" {...register("email")} placeholder="Insira seu e-mail"/>
-                    {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
+                    <input type="email" onChange={onChangeEmail} {...register("email")} placeholder="Insira seu e-mail"/>
+                    { /*{errors.email && <ErrorText>{errors.email.message}</ErrorText>}*/ }
                     <label>Senha</label>
-                    <input type="password" {...register("password")} placeholder="Insira sua senha"/>
-                    {errors.password && <ErrorText>{errors.password.message}</ErrorText>}
+                    <input type="password" onChange={onChangePassword} {...register("password")} placeholder="Insira sua senha"/>
+                    { /* {errors.password && <ErrorText>{errors.password.message}</ErrorText>} */ }
                         
                         <div style={{margin: '0 auto', marginTop: '1em'}}>
                             <input type="checkbox" value="remember" {...register('remember')} />
