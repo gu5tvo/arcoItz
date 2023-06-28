@@ -27,7 +27,6 @@ export default function ProtectedRoute({ isPrivate, redirectTo, element: Compone
     }
 
     setIsAuthenticated(updatedIsAuthenticated);
-    setRedirect(isAuthenticated)
 
     setLoaded(true)
 
@@ -35,7 +34,9 @@ export default function ProtectedRoute({ isPrivate, redirectTo, element: Compone
 
   if (!loaded) return <></>
 
-  if (redirect) { return <Navigate to={redirectTo || '/login'} /> }
+  console.log(isPrivate, !user, isAuthenticated);
+
+  if (!isAuthenticated) { return <Navigate to={redirectTo || '/login'} /> }
   
   return <Component />
 }
