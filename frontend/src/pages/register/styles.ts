@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 
 export const RegisterContainer = styled.div`
-    height: 80vh;
+    padding: min(10vh, 50px) min(5vw, 30px);
+    min-height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,8 +14,7 @@ export const RegisterForm = styled.form`
     padding: 2rem;
     display: flex;
     flex-direction: column;
-    max-width: 410px;
-    width: 100%;
+    width: min(100%, 490px);
     border-radius: 0.5rem;
     box-shadow: 0 0 60px rgba(0, 0, 0, 0.09);
 
