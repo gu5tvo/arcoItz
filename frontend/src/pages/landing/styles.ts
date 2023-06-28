@@ -19,15 +19,13 @@ export const PinkSection = styled.section`
 
     @media (max-width: 768px){
 
-        padding: 2rem;
-
         img{
             display: none;
         }
 
         .content {
             justify-content: center;
-            
+            padding: 2rem;            
         }
     }
 
@@ -85,6 +83,8 @@ export const DisclaimerSection = styled.section`
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    line-height: clamp(1.5rem, 3vw, 1.9rem);
 
     .content {
         width: min(100vw, 2200px);
@@ -98,6 +98,7 @@ export const DisclaimerSection = styled.section`
 
     .description{
         width: 30%;
+        padding: 2rem;            
     }
 
     h3{
@@ -108,7 +109,7 @@ export const DisclaimerSection = styled.section`
 
     p {
         text-align: left;
-        line-height: 1.3rem;
+        line-height: 1.3em;
     }
 
     @media (max-width: 768px){
@@ -140,7 +141,6 @@ export const ActionSection = styled.section`
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
     gap: min(4rem, 7vw);
 `
 
@@ -150,8 +150,8 @@ export const BlockArticle = styled.article`
     justify-content: space-between;
     align-items: center;
     gap: 1em;
-    width: 240px;
-    height: 280px;
+    width: 330px;
+    min-height: 280px;
     background-color: #FFFFFF;
     border-radius: 1em;
     padding: 1em;
@@ -159,6 +159,7 @@ export const BlockArticle = styled.article`
     transition: all 0.3s ease-in-out;
     box-shadow: 0 0 0 #48A7FF;
     text-align: left;
+    font-size: clamp(1rem, 2vw, 1.3rem);
     
     &:hover{
         scale: 1.05;
@@ -167,13 +168,16 @@ export const BlockArticle = styled.article`
 
 
     div h4{
-        font-size: 1.1em;
+        font-size: 1em;
         font-weight: 700;
         margin-bottom: 1rem;
+        text-align: center;
+        line-height: 1.1em;
     }
 
     div p{
         text-rendering: optimizeLegibility;
+        line-height: 1.15em;
     }
 
     div {
@@ -185,6 +189,14 @@ export const BlockArticle = styled.article`
         line-height: 1.2rem;
         padding: 0.8rem;
         padding-bottom: 0;
+
+        span {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: min(10vh, 40px);
+
+        }
     }
 
     a{

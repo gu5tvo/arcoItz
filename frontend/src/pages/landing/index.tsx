@@ -34,7 +34,9 @@ export default function LandingPage(): JSX.Element{
             <ActionSection>
                 <BlockArticle>
                     <div>
-                        <h4>É um recrutador?</h4>
+                        <span>
+                            <h4>É um recrutador?</h4>
+                        </span>
                         <p>
                         Recrutador, encontre os melhores talentos para sua empresa buscando currículos em nosso site. Cadastre-se agora e encontre o candidato ideal.
                         </p>
@@ -43,7 +45,9 @@ export default function LandingPage(): JSX.Element{
                 </BlockArticle>
                 <BlockArticle>
                     <div>
-                        <h4>É um candidato?</h4>
+                        <span>
+                            <h4>É um candidato?</h4>
+                        </span>
                         <p>
                         Seja visto pelos melhores empregadores! Cadastre seu currículo em nosso site e aumente suas chances de conquistar seu emprego dos sonhos.
                         </p>
@@ -52,7 +56,9 @@ export default function LandingPage(): JSX.Element{
                 </BlockArticle>
                 <BlockArticle>
                     <div>
-                        <h4>Saiba sobre nossa causa</h4>
+                        <span>
+                            <h4>Saiba sobre nossa causa</h4>
+                        </span>
                         <p>
                         Saiba mais a respeito dos nossos objetivos de maneira mais detalhada clicando no botão abaixo.
                         </p>
