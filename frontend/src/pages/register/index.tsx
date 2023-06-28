@@ -7,19 +7,33 @@ import registerSchema from "../../schemas/register";
 import { useUser } from "../../hooks/contexts";
 import { Link } from "react-router-dom";
 
+interface RegisterData {
+    name: string,
+    email: string,
+    password: string,
+    confirmPassword: string
+}
+
 export default function RegisterPage(): JSX.Element{
 
-    const { register, handleSubmit, formState: { errors } } = useForm({resolver: yupResolver(registerSchema)});
+    const { register, handleSubmit, trigger, formState: { errors } } = useForm({resolver: yupResolver(registerSchema)});
     const { registerUser } = useUser();
     document.title = "Cadastre-se | DiversiTrampos";
+
+    const onRegister = handleSubmit(async (formData: RegisterData) => {
+        await trigger();
+        registerUser(formData);
+      })
+
     return (
         <>
             <DinamicHeader startBtn={true} searchBtn={true} loginBtn={true}/>
             <RegisterContainer>
-                <RegisterForm onSubmit={handleSubmit(registerUser)}>
+                <RegisterForm onSubmit={onRegister}>
                     <h2>Cadastre-se</h2>
                     <label>Nome Completo</label>
                     <input type="text" {...register("name")} placeholder="Insira seu nome completo"/>
+                    {errors.name && <ErrorText>{errors.name.message}</ErrorText>}
                     <label>Email</label>
                     <input type="email" {...register("email")} placeholder="Insira seu e-mail"/>
                     {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
