@@ -11,8 +11,8 @@ export const ProfilePreviewDiv = styled.div`
     background-color: #fff;
     padding: 1em;
     border-radius: min(3vw, 1.5rem);
-    width: min(500px, 90vw);
-    height: 90px;;
+    width: min(450px, 90vw);
+    height: 70px;
 
     box-shadow: 0 0 0 rgba(0, 0, 0, 0.09);
     transition: 0.5s all ease-in-out;

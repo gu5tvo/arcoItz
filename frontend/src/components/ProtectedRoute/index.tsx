@@ -13,8 +13,8 @@ export default function ProtectedRoute({ isPrivate, redirectTo, element: Compone
   const { user } = useUser();
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [redirect, setRedirect] = useState(true)
-  const [loaded, setLoaded] = useState(false)
+  const [redirect, setRedirect] = useState(true);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     let updatedIsAuthenticated = false;
@@ -28,13 +28,13 @@ export default function ProtectedRoute({ isPrivate, redirectTo, element: Compone
 
     setIsAuthenticated(updatedIsAuthenticated);
 
-    setLoaded(true)
+    setLoaded(true);
 
   }, [user, navigate, isPrivate, redirectTo]);
 
-  if (!loaded) return <></>
+  if (!loaded) return (<></>);
 
   if (!isAuthenticated) { return <Navigate to={redirectTo || '/login'} /> }
   
-  return <Component />
+  return <Component />;
 }

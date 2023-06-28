@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { ProfilePreview } from '../../components/littledisplay'
+import { ProfilePreview } from '../../components/ProfilePreview'
 import DinamicHeader from '../../components/header'
 import { useUser, useAdmin } from '../../hooks/contexts'
 import { SearchContainer, SearchForm, SearchView } from './styles'
@@ -50,7 +50,7 @@ export default function SearchPage(){
                         ))}
                     </select>
                     <button onClick={listCities}>Aplicar filtros</button>
-                    <label>Página:</label>
+                    <label className='label-pagina'>Página:</label>
                     <nav>
                         <button onClick={() => {
                             if(page > 1){

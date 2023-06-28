@@ -1,28 +1,36 @@
 import styled from 'styled-components';
 
 export const SearchContainer = styled.div`
-    padding: 2em;
+    margin-top: min(5vh, 30px);
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
 `;
 
 export const SearchForm = styled.form`
     display: flex;
     flex-direction: column;
-    width: 16vw;
     background-color: #fff;
     padding: 2em;
+    width: 19vw;
     border-radius: 0.5rem;
     box-shadow: 0 0 60px rgba(0, 0, 0, 0.09);
     height: fit-content;
+    font-size: 1rem;
 
     label{
         margin-bottom: 0.3rem;
     }
 
+    .label-pagina{
+        margin-top: 0.5rem;
+        margin-bottom: 0rem;
+    }
+
     h3{
         margin-bottom: 1.5rem;
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         text-align: center;
         font-weight: 700;
     }
@@ -51,8 +59,9 @@ export const SearchForm = styled.form`
     }
 
     nav{
+        max-width: 50%;
         box-sizing: border-box;
-        display: flex;
+        display: inline-flex;
         margin-top: 1em;
         justify-content: center;
 
@@ -65,7 +74,7 @@ export const SearchForm = styled.form`
             margin: 0 .5em;
             border: none;
             background-color: #eee;
-            width: 30%;
+            max-width: 15%;
             border-radius: 0.5rem;
             text-align: center;
         }
@@ -73,10 +82,9 @@ export const SearchForm = styled.form`
 `;
 
 export const SearchView = styled.section`
-    width: calc(100% - 520px);
-    margin-left: 2em;
+    width: 74vw;
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: center;
+    gap: min(20px, 10vw);
     flex-wrap: wrap;
 `;
