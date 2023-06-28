@@ -1,27 +1,40 @@
 import { useUser } from "../../hooks/contexts";
 import React, { useEffect, useState } from "react";
-import { Navigate, Route, useNavigate, RouteProps } from "react-router-dom";
+import { Navigate, Route, useNavigate, RouteProps, Routes } from "react-router-dom";
 
 interface ProtectedRouteProps extends Omit<RouteProps, 'component'> {
   isPrivate?: boolean;
   redirectTo?: string;
-  component?: React.ElementType;
+  element?: React.ElementType;
 }
 
-export default function ProtectedRoute({ isPrivate, redirectTo, component: Component, ...rest }: ProtectedRouteProps): JSX.Element {
+export default function ProtectedRoute({ isPrivate, redirectTo, element: Component, ...rest }: ProtectedRouteProps): JSX.Element {
   const navigate = useNavigate();
   const { user } = useUser();
+
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [redirect, setRedirect] = useState(false)
 
   useEffect(() => {
+    let updatedIsAuthenticated = false;
+
     if (isPrivate && !user) {
-      setIsAuthenticated(false);
+      updatedIsAuthenticated = false;
       navigate(redirectTo || '/login');
     } else {
-      setIsAuthenticated(true);
+      updatedIsAuthenticated = true;
     }
-  }, [user, navigate, isPrivate, redirectTo]);
 
-  if (!isAuthenticated && isPrivate) return <Navigate to={redirectTo || '/login'} />;
-  return <Route {...rest} element={<Component />} index={false} />;
+    setIsAuthenticated(updatedIsAuthenticated);
+    setRedirect(isAuthenticated)
+
+  }, [user, navigate, isPrivate, redirectTo, redirect]);
+
+  if (isPrivate && !user) {
+    navigate(redirectTo || '/login')
+  }
+
+  if (redirect) { return <Navigate to={redirectTo || '/login'} /> }
+  
+  return <Component />
 }
