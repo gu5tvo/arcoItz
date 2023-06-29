@@ -1,14 +1,20 @@
 import { Container } from "./style";
-import ManageButtonsProps from "../../utils/Interfaces/ManageButtonsProps";
 import { Link } from "react-router-dom";
+import React from 'react'
 
-export function ManageButtons({ Image, Text, Path } : ManageButtonsProps) {
+interface ManageButtonsProps {
+  image: string,
+  text: string,
+  path: string
+}
+
+export default function ManageButtons({ image, text, path } : ManageButtonsProps) {
 
   return (
-    <Link to={ Path } style={ { textDecoration: 'none', color: '#1a1a1a'} }>
+    <Link to={ path } style={ { textDecoration: 'none', color: '#1a1a1a'} }>
       <Container className="manage-btn">
-        <img src={ Image }/>
-        {Text}
+        <img src={image}/>
+        {text}
       </Container>
     </Link>
   )

@@ -2,8 +2,9 @@ import styled from "styled-components";
 
 
 export const ProfilePreviewDiv = styled.div`
+
     box-sizing: content-box;
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center; 
@@ -46,7 +47,7 @@ export const ProfilePreviewDiv = styled.div`
         }
 
         .pronouns {
-
+            
         }
     }
 
