@@ -41,6 +41,7 @@ export const RegisterForm = styled.form`
         font-weight: 600;
         margin-bottom: 0.5rem;
         font-size: 90%;
+        padding-left: 0.5rem;
     }
 
     button{
@@ -51,6 +52,7 @@ export const RegisterForm = styled.form`
         background-color: #48A7FF;
         color: #fff;
         transition: 0.3s all ease-in-out;
+        font-size: 90%;
 
         &:hover{
             cursor: pointer;

@@ -38,7 +38,10 @@ export const LoginForm = styled.form`
 
     label{
         margin-top: 1.5rem;
-        font-weight: 500;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        font-size: 90%;
+        padding-left: 0.5rem;
     }
 
     button{
@@ -49,11 +52,13 @@ export const LoginForm = styled.form`
         background-color: #48A7FF;
         color: #fff;
         transition: 0.3s all ease-in-out;
+        font-size: 90%;
 
         &:hover{
             cursor: pointer;
             background-color: #3F8FCC;
         }
+
     }
 
     nav {
