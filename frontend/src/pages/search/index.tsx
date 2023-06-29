@@ -15,9 +15,6 @@ export default function SearchPage(){
     const [page, setPage] = useState(1);
     const [amount, setAmount] = useState(10);
 
-    const [keys, setKeys] = useState<Array<string>>([]);
-    const [loading, setLoading] = useState(true)
-
     function listiUsers(){
         listUsersPage(page, amount, city)
     }
@@ -26,6 +23,8 @@ export default function SearchPage(){
         listiUsers();
         listCities();
     },[ city, amount, page ])
+
+    // console.log(usersList)
 
     return (
         <>
@@ -70,12 +69,10 @@ export default function SearchPage(){
                     </SearchForm>
                     <SearchView>
                                 {
-                                    usersList.map((user) => { 
-                                        if (keys.includes(user.id)) 
-                                            return;
+                                    usersList.map((user, index) => { 
 
                                         return <ProfilePreview
-                                            key={user.id}
+                                            key={index}
                                             id={user.id}
                                             image={user.avatar}
                                             name={user.name}
