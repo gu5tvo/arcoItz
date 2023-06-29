@@ -83,7 +83,7 @@ export const DisclaimerSection = styled.section`
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: clamp(1rem, 2vw, 1.3rem);
+    font-size: clamp(1rem, 1vw, 1.3rem);
     line-height: clamp(1.5rem, 3vw, 1.9rem);
 
     .content {
@@ -159,7 +159,7 @@ export const BlockArticle = styled.article`
     transition: all 0.3s ease-in-out;
     box-shadow: 0 0 0 #48A7FF;
     text-align: left;
-    font-size: clamp(1rem, 2vw, 1.3rem);
+    font-size: clamp(1rem, 1vw, 1.3rem);
     
     &:hover{
         scale: 1.05;

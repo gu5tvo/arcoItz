@@ -11,8 +11,9 @@ export const ProfilePreviewDiv = styled.div`
     background-color: #fff;
     padding: 1em;
     border-radius: min(3vw, 1.5rem);
-    width: min(450px, 90vw);
+    width: min(30vw, 450px);
     height: 70px;
+    gap: min(1rem, 10%);
 
     box-shadow: 0 0 0 rgba(0, 0, 0, 0.09);
     transition: 0.5s all ease-in-out;
@@ -26,23 +27,26 @@ export const ProfilePreviewDiv = styled.div`
     .middle-div{
         display: flex;
         flex-direction: column;
-        margin-left: 24px; 
-        margin-right: auto;
         justify-content: space-between;
         min-height: 68px;
+        min-width: 33%;
 
         h4{
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 3vw, 1.2rem);
             font-weight: 600;
         }
 
         .fullname-paragraph{
-            font-size: 16px;
+            font-size: clamp(0.8rem, 2vw, 1rem);
             font-weight: bold;
         }
 
         p {
-            font-size: 14px;
+            font-size: clamp(0.6rem, 2vw, 0.8rem);
+        }
+
+        .pronouns {
+
         }
     }
 
@@ -54,23 +58,13 @@ export const ProfilePreviewDiv = styled.div`
         aspect-ratio: 1 / 1;
     }
 
-    small{
+    small {
         font-size: 0.8rem;
     }
 
     .area-paragraph, .final-paragraph {
         font-weight: 500; 
         font-size: 14px;
-    }
-    
-    .final-paragraph {
-        margin: 1px 0px 0px 88px;
+        align-self: flex-start;
     }
 `
-
-/*    
-
-
-
-
-*/

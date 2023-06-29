@@ -15,6 +15,9 @@ export default function SearchPage(){
     const [page, setPage] = useState(1);
     const [amount, setAmount] = useState(10);
 
+    const [keys, setKeys] = useState<Array<string>>([]);
+    const [loading, setLoading] = useState(true)
+
     function listiUsers(){
         listUsersPage(page, amount, city)
     }
@@ -31,57 +34,60 @@ export default function SearchPage(){
                 loginBtn={true}
                 registerBtn={true}
             />
-            <SearchContainer>
-                <SearchForm onSubmit={(e)=>e.preventDefault()}>
-                    <h3>Filtrar resultados</h3>
-                    <label>Perfís por página:</label>
-                    <select onChange={(e) => setAmount(Number(e.target.value))}>
-                        <option value="10">10 Perfís</option>
-                        <option value="15">15 Perfís</option>
-                        <option value="20">20 Perfís</option>
-                        <option value="25">25 Perfís</option>
-                        <option value="30">30 Perfís</option>
-                    </select>
-                    <label>Cidade:</label>
-                    <select onChange={(e) => setCity(e.target.value)}>
-                        <option value="">Todas as cidades</option>
-                        {cities.map((city) => (
-                            <option key={city.id} value={city.name}>{city.name}</option>
-                        ))}
-                    </select>
-                    <button onClick={listCities}>Aplicar filtros</button>
-                    <label className='label-pagina'>Página:</label>
-                    <nav>
-                        <button onClick={() => {
-                            if(page > 1){
-                                setPage(page-1)
+                <SearchContainer>
+                    <SearchForm onSubmit={(e)=>e.preventDefault()}>
+                        <h3>Filtrar resultados</h3>
+                        <label>Perfís por página:</label>
+                        <select onChange={(e) => setAmount(Number(e.target.value))}>
+                            <option value="10">10 Perfís</option>
+                            <option value="15">15 Perfís</option>
+                            <option value="20">20 Perfís</option>
+                            <option value="25">25 Perfís</option>
+                            <option value="30">30 Perfís</option>
+                        </select>
+                        <label>Cidade:</label>
+                        <select onChange={(e) => setCity(e.target.value)}>
+                            <option value="">Todas as cidades</option>
+                            {cities.map((city) => (
+                                <option key={city.id} value={city.name}>{city.name}</option>
+                            ))}
+                        </select>
+                        <button onClick={listCities}>Aplicar filtros</button>
+                        <label className='label-pagina'>Página:</label>
+                        <nav>
+                            <button onClick={() => {
+                                if(page > 1){
+                                    setPage(page-1)
+                                    listiUsers();
+                                }
+                            }}>{'<'}</button>
+                            <input type="number" value={page} onChange={(e) => setPage(Number(e.target.value))}/>
+                            <button onClick={() => {
+                                setPage(page+1)
                                 listiUsers();
-                            }
-                        }}>{'<'}</button>
-                        <input type="number" value={page} onChange={(e) => setPage(Number(e.target.value))}/>
-                        <button onClick={() => {
-                            setPage(page+1)
-                            listiUsers();
-                        }}>{'>'}</button>
-                    </nav>
-                </SearchForm>
-                <SearchView>
-                            {
-                                usersList.map((user) => (
-                                    <ProfilePreview
-                                        key={user.id}
-                                        id={user.id}
-                                        image={user.avatar}
-                                        name={user.name}
-                                        area={user.area}
-                                        gender={user.gender}
-                                        pronouns={user.pronnouns}
-                                    />
+                            }}>{'>'}</button>
+                        </nav>
+                    </SearchForm>
+                    <SearchView>
+                                {
+                                    usersList.map((user) => { 
+                                        if (keys.includes(user.id)) 
+                                            return;
 
-                                ))
-                            }
-                </SearchView>
-            </SearchContainer>
+                                        return <ProfilePreview
+                                            key={user.id}
+                                            id={user.id}
+                                            image={user.avatar}
+                                            name={user.name}
+                                            area={user.area}
+                                            gender={user.gender}
+                                            pronouns={user.pronnouns}
+                                        />
+
+                                    })
+                                }
+                    </SearchView> 
+                </SearchContainer>
         </>
     )
 }

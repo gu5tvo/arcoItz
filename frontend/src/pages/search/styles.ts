@@ -11,20 +11,23 @@ export const SearchContainer = styled.div`
 export const SearchForm = styled.form`
     display: flex;
     flex-direction: column;
+    align-items: center;
     background-color: #fff;
     padding: 2em;
-    width: 19vw;
+    min-width: 19vw;
     border-radius: 0.5rem;
     box-shadow: 0 0 60px rgba(0, 0, 0, 0.09);
     height: fit-content;
     font-size: 1rem;
+    margin-bottom: min(2rem, 10vh);
 
     label{
-        margin-bottom: 0.3rem;
+        margin-bottom: 0.4rem;
+        align-self: flex-start;
     }
 
     .label-pagina{
-        margin-top: 0.5rem;
+        margin-top: 0.8rem;
         margin-bottom: 0rem;
     }
 
@@ -41,6 +44,7 @@ export const SearchForm = styled.form`
         border-radius: 0.5rem;
         font-size: 0.82rem;
         margin-bottom: 1rem;
+        width: 100%;
     }
 
     button{
@@ -51,6 +55,7 @@ export const SearchForm = styled.form`
         background-color: #48A7FF;
         color: #fff;
         transition: 0.3s all ease-in-out;
+        width: 100%;
 
         &:hover{
             cursor: pointer;
@@ -59,32 +64,43 @@ export const SearchForm = styled.form`
     }
 
     nav{
-        max-width: 50%;
+        max-width: 200px;
         box-sizing: border-box;
         display: inline-flex;
         margin-top: 1em;
         justify-content: center;
 
         button{
-            margin: 0 .5em;
+            margin: 0.5em;
+            max-width: 20%;
         }
 
         input{
-            padding: 1em;
-            margin: 0 .5em;
+            padding: 0.45em;
+            margin: 0.5em;
             border: none;
             background-color: #eee;
             max-width: 15%;
             border-radius: 0.5rem;
             text-align: center;
         }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+             -webkit-appearance: none;
+        margin: 0;
+        }       
+
+        input[type=number] {
+         appearance: textfield;
+        }
     }
 `;
 
 export const SearchView = styled.section`
-    width: 74vw;
+    width: 70vw;
     display: flex;
     justify-content: center;
-    gap: min(20px, 10vw);
+    gap: min(40px, 9vw);
     flex-wrap: wrap;
 `;

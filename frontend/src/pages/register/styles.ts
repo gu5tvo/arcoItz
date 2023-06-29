@@ -38,7 +38,9 @@ export const RegisterForm = styled.form`
 
     label{
         margin-top: 1.5rem;
-        font-weight: 500;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        font-size: 90%;
     }
 
     button{

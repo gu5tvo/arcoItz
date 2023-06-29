@@ -11,27 +11,9 @@ export function ProfilePreview({ id, image , name, area, pronouns , gender}: iPr
         <div className="middle-div">
             <p className="fullname-paragraph">{name}</p>
             <p className="area-paragraph">{area}</p>
-            <p>{pronouns}</p>
+            <p className="pronouns">{pronouns}</p>
         </div>
-        <div className="middle-div">
-            <p className="final-paragraph">{gender}</p> 
-        </div>
+        <p className="final-paragraph">{gender}</p> 
     </ProfilePreviewDiv>
     )
 }
-
-/*
-
-        <ProfilePreviewDiv onClick={()=> navigate(`/profile/${id}`)}>
-            <div className="main-box">
-                <img src={image ? image : 'https://secure.gravatar.com/avatar/e0e5d1205872d84374c3e555c8a56958?s=225&d=mm&r=g'} alt={"foto de " + name}/>
-                <div className="info-box">
-                    <h4>{name}</h4>
-                    <p>{pronouns}</p>
-                    <p><b>{area}</b></p>
-                </div>
-            </div>
-            <small>{gender}</small>
-        </ProfilePreviewDiv>
-
-*/

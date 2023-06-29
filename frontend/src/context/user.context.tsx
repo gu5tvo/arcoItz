@@ -214,6 +214,9 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
     try {
       const query = city ? `?page=${page}&amount=${amount}&city=${city}` : `?page=${page}&amount=${amount}`;
       const response = await api.get(`/users/all${query}`);
+      console.log("b")
+      console.log(response)
+      console.log("a")
       setUsersList(response.data.content);
     } catch (err: AxiosError | unknown) {
       if (err instanceof AxiosError) {
