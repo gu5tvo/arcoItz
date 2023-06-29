@@ -98,9 +98,18 @@ export const SearchForm = styled.form`
 `;
 
 export const SearchView = styled.section`
+    margin-left: 5rem;
     width: 70vw;
-    display: flex;
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     justify-content: center;
-    gap: min(40px, 9vw);
-    flex-wrap: wrap;
+    grid-row-gap: 1.5rem;
+
+    @media (max-width: 400px) {
+        margin-left: 0rem;
+        grid-template-columns: 1fr;
+        width: 85vw;
+        
+    }
 `;

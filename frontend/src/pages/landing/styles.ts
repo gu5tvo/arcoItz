@@ -78,8 +78,8 @@ export const PinkSection = styled.section`
 `
 
 export const DisclaimerSection = styled.section`
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     width: 100vw;
-    padding: 1rem 2rem;    
     display: flex;
     align-items: center;
     justify-content: center;
@@ -94,6 +94,7 @@ export const DisclaimerSection = styled.section`
         flex-direction: row;
         justify-content: space-evenly;
         align-items: center;
+        padding: 1.5rem;
     }
 
     .description{
