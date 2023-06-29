@@ -4,10 +4,6 @@ import styled from "styled-components";
 export const Container = styled.main `
   width: 100vw;
   height: 100vh;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 `
 
 export const PainelSection = styled.section `
@@ -22,12 +18,13 @@ export const PainelSection = styled.section `
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.9rem;
     margin-top: 3rem;
 
     h4{
       font-size: 1.5rem;
       font-weight: 700;
+      text-align: center;
     }
 
     p {
@@ -52,7 +49,7 @@ export const ButtonsContainer = styled.div`
     @media (min-width: 769px) {
       grid-template-columns: 1fr 1fr 1fr;
 
-      .manage-btn:nth-child(4) {
+      :nth-child(4) {
         grid-column: 2 / span 1;
       }
     }

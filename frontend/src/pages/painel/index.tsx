@@ -1,38 +1,43 @@
-import { GerenciarButtons } from "../../components/GerenciarButtons";
-import { Header } from "../../layouts/Header";
-import { PainelButtons } from "../../utils/HeaderButtons";
+import DinamicHeader from '../../components/header'
 import { Container, PainelSection, ButtonsContainer } from "./style";
-
-import CityIcon from '../../assets/images/map-icon.svg'
-import ProfilePicture from '../../assets/images/profile-picture.svg'
-import SectorIcon from '../../assets/images/sector-icon.svg'
-import ManagerIcon from '../../assets/images/manager-icon.svg'
+import CityIcon from '../../assets/map-icon.svg'
+import ProfilePicture from '../../assets/profile-picture.svg'
+import SectorIcon from '../../assets/sector-icon.svg'
+import ManagerIcon from '../../assets/manager-icon.svg'
 import { useAdmin } from "../../hooks/contexts";
+import React from 'react'
+import { Navigate } from 'react-router-dom'
+
+import ManageButtons from "../../components/ManageButtons";
 
 export function Painel () {
 
-  const { adminList, admins } = useAdmin()
+  const { adminList, admins, isAuthenticated } = useAdmin()
 
   const getAdmin = async ()=> {
     await adminList();
 
-    const currentAdmin = admins.filter((admin)=> admin.name)
+    const currentAdmin = admins.filter((admin)=> admin.name) 
+  }
+
+  if (!isAuthenticated) {
+    return <Navigate to="/"/>
   }
 
   return (
     <Container>
-      <Header header={PainelButtons}/>
+      <DinamicHeader logoutBtn={true}/>
       <PainelSection>
         <div className='TextPainel'>
-            <h4>Olá, jij</h4>
+            <h4>Olá! Boas-vindas ao painel de admin</h4>
             <p>O que pretende fazer agora?</p>
         </div>
 
         <ButtonsContainer>
-          <GerenciarButtons Image={CityIcon} Text='Gerenciar cidades' Path='/manage-cities'/>
-          <GerenciarButtons Image={ProfilePicture} Text='Gerenciar usuários' Path='/manage-users'/>
-          <GerenciarButtons Image={SectorIcon} Text='Gerenciar setores' Path='/manage-sectors'/>
-          <GerenciarButtons Image={ManagerIcon} Text='Gerenciar admins'Path='/manage-admins'/>
+          <ManageButtons image={CityIcon} text='Gerenciar cidades' path='/manage-cities'/>
+          <ManageButtons image={ProfilePicture} text='Gerenciar usuários' path='/manage-users'/>
+          <ManageButtons image={SectorIcon} text='Gerenciar setores' path='/manage-sectors'/>
+          <ManageButtons image={ManagerIcon} text='Gerenciar admins' path='/manage-admins'/>
 
         </ButtonsContainer>
 
