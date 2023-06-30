@@ -17,7 +17,7 @@ export default function LandingPage(): JSX.Element{
                         <small> Apoie essa causa, clique em ”saiba mais”.</small>
                         <Link to="/about">Saiba mais</Link>
                     </div>
-                    <img src={splash} alt="Mulher trans segurando a bandeira Trans, com o mapa do maranhão sobreposto com as cores da bandeira do maranhão."/>
+                    <img src={splash} alt="Pessoa trans segurando a bandeira Trans, com o mapa do Maranhão sobreposto com as cores da bandeira do Maranhão."/>
                 </div>
             </PinkSection>
             <DisclaimerSection>

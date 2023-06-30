@@ -36,7 +36,7 @@ export const Header = styled.header`
     }
 
     h1{
-        font-size: 1.8em;
+        font-size: clamp(1.4rem, 3vw, 1.7rem);
         color: #ffffff;
         font-weight: 900;
     }

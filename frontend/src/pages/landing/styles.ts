@@ -8,10 +8,10 @@ export const PinkSection = styled.section`
     font-family: 'Inter', sans-serif;
     text-align: center;
     position: relative;
+    background-color: #FFCCE4;
+    width: 100vw;
     
     .content { 
-        width: min(100vw, 2200px);
-        background-color: #FFCCE4;
         position: relative;
         display: flex;
         justify-content: space-around;
@@ -56,7 +56,6 @@ export const PinkSection = styled.section`
         position: relative;
         bottom: 0;
         max-width: 30%;
-        width: 100vw;
         margin-left: 4vw;        
     }
 
@@ -85,11 +84,11 @@ export const DisclaimerSection = styled.section`
     justify-content: center;
     font-size: clamp(1rem, 1vw, 1.3rem);
     line-height: clamp(1.5rem, 3vw, 1.9rem);
+    background-color: #FFF;
+    width: 100vw;
 
     .content {
-        width: min(100vw, 2200px);
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        background-color: #FFF;
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;

@@ -1070,6 +1070,11 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
+"@klarr-agency/circum-icons-react@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@klarr-agency/circum-icons-react/-/circum-icons-react-2.0.1.tgz#35e514e057c262fe2f61a74fc7641fd25b338b5a"
+  integrity sha512-bGkrrB2R/o+gT0kJrch8pAt0HOil0P720KA6bCGja2ee+dKHKkoNKV+VT+nWj7HqA30Sc41Sb7I5dgXddD/q+Q==
+
 "@koa/cors@^3.1.0":
   version "3.4.3"
   resolved "https://registry.npmjs.org/@koa/cors/-/cors-3.4.3.tgz"
@@ -2855,11 +2860,6 @@ react-hot-toast@^2.4.1:
   integrity sha512-j8z+cQbWIM5LY37pR6uZR6D4LfseplqnuAO4co4u8917hBUvXlEqyP1ZzqVLcqoyUesZZv/ImreoCeHVDpE5pQ==
   dependencies:
     goober "^2.1.10"
-
-react-icons@^4.10.1:
-  version "4.10.1"
-  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.10.1.tgz#3f3b5eec1f63c1796f6a26174a1091ca6437a500"
-  integrity sha512-/ngzDP/77tlCfqthiiGNZeYFACw85fUjZtLbedmJ5DTlNDIwETxhwBzdOJ21zj4iJdvc0J3y7yOsX3PpxAJzrw==
 
 react-input-mask@^2.0.4:
   version "2.0.4"
