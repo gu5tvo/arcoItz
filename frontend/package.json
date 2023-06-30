@@ -9,8 +9,8 @@
     "build": "tsc && vite build"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.1.4",
     "@hookform/resolvers": "^3.1.0",
-    "@klarr-agency/circum-icons-react": "^2.0.1",
     "axios": "^1.4.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",

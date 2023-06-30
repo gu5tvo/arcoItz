@@ -6,7 +6,7 @@ export const CitiesContainer = styled.main `
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    margin-top: min(15vh, 3rem);
     gap: min(1.5rem, 10vh);
 
     h1 {
@@ -14,18 +14,63 @@ export const CitiesContainer = styled.main `
         font-weight: bold;
     }
 
-    .circumicon__circle_plus {
-        aspect-ratio: 1 / 1;
-        width: min(10vw, 100px);
-        height: min(10vw, 100px);
+    .plus-icon svg {
+        --size: min(80vw, 80px);
+        aspect-ratio: 1;
+        width: var(--size);
+        height: var(--size);
         cursor: pointer;
+    }
+
+    .cities {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: min(5vh, 20px);
     }
 
 `
 
-// https://github.com/Klarr-Agency/Circum-icons
-
 export const CitiesSection = styled.section `
     width: 100%;
     height: 100%;
+`
+export const DeleteModalContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: min(10vh, 20px);
+    min-height: 300px;
+    padding: min(1rem, 3vw);
+    max-width: 90%;
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+
+    h1 {
+        font-size: 1em;
+        font-weight: bold;
+    }
+
+    p {
+        font-size: 0.8em;
+    }
+
+    .confirm-btn {
+        all: unset;
+        color: var(--WHITE);
+        padding: min(10px, 10vw);
+        background-color: var(--BLUE);
+        border-radius: min(15px, 5vw);
+        height: 25px;
+        font-size: 0.7em;
+        align-self: flex-end;
+        transition: 0.15s linear;
+        cursor: pointer;
+        &:hover {
+            background-color: var(--BLUE-DARK);
+            font-size: 0.8em;
+        }
+    }
+    
 `
