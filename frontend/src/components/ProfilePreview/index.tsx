@@ -2,18 +2,31 @@ import React from "react"
 import iProfilePreview from "../../interfaces/profile.component"
 import { ProfilePreviewDiv } from "./styles"
 import { useNavigate } from "react-router-dom"
+import pfp from '../../assets/profile-picture.svg'
+
 
 export function ProfilePreview({ id, image , name, area, pronouns , gender}: iProfilePreview){
     const navigate = useNavigate()
+
+    const splitName = name.split(' ');
+    const firstName = splitName[0];
+    const lastName = splitName[splitName.length - 1]
+
+    const names = (firstName === lastName) ? firstName : firstName + ' ' + lastName;
+
+    console.log(image)
+    // 
     return( 
     <ProfilePreviewDiv onClick={()=> navigate(`/profile/${id}`)}>
-        <img src={image ? image : 'https://secure.gravatar.com/avatar/e0e5d1205872d84374c3e555c8a56958?s=225&d=mm&r=g'} alt={"foto de " + name} className="photo"/>
-        <div className="middle-div">
-            <p className="fullname-paragraph">{name}</p>
-            <p className="area-paragraph">{area}</p>
-            <p className="pronouns">{pronouns}</p>
+        <div className="infos-container">
+            <img src={image ? image : pfp} alt={"foto de " + name} className="photo"/>
+          <div className="middle-div">
+            <p className="fullname-paragraph">{names}</p>
+            <p className="area-paragraph">Desenvolvedor Fullstack</p>
+            <p className="pronouns">ele/dela</p>
+          </div>
         </div>
-        <p className="final-paragraph">{gender}</p> 
+        <p className="final-paragraph">Pessoa trans</p> 
     </ProfilePreviewDiv>
     )
 }

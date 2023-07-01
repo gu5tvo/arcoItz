@@ -12,12 +12,19 @@ export const ProfilePreviewDiv = styled.div`
     background-color: #fff;
     padding: 1em;
     border-radius: min(3vw, 1.5rem);
-    width: min(30vw, 450px);
+    width: min(90vw, 450px);
     height: 70px;
     gap: min(1rem, 10%);
 
     box-shadow: 0 0 0 rgba(0, 0, 0, 0.09);
     transition: 0.5s all ease-in-out;
+    font-size: clamp(0.6rem, 1vw, 0.8rem);
+
+    @media (width < 1400px) {
+        width: min(90vw, 360px);
+        font-size: clamp(0.5rem, 0.9vw, 0.0.7rem);
+    }
+
 
     &:hover{
         cursor: pointer;
@@ -25,10 +32,15 @@ export const ProfilePreviewDiv = styled.div`
         scale: 1.05;
     }
 
-    .middle-div{
+    .infos-container{
+        display: flex;
+        justify-content: start;
+        gap: 10px;
+        
+        .middle-div{
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: space-evenly;
         min-height: 68px;
         min-width: 33%;
 
@@ -50,14 +62,18 @@ export const ProfilePreviewDiv = styled.div`
             
         }
     }
+    }
+
+
 
     .photo{
-        max-height: 100%;
         margin-left: 10px;
         border-radius: 50%;
         align-self: center;
         aspect-ratio: 1 / 1;
+        width: min(75px, 15vw);
     }
+
 
     small {
         font-size: 0.8rem;
@@ -67,5 +83,10 @@ export const ProfilePreviewDiv = styled.div`
         font-weight: 500; 
         font-size: 14px;
         align-self: flex-start;
+        white-space: nowrap;
+    }
+
+    .final-paragraph {
+
     }
 `

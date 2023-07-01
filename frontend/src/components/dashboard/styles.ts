@@ -10,7 +10,7 @@ export const Image = styled.img`
     border-radius: 50%;
     margin-bottom: 1em;
     transition: 0.3s all ease-in-out;
-
+    aspect-ratio: 1;
     &:hover{
         opacity: 0.8;
         scale: 1.1;

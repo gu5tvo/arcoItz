@@ -3,18 +3,18 @@ import { Link } from 'react-router-dom';
 
 export const PinkSection = styled.section`
     display: flex;
-    flex-direction: row;
     justify-content: center;
     font-family: 'Inter', sans-serif;
     text-align: center;
     position: relative;
-    background-color: #FFCCE4;
+    background-color: var(--PINK);
     width: 100vw;
     
     .content { 
         position: relative;
         display: flex;
         justify-content: space-around;
+        gap: min(20rem, 30vw);
     }
 
     @media (max-width: 768px){
@@ -53,10 +53,8 @@ export const PinkSection = styled.section`
     }
 
     img{
-        position: relative;
         bottom: 0;
-        max-width: 30%;
-        margin-left: 4vw;        
+        max-width: 40%;      
     }
 
     a{
@@ -88,7 +86,7 @@ export const DisclaimerSection = styled.section`
     width: 100vw;
 
     .content {
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;

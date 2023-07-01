@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import DinamicHeader from "../../components/header";
-import {DisplayContainer, LeftContainer, RightContainer, Selections, Container} from './styles'
+import { DisplayContainer, LeftContainer, RightContainer, Selections, Container } from './styles'
 import ProfileScreen from "../../components/dashboard/profile";
 import SchoolScreen from "../../components/dashboard/school";
 import ContactScreen from "../../components/dashboard/contact";

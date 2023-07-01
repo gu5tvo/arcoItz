@@ -24,8 +24,6 @@ export default function SearchPage(){
         listCities();
     },[ city, amount, page ])
 
-    // console.log(usersList)
-
     return (
         <>
             <DinamicHeader 
@@ -33,6 +31,7 @@ export default function SearchPage(){
                 loginBtn={true}
                 registerBtn={true}
             />
+
                 <SearchContainer>
                     <SearchForm onSubmit={(e)=>e.preventDefault()}>
                         <h3>Filtrar resultados</h3>
@@ -51,7 +50,7 @@ export default function SearchPage(){
                                 <option key={city.id} value={city.name}>{city.name}</option>
                             ))}
                         </select>
-                        <button onClick={listCities}>Aplicar filtros</button>
+                        {/* <button onClick={listCities}>Aplicar filtros</button> <-- useless */}
                         <label className='label-pagina'>Página:</label>
                         <nav>
                             <button onClick={() => {

@@ -1,11 +1,18 @@
 import styled from 'styled-components';
 
-export const SearchContainer = styled.div`
+export const SearchContainer = styled.main`
     margin-top: min(5vh, 30px);
     display: flex;
     flex-direction: row;
     justify-content: center;
+    width: 100vw;
     flex-wrap: wrap;
+    gap: min(2vw, 2rem);
+
+    @media (width > 1500px) {
+        gap: 20px;
+    }
+
 `;
 
 export const SearchForm = styled.form`
@@ -19,7 +26,6 @@ export const SearchForm = styled.form`
     box-shadow: 0 0 60px rgba(0, 0, 0, 0.09);
     height: fit-content;
     font-size: 1rem;
-    margin-bottom: min(2rem, 10vh);
 
     label{
         margin-bottom: 0.4rem;
@@ -98,18 +104,19 @@ export const SearchForm = styled.form`
 `;
 
 export const SearchView = styled.section`
-    margin-left: 5rem;
-    width: 70vw;
-    height: auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    width: min(70vw, 1700px);
+    
+    display: flex;
     justify-content: center;
-    grid-row-gap: 1.5rem;
+    flex-wrap: wrap;
+    gap: 2vw;
 
-    @media (max-width: 400px) {
-        margin-left: 0rem;
-        grid-template-columns: 1fr;
-        width: 85vw;
-        
+    @media (width < 800px) {
+        gap: 7vh;
     }
+
+    @media (width > 1400px) {
+        gap: 3.5vw;
+    }
+
 `;
