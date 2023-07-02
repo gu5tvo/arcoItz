@@ -105,7 +105,6 @@ export const SearchForm = styled.form`
 
 export const SearchView = styled.section`
     width: min(70vw, 1700px);
-    
     display: flex;
     justify-content: center;
     flex-wrap: wrap;

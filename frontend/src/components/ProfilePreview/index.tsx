@@ -19,14 +19,14 @@ export function ProfilePreview({ id, image , name, area, pronouns , gender}: iPr
     return( 
     <ProfilePreviewDiv onClick={()=> navigate(`/profile/${id}`)}>
         <div className="infos-container">
-            <img src={image ? image : pfp} alt={"foto de " + name} className="photo"/>
+            <img src={image ? image : pfp} alt={`foto de ${name}`} className="photo"/>
           <div className="middle-div">
             <p className="fullname-paragraph">{names}</p>
-            <p className="area-paragraph">Desenvolvedor Fullstack</p>
-            <p className="pronouns">ele/dela</p>
+            <p className="area-paragraph">{area}</p>
+            <p className="pronouns">{pronouns}</p>
           </div>
         </div>
-        <p className="final-paragraph">Pessoa trans</p> 
+        <p className="final-paragraph">{gender}</p> 
     </ProfilePreviewDiv>
     )
 }

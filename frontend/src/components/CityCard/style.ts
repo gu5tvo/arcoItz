@@ -11,12 +11,19 @@ export const CityCardContainer = styled.div`
     padding-left: min(25px, 10vw);
     font-weight: bold;
 
+    span {
+        order: 2;
+    }
+
     .trash-icon {
+        width: min(1.2rem, 100%);
+        fill: #292D32;
+        color: blue;
         cursor: pointer;
         transition: 0.15s linear;
-        order: 2;
         &:hover {
-            color: red;
+            fill: red;
+
         }        
     }
 
@@ -24,7 +31,7 @@ export const CityCardContainer = styled.div`
         transition: 0.15s linear;
     }
 
-    .trash-icon:hover ~ p {
+    span:hover ~ p {
         color: red;
     }
 `

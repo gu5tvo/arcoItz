@@ -1,22 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useUser } from '../../hooks/contexts';
 import { ContainerProfile, UserGradient} from './style';
+import { iUserSimple } from '../../interfaces/users';
 
 export default function Profile() {
-  const { usersList } = useUser();
-  const { id } = useParams<{ id: string }>();
+  const { displayProfile } = useUser();
+  const { id } = useParams();
 
-  const user = usersList.find((user) => user.id === id);
+  const [user, setUser] = useState<iUserSimple>();
+
+  useEffect(() => {
+    async function loadProfile() {
+      const response = await displayProfile(id);
+      setUser(response);
+    }
+    loadProfile();
+  }, [displayProfile, id]);
 
   return (
     <ContainerProfile>
-      <h1>Profile</h1>
       <div className='content'>
         <UserGradient>
-          <img src={user?.avatar} alt={user?.name} />
-          <p>{user.pronnouns}</p>
-          <h1>{user?.name}</h1>
+            <img src={user?.avatar} alt={`imagem de ${user?.name}`} />
+          <div className='profile-description'>
+            <p>{user?.pronnouns}</p>
+            <hr />
+            <h1>{user?.name}</h1>
+            <h3>{user?.area}</h3>
+          </div>
 
         </UserGradient>
       </div>

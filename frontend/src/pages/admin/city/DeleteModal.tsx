@@ -1,6 +1,6 @@
 import { DeleteModalContainer } from "./style"
 import React, { useState } from 'react'
-import { useAdmin } from "../../hooks/contexts";
+import { useAdmin } from "../../../hooks/contexts";
 
 interface DeleteModalProps {
     cityName: string;
@@ -29,7 +29,7 @@ export default function DeleteModal({ cityName, cityId }: DeleteModalProps) {
         <DeleteModalContainer>
             <h1>Apagar cidade</h1>
             <p>Você tem certeza que deseja apagar <b>{cityName}</b> dos registros?</p>
-            <button className="confirm-btn">Confirmar</button>
+            <button className="confirm-btn" onClick={deleteCity}>Confirmar</button>
         </DeleteModalContainer>
     )
 }

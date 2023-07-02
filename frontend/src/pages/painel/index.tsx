@@ -13,13 +13,13 @@ import ManageButtons from "../../components/ManageButtons";
 export function Painel () {
 
   const { adminList, admins, isAuthenticated } = useAdmin()
-
+  
   const getAdmin = async ()=> {
     await adminList();
-
+    
     const currentAdmin = admins.filter((admin)=> admin.name) 
   }
-
+  
   if (!isAuthenticated) {
     return <Navigate to="/"/>
   }

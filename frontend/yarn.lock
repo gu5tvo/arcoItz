@@ -1105,6 +1105,11 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
+"@klarr-agency/circum-icons-react@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@klarr-agency/circum-icons-react/-/circum-icons-react-2.0.1.tgz#35e514e057c262fe2f61a74fc7641fd25b338b5a"
+  integrity sha512-bGkrrB2R/o+gT0kJrch8pAt0HOil0P720KA6bCGja2ee+dKHKkoNKV+VT+nWj7HqA30Sc41Sb7I5dgXddD/q+Q==
+
 "@koa/cors@^3.1.0":
   version "3.4.3"
   resolved "https://registry.npmjs.org/@koa/cors/-/cors-3.4.3.tgz"

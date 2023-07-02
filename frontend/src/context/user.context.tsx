@@ -27,7 +27,7 @@ export const UserContext = createContext<{
   logout: () => void;
   registerUser: (data: iRegister) => void;
   profile: () => void;
-  displayProfile: (id: string) => void;
+  displayProfile: (id: string) => Promise<iUserSimple>;
   updateProfile: (data: iUserSimple) => void;
   deleteSelf: () => void;
   listUsersPage: (page: string | number, amount: string | number, city: string) => void;
@@ -55,7 +55,7 @@ export const UserContext = createContext<{
   logout: () => {},
   registerUser: () => {},
   profile: () => {},
-  displayProfile: () => {},
+  displayProfile: () => new Promise(() => []),
   updateProfile: () => {},
   deleteSelf: () => {},
   listUsersPage: () => new Promise(() => []),

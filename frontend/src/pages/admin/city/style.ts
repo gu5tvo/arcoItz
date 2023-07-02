@@ -14,7 +14,7 @@ export const CitiesContainer = styled.main `
         font-weight: bold;
     }
 
-    .plus-icon svg {
+    .plus-icon {
         --size: min(80vw, 80px);
         aspect-ratio: 1;
         width: var(--size);
@@ -40,9 +40,9 @@ export const DeleteModalContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    gap: min(10vh, 20px);
-    min-height: 300px;
+    justify-content: center;
+    gap: min(20vh, 70px);
+    min-height: 200px;
     padding: min(1rem, 3vw);
     max-width: 90%;
     font-size: clamp(1.2rem, 3vw, 1.6rem);
@@ -50,6 +50,57 @@ export const DeleteModalContainer = styled.div`
     h1 {
         font-size: 1em;
         font-weight: bold;
+    }
+
+    p {
+        font-size: 0.8em;
+    }
+
+    .confirm-btn {
+        all: unset;
+        color: var(--WHITE);
+        padding: min(10px, 10vw);
+        background-color: var(--BLUE);
+        border-radius: min(15px, 5vw);
+        height: 25px;
+        font-size: 0.7em;
+        align-self: flex-end;
+        transition: 0.15s linear;
+        cursor: pointer;
+        &:hover {
+            background-color: var(--BLUE-DARK);
+            font-size: 0.8em;
+        }
+    }
+    
+`
+export const CreateModalContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: min(10vh, 50px);
+    min-height: 200px;
+    padding: min(1rem, 3vw);
+    max-width: 90%;
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+
+    h1 {
+        font-size: 1em;
+        font-weight: bold;
+    }
+
+    input {
+        all: unset;
+        border: 1px solid black;
+        background-color: var(--GRAY);
+        min-height: 40px;
+        width: clamp(200px, 60vw, 330px);
+        max-width: 100%;
+        box-sizing: border-box;
+        padding: 10px 15px;
+        font-size: clamp(0.8rem, 1.1vw, 1.8rem);
+        border-radius: 10px;
     }
 
     p {
