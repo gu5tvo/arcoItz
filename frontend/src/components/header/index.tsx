@@ -7,46 +7,47 @@ import  {Link}  from "react-router-dom";
 
 export default function DinamicHeader(
     {startBtn = false, loginBtn = false, registerBtn = false,
-     profileBtn = false ,logoutBtn = false, adminLogoutBtn = false,
-     searchBtn = false
+     profileBtn = false, logoutBtn = false, adminLogoutBtn = false,
+     searchBtn = false, adminPanel = false
     }: iHeader){
 
-    const { isAuthenticated, logout } = useUser();
-    const { adminLogout } = useAdmin();
-    const [isOpen, setIsOpen] = useState(false);
+    const { isAuthenticated: userAuthenticated, logout } = useUser();
+    const { isAuthenticated: adminAuthenticated, adminLogout } = useAdmin();
     const [showMenu, setShowMenu] = useState(false);
 
-        function betterMenu(){
-            if(loginBtn || registerBtn){
-                if(isAuthenticated){
-                    return(
-                        <UndecoratedLink to="/dashboard">Acessar Dashboard</UndecoratedLink>
-                    )
-                }else if(!isAuthenticated){
-                    return (
-                        <>
-                            {loginBtn && <UndecoratedLink to="/login">Entrar</UndecoratedLink>}
-                            {registerBtn && <OutlinedLink to="/register">Cadastre-se</OutlinedLink>}
-                        </>
-                    )
-                }
+    function betterMenu(){
+        if (adminPanel && adminAuthenticated) {
+            return (
+                <UndecoratedLink to="/admin/painel">Administração</UndecoratedLink>
+            )
+        }
+
+        if(loginBtn || registerBtn){
+            if(userAuthenticated){
+                return(
+                    <UndecoratedLink to="/dashboard">Acessar Dashboard</UndecoratedLink>
+                )
+            }else if(!userAuthenticated){
+                return (
+                    <>
+                        {loginBtn && <UndecoratedLink to="/login">Entrar</UndecoratedLink>}
+                        {registerBtn && <OutlinedLink to="/register">Cadastre-se</OutlinedLink>}
+                    </>
+                )
             }
         }
+    }
 
-        const [menuClass, setMenuClass] = useState("")
+    const [menuClass, setMenuClass] = useState("")
 
-        const toggleMenuState = () => {
-            setShowMenu(!showMenu);
+    const toggleMenuState = () => {
+        setShowMenu(!showMenu);
 
-            if (showMenu)
-                setMenuClass("show")
-            else 
-                setMenuClass("")
-        }
-
-
-
-        
+        if (showMenu)
+            setMenuClass("show")
+        else 
+            setMenuClass("")
+    }        
 
     return (
         <Header>
@@ -60,7 +61,7 @@ export default function DinamicHeader(
                     {betterMenu()}
                     {profileBtn && <UndecoratedLink to="/profile">Acessar meu perfil</UndecoratedLink>}
                     {logoutBtn && <FilledBtn onClick={logout}>Desconectar</FilledBtn>}
-                    {adminLogoutBtn && <FilledBtn onClick={adminLogout}>Sair</FilledBtn>}
+                    {adminLogoutBtn && <FilledBtn onClick={adminLogout}>Desconectar</FilledBtn>}
                 </nav>
             </span>
         </Header>
