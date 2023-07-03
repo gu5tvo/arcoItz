@@ -15,6 +15,12 @@ export interface iAdminRegister {
     password: string;
 }
 
+export interface iAdminEdit {
+    name?: string;
+    email?: string;
+    password?: string;
+}
+
 export interface iSectors {
     id: string;
     name: string;

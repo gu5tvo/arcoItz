@@ -6,4 +6,5 @@ export interface iHeader {
     logoutBtn?: Boolean,
     adminLogoutBtn?: Boolean,
     searchBtn?: Boolean,
+    adminPanel?: Boolean
 }
