@@ -4,7 +4,7 @@ import DinamicHeader from '../../../components/header'
 import Modal from '../../../components/Modal';
 import CityCard from '../../../components/CityCard';
 import { useAdmin } from '../../../hooks/contexts';
-import DeleteModal from './DeleteModal';
+import DeleteCityModal from './DeleteModal';
 import CreateModal from './CreateModal';
 import AddIcon from '.././../../assets/add.svg'
 import { Navigate } from "react-router-dom";
@@ -17,8 +17,8 @@ export default function Cities() {
     const { listCities, cities, deleteCities, isAuthenticated } = useAdmin()
 
 
-    if (isAuthenticated) {
-        return <Navigate to="/"/>
+    if (!isAuthenticated) {
+        return <Navigate to="/admin/login"/>
     }
 
     const [modalChoice, setModalChoice] = useState<ModalOptions>({ choice: null })
@@ -52,7 +52,7 @@ export default function Cities() {
 
     return (
         <>
-         <DinamicHeader logoutBtn={true}/>
+         <DinamicHeader logoutBtn adminPanel/>
              <CitiesContainer>
                 <h1>Cidades</h1>
                 <img className='plus-icon' src={AddIcon} onClick={onAdd}/>
@@ -65,7 +65,7 @@ export default function Cities() {
             <Modal modalIsOpen={showModal} toggleModal={toggleModal}>
                 {
                     showModal &&
-                    (modalChoice.choice && modalChoice.choice === 'delete') ? <DeleteModal cityName={cityName} cityId={cityId}/> : <CreateModal/>
+                    (modalChoice.choice && modalChoice.choice === 'delete') ? <DeleteCityModal cityName={cityName} cityId={cityId}/> : <CreateModal/>
                 }
             </Modal> 
 

@@ -2,12 +2,12 @@ import { DeleteModalContainer } from "./style"
 import React, { useState } from 'react'
 import { useAdmin } from "../../../hooks/contexts";
 
-interface DeleteModalProps {
+interface DeleteCityModalProps {
     cityName: string;
     cityId: string;
 }
 
-export default function DeleteModal({ cityName, cityId }: DeleteModalProps) {
+export default function DeleteCityModal({ cityName, cityId }: DeleteCityModalProps) {
 
     const { deleteCities } = useAdmin()
     const [cityDeleted, setCityDeleted] = useState(false)

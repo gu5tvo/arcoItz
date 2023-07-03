@@ -1,12 +1,12 @@
 import styled from 'styled-components'
 
-export const CitiesContainer = styled.main `
+export const ManageAdminsContainer = styled.main`
     width: 100vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: min(15vh, 3rem);
+    margin: min(15vh, 3rem) 0;
     gap: min(1.5rem, 10vh);
 
     h1 {
@@ -29,20 +29,83 @@ export const CitiesContainer = styled.main `
         justify-content: center;
         gap: min(5vh, 20px);
     }
-
 `
 
-export const CitiesSection = styled.section `
-    width: 100%;
-    height: 100%;
+export const AdmCardContainer = styled.div`
+    width: min(400px, 90vw);
+    min-height: 40px;
+    background-color: var(--WHITE);
+    
+    display: grid;
+    grid-template-columns: 20% 1fr 20%;
+    padding: min(20px, 5vw);
+    font-size: min(1rem, 2vw, 1.2rem);
+    border-radius: min(20px, 5vw);
+    box-shadow: 1px 1px 1px rgb(0, 0, 0, 0.25);
+    
+    h1 {
+        font-size: 1em;
+    }
+
+    p {
+        font-size: 0.8em;
+    }
+    .profile-picture {
+        width: 100%;
+        aspect-ratio: 1;
+        border-radius: 50%;
+    }
+
+    .adm-infos {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: min(20%, 20px);
+    }
+
+    span {
+        width: 30%;
+        height: 30%;
+    }
+
+    .options {
+        display: flex;
+        flex-direction: column;   
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    .trash-icon,
+    .pen-icon {
+        width: 100%;
+        height: 100%;
+        fill: var(--BLACK);
+        transition: 0.15 linear;
+        cursor: pointer;
+    }
+
+    .trash-icon:hover,
+    .pen-icon:hover {
+        width: 110%;
+        height: 110%;
+    }
+
+    .trash-icon:hover {
+        fill: red;
+    }
+
+    .pen-icon:hover {
+        fill: blue;
+    }
 `
+
 export const DeleteModalContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: min(20vh, 70px);
-    min-height: 200px;
+    gap: min(10vh, 70px);
+    min-height: 100px;
     padding: min(1rem, 3vw);
     max-width: 90%;
     font-size: clamp(1.2rem, 3vw, 1.6rem);
