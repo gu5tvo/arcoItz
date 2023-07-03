@@ -29,11 +29,10 @@ export default async function displayAllUsersService(pageNumber: string, pageSiz
       isActive: true,
   };
 
-  // if (city) { city: { $regex: new RegExp(city, 'i') } },
-  // if (name) { name: { $regex: new RegExp(name, 'i') } },
-  // if (id)   { id:   { $regex: new RegExp(id, 'i') } } 
     const newQuery = {...query, 
-      name: new RegExp(name, 'i')
+      name: (name) ? new RegExp(name, 'i') : undefined,
+      city: (city) ? new RegExp(city, 'i') : undefined,
+      id: (id) ? new RegExp(id, 'i') : undefined
     }
 
     const users = await User.find(newQuery).select('-password').skip(skip).limit(pageSizeNumber);
