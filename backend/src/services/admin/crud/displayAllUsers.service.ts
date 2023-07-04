@@ -29,13 +29,24 @@ export default async function displayAllUsersService(pageNumber: string, pageSiz
       isActive: true,
   };
 
-    const newQuery = {...query, 
-      name: (name) ? new RegExp(name, 'i') : undefined,
-      city: (city) ? new RegExp(city, 'i') : undefined,
-      id: (id) ? new RegExp(id, 'i') : undefined
-    }
+  const newQuery = {
+    isBanned: false,
+    isActive: true,
+  } as { isBanned: boolean, isActive: boolean, name?: RegExp, city?: RegExp, id?: RegExp };
 
-    const users = await User.find(newQuery).select('-password').skip(skip).limit(pageSizeNumber);
+  if (name) {
+      newQuery.name = new RegExp(name, 'i');
+  }
+
+  if (city) {
+      newQuery.city = new RegExp(city, 'i');
+  }
+
+  if (id) {
+      newQuery.id = new RegExp(id, 'i');
+  }
+
+  const users = await User.find(newQuery).select('-password').skip(skip).limit(pageSizeNumber);
 
     const fixedUsers = users.map(user => { return { ...user.toObject(), _id: undefined, __v: undefined } })
 

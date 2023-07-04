@@ -68,6 +68,8 @@ adminRouter.get('', checkAdminTokenMiddleware, listAdminController)
 adminRouter.get('/self', checkAdminTokenMiddleware, getAdmin)
 
 
+// checkAdminTokenMiddleware
+
 //Cadastra um admin
 adminRouter.post('', verifyShape(registerAdmin), checkAdminTokenMiddleware, registerAdminController)
 //Edita outro admin
