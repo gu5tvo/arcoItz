@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { ProfilePreview } from '../../../components/ProfilePreview'
+import { ProfilePreview } from './ProfilePreview'
 import DinamicHeader from '../../../components/header'
 import { useUser, useAdmin } from '../../../hooks/contexts'
 import { SearchContainer, SearchForm, SearchView } from './styles'
@@ -22,13 +22,26 @@ export default function SearchPage(){
     }
 
     const onSearch = ()=> {
-        setSearch(true)
+        if (name !== '' || id !== '')
+            setSearch(true)
     }
 
     useEffect(()=>{
         listUsers();
         setSearch(false)
     },[ search ])
+
+    const onBan = (e: React.MouseEvent<SVGSVGElement, MouseEvent>)=> {
+        e.stopPropagation()
+      }
+  
+      const onEdit = (e: React.MouseEvent<SVGSVGElement, MouseEvent>)=> {
+        e.stopPropagation()
+      }
+  
+      const onDelete = (e: React.MouseEvent<SVGSVGElement, MouseEvent>)=> {
+        e.stopPropagation()
+      }
     
     return (
         <>
@@ -86,6 +99,9 @@ export default function SearchPage(){
                                             area={user.area}
                                             gender={user.gender}
                                             pronouns={user.pronnouns}
+                                            onEdit={(e)=>onEdit(e)}
+                                            onDelete={(e)=>onDelete(e)}
+                                            onBan={(e)=>onBan(e)}
                                         />
 
                                     })

@@ -2,6 +2,9 @@ export interface iAdmin {
     id: string;
     name: string;
     email: string;
+    avatar: string;
+    phone: string;
+    city: string;
 }
 
 export interface iAdminLogin {

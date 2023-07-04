@@ -30,7 +30,7 @@ export default function AdminRegisterPage(): JSX.Element{
         setRegistered(true)
       })
 
-      if (registered) return <Navigate to='/admin/manage'/>
+      if (registered) return <Navigate to='/admin/login'/>
 
     return (
         <>

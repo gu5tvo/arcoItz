@@ -45,7 +45,7 @@ export const AdminContext = createContext<
             token: '',
             setToken: () => {},
             admins: [],
-            admin: { id: '', name: '', email: ''},
+            admin: { id: '', name: '', email: '', avatar: '', city: '', phone: '' },
             setAdmin: ()=>{},
             setAdmins: () => {},
             isAuthenticated: false,
@@ -97,7 +97,7 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
 
     const [token, setToken] = React.useState<string>('')
     const [admins, setAdmins] = React.useState<iAdmin[]>([])
-    const [admin, setAdmin] = React.useState<iAdmin>({ id: '', name: '', email: ''})
+    const [admin, setAdmin] = React.useState<iAdmin>({ id: '', name: '', email: '', phone: '', avatar: '', city: ''})
     const [isAuthenticated, setIsAuthenticated] = React.useState<boolean>(false)
     const [usersList, setUsersList] = React.useState<iUserSimple[]>([])
     const [sectors, setSectors] = React.useState<iSectors[]>([])
@@ -243,7 +243,11 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
 
       const adminBanUsers = useCallback(async (id: string) => {
         try{
-            const response = await api.put(`/users/ban/${id}`);
+            const response = await api.put(`/users/ban/${id}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
             toast.success(response.data.message as string);
             const updatedUsers: iUserSimple[] = usersList.map(user => {
                 if(user.id === id){
@@ -259,7 +263,7 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
                 toast.error('Erro do lado do cliente, tente novamente!')
             }
         }
-      },[])
+      },[token])
 
       const adminUpdateUsers = useCallback(async (id: string, data: iUserSimple) => {
         try{

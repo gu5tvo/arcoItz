@@ -2,6 +2,7 @@ import { AdmCardContainer } from "./style";
 import pfp from '../../../assets/profile-picture.svg'
 import { PenIcon, TrashIcon } from "../../../components/Icons";
 import React from 'react'
+import { useAdmin, useUser } from "../../../hooks/contexts";
 
 interface AdmCardProps {
     name: string;
@@ -13,9 +14,11 @@ interface AdmCardProps {
 
 export default function AdmCard({ name, email, onDelete, onEdit }: AdmCardProps) {
 
+    const { adminUpdate , admin } = useAdmin()
+
     return (
     <AdmCardContainer>
-        <img src={pfp} className="profile-picture"/>
+        <img src={ (admin.avatar) ? admin.avatar : pfp} className="profile-picture"/>
         <div className="adm-infos">
             <h1>{name}</h1>
             <p>{email}</p>

@@ -1,12 +1,15 @@
 import { CreateModalContainer } from "./style"
 import React, { useState } from 'react'
-import { useAdmin } from "../../../hooks/contexts";
+import { useAdmin, useModal, useUser } from "../../../hooks/contexts";
+import { Image , Button } from "../../../components/dashboard/styles";
 
 interface EditModalProps {
     id: string;
 }
 export default function EditModal({ id }: EditModalProps) {
-    const { adminUpdate } = useAdmin()
+    const { adminUpdate , admin } = useAdmin()
+    const { setPicture } = useModal() 
+
 
     const [updated, setUpdated] = useState(false)
     const [name, setName] = useState("")
@@ -42,6 +45,8 @@ export default function EditModal({ id }: EditModalProps) {
     return (
         <CreateModalContainer>
             <h1>Editar administrador</h1>
+            <Image src={admin.avatar} alt={"foto de " + admin.name} />
+            <Button onClick={()=>setPicture(true)}>Alterar foto</Button>
             <input placeholder="Nome" type='text' onChange={onChangeName} />
             <input placeholder="Email" type='email' onChange={onChangeEmail} />
             <input placeholder="Senha" type='password' onChange={onChangePassword} />
