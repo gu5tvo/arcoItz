@@ -35,9 +35,9 @@ adminRouter.post('/city', verifyShape(city), checkAdminTokenMiddleware, register
 adminRouter.delete('/city/:id', checkAdminTokenMiddleware, checkCityMiddleware, deleteCityController) //
 
 //Adiciona, edita, lista e deleta áreas de serviço
-adminRouter.get('/area', listAreaController) //
-adminRouter.post('/area', verifyShape(serviceArea), checkAdminTokenMiddleware, registerAreaController) //
-adminRouter.delete('/area/:id', checkAdminTokenMiddleware, checkAreaMiddleware, deleteAreaController) //
+adminRouter.get('/sector', listAreaController) //
+adminRouter.post('/sector', verifyShape(serviceArea), checkAdminTokenMiddleware, registerAreaController) //
+adminRouter.delete('/sector/:id', checkAdminTokenMiddleware, checkAreaMiddleware, deleteAreaController) //
 
 //Bane/desbane contas
 adminRouter.put('/ban/:id', checkAdminTokenMiddleware, checkUserMiddleware, banUserController) //

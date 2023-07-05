@@ -1,12 +1,11 @@
 import React, {useState} from "react";
 import DinamicHeader from "../../components/header";
 import { DisplayContainer, LeftContainer, RightContainer, Selections, Container } from './styles'
-import ProfileScreen from "../../components/dashboard/profile";
-
 import ContactScreen from "../../components/dashboard/contact";
 import SkillsScreen from "../../components/dashboard/skills";
 import SchoolScreen from "../../components/dashboard/school";
 import ExperienceScreen from "../../components/dashboard/experience";
+import ProfileScreen from "../../components/dashboard/profile";
 
 
 

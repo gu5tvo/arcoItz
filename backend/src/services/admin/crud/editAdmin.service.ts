@@ -9,9 +9,10 @@ export default async function editAdminService(id, { name, email, password, avat
     if(email) admin.email = email;
     if(password) admin.password = await hash(password, 10);
     if(avatar) admin.avatar = avatar
-    if(city) admin.city = city;
-    if(phone) admin.phone = phone
     
+    if (city) admin.city = city;
+    if (phone) admin.phone = phone
+
     await admin.save();
 
     return {...admin.toObject(), password: undefined, _id: undefined, __v: undefined};

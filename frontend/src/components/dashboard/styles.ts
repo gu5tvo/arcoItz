@@ -1,6 +1,23 @@
 import styled from 'styled-components';
 import InputMask from 'react-input-mask';
 
+export const FormStyle = styled.form`
+    display: inline-flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    div{
+      display: flex;
+      flex-direction: column;
+      gap: 0.5vh;
+    }
+
+     div > label.label-form {
+      margin: 0rem;
+    }
+`
+
+
 export const Image = styled.img`
     width: 100%;
     height: 100%;
@@ -8,7 +25,7 @@ export const Image = styled.img`
     max-width: 150px;
     max-height: 150px;
     border-radius: 50%;
-    margin-bottom: 1em;
+
     transition: 0.3s all ease-in-out;
     aspect-ratio: 1;
     &:hover{
@@ -22,7 +39,8 @@ export const Image = styled.img`
     }
 `
 
-export const Label = styled.p`
+export const Label = styled.label`
+    margin-top: 0rem;
     font-size: 1rem;
     font-weight: 500;
 `
@@ -33,21 +51,29 @@ export const Input = styled.input`
     border-radius: 0.5rem;
     background-color: #eee;
     transition: 0.3s all ease-in-out;
-    margin-bottom: 1em;
+
+
+
 
     &:focus{
-        outline: 1px solid #000;
+        outline: none;
+        background-color: #9AE7F8;
+        color: #001C22;
     }
 `
 
 export const Button = styled.button`
-    margin-top: 1em;
+
+    margin-top: 2.5%;
+    margin-bottom: 5%;
     border: none;
     padding: 0.5em 1em;
     border-radius: 0.5rem;
     background-color: #48A7FF;
     color: #fff;
     transition: 0.3s all ease-in-out;
+
+
 
     &:hover{
         cursor: pointer;
@@ -68,11 +94,12 @@ export const Select = styled.select`
     border-radius: 0.5rem;
     background-color: #eee;
     transition: 0.3s all ease-in-out;
-    margin-bottom: 1em;
 
     &:focus{
-        outline: 1px solid #000;
+        outline: none;
         cursor: pointer;
+        background-color: #9AE7F8;
+        color: #001C22;
     }
 `
 
@@ -84,7 +111,9 @@ export const MaskedInput = styled(InputMask)`
     transition: 0.3s all ease-in-out;
 
     &:focus{
-        outline: 1px solid #000;
+        outline: none;
+        background-color: #9AE7F8;
+        color: #001C22;
     }
 `
 
@@ -94,11 +123,12 @@ export const TextArea = styled.textarea`
     border-radius: 0.5rem;
     background-color: #eee;
     transition: 0.3s all ease-in-out;
-    margin-bottom: 1em;
     resize: none;
 
     &:focus{
-        outline: 1px solid #000;
+        outline: none;
+        background-color: #9AE7F8;
+        color: #001C22;
     }
 `
 

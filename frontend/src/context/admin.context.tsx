@@ -300,7 +300,7 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
 
         const listSectors = useCallback(async () => {
             try{
-                const response = await api.get('/sectors')
+                const response = await api.get('/admin/sector')
                 setSectors(response.data)
             }catch(err: AxiosError | unknown){
                 if(err instanceof AxiosError){
@@ -313,7 +313,12 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
 
         const registerSectors = useCallback(async (data: { name: string}) => {
             try{
-                const response = await api.post('/sectors', data)
+                const response = await api.post('/admin/sector', data, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+
                 setSectors([...sectors, response.data])
             }catch(err: AxiosError | unknown){
                 if(err instanceof AxiosError){
@@ -322,11 +327,11 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
                     toast.error('Erro do lado do cliente, tente novamente!')
                 }
             }
-        },[])
+        },[token, sectors])
 
         const deleteSectors = useCallback(async (id: string) => {
             try{
-                await api.delete(`/sectors/${id}`)
+                await api.delete(`/sector/${id}`)
                 const updatedSectors: iSectors[] = sectors.filter(sector => sector.id !== id)
                 setSectors(updatedSectors)
             }catch(err: AxiosError | unknown){

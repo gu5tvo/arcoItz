@@ -21,13 +21,13 @@ export const GraduationStyle = styled.div`
         }
 
         input{
-        width: 21.5275rem;
+        width: 48%;
         height: 3rem;
         padding-left: 0.3rem ;
         }
 
         select{
-        width: 21.9375rem;
+        width: 47%;
         height: 3.14rem;
 
         }
@@ -40,7 +40,7 @@ export const GraduationStyle = styled.div`
 
         background-color: #00B4D8;
         color: #C5EFF8;
-        width: 100%;
+        width: 99%;
         height: 7.5rem;
         border: none;
         border-radius: 1rem;
