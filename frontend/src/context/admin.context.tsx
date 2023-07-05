@@ -236,9 +236,9 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
     // page: number, amount: number, city: string, name: string, id?: string
     const adminListUsers = useCallback(async ({ page = 1, amount = 10, city = "", name = "", id = "", isBanned = false, isActive = true } : iListUsers) => {
         try {
-
+            
           const query = `?page=${page}&amount=${amount}&city=${city}&name=${name}&id=${id}&isBanned=${isBanned}&isActive=${isActive}`
-          
+          const token = retrieveToken()
           const response = await api.get(`/admin/users${query}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -283,7 +283,12 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
 
       const adminUpdateUsers = useCallback(async (id: string, data: iUserSimple) => {
         try{
-            const response = await api.patch(`/users/${id}`, data) as { data: iUserSimple }
+            const token = retrieveToken()
+            const response = await api.patch(`/users/${id}`, data, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }) as { data: iUserSimple }
             const updatedUsers = usersList.map(user => { if(user.id === id){ return response.data } return user})
             setUsersList(updatedUsers)
         }catch(err: AxiosError | unknown){
@@ -297,6 +302,7 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
 
         const adminDeleteUsers = useCallback(async (id: string) => {
         try{
+            const token = retrieveToken()
             await api.delete(`/admin/users/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -373,6 +379,7 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
 
         const registerCities = useCallback(async (data: { name: string}) => {
             try{
+                const token = retrieveToken()
                 const response = await api.post('/admin/city', data, {
                     headers: {
                         'Authorization': `Bearer ${token}`

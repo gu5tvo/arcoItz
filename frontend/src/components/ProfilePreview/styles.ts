@@ -72,6 +72,8 @@ export const ProfilePreviewDiv = styled.div`
         align-self: center;
         aspect-ratio: 1 / 1;
         width: min(75px, 15vw);
+        object-fit: cover;
+        object-position: center;
     }
 
 

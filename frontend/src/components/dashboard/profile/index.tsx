@@ -1,27 +1,37 @@
-import React, {useEffect} from 'react'
-import { useUser } from '../../../hooks/contexts'
-import { useForm } from 'react-hook-form'
-import { useModal } from '../../../hooks/contexts';
-import { Image, Input, Label, Select, Button, MaskedInput, TextArea, FormStyle } from '../styles';
+import React, {useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom';
+import { useModal, useUser } from '../../../hooks/contexts';
+import { useForm } from 'react-hook-form';
+import { Button, FormStyle, Input, MaskedInput, Select, TextArea , Image, DivSpaceStyle} from '../styles';
+import DefaultPfp from '../../../assets/profile-picture.svg'
 
 export default function ProfileScreen(): JSX.Element {
 
     const { updateProfile, user } = useUser();
     const { register, handleSubmit } = useForm();
-    const { setPicture } = useModal() 
+    const { setPicture, setRequest } = useModal();
     const navigate = useNavigate();
-
+    const [pfp, setPfp] = useState("");
     useEffect(()=>{
         if(!user){
             navigate('/login')
         }
     },[user])
 
+    const onSetPicture = () => {
+      setRequest({ source: 'user', id: user.id, setPfp })
+      setPicture(true)
+    }
+
     return (
         <>
-            <Image src={user.avatar} alt={"foto de " + user.name} />
-            <Button onClick={()=>setPicture(true)}>Alterar foto</Button>
+
+          <DivSpaceStyle>
+            <Image src={pfp ? pfp : user.avatar ? user.avatar : DefaultPfp} alt={"foto de " + user.name} />
+            <Button onClick={onSetPicture}>Alterar foto</Button>
+          </DivSpaceStyle>
+            
+
             <FormStyle onSubmit={handleSubmit(updateProfile)}>
                 <div>
                   <label htmlFor="pronouns" className='label-form'>Pronomes</label>

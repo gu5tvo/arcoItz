@@ -18,9 +18,6 @@ export default async function checkTokenMiddleware(req: Request, res: Response, 
     const user = await User.findOne({id})
     if(!user) throw new AppError('Token inválido', 401);
 
-    //Verifica se o usuário está ativo.
-    if(!user.isActive) throw new AppError('Usuário inativo, contate um administrador.', 403);
-
     //Se tudo estiver correto, adiciona o id do usuário na requisição.
     req.user = {
         id: user.id,

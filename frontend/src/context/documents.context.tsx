@@ -1,24 +1,45 @@
-import React, { useCallback, createContext } from "react";
+import React, { useCallback, createContext, useState } from "react";
 import { useUser } from "../hooks/contexts";
 import api from "../utils/axios";
 import { iDocuments } from "../interfaces/users";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
+import retrieveToken from "../utils/user/retrieveToken";
+import Modal from "../components/Modal";
 
-export const DocumentsContext = createContext({
-    registerDocument: (data: iDocuments) => {},
-    updateDocument: (id: string, data: iDocuments) => {},
-    deleteDocument: (id: string) => {}
+export const DocumentsContext = createContext<{
+        registerDocument: (data: iDocuments) => Promise<void>,
+        updateDocument: (id: string, data: iDocuments) => Promise<void>,
+        deleteDocument: (id: string) => Promise<void>,
+        modalDisplay: boolean,
+        setModalDisplay: React.Dispatch<React.SetStateAction<boolean>>
+    }>({
+    registerDocument: (data: iDocuments) => Promise.resolve(),
+    updateDocument: (id: string, data: iDocuments) => Promise.resolve(),
+    deleteDocument: (id: string) => Promise.resolve(),
+    modalDisplay: false,
+    setModalDisplay: ()=>{}
 });
 
 export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
+
+    const [ modalDisplay, setModalDisplay] = useState(false);
+    
+
+    const toggleModal = () => {setModalDisplay(!modalDisplay)}
+
 
     const { token, documents, setDocuments } = useUser()
     api.defaults.headers.Authorization = `Bearer ${token}`
 
     const registerDocument = useCallback( async (data: iDocuments) => {
+        // const token = retrieveToken()
         try{
-            const {data: document} = await api.post('/document', data) as {data: iDocuments}
+            const {data: document} = await api.post('/document', data, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }) as {data: iDocuments}
             setDocuments([...documents, document])
         }catch(err: AxiosError | unknown){
             if(err instanceof AxiosError){
@@ -60,7 +81,12 @@ export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
     },[])
 
     return (
-        <DocumentsContext.Provider value={{registerDocument, updateDocument, deleteDocument}}>
+        <DocumentsContext.Provider value={{registerDocument, updateDocument, deleteDocument, modalDisplay, setModalDisplay}}>
+            <Modal modalIsOpen={modalDisplay} toggleModal={toggleModal}>
+            {
+                modalDisplay && <h1>aaaa</h1>
+            }
+            </Modal>
             {children}
         </DocumentsContext.Provider>
     )

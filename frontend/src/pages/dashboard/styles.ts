@@ -6,18 +6,45 @@ export const Container = styled.div`
     align-items: center;
     box-sizing: border-box;
     width: 100%;
+    flex-wrap: wrap;
 `
 export const LeftContainer = styled.div`
-    width: 420px;
-    height: fit-content;
-    padding: 2em;
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
+    @media (max-width: 1229px) {
+        padding: min(2rem, 20px);
+        margin-top: min(10vh, 30px);
+
+        width: 100vw;
+        display: flex;
+        overflow-x: scroll;
+        gap: min(50px, 20vw);
+        white-space: nowrap;
+        & > div {
+            min-width: min(300px, 35vw);
+        }
+    }
+
+    ::hover {
+        background-color: #D7ECFF
+    }
+
+    @media (max-width: 650px) {
+        &::webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    @media (min-width: 1230px) {
+        width: 420px;
+        height: fit-content;
+        padding: 2em;
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+    }
 `
 
 export const RightContainer = styled.div`
-    width: calc(90% - 420px);
+    width: min(90vw, 800px);
     height: fit-content;
     padding: 2em;
 `
@@ -61,14 +88,22 @@ export const Selections = styled.div<iSelection>`
     box-shadow: 0 0 60px rgba(0, 0, 0, 0.09);
     background-color: ${props => props.actual === props.selected ? '#B9DDFF' : '#fff'};
     transition: 0.3s all ease-in-out;
+    
+    font-size: clamp(1rem, 2vw, 1.4rem);
+
+    p, h4 {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
 
     h4{
-        font-size: 1.5rem;
+        font-size: 1.5eem;
         font-weight: 600;
     }
 
     p{
-        font-size: 1.2rem;
+        font-size: 1em;
     }
 
     &:hover{

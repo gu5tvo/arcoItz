@@ -31,22 +31,37 @@ export default function RegisterPage(): JSX.Element{
             <RegisterContainer>
                 <RegisterForm onSubmit={onRegister}>
                     <h2>Cadastre-se</h2>
-                    <label>Nome Completo</label>
-                    <input type="text" {...register("name")} placeholder="Insira seu nome completo"/>
-                    {errors.name && <ErrorText>{errors.name.message}</ErrorText>}
-                    <label>Email</label>
-                    <input type="email" {...register("email")} placeholder="Insira seu e-mail"/>
-                    {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
-                    <label>Senha</label>
-                    <input type="password" {...register("password")} placeholder="Insira sua senha"/>
-                    {errors.password && <ErrorText>{errors.password.message}</ErrorText>}
-                    <label>Confirme sua senha</label>
-                    <input type="password" {...register("confirmPassword")} placeholder="Confirme sua senha"/>
-                    {errors.confirmPassword && <ErrorText>{errors.confirmPassword.message}</ErrorText>}
-                    <button type="submit">Cadastrar</button>
-                    <nav>
-                        <p>Já possui uma conta? <Link to="/login">Faça login</Link>!</p>
-                    </nav>
+
+                    <div className='form-section'>
+                        <label>Nome Completo</label>
+                        <input type="text" {...register("name")} placeholder="Insira seu nome completo"/>
+                        {errors.name && <ErrorText>{errors.name.message}</ErrorText>}
+                    </div>
+
+                    <div className='form-section'>
+                        <label>Email</label>
+                        <input type="email" {...register("email")} placeholder="Insira seu e-mail"/>
+                        {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
+                    </div>
+
+                    <div className='form-section'>
+                        <label>Senha</label>
+                        <input type="password" {...register("password")} placeholder="Insira sua senha"/>
+                        {errors.password && <ErrorText>{errors.password.message}</ErrorText>}
+                    </div>
+
+                    <div className='form-section'>
+                        <label>Confirme sua senha</label>
+                        <input type="password" {...register("confirmPassword")} placeholder="Confirme sua senha"/>
+                        {errors.confirmPassword && <ErrorText>{errors.confirmPassword.message}</ErrorText>}
+                    </div>
+
+                    <div className='form-section'>
+                        <button type="submit">Cadastrar</button>
+                        <nav>
+                            <span>Já possui uma conta? <Link to="/login">Faça login</Link>!</span>
+                        </nav>
+                    </div>
                 </RegisterForm>
             </RegisterContainer>
         </>

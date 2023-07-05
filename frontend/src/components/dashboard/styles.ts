@@ -1,10 +1,19 @@
 import styled from 'styled-components';
 import InputMask from 'react-input-mask';
 
+export const DivSpaceStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: min(2vh, 15px);
+  margin-bottom: min(2vh, 15px);
+`
+
 export const FormStyle = styled.form`
     display: inline-flex;
     flex-direction: column;
     gap: 1rem;
+    font-size: clamp(1rem, 1.4vw, 1.4rem);
 
     div{
       display: flex;
@@ -13,7 +22,8 @@ export const FormStyle = styled.form`
     }
 
      div > label.label-form {
-      margin: 0rem;
+      margin: 0;
+      font-size: 0.8em;
     }
 `
 

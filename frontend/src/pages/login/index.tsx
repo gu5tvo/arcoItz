@@ -34,18 +34,24 @@ export default function LoginPage(): JSX.Element{
             <LoginContainer>
                 <LoginForm onSubmit={onLogin}>
                     <h2>Entrar</h2>
-                    <label>Email</label>
-                    <input type="email" {...register("email")} placeholder="Insira seu e-mail"/>
-                    {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
-                    <label>Senha</label>
-                    <input type="password" {...register("password")} placeholder="Insira sua senha"/>
-                    {errors.password && <ErrorText>{errors.password.message}</ErrorText>}
-                        
+                    <div className='form-section'>
+                        <label>Email</label>
+                        <input type="email" {...register("email")} placeholder="Insira seu e-mail"/>
+                        {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
+                    </div>
+
+                    <div className='form-section'>
+                        <label>Senha</label>
+                        <input type="password" {...register("password")} placeholder="Insira sua senha"/>
+                        {errors.password && <ErrorText>{errors.password.message}</ErrorText>}
+                    </div> 
+                    <div className='form-section'>                       
                         <div style={{margin: '0 auto', marginTop: '1em'}}>
                             <input type="checkbox" value="remember" {...register('remember')} />
                             <label>Lembrar-me</label>
                         </div>
-                    <button type="submit">Entrar</button>
+                        <button type="submit">Entrar</button>
+                    </div>
                     <LoginFooter/>
                 </LoginForm>
             </LoginContainer>

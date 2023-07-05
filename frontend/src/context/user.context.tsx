@@ -201,7 +201,13 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
 
   const updateProfile = useCallback(async (data: iUserSimple) => {
     try {
-      const response = await api.patch('/users', data);
+      const token = retrieveToken()
+
+      const response = await api.patch('/users', data, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       toast.success('Seu perfil foi atualizado!');
       setUser((prevUser) => prevUser ? { ...prevUser, ...response.data } : undefined);
     } catch (err: AxiosError | unknown) {

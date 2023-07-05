@@ -17,42 +17,39 @@ export const RegisterForm = styled.form`
     width: min(100%, 490px);
     border-radius: 0.5rem;
     box-shadow: 0 0 60px rgba(0, 0, 0, 0.09);
+    font-size: clamp(1em, 2vw, 1.2rem);
+    gap: min(20px, 6vh);
 
     h2{
-        margin-bottom: 1.5rem;
-        font-size: 1.5rem;
+        font-size: 1em;
         text-align: center;
         font-weight: 600;
     }
 
     input{
-        padding: 1em;
+        padding: min(1em, 10px);
         border: none;
         border-radius: 0.5rem;
         background-color: #eee;
-
+        font-size: 0.7em;
         &:focus{
             outline: 1px solid #000;
         }
     }
 
     label{
-        margin-top: 1.5rem;
         font-weight: 600;
-        margin-bottom: 0.5rem;
-        font-size: 90%;
+        font-size: 0.8em;
         padding-left: 0.5rem;
     }
-
     button{
-        margin-top: 1em;
         border: none;
-        padding: 1em;
-        border-radius: 0.5rem;
+        padding: min(8px, 2vw);
+        border-radius: min(8px, 2vw);
         background-color: #48A7FF;
         color: #fff;
         transition: 0.3s all ease-in-out;
-        font-size: 90%;
+        font-size: 0.9em;
 
         &:hover{
             cursor: pointer;
@@ -60,13 +57,19 @@ export const RegisterForm = styled.form`
         }
     }
 
+    .form-section {
+        display: flex;
+        flex-direction: column;
+        
+        gap: min(6px, 3vh);
+    }
+
     nav {
-        margin-top: 1em;
-        p{
-        margin: .5em auto;
-        text-align: center;
+        span {
+            text-align: center;
+            font-size: 0.75em;
         }
-        a{
+        a {
             text-decoration: none;
             color: #48A7FF;
         }
@@ -76,7 +79,5 @@ export const RegisterForm = styled.form`
 export const ErrorText = styled.p`
     color: darkred;
     font-size: 0.8rem;
-    margin-top: 0.5rem;
-    margin-top: 0.5rem;
     text-align: center;
 `
