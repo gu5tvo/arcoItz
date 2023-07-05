@@ -16,6 +16,10 @@ export const ExperienceStyle = styled.div`
     width: 100%;
     height: 3rem;
     padding-left: 0.3rem ;
+  
+    &:focus{
+      outline: none;
+    }
   }
 
 
@@ -27,5 +31,9 @@ export const ExperienceStyle = styled.div`
     border: none;
     border-radius: 1rem;
     padding: 0.3rem;
+
+    &:focus{
+      outline: none;
+    }
   }
 `;

@@ -18,6 +18,9 @@ export const GraduationStyle = styled.div`
             border: none;
             border-radius: 1rem;
             
+            &:focus{
+                outline: none;
+            }
         }
 
         input{
@@ -45,5 +48,9 @@ export const GraduationStyle = styled.div`
         border: none;
         border-radius: 1rem;
         padding: 0.3rem ;
+ 
+        &:focus{
+            outline: none;
+        }
     }
 `

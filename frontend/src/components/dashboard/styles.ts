@@ -17,7 +17,6 @@ export const FormStyle = styled.form`
     }
 `
 
-
 export const Image = styled.img`
     width: 100%;
     height: 100%;
@@ -51,9 +50,6 @@ export const Input = styled.input`
     border-radius: 0.5rem;
     background-color: #eee;
     transition: 0.3s all ease-in-out;
-
-
-
 
     &:focus{
         outline: none;

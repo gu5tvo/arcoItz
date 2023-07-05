@@ -1,13 +1,12 @@
 import React, {useState} from "react";
 import DinamicHeader from "../../components/header";
 import { DisplayContainer, LeftContainer, RightContainer, Selections, Container } from './styles'
-import ContactScreen from "../../components/dashboard/contact";
 import SkillsScreen from "../../components/dashboard/skills";
 import SchoolScreen from "../../components/dashboard/school";
 import ExperienceScreen from "../../components/dashboard/experience";
 import ProfileScreen from "../../components/dashboard/profile";
-
-
+import CertificatesScreen from "../../components/dashboard/certificates";
+import ContactScreen from "../../components/dashboard/contact";
 
 export default function UserDashboardPage(): JSX.Element {
 
@@ -18,6 +17,7 @@ export default function UserDashboardPage(): JSX.Element {
         if(display === 'contact') return <ContactScreen />
         if(display === 'skills') return <SkillsScreen />
         if(display === 'experience') return <ExperienceScreen />
+        if(display === 'certificates') return <CertificatesScreen />
     }
 
     return (
@@ -31,7 +31,7 @@ export default function UserDashboardPage(): JSX.Element {
                     </Selections>
                     <Selections actual="school" selected={display} onClick={()=> setDisplay('school')}>
                         <h4>Dados acadêmicos</h4>
-                        <p>Cursos, Certificações e etc...</p>
+                        <p>Cursos...</p>
                     </Selections>
                     <Selections actual="experience" selected={display} onClick={()=> setDisplay('experience')}>
                         <h4>Experiências profissionais</h4>
@@ -40,6 +40,10 @@ export default function UserDashboardPage(): JSX.Element {
                     <Selections actual="skills" selected={display} onClick={()=> setDisplay('skills')}>
                         <h4>Habilidades e competências</h4>
                         <p>Tecnologias, habilidades e softskils...</p>
+                    </Selections>
+                    <Selections actual="certificates" selected={display} onClick={()=> setDisplay('certificates')}>
+                        <h4>Certificações e documentos</h4>
+                        <p>Documentos..</p>
                     </Selections>
                     <Selections actual="contact" selected={display} onClick={()=> setDisplay('contact')}>
                         <h4>Contato</h4>
