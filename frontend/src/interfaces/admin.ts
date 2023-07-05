@@ -11,6 +11,7 @@ export interface iAdmin {
 export interface iAdminLogin {
     email: string;
     password: string;
+    remember: boolean;
 }
 
 export interface iAdminRegister {

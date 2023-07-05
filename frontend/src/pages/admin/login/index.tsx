@@ -10,7 +10,8 @@ import { Navigate } from "react-router-dom";
 
 interface LoginData {
     email: string,
-    password: string
+    password: string,
+    remember: boolean
 }
 
 export default function AdminLogin() {

@@ -15,12 +15,22 @@ export function Painel () {
   const { isAuthenticated, adminSelf, admin } = useAdmin()
   const [loaded, setLoaded] = useState(false)
 
-  useEffect(()=> {
-    (async ()=> {
-        await adminSelf()
-        setLoaded(true)
-      })()
-  }, [])
+  useEffect(() => {
+    let isMounted = true;
+
+    const fetchData = async () => {
+      await adminSelf();
+      if (isMounted) {
+        setLoaded(true);
+      }
+    };
+
+    fetchData();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [isAuthenticated]);
 
   if (!loaded) return <></>
 

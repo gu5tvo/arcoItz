@@ -22,6 +22,8 @@ export const AdminContext = createContext<
         cities: iCity[],
         setCities: React.Dispatch<React.SetStateAction<iCity[]>>,
         adminLogin: (data: iAdminLogin) => Promise<void>,
+        adminRemember: boolean,
+        adminSetRemember: React.Dispatch<React.SetStateAction<boolean>>,
         adminSelf: () => Promise<void>,
         adminLogout: () => void,
         adminList: () => Promise<void>,
@@ -57,6 +59,8 @@ export const AdminContext = createContext<
             cities: [],
             setCities: () => {},
             adminLogin: () => Promise.resolve(),
+            adminRemember: false,
+            adminSetRemember: () => Promise.resolve(),
             adminSelf: ()=> Promise.resolve(),
             adminLogout: () => {},
             adminList: () => Promise.resolve(),
@@ -80,22 +84,54 @@ export const AdminContext = createContext<
         });
 
 export const AdminProvider = ({ children }: { children: JSX.Element }) => {
+    const [adminRemember, setAdminRemember] = React.useState(null)
+    const [token, setToken] = React.useState<string>('')
+    
+    const adminSelf = useCallback(async () => {
+        try{
+            const retrievedToken: string = localStorage.getItem('@adminToken')
+            const admin = await api.get('/admin/self', {
+                headers: {
+                    'Authorization': `Bearer ${retrievedToken}`
+                }
+            }) as { data: iAdmin }
+            setAdmin(admin.data)
+            setIsAuthenticated(true)
+        }catch(err: AxiosError | unknown){
+            if(err instanceof AxiosError){
+                toast.error(err.response?.data.message as string)
+            }else{
+                toast.error('Erro do lado do cliente, tente novamente!')
+            }
+        }
+    },[token])
 
     useEffect(() => {
-        const retrievedToken: string = localStorage.getItem('@adminToken')
-        if(retrievedToken){
-            setToken(retrievedToken)
-            adminSelf()
-            api.defaults.headers.common['Authorization'] = `Bearer ${retrievedToken}`
+        const retrievedToken: string = localStorage.getItem('@adminToken');
+      
+        if (retrievedToken) {
+          setToken(retrievedToken);
+          adminSelf();
+          api.defaults.headers.common['Authorization'] = `Bearer ${retrievedToken}`;
         }
-        //No caso de logout, o token é removido do localStorage
+      
+        // No caso de abandonar a página, o token é removido do localStorage
+        const cleanup = () => {
+          if (!adminRemember) {
+            localStorage.removeItem('@adminToken');
+          }
+        };
+      
+        window.addEventListener('beforeunload', cleanup);
+      
         return () => {
-            localStorage.removeItem('@adminToken')
-        }
-    },[])
+          window.removeEventListener('beforeunload', cleanup);
+        };
+      }, [adminRemember, adminSelf]);
+      
 
 
-    const [token, setToken] = React.useState<string>('')
+    
     const [admins, setAdmins] = React.useState<iAdmin[]>([])
     const [admin, setAdmin] = React.useState<iAdmin>({ id: '', name: '', email: '', phone: '', avatar: '', city: '', isSuper: false})
     const [isAuthenticated, setIsAuthenticated] = React.useState<boolean>(false)
@@ -107,8 +143,10 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
         try {
             const response = await api.post('/admin/login', data) as { data: { token: string } }
             setToken(response.data.token)
+            console.log(response)
             localStorage.setItem('@adminToken', response.data.token)
             setIsAuthenticated(true)
+            setAdminRemember(!!data.remember)
         }catch(err: AxiosError | unknown){
             if(err instanceof AxiosError){
                 toast.error(err.response?.data.message as string)
@@ -122,25 +160,9 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
         setToken('')
         api.defaults.headers.Authorization = ''
         localStorage.removeItem('@adminToken')
+        setIsAuthenticated(false)
+        setAdmin(null)
     },[])
-
-    const adminSelf = useCallback(async () => {
-        try{
-            const admin = await api.get('/admin/self', {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            }) as { data: iAdmin }
-            setAdmin(admin.data)
-            setIsAuthenticated(true)
-        }catch(err: AxiosError | unknown){
-            if(err instanceof AxiosError){
-                toast.error(err.response?.data.message as string)
-            }else{
-                toast.error('Erro do lado do cliente, tente novamente!')
-            }
-        }
-    },[token])
 
     const adminList = useCallback(async () => {
         try{
@@ -458,6 +480,7 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
                 sectors, setSectors,
                 cities, setCities,
                 adminLogin, adminSelf,
+                adminRemember, adminSetRemember: setAdminRemember,
                 adminLogout,adminList, adminRegister,
                 adminUpdate, adminDelete,
                 adminListUsers, adminBanUsers,
