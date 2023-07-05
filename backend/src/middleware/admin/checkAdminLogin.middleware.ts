@@ -13,7 +13,7 @@ export default async function checkAdminLoginMiddleware(req: Request, res: Respo
     }
 
     const passwordMatch = compare(password, admin.password)
-    console.log(password, admin.password)
+    
     if (!passwordMatch) {
         throw new AppError('Email ou senha incorretos', 401);
     }
