@@ -60,8 +60,6 @@ export const Input = styled.input`
 
 export const Button = styled.button`
 
-    margin-top: 2.5%;
-    margin-bottom: 5%;
     border: none;
     padding: 0.5em 1em;
     border-radius: 0.5rem;

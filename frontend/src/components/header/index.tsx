@@ -3,7 +3,7 @@ import { Header, FilledBtn, OutlinedLink, UndecoratedLink } from "./styles";
 import { iHeader } from "../../interfaces/header";
 import { useUser, useAdmin } from "../../hooks/contexts";
 import menuIcon from '../../assets/ham-btn.svg'
-import  {Link}  from "react-router-dom";
+import  { Link, useNavigate }  from "react-router-dom";
 
 export default function DinamicHeader(
     {startBtn = false, loginBtn = false, registerBtn = false,
@@ -11,9 +11,12 @@ export default function DinamicHeader(
      searchBtn = false, adminPanel = false
     }: iHeader){
 
+    const navigate = useNavigate();
+
     const { isAuthenticated: userAuthenticated, logout } = useUser();
     const { isAuthenticated: adminAuthenticated, adminLogout } = useAdmin();
     const [showMenu, setShowMenu] = useState(false);
+
 
     function betterMenu(){
         if (adminPanel && adminAuthenticated) {
@@ -35,6 +38,16 @@ export default function DinamicHeader(
                     </>
                 )
             }
+        }
+    }
+
+    const onLogout = ()=> {
+        if (userAuthenticated) {
+            logout()
+            navigate('/login');
+        } else if (adminAuthenticated) {
+            adminLogout()
+            navigate('/admin/login')
         }
     }
 
@@ -60,8 +73,8 @@ export default function DinamicHeader(
                     {searchBtn && <UndecoratedLink to="/search">Buscar currículos</UndecoratedLink>}
                     {betterMenu()}
                     {profileBtn && <UndecoratedLink to="/profile">Acessar meu perfil</UndecoratedLink>}
-                    {logoutBtn && <FilledBtn onClick={logout}>Desconectar</FilledBtn>}
-                    {adminLogoutBtn && <FilledBtn onClick={adminLogout}>Desconectar</FilledBtn>}
+                    {logoutBtn && <FilledBtn onClick={onLogout}>Desconectar</FilledBtn>}
+                    {adminLogoutBtn && <FilledBtn onClick={onLogout}>Desconectar</FilledBtn>}
                 </nav>
             </span>
         </Header>
