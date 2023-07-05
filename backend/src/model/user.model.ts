@@ -8,8 +8,7 @@ const userSchema = new mongoose.Schema({
     },
     avatar: {
         type: String,
-        required: false,
-        default: "https://res.cloudinary.com/dg5lakmem/image/upload/v1623686213/avatars/default-avatar.png"
+        required: false
     },
     name: {
         type: String,

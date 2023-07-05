@@ -22,8 +22,8 @@ export const Image = styled.img`
     }
 `
 
-export const Label = styled.label`
-    font-size: 1.2rem;
+export const Label = styled.p`
+    font-size: 1rem;
     font-weight: 500;
 `
 
@@ -101,3 +101,48 @@ export const TextArea = styled.textarea`
         outline: 1px solid #000;
     }
 `
+
+export const IconsDivStyle = styled.div`
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+
+  button {
+    border: none;
+    background-color: transparent;
+    display: inline-flex;
+    align-items: center;
+
+    span {
+      padding-left: 0.4rem;
+      padding-right: 0.4rem;
+      display: inline-block;
+      opacity: 0;
+      overflow: hidden;
+      transition:opacity 0.5s;
+    }
+
+    &:hover {
+      span {
+        opacity: 1;
+      }
+    }
+  }
+
+  img.add {
+    transition: transform 0.5s;
+
+    &:hover {
+      transform: rotate(-90deg);
+    }
+  }
+
+  img.remove {
+    transform: rotate(45deg);
+    transition: transform 0.5s;
+
+    &:hover {
+      transform: rotate(-135deg);
+    }
+  }
+`;

@@ -6,7 +6,6 @@ import {compare} from 'bcryptjs';
 export default async function checkAdminLoginMiddleware(req: Request, res: Response, next: NextFunction): Promise<void> {
     const { email, password } = req.body;
 
-    console.log(email, password)
     const admin = await Admin.findOne({ email });
 
     if (!admin) {
