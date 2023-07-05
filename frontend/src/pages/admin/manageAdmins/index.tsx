@@ -25,9 +25,7 @@ interface Admin {
 
 export default function ManageAdmins() {   
 
-    const { admins, adminList, isAuthenticated } = useAdmin()
-
-    if (!isAuthenticated) return <Navigate to="/"/>
+    const { admins, adminList } = useAdmin()
 
     const [showModal, setShowModal] = useState(false)
     const [modalChoice, setModalChoice] = useState<ModalOptions>({ choice: null })

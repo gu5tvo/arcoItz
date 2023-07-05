@@ -14,12 +14,7 @@ interface ModalOptions {
 }
 export default function Cities() {
 
-    const { listCities, cities, deleteCities, isAuthenticated } = useAdmin()
-
-
-    if (!isAuthenticated) {
-        return <Navigate to="/admin/login"/>
-    }
+    const { listCities, cities } = useAdmin()
 
     const [modalChoice, setModalChoice] = useState<ModalOptions>({ choice: null })
     const [showModal, setShowModal] = useState(false)

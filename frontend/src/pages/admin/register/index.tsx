@@ -17,10 +17,8 @@ interface RegisterData {
 export default function AdminRegisterPage(): JSX.Element{
 
     const { register, handleSubmit, trigger, formState: { errors } } = useForm({resolver: yupResolver(registerSchema)});
-    const { adminRegister, isAuthenticated } = useAdmin();
+    const { adminRegister } = useAdmin();
     const [registered, setRegistered] = useState(false)
-
-    if (!isAuthenticated) return <Navigate to='/'/>
 
     document.title = "Cadastre-se | DiversiTrampos";
 
@@ -30,7 +28,7 @@ export default function AdminRegisterPage(): JSX.Element{
         setRegistered(true)
       })
 
-      if (registered) return <Navigate to='/admin/login'/>
+    if (registered) return <Navigate to='/admin/login'/>
 
     return (
         <>

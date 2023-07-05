@@ -5,38 +5,13 @@ import ProfilePicture from '../../../assets/profile-picture.svg'
 import SectorIcon from '../../assets/sector-icon.svg'
 import ManagerIcon from '../../../assets/manager-icon.svg'
 import { useAdmin } from '../../../hooks/contexts';
-import React, { useEffect, useState } from 'react'
-import { Navigate } from 'react-router-dom'
+import React from 'react'
 
 import ManageButtons from '../../../components/ManageButtons';
 
 export function Painel () {
 
-  const { isAuthenticated, adminSelf, admin } = useAdmin()
-  const [loaded, setLoaded] = useState(false)
-
-  useEffect(() => {
-    let isMounted = true;
-
-    const fetchData = async () => {
-      await adminSelf();
-      if (isMounted) {
-        setLoaded(true);
-      }
-    };
-
-    fetchData();
-
-    return () => {
-      isMounted = false;
-    };
-  }, [isAuthenticated]);
-
-  if (!loaded) return <></>
-
-  if (!isAuthenticated) {
-    return <Navigate to="/"/>
-  }
+  const { admin } = useAdmin()
 
   return (
     <Container>

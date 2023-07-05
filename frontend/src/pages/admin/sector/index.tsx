@@ -7,19 +7,13 @@ import { useAdmin } from '../../../hooks/contexts';
 import DeleteCityModal from './DeleteModal';
 import CreateModal from './CreateModal';
 import AddIcon from '.././../../assets/add.svg'
-import { Navigate } from "react-router-dom";
 
 interface ModalOptions {
     choice: 'add' | 'delete' | null
 }
 export default function SectorPage() {
 
-    const { listSectors, sectors, isAuthenticated } = useAdmin()
-
-
-    if (!isAuthenticated) {
-        return <Navigate to="/admin/login"/>
-    }
+    const { listSectors, sectors } = useAdmin()
 
     const [modalChoice, setModalChoice] = useState<ModalOptions>({ choice: null })
     const [showModal, setShowModal] = useState(false)

@@ -22,7 +22,6 @@ export const EditProfileContainer = styled.div<{small?: boolean}>`
         justify-content: center;
 
         button{
-            margin: 0.5em;
             max-width: 20%;
         }
 

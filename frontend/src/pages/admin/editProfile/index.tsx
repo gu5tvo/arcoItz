@@ -1,15 +1,14 @@
 import { EditProfileContainer } from './style';
 import React, { useEffect, useState } from 'react'
-import { useAdmin, useModal, useUser } from "../../../hooks/contexts";
+import { useAdmin, useModal } from "../../../hooks/contexts";
 import { Image , Button } from "../../../components/dashboard/styles";
 import defaultImage from '../../../assets/profile-picture.svg'
 import DinamicHeader from '../../../components/header';
 import { Navigate } from 'react-router-dom';
 
 export default function EditAdminProfile() {
-    const { adminUpdate , admin, listCities, cities, adminSelf, isAuthenticated } = useAdmin()
+    const { adminUpdate , admin, listCities, cities } = useAdmin()
 
-    if (!isAuthenticated) return <Navigate to='/'/>
     const { setPicture, setRequest } = useModal() 
     const [avatar, setAvatar] = useState("")
 
@@ -22,19 +21,12 @@ export default function EditAdminProfile() {
     const [phone, setPhone] = useState("")
     const [city, setCity] = useState("")
 
-    const [loaded, setLoaded] = useState(false)
-
     useEffect(()=> {
-      (async ()=> {
-          await Promise.all([adminSelf(), listCities()])
-          setLoaded(true)
-          setId(admin.id)
-        })()
+          listCities()
+        
+        setId(admin.id)
         setAvatar(admin.avatar)
-    }, [])
-  
-    if (!loaded) return <></>
-  
+    }, [])  
 
     const onChangeName = (e: React.ChangeEvent<HTMLInputElement>)=> {
         setName(e.target.value)
