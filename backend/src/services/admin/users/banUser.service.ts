@@ -8,6 +8,6 @@ export default async function banUserService(id){
     await user.save();
 
     const message = user.isBanned ? 'Usuário banido com sucesso' : 'Usuário desbanido com sucesso';
-
+    
     return message;
 }

@@ -1,6 +1,6 @@
 import React from "react"
 import iProfilePreview from "../../../interfaces/profile.component"
-import { ProfilePreviewDiv } from "./styles"
+import { ProfilePreviewDiv } from "./style"
 import { useNavigate } from "react-router-dom"
 import pfp from '../../../assets/profile-picture.svg'
 import { TrashIcon, PenIcon, BanIcon } from '../../../components/Icons'
@@ -14,11 +14,12 @@ interface ProfilePreviewProps {
   gender: string,
   onBan: React.MouseEventHandler<SVGSVGElement>,
   onEdit: React.MouseEventHandler<SVGSVGElement>,
-  onDelete: React.MouseEventHandler<SVGSVGElement>
+  onDelete: React.MouseEventHandler<SVGSVGElement>,
+  banned: boolean
 
 }
 
-export function ProfilePreview({ id, image , name, area, pronouns, gender, onBan, onEdit, onDelete}: ProfilePreviewProps){
+export function ProfilePreview({ id, image , name, area, pronouns, gender, onBan, onEdit, onDelete, banned }: ProfilePreviewProps){
     const navigate = useNavigate()
 
     const splitName = name.split(' ');
@@ -40,7 +41,7 @@ export function ProfilePreview({ id, image , name, area, pronouns, gender, onBan
         <div className='action-icons'>
           <TrashIcon className="trash-icon" onClick={onDelete} />
           <PenIcon className="pen-icon" onClick={onEdit} />
-          <BanIcon className="ban-icon" onClick={onBan} />
+          <BanIcon className={`ban-icon ${banned ? 'banned' : ''}`} onClick={onBan} />
         </div>
 
     </ProfilePreviewDiv>

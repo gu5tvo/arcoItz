@@ -30,7 +30,7 @@ export function Painel () {
 
   return (
     <Container>
-      <DinamicHeader adminLogoutBtn={true}/>
+      <DinamicHeader adminLogoutBtn/>
       <PainelSection>
         <div className='TextPainel'>
             <h4>Olá, {`${admin.name}`}!</h4>
@@ -41,7 +41,8 @@ export function Painel () {
           <ManageButtons image={CityIcon} text='Gerenciar cidades' path='/admin/city'/>
           <ManageButtons image={ProfilePicture} text='Gerenciar usuários' path='/admin/users'/>
           <ManageButtons image={SectorIcon} text='Gerenciar setores' path='/manage-sectors'/>
-          <ManageButtons image={ManagerIcon} text='Gerenciar admins' path='/admin/manage'/>
+          {admin.isSuper ? <ManageButtons image={ManagerIcon} text='Gerenciar admins' path='/admin/manage'/> : <ManageButtons image={ManagerIcon} text='Modificar perfil' path='/admin'/>}
+          
 
         </ButtonsContainer>
 

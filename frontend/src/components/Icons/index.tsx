@@ -27,10 +27,10 @@ export function TrashIcon({ className, size, color, onClick }: IconProps) {
 export function BanIcon({ className, size, color, onClick }: IconProps) {
     return (
         <svg width={size? size : "24"} onClick={onClick} className={className ? className : ''} height={size? size : "24"} viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g clip-path="url(#clip0_492_2)">
+            <g clipPath="url(#clip0_492_2)">
                 <rect width="500" height="500"/>
-                <circle cx="250" cy="250" r="230" stroke="#1B1A1A" stroke-width="40"/>
-                <path d="M78 78L421.518 421.518" stroke="#1B1A1A" stroke-width="40"/>
+                <circle cx="250" cy="250" r="230" stroke="#1B1A1A" strokeWidth="40"/>
+                <path d="M78 78L421.518 421.518" stroke="#1B1A1A" strokeWidth="40"/>
             </g>
             <defs>
                 <clipPath id="clip0_492_2">

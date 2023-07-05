@@ -5,15 +5,17 @@ import Admin from '../../model/admin.model';
 import 'dotenv/config'
 
 export default async function checkAdminTokenMiddleware(req: Request, res: Response, next: NextFunction){
+    console.log(req.originalUrl)
     const { authorization } = req.headers;
 
     if(!authorization) throw new AppError('Token não informado', 401);
     
     const [ , token ] = authorization.split(' ');
+
     try {
         const decoded = jwt.verify(token, process.env.SECRET_KEY);
         const admin = await Admin.findOne({ id: decoded.id });
-
+        
         if(!admin) throw new AppError('Admin não encontrado', 404);
 
         req.user = {

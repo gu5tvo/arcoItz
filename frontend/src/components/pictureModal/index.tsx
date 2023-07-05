@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import { ModalFog, ModalContainer, ModalHeader, ModalBody } from './styles';
-import { useModal, useUser } from '../../hooks/contexts';
+import { useAdmin, useModal, useUser } from '../../hooks/contexts';
 import { Image } from '../dashboard/styles';
 
 export default function PictureModal():JSX.Element{
 
-    const { setPicture } = useModal()
+    const { setPicture, request } = useModal()
     const { updateProfile } = useUser();
+    const { adminUpdate } = useAdmin()
     const [image, setImage] = useState<string>('');
  
     const handleUpload = async (event) => {
@@ -20,7 +21,14 @@ export default function PictureModal():JSX.Element{
         axios.post(`https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`, formData)
         .then((res)=>{
           setImage(res.data.secure_url)
-          updateProfile({avatar: res.data.secure_url})
+
+          if (request.source === 'admin') {
+            request.setPfp(res.data.secure_url)
+            setPicture(false)
+          } else if (request.source === 'user') { 
+            updateProfile({avatar: res.data.secure_url}) 
+          
+          }
         })
       };
 

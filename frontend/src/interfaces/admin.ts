@@ -5,6 +5,7 @@ export interface iAdmin {
     avatar: string;
     phone: string;
     city: string;
+    isSuper: boolean;
 }
 
 export interface iAdminLogin {
@@ -22,6 +23,9 @@ export interface iAdminEdit {
     name?: string;
     email?: string;
     password?: string;
+    avatar?: string;
+    phone?: string;
+    city?: string;
 }
 
 export interface iSectors {
@@ -32,4 +36,14 @@ export interface iSectors {
 export interface iCity {
     id: string;
     name: string;
+}
+
+export interface iListUsers {
+    page?: number;
+    amount?: number;
+    city?: string;
+    name?: string;
+    id?: string;
+    isBanned?: boolean;
+    isActive?: boolean
 }

@@ -34,7 +34,7 @@ export const SearchForm = styled.form`
 
     .label-pagina{
         margin-top: 0.8rem;
-        margin-bottom: 0rem;
+        margin-bottom: 0;
     }
 
     h3{
@@ -73,7 +73,7 @@ export const SearchForm = styled.form`
         max-width: 200px;
         box-sizing: border-box;
         display: inline-flex;
-        margin-top: 1em;
+        margin-top: 0.5em;
         justify-content: center;
 
         button{
@@ -100,6 +100,24 @@ export const SearchForm = styled.form`
         input[type=number] {
          appearance: textfield;
         }
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+    .filter-input {
+        all: unset;
+        box-sizing: border-box;
+        background-color: var(--GRAY);
+        box-shadow: 0px 0px 1px black;
+        border-radius: min(2vw, 10px);
+        padding: min(5px, 1vw) min(10px, 2vw);
+        width: 100%;
+        font-size: 0.9em;
+    }
+
+    .filter-input:first-of-type {
+        margin-bottom: min(10px, 2vh);
     }
 `;
 
@@ -236,6 +254,7 @@ export const ProfilePreviewDiv = styled.div`
             stroke: purple;
         }
 
+
         .trash-icon:hover {
             fill: red
         }
@@ -244,5 +263,50 @@ export const ProfilePreviewDiv = styled.div`
             fill: blue
         }
         
+        .banned > g > *{
+            stroke: purple
+        }
+
+        .banned:hover > g > * {
+            stroke: green;
+        }
+    }
+`
+
+export const ModalContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: min(10vh, 70px);
+    min-height: 100px;
+    padding: min(1rem, 3vw);
+    max-width: 90%;
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+
+    h1 {
+        font-size: 1em;
+        font-weight: bold;
+    }
+
+    p {
+        font-size: 0.8em;
+    }
+
+    .confirm-btn {
+        all: unset;
+        color: var(--WHITE);
+        padding: min(10px, 10vw);
+        background-color: var(--BLUE);
+        border-radius: min(15px, 5vw);
+        height: 25px;
+        font-size: 0.7em;
+        align-self: flex-end;
+        transition: 0.15s linear;
+        cursor: pointer;
+        &:hover {
+            background-color: var(--BLUE-DARK);
+            font-size: 0.8em;
+        }
     }
 `

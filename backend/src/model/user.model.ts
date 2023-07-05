@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid'
 const userSchema = new mongoose.Schema({
     id: {
         type: String,
-        default: uuidv4()
+        default: uuidv4
     },
     avatar: {
         type: String,
@@ -93,11 +93,11 @@ const userSchema = new mongoose.Schema({
     },
     createdAt: {
         type: Date,
-        default: new Date()
+        default: new Date
     },
     updatedAt: {
         type: Date,
-        default: new Date()
+        default: new Date
     }
 })
 

@@ -14,7 +14,10 @@ export const loginAdmin = yup.object().shape({
 export const editAdmin = yup.object().shape({
     name: yup.string(),
     email: yup.string().email(),
-    password: yup.string()
+    password: yup.string(),
+    avatar: yup.string(),
+    phone: yup.string(),
+    city: yup.string()
 })
 
 export const serviceArea = yup.object().shape({

@@ -15,6 +15,7 @@ import AdminRegisterPage from '../pages/admin/register';
 import AdminSearchPage from '../pages/admin/search';
 
 import AdminLogin from '../pages/admin/login/';
+import EditAdminProfile from '../pages/admin/editProfile';
 
 export default function MakeRoutes(){
 
@@ -34,6 +35,7 @@ export default function MakeRoutes(){
             <Route path="/admin/login" element={<AdminLogin/>} />
             <Route path="/admin/city" element={<City/>} />
             <Route path="/admin/users" element={<AdminSearchPage/>} />
+            <Route path="/admin" element={<EditAdminProfile/>} />
         </Routes>
     )
 }

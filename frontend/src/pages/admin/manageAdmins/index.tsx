@@ -17,6 +17,10 @@ interface Admin {
     name?: string;
     email?: string;
     id: string;
+    avatar?: string;
+    city?: string;
+    phone?: string;
+    isSuper?: boolean;
 }
 
 export default function ManageAdmins() {   
@@ -36,12 +40,11 @@ export default function ManageAdmins() {
 
     const toggleModal = ()=> {
         setShowModal(!showModal)
-
     }
 
-    const onEdit = (name: string, id: string)=> {
+    const onEdit = (name: string, id: string, avatar: string)=> {
         setModalChoice({ choice: 'edit'} )
-        setAdminInfos({ name, id })
+        setAdminInfos({ name, id, avatar })
         toggleModal()
     }
 
@@ -66,13 +69,13 @@ export default function ManageAdmins() {
                 <h1>Administradores</h1>
                 <img src={AddIcon} onClick={onAddAdmin} className='plus-icon'/>
                 {admins.map((admin, index)=>{
-                    return <AdmCard name={admin.name} email={admin.email} key={index} onEdit={()=>onEdit(admin.name, admin.id)} onDelete={()=>onDelete(admin.name, admin.id)}/>
+                    return <AdmCard name={admin.name}phone={admin.phone} city={admin.city} email={admin.email} avatar={admin.avatar} key={index} onEdit={()=>onEdit(admin.name, admin.id, admin.avatar)} onDelete={()=>onDelete(admin.name, admin.id)}/>
                 })}
             </ManageAdminsContainer>
             <Modal modalIsOpen={showModal} toggleModal={toggleModal}>
                 {
                     showModal &&
-                    (modalChoice.choice && modalChoice.choice === 'delete') ? <DeleteAdminModal id={adminInfos.id} name={adminInfos.name}/> : <EditModal id={adminInfos.id}/>
+                    (modalChoice.choice && modalChoice.choice === 'delete') ? <DeleteAdminModal id={adminInfos.id} name={adminInfos.name}/> : <EditModal avatar={adminInfos.avatar} name={adminInfos.name} id={adminInfos.id}/>
                 }
             </Modal> 
         </>

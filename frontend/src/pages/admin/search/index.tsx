@@ -2,46 +2,93 @@ import React, {useState, useEffect} from 'react'
 import { ProfilePreview } from './ProfilePreview'
 import DinamicHeader from '../../../components/header'
 import { useUser, useAdmin } from '../../../hooks/contexts'
-import { SearchContainer, SearchForm, SearchView } from './styles'
+import { SearchContainer, SearchForm, SearchView } from './style'
+import Modal from '../../../components/Modal'
+import DeleteUserModal from './DeleteModal'
+import BanUserModal from './BanModal'
+import UnbanUserModal from './UnbanModal'
+
+type ModalOptions =  'edit' | 'delete' | 'ban' | null
 
 export default function SearchPage(){
 
     document.title = "Buscar currículos | DiversiTrampos"
 
     const { cities, listCities, adminListUsers, usersList } = useAdmin();
-    
+
+    const [showModal, setShowModal] = useState(false)
+    const [modalChoice, setModalChoice] = useState<ModalOptions>(null)
+
     const [city, setCity] = useState("");
     const [page, setPage] = useState(1);
     const [amount, setAmount] = useState(10);
     const [name, setName] = useState("")
     const [id, setId] = useState("")
     const [search, setSearch] = useState(false)
+    const [showBanned, setShowBanned] = useState(false)
+    const [showActive, setShowActive] = useState(true)
+
+    const [userName, setUserName] = useState("")
+    const [userId, setUserId] = useState("")
+    const [banned, setBanned] = useState(false)
 
     function listUsers(){
-        adminListUsers(page, amount, city, name, id)
+        adminListUsers({ page, amount, city, name, id, isBanned: showBanned, isActive: showActive })
+    }
+
+    const toggleShowBanned = ()=> {
+        setShowBanned(!showBanned)
+    }
+
+    const toggleShowActive = ()=> {
+        setShowActive(!showActive)
+    }
+
+    const toggleModal = (choice: 'edit' | 'delete' | 'ban')=> {
+        setShowModal(!showModal)
+        setModalChoice(choice)
     }
 
     const onSearch = ()=> {
-        if (name !== '' || id !== '')
-            setSearch(true)
+            setSearch(!search)
     }
 
     useEffect(()=>{
         listUsers();
-        setSearch(false)
+        listCities();
     },[ search ])
 
-    const onBan = (e: React.MouseEvent<SVGSVGElement, MouseEvent>)=> {
+    const onBan = (e: React.MouseEvent<SVGSVGElement, MouseEvent>, name: string, id: string, isBanned: boolean)=> {
+        toggleModal('ban')
         e.stopPropagation()
-      }
-  
-      const onEdit = (e: React.MouseEvent<SVGSVGElement, MouseEvent>)=> {
+
+        setBanned(isBanned)
+        setUserName(name)
+        setUserId(id)
+    }
+
+    const onEdit = (e: React.MouseEvent<SVGSVGElement, MouseEvent>)=> {
+        toggleModal('edit')
         e.stopPropagation()
-      }
-  
-      const onDelete = (e: React.MouseEvent<SVGSVGElement, MouseEvent>)=> {
+    }
+
+    const onDelete = (e: React.MouseEvent<SVGSVGElement, MouseEvent>, name: string, id: string)=> {
+        toggleModal('delete')
         e.stopPropagation()
-      }
+
+        setUserName(name)
+        setUserId(id)
+    }
+
+    const displayModal = ()=>{
+        if (modalChoice === 'edit') {
+
+        } else if (modalChoice === 'ban') {
+            return (banned) ? <UnbanUserModal name={userName} id={userId} /> : <BanUserModal name={userName} id={userId}/>
+        } else if (modalChoice === 'delete') {
+            return <DeleteUserModal name={userName} id={userId} />
+        }
+    }
     
     return (
         <>
@@ -54,7 +101,7 @@ export default function SearchPage(){
                 <SearchContainer>
                     <SearchForm onSubmit={(e)=>e.preventDefault()}>
                         <h3>Filtrar resultados</h3>
-                        <label>Perfís por página:</label>
+                        <label>Perfis por página:</label>
                         <select onChange={(e) => setAmount(Number(e.target.value))}>
                             <option value="10">10 Perfís</option>
                             <option value="15">15 Perfís</option>
@@ -69,8 +116,19 @@ export default function SearchPage(){
                                 <option key={city.id} value={city.name}>{city.name}</option>
                             ))}
                         </select>
-                        {/* <button onClick={listCities}>Aplicar filtros</button> <-- useless */}
-                        <label className='label-pagina'>Página:</label>
+                        <div style={{margin: '0 auto' }}>
+                            <input type="checkbox" defaultChecked onClick={toggleShowActive} />
+                            <label>Mostrar usuários inativos</label>
+                        </div>
+                        <div style={{margin: '0 auto', marginBottom: '1em'}}>
+                            <input type="checkbox" onClick={toggleShowBanned} />
+                            <label>Mostrar usuários banidos</label>
+                        </div>
+                        <label>Filtrar por nome</label>
+                        <input type="text" className="filter-input" value={name} onChange={(e) => setName(e.target.value)}/>
+                        <label>Filtrar por id</label>
+                        <input type="text" className="filter-input" value={id} onChange={(e) => setId(e.target.value)}/>
+                        <label className='label-pagina'>Página atual</label>
                         <nav>
                             <button onClick={() => {
                                 if(page > 1){
@@ -84,13 +142,13 @@ export default function SearchPage(){
                                 listUsers();
                             }}>{'>'}</button>
                         </nav>
-                        <input type="text" value={name} onChange={(e) => setName(e.target.value)}/>
-                        <button onClick={onSearch}>Pesquisar</button>
+
+                        <button onClick={onSearch}>Aplicar filtros</button>
                     </SearchForm>
                     <SearchView>
                                 {
                                     usersList.map((user, index) => { 
-
+                                        if (user)
                                         return <ProfilePreview
                                             key={index}
                                             id={user.id}
@@ -100,14 +158,20 @@ export default function SearchPage(){
                                             gender={user.gender}
                                             pronouns={user.pronnouns}
                                             onEdit={(e)=>onEdit(e)}
-                                            onDelete={(e)=>onDelete(e)}
-                                            onBan={(e)=>onBan(e)}
+                                            onDelete={(e)=>onDelete(e, user.name, user.id)}
+                                            onBan={(e)=>onBan(e, user.name, user.id, user.isBanned)}
+                                            banned={user.isBanned}
                                         />
 
                                     })
                                 }
                     </SearchView> 
                 </SearchContainer>
+                <Modal modalIsOpen={showModal} toggleModal={toggleModal}>
+                {
+                    showModal && displayModal()
+                }
+            </Modal> 
         </>
     )
 }

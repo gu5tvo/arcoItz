@@ -1,31 +1,43 @@
-import { EditModalContainer } from "./style"
+import { EditProfileContainer } from './style';
 import React, { useEffect, useState } from 'react'
 import { useAdmin, useModal, useUser } from "../../../hooks/contexts";
 import { Image , Button } from "../../../components/dashboard/styles";
 import defaultImage from '../../../assets/profile-picture.svg'
-interface EditModalProps {
-    id: string;
-    avatar: string;
-    name: string;
-}
-export default function EditModal({ id, avatar, name }: EditModalProps) {
-    const { adminUpdate , admin, listCities, cities } = useAdmin()
+import DinamicHeader from '../../../components/header';
+import { Navigate } from 'react-router-dom';
+
+export default function EditAdminProfile() {
+    const { adminUpdate , admin, listCities, cities, adminSelf, isAuthenticated } = useAdmin()
+
+    if (!isAuthenticated) return <Navigate to='/'/>
     const { setPicture, setRequest } = useModal() 
+    const [avatar, setAvatar] = useState("")
 
-
+    const [id, setId] = useState("")
     const [updated, setUpdated] = useState(false)
-    const [admName, setAdmName] = useState(name)
+    const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [pfp, setPfp] = useState("")
     const [phone, setPhone] = useState("")
     const [city, setCity] = useState("")
 
+    const [loaded, setLoaded] = useState(false)
+
     useEffect(()=> {
-        listCities();
+      (async ()=> {
+          await Promise.all([adminSelf(), listCities()])
+          setLoaded(true)
+          setId(admin.id)
+        })()
+        setAvatar(admin.avatar)
     }, [])
+  
+    if (!loaded) return <></>
+  
+
     const onChangeName = (e: React.ChangeEvent<HTMLInputElement>)=> {
-        setAdmName(e.target.value)
+        setName(e.target.value)
     }
     
     const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>)=> {
@@ -43,7 +55,7 @@ export default function EditModal({ id, avatar, name }: EditModalProps) {
     const editAdmin = ()=> {
         if (name || email || password || pfp) {
             const avatar = pfp
-            adminUpdate(id, { name: admName, email, password, avatar, city, phone })
+            adminUpdate(id, { name, email, password, avatar, city, phone })
             setUpdated(true)
         }
     }
@@ -54,16 +66,12 @@ export default function EditModal({ id, avatar, name }: EditModalProps) {
     }
 
     if (updated) {
-        return (
-            <EditModalContainer small>
-                <h1>Mudanças realizadas com sucesso!</h1>
-            </EditModalContainer>
-        )
+        return ( <Navigate to='/admin/painel'/>)
     }
 
-    return (
-        <EditModalContainer>
-            <h1>Editar o perfil de {name}</h1>
+    return (<>
+    <DinamicHeader adminLogoutBtn adminPanel/>
+        <EditProfileContainer>
             <img src={pfp ? pfp : avatar ? avatar : defaultImage} alt={"Foto de " + admin.name} />
 
             <Button onClick={onChangePicture}>Alterar foto</Button>
@@ -79,6 +87,6 @@ export default function EditModal({ id, avatar, name }: EditModalProps) {
             </select>
 
             <button className="confirm-btn" onClick={editAdmin}>Confirmar mudanças</button>
-        </EditModalContainer>
-    )
+        </EditProfileContainer>
+        </>)
 }

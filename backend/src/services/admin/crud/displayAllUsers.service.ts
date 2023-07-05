@@ -1,6 +1,8 @@
 import User from "../../../model/user.model";
 
 import { iDisplayAll } from "../../../interfaces/user.interface";
+import { iDisplayAllProps } from "../../../interfaces/admin.interface";
+import { formatDiagnosticsWithColorAndContext } from "typescript";
 
 //Algorítmo que faz a ordem de usuáros serem exibidos em ordem aleatória, 
 //para que não haja uma ordem de exibição padrão.
@@ -12,30 +14,28 @@ function randomizaUsuários(array) {
     return array;
   }
 
-export default async function displayAllUsersService(pageNumber: string, pageSize: string, city: string, name: string, id: string): Promise<iDisplayAll> {
-    const pageNumberNumber = parseInt(pageNumber);
-    const pageSizeNumber = parseInt(pageSize);
+export default async function displayAllUsersService({ page, amount, city, id, name, isBanned, isActive }: iDisplayAllProps): Promise<iDisplayAll> {
+    const pageNumberNumber = parseInt(page);
+    const pageSizeNumber = parseInt(amount);
 
     //Algoritmo que gera uma 'seed' de paginação, mantendo consistência nos resultados.
     let actualPage, actualPageSize;
     
-    actualPage = pageNumber ? pageNumberNumber : 1
-    actualPageSize = pageSize ? pageSizeNumber : 10
+    actualPage = page ? pageNumberNumber : 1
+    actualPageSize = amount ? pageSizeNumber : 10
 
     const skip = (actualPage - 1) * actualPageSize;
 
     const query = {
-      isBanned: false,
-      isActive: true,
-  };
+      isBanned: (isBanned.toLowerCase() === 'true'),
+      isActive: (isActive.toLowerCase() === 'true')
+    } as { isBanned?: boolean, isActive?: boolean, name?: RegExp, id?: RegExp, city?: RegExp };
 
-    const newQuery = {...query, 
-      name: (name) ? new RegExp(name, 'i') : undefined,
-      city: (city) ? new RegExp(city, 'i') : undefined,
-      id: (id) ? new RegExp(id, 'i') : undefined
-    }
+    if (name) query.name = new RegExp(name, 'i')
+    if (id) query.id = new RegExp(id, 'i')
+    if (city) query.city = new RegExp(city, 'i')
 
-    const users = await User.find(newQuery).select('-password').skip(skip).limit(pageSizeNumber);
+    const users = await User.find(query).select('-password').skip(skip).limit(pageSizeNumber);
 
     const fixedUsers = users.map(user => { return { ...user.toObject(), _id: undefined, __v: undefined } })
 

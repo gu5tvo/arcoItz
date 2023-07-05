@@ -18,6 +18,6 @@ export const modalStyle = {
 
 export interface ModalProps {
     modalIsOpen: boolean,
-    toggleModal: ()=> any,
+    toggleModal: (choice: any)=> any,
     children: React.ReactNode
 }

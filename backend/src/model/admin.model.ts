@@ -6,7 +6,19 @@ const adminSchema = new mongoose.Schema({
         type: String,
         default: uuidv4
     },
+    avatar: {
+        type: String,
+        required: false
+    },
     name: {
+        type: String,
+        required: true
+    },
+    phone: {
+        type: String,
+        required: true
+    },
+    city: {
         type: String,
         required: true
     },
@@ -17,6 +29,10 @@ const adminSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    isSuper: {
+        type: Boolean,
+        default: false
     }
 })
 
