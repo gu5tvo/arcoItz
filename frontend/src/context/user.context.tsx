@@ -6,6 +6,7 @@ import {
 } from '../interfaces/users';
 import api from '../utils/axios';
 import { AxiosError } from 'axios';
+import retrieveToken from '../utils/user/retrieveToken';
 
 export const UserContext = createContext<{
   user: iUserComplete | undefined;
@@ -26,7 +27,7 @@ export const UserContext = createContext<{
   login: (data: iLogin) => void;
   logout: () => void;
   registerUser: (data: iRegister) => void;
-  profile: () => void;
+  profile: () => Promise<void>;
   displayProfile: (id: string) => Promise<iUserSimple>;
   updateProfile: (data: iUserSimple) => void;
   deleteSelf: () => void;
@@ -54,13 +55,13 @@ export const UserContext = createContext<{
   login: () => {},
   logout: () => {},
   registerUser: () => {},
-  profile: () => {},
+  profile: () => Promise.resolve(),
   displayProfile: () => new Promise(() => []),
   updateProfile: () => {},
   deleteSelf: () => {},
   listUsersPage: () => new Promise(() => []),
   forgotPassword: () => {},
-  resetPassword: () => {}
+  resetPassword: () => {},
 });
 
 export const UserProvider = ({ children }: { children: JSX.Element }) => {
@@ -91,7 +92,15 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
       setToken(token);
       setIsAuthenticated(true);
       api.defaults.headers.Authorization = `Bearer ${token}`;
-      localStorage.setItem('token', token);
+
+      if (!!data.remember) { 
+        localStorage.setItem('@token', response.data.token) 
+        sessionStorage.removeItem('@token')
+    } else {
+        sessionStorage.setItem('@token', response.data.token)
+        localStorage.removeItem('@token')
+    }
+    
       toast.success('Login realizado com sucesso!');
       profile();
       navigate('/dashboard');
@@ -140,7 +149,7 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
     try {
       await api.post('/users', data);
       toast.success('Cadastro realizado com sucesso!');
-      login({ email: data.email, password: data.password });
+      login({ email: data.email, password: data.password, remember: true });
     } catch (err: AxiosError | unknown) {
       if (err instanceof AxiosError) {
         toast.error(err.response?.data.message as string);
@@ -151,13 +160,23 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
   }, []);
 
   const profile = useCallback(async () => {
+
     try {
-      const response = await api.get('/users');
+      const retrievedToken: string = retrieveToken()
+
+      const response = await api.get('/users', {
+        headers: {
+          'Authorization': `Bearer ${retrievedToken}`
+        }
+      });
+
       setUser(response.data);
       setSkills(response.data.skills);
       setCourses(response.data.courses);
       setExperiences(response.data.experiences);
       setDocuments(response.data.documents);
+      setIsAuthenticated(true)
+
     } catch (err: AxiosError | unknown) {
       if (err instanceof AxiosError) {
         toast.error(err.response?.data.message as string);

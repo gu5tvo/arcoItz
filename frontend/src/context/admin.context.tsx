@@ -4,6 +4,7 @@ import { AxiosError } from "axios";
 import { iUserSimple } from "../interfaces/users";
 import { iAdmin, iAdminLogin, iAdminRegister, iSectors, iCity, iAdminEdit, iListUsers } from "../interfaces/admin";
 import api from "../utils/axios";
+import retrieveToken from "../utils/admin/retrieveToken";
 
 export const AdminContext = createContext<
     {
@@ -22,8 +23,6 @@ export const AdminContext = createContext<
         cities: iCity[],
         setCities: React.Dispatch<React.SetStateAction<iCity[]>>,
         adminLogin: (data: iAdminLogin) => Promise<void>,
-        adminRemember: boolean,
-        adminSetRemember: React.Dispatch<React.SetStateAction<boolean>>,
         adminSelf: () => Promise<void>,
         adminLogout: () => void,
         adminList: () => Promise<void>,
@@ -59,8 +58,6 @@ export const AdminContext = createContext<
             cities: [],
             setCities: () => {},
             adminLogin: () => Promise.resolve(),
-            adminRemember: false,
-            adminSetRemember: () => Promise.resolve(),
             adminSelf: ()=> Promise.resolve(),
             adminLogout: () => {},
             adminList: () => Promise.resolve(),
@@ -84,17 +81,18 @@ export const AdminContext = createContext<
         });
 
 export const AdminProvider = ({ children }: { children: JSX.Element }) => {
-    const [adminRemember, setAdminRemember] = React.useState(null)
     const [token, setToken] = React.useState<string>('')
     
     const adminSelf = useCallback(async () => {
         try{
-            const retrievedToken: string = localStorage.getItem('@adminToken')
-            const admin = await api.get('/admin/self', {
+            const retrievedToken: string = retrieveToken()
+
+            const admin = await api.get('/admin/authenticate', {
                 headers: {
                     'Authorization': `Bearer ${retrievedToken}`
                 }
             }) as { data: iAdmin }
+
             setAdmin(admin.data)
             setIsAuthenticated(true)
         }catch(err: AxiosError | unknown){
@@ -107,31 +105,19 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
     },[token])
 
     useEffect(() => {
-        const retrievedToken: string = localStorage.getItem('@adminToken');
-      
-        if (retrievedToken) {
-          setToken(retrievedToken);
-          adminSelf();
-          api.defaults.headers.common['Authorization'] = `Bearer ${retrievedToken}`;
+        const retrievedLocalToken: string = localStorage.getItem('@adminToken');
+        const retrievedSessionToken: string = sessionStorage.getItem('@adminToken')
+
+        if (retrievedLocalToken) {
+            setToken(retrievedLocalToken);
+            adminSelf();
+        } else if (retrievedSessionToken) {
+            setToken(retrievedLocalToken);
+            adminSelf();
         }
-      
-        // No caso de abandonar a página, o token é removido do localStorage
-        const cleanup = () => {
-          if (!adminRemember) {
-            localStorage.removeItem('@adminToken');
-          }
-        };
-      
-        window.addEventListener('beforeunload', cleanup);
-      
-        return () => {
-          window.removeEventListener('beforeunload', cleanup);
-        };
-      }, [adminRemember, adminSelf]);
-      
 
-
-    
+      }, [adminSelf]);
+      
     const [admins, setAdmins] = React.useState<iAdmin[]>([])
     const [admin, setAdmin] = React.useState<iAdmin>({ id: '', name: '', email: '', phone: '', avatar: '', city: '', isSuper: false})
     const [isAuthenticated, setIsAuthenticated] = React.useState<boolean>(false)
@@ -143,10 +129,16 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
         try {
             const response = await api.post('/admin/login', data) as { data: { token: string } }
             setToken(response.data.token)
-            console.log(response)
-            localStorage.setItem('@adminToken', response.data.token)
+            
+            if (!!data.remember) { 
+                localStorage.setItem('@adminToken', response.data.token) 
+                sessionStorage.removeItem('@dminToken')
+            } else {
+                sessionStorage.setItem('@adminToken', response.data.token)
+                localStorage.removeItem('@adminToken')
+            }
+
             setIsAuthenticated(true)
-            setAdminRemember(!!data.remember)
         }catch(err: AxiosError | unknown){
             if(err instanceof AxiosError){
                 toast.error(err.response?.data.message as string)
@@ -160,12 +152,14 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
         setToken('')
         api.defaults.headers.Authorization = ''
         localStorage.removeItem('@adminToken')
+        sessionStorage.removeItem('@adminToken')
         setIsAuthenticated(false)
         setAdmin(null)
     },[])
 
     const adminList = useCallback(async () => {
         try{
+            const token = retrieveToken()
             const response = await api.get('/admin', {
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -201,7 +195,7 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
 
     const adminUpdate = useCallback(async (id: string, data: iAdminEdit) => {
         try{
-            console.log(data)
+            const token = retrieveToken()
             const response = await api.patch(`/admin/${id}`, data, {
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -274,7 +268,6 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
             toast.success(response.data.message as string);
             
             const updatedUsers: iUserSimple[] = usersList.filter((user) => {
-                console.log(user)
                 return (user.id !== id)
             })
 
@@ -480,7 +473,6 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
                 sectors, setSectors,
                 cities, setCities,
                 adminLogin, adminSelf,
-                adminRemember, adminSetRemember: setAdminRemember,
                 adminLogout,adminList, adminRegister,
                 adminUpdate, adminDelete,
                 adminListUsers, adminBanUsers,

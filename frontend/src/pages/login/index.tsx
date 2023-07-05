@@ -10,7 +10,8 @@ import LoginFooter from "./Footer";
 
 interface LoginData {
     email: string,
-    password: string
+    password: string,
+    remember: boolean
 }
 
 export default function LoginPage(): JSX.Element{
