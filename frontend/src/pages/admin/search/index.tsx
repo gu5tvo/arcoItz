@@ -26,22 +26,22 @@ export default function SearchPage(){
     const [id, setId] = useState("")
     const [search, setSearch] = useState(false)
     const [showBanned, setShowBanned] = useState(false)
-    const [showActive, setShowActive] = useState(true)
+    const [active, setActive] = useState(true)
 
     const [userName, setUserName] = useState("")
     const [userId, setUserId] = useState("")
     const [banned, setBanned] = useState(false)
 
     function listUsers(){
-        adminListUsers({ page, amount, city, name, id, isBanned: showBanned, isActive: showActive })
+        adminListUsers({ page, amount, city, name, id, isBanned: showBanned, isActive: active })
     }
 
     const toggleShowBanned = ()=> {
         setShowBanned(!showBanned)
     }
 
-    const toggleShowActive = ()=> {
-        setShowActive(!showActive)
+    const toggleShowInactive = ()=> {
+        setActive(!active)
     }
 
     const toggleModal = (choice: 'edit' | 'delete' | 'ban')=> {
@@ -117,7 +117,7 @@ export default function SearchPage(){
                             ))}
                         </select>
                         <div style={{margin: '0 auto' }}>
-                            <input type="checkbox" defaultChecked onClick={toggleShowActive} />
+                            <input type="checkbox" onClick={toggleShowInactive} />
                             <label>Mostrar usuários inativos</label>
                         </div>
                         <div style={{margin: '0 auto', marginBottom: '1em'}}>

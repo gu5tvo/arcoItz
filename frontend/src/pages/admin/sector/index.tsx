@@ -54,7 +54,7 @@ export default function SectorPage() {
         <>
          <DinamicHeader logoutBtn adminPanel/>
              <CitiesContainer>
-                <h1>Cidades</h1>
+                <h1>Setores</h1>
                 <img className='plus-icon' src={AddIcon} onClick={onAdd}/>
                 <div className="cities">
                     {sectors.map((city, index)=> {

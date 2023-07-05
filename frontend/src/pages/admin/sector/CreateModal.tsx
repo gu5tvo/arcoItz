@@ -5,33 +5,33 @@ import { useAdmin } from "../../../hooks/contexts";
 export default function CreateModal() {
     const { registerSectors } = useAdmin()
 
-    const [cityCreated, setCityCreated] = useState(false)
-    const [cityName, setCityName] = useState("")
+    const [sectorCreated, setSectorCreated] = useState(false)
+    const [name, setName] = useState("")
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>)=> {
-        setCityName(e.target.value)
+        setName(e.target.value)
     }
 
-    const createCity = ()=> {
-        if (cityName) {
-            registerSectors({ name: cityName })
-            setCityCreated(true)
+    const createSector = ()=> {
+        if (name) {
+            registerSectors({ name })
+            setSectorCreated(true)
         }
     }
 
-    if (cityCreated) {
+    if (sectorCreated) {
         return (
             <CreateModalContainer>
-                <h1>Cidade criada com sucesso!</h1>
+                <h1>Setor criado com sucesso!</h1>
             </CreateModalContainer>
         )
     }
 
     return (
         <CreateModalContainer>
-            <h1>Criar cidade</h1>
-            <input placeholder="Nome da cidade" onChange={onChange} />
-            <button className="confirm-btn" onClick={createCity}>Criar cidade</button>
+            <h1>Criar setor</h1>
+            <input placeholder="Nome do setor" onChange={onChange} />
+            <button className="confirm-btn" onClick={createSector}>Confirmar</button>
         </CreateModalContainer>
     )
 }
