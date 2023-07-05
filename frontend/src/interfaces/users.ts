@@ -1,6 +1,7 @@
 export interface iLogin {
     email: string;
     password: string;
+    remember: boolean;
 }
 
 export interface iRegister {
