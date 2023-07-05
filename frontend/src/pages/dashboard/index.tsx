@@ -5,8 +5,8 @@ import ProfileScreen from "../../components/dashboard/profile";
 
 import ContactScreen from "../../components/dashboard/contact";
 import SkillsScreen from "../../components/dashboard/skills";
-import ExperienceScreen from "../../components/dashboard/experience";
 import SchoolScreen from "../../components/dashboard/school";
+import ExperienceScreen from "../../components/dashboard/experience";
 
 
 
