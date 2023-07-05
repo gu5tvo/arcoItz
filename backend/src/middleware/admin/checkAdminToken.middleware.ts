@@ -5,7 +5,6 @@ import Admin from '../../model/admin.model';
 import 'dotenv/config'
 
 export default async function checkAdminTokenMiddleware(req: Request, res: Response, next: NextFunction){
-    console.log(req.originalUrl)
     const { authorization } = req.headers;
 
     if(!authorization) throw new AppError('Token não informado', 401);

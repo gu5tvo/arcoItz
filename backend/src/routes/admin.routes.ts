@@ -65,7 +65,7 @@ adminRouter.delete('/courses/:id', checkAdminTokenMiddleware, checkCourseMiddlew
 //Lista todos admins
 adminRouter.get('', checkAdminTokenMiddleware, listAdminController)
 //Retorna o admin logado
-adminRouter.get('/self', checkAdminTokenMiddleware, getAdmin)
+adminRouter.get('/authenticate', checkAdminTokenMiddleware, getAdmin)
 
 
 // checkAdminTokenMiddleware
