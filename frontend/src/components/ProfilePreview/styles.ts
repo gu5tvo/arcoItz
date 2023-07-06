@@ -10,21 +10,15 @@ export const ProfilePreviewDiv = styled.div`
     align-items: center; 
 
     background-color: #fff;
-    padding: 1em;
+    padding: min(1.4rem, 4vw);
     border-radius: min(3vw, 1.5rem);
-    width: min(90vw, 450px);
-    height: 70px;
+    min-width: min(90vw, 450px);
+    min-height: 70px;
     gap: min(1rem, 10%);
 
     box-shadow: 0 0 0 rgba(0, 0, 0, 0.09);
     transition: 0.5s all ease-in-out;
     font-size: clamp(0.6rem, 1vw, 0.8rem);
-
-    @media (width < 1400px) {
-        width: min(90vw, 360px);
-        font-size: clamp(0.5rem, 0.9vw, 0.0.7rem);
-    }
-
 
     &:hover{
         cursor: pointer;

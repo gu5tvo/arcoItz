@@ -16,6 +16,7 @@ export const ContainerProfile = styled.main`
     justify-content: center;
     width: 100%;
     height: 100%;
+    
   }
 `
 
@@ -29,20 +30,62 @@ export const UserGradient = styled.div`
   border-image:linear-gradient(to bottom, #0077B6, rgba(0, 0, 0, 0)) 1 100%;
   padding: 90px 20px 20px 20px;
   color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
-  .profile-description {
+  .profile-header{
+    .profile-description {
+      filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+      width: 270px;
+
+      hr{
+        width: 100%;
+      }
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      h1{
+        font-size: clamp(1.5rem, 2.5vw, 2rem);
+      }
+      h3{
+        font-size: clamp(1rem, 1vw, 1rem);
+        font-weight: 400;
+      }
+      
+      .profile-info{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+      }
+    }
+  } 
+  .profile-contact{
+    width: 270px;
+
     hr{
       width: 100%;
     }
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    .profile-info{
+      display: flex;
+      flex-direction: column;
+    }
   }
 
   img{
     width: 100%;
+    height: 300px;
+    object-fit: cover;
     border-radius: 100%;
+    background-color: #fff;
   }
+
+
 
   
 `

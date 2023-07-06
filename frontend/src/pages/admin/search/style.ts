@@ -5,14 +5,14 @@ export const SearchContainer = styled.main`
     display: flex;
     flex-direction: row;
     justify-content: center;
-    width: 100vw;
     flex-wrap: wrap;
     gap: min(2vw, 2rem);
+    padding: min(1.5rem, 2vw);
+    align-items: flex-start;
 
     @media (width > 1500px) {
         gap: 20px;
     }
-
 `;
 
 export const SearchForm = styled.form`
@@ -21,7 +21,7 @@ export const SearchForm = styled.form`
     align-items: center;
     background-color: #fff;
     padding: 2em;
-    min-width: 19vw;
+    width: min(90vw, 350px);
     border-radius: 0.5rem;
     box-shadow: 0 0 60px rgba(0, 0, 0, 0.09);
     height: fit-content;
@@ -126,16 +126,13 @@ export const SearchView = styled.section`
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 2vw;
 
+    gap: min(6vw, 60px);
+
+    row-gap: min(10vh, 30px);
     @media (width < 800px) {
         gap: 7vh;
     }
-
-    @media (width > 1400px) {
-        gap: 3.5vw;
-    }
-
 `;
 
 export const ProfilePreviewDiv = styled.div`

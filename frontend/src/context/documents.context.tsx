@@ -6,6 +6,7 @@ import { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import retrieveToken from "../utils/user/retrieveToken";
 import Modal from "../components/Modal";
+import ModalContent from "../components/dashboard/certificates/ModalContent";
 
 export const DocumentsContext = createContext<{
         registerDocument: (data: iDocuments) => Promise<void>,
@@ -84,7 +85,7 @@ export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
         <DocumentsContext.Provider value={{registerDocument, updateDocument, deleteDocument, modalDisplay, setModalDisplay}}>
             <Modal modalIsOpen={modalDisplay} toggleModal={toggleModal}>
             {
-                modalDisplay && <h1>aaaa</h1>
+                modalDisplay && <ModalContent/>
             }
             </Modal>
             {children}

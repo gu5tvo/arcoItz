@@ -38,7 +38,6 @@ export const LoginForm = styled.form`
     }
 
     label{
-        font-weight: 600;
         font-size: 0.8em;
         padding-left: 0.5rem;
     }
@@ -62,7 +61,6 @@ export const LoginForm = styled.form`
     .form-section {
         display: flex;
         flex-direction: column;
-        
         gap: min(6px, 3vh);
     }
 
