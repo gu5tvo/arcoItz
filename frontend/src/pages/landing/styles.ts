@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 export const PinkSection = styled.section`
     display: flex;
@@ -8,7 +7,6 @@ export const PinkSection = styled.section`
     text-align: center;
     position: relative;
     background-color: var(--PINK);
-    width: 100vw;
     
     .content { 
         position: relative;
@@ -76,14 +74,12 @@ export const PinkSection = styled.section`
 
 export const DisclaimerSection = styled.section`
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    width: 100vw;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: clamp(1rem, 1vw, 1.3rem);
     line-height: clamp(1.5rem, 3vw, 1.9rem);
     background-color: #FFF;
-    width: 100vw;
 
     .content {
         
