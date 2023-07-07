@@ -28,13 +28,14 @@ export const UserContext = createContext<{
   logout: () => void;
   registerUser: (data: iRegister) => void;
   profile: () => Promise<void>;
-  displayProfile: (id: string) => Promise<iUserSimple>;
+  displayProfile: (id: string) => Promise<iUserComplete>;
   updateProfile: (data: iUserSimple) => void;
   deleteSelf: () => void;
   listUsersPage: ({ page, amount, area, title, city }: iUsersPage) => void;
   forgotPassword: (email: string) => void;
   resetPassword: (token: string, password: string) => void;
   setUsersList: React.Dispatch<React.SetStateAction<iUserSimple[]>>;
+  validateToken: (token: string) => Promise<void>
 }>({
   user: undefined,
   setUser: () => {},
@@ -62,6 +63,7 @@ export const UserContext = createContext<{
   listUsersPage: () => new Promise(() => []),
   forgotPassword: () => {},
   resetPassword: () => {},
+  validateToken: ()=> Promise.resolve(),
 });
 
 export const UserProvider = ({ children }: { children: JSX.Element }) => {
@@ -199,6 +201,21 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
     }
   }, []);
 
+
+  const validateToken = useCallback(async (token: string) => {
+    try {
+      const response = await api.get(`/login/${token}`);
+      setUser(response.data)
+
+    } catch (err: AxiosError | unknown) {
+      if (err instanceof AxiosError) {
+        toast.error(err.response?.data.message as string);
+      } else {
+        toast.error('Erro do lado do cliente, tente novamente!');
+      }
+    }
+  }, []);
+
   const updateProfile = useCallback(async (data: iUserSimple) => {
     try {
       const token = retrieveToken()
@@ -277,7 +294,8 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
         forgotPassword,
         resetPassword,
         usersList,
-        setUsersList
+        setUsersList,
+        validateToken
       }}
     >
       {children}

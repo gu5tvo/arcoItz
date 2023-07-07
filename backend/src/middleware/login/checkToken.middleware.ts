@@ -1,30 +1,28 @@
 import { Request, Response, NextFunction } from 'express';
 import AppError from '../../errors';
 import User from '../../model/user.model';
-import jwt from 'jsonwebtoken';
+import { verify } from 'jsonwebtoken'
 
 export default async function checkTokenMiddleware(req: Request, res: Response, next: NextFunction): Promise<void> {
-    //Verifica se há token enviado na requisição.
-    const { authorization } = req.headers;
-    if(!authorization) throw new AppError('Token não encontrado', 401);
 
-    //Verifica se o token é válido.
-    const [, token] = authorization.split(' ');
-    if(token.length < 14) throw new AppError('Token inválido', 401);
-    const { id } = jwt.verify(token, process.env.SECRET_KEY) as { id: string };
-    if(!id) throw new AppError('Token inválido', 401);
+    const {token} = req.params;
 
-    //Verifica se o usuário existe.
-    const user = await User.findOne({id})
-    if(!user) throw new AppError('Token inválido', 401);
+    if(!token) throw new AppError("Token não informado", 400);
 
-    //Se tudo estiver correto, adiciona o id do usuário na requisição.
-    req.user = {
-        id: user.id,
-        name: user.name,
-        email: user.email,
+    try {
+
+        const {id} = verify(token, process.env.SECRET_KEY) as {id: string};
+        const user = await User.findById(id);
+        req.user = {
+            id: user._id.toString(),
+            email: user.email,
+            name: user.name
+        }
+    
+        return next();
+
+    } catch(err) {
+        throw new AppError("Token inválido", 404);
     }
-
-    return next();
 
 }

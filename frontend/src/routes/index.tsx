@@ -17,6 +17,7 @@ import AdminSearchPage from '../pages/admin/search';
 
 import AdminLogin from '../pages/admin/login/';
 import EditAdminProfile from '../pages/admin/editProfile';
+import ResetPage from '../pages/reset';
 
 export default function MakeRoutes(){
 
@@ -29,7 +30,7 @@ export default function MakeRoutes(){
             <Route path="/l" element={<UserDashboardPage/>} />
             <Route path="/profile/:id" element={<Profile/>} />
             <Route path="/dashboard/*" element={<ProtectedRoute path="/dashboard" element={UserDashboardPage} isPrivate redirectTo="/login" />} />
-
+            <Route path="/reset/*" element={<ResetPage/>}/>
             {/* <AdminProtectedRoute path="/login" element={AdminLogin} isPrivate redirectTo="/admin/login" /> */}
             <Route path="/admin/login/" element={<AdminLogin/>} />
 
