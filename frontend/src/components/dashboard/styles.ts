@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import InputMask from 'react-input-mask';
+import InputMask from 'react-text-mask'
 
 export const DivSpaceStyle = styled.div`
   display: flex;
@@ -68,6 +68,21 @@ export const Input = styled.input`
     }
 `
 
+export const TextArea = styled.textarea`
+    padding: 1em;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: #eee;
+    transition: 0.3s all ease-in-out;
+    resize: none;
+    min-height: miN(70px, 10vh);
+    &:focus{
+        outline: none;
+        background-color: #9AE7F8;
+        color: #001C22;
+    }
+`
+
 export const Button = styled.button`
 
     border: none;
@@ -113,21 +128,6 @@ export const MaskedInput = styled(InputMask)`
     border-radius: 0.5rem;
     background-color: #eee;
     transition: 0.3s all ease-in-out;
-
-    &:focus{
-        outline: none;
-        background-color: #9AE7F8;
-        color: #001C22;
-    }
-`
-
-export const TextArea = styled.textarea`
-    padding: 1em;
-    border: none;
-    border-radius: 0.5rem;
-    background-color: #eee;
-    transition: 0.3s all ease-in-out;
-    resize: none;
 
     &:focus{
         outline: none;

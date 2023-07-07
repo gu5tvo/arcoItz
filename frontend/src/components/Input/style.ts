@@ -1,4 +1,4 @@
-import { styled } from 'styled-components'
+import styled from 'styled-components'
 
 const InputElement = styled.input`
     background-color: var(--GRAY);

@@ -40,7 +40,22 @@ export default function ProfileScreen(): JSX.Element {
                 
                 <div>
                   <label htmlFor="number" className='label-form'>Número de telefone</label>
-                  <MaskedInput mask="(99) 9 9999-9999" type="text" placeholder="Digite seu número de telefone" defaultValue={user.number ? user.number : ''} {...register('number')} />
+                  <MaskedInput mask={[
+              '(',
+              /[1-9]/,
+              /\d/,
+              ')',
+              ' ',
+              /\d/,
+              /\d/,
+              /\d/,
+              /\d/,
+              '-',
+              /\d/,
+              /\d/,
+              /\d/,
+              /\d/,
+            ]} type="text" placeholder="Digite seu número de telefone" defaultValue={user.number ? user.number : ''} {...register('number')} />
                 </div>
                 
                 <div>
