@@ -3,7 +3,7 @@ import { Router } from 'express';
 import verifyShape from '../schemas/verifyShape.middleware';
 import checkExistenceMiddleware from '../middleware/users/checkExistence.middleware';
 import checkRegisterMiddleware from '../middleware/users/checkRegister.middleware';
-import checkTokenMiddleware from '../middleware/login/checkToken.middleware';
+import checkTokenMiddleware from '../middleware/users/checkToken.middleware';
 import verifyMailMiddleware from '../middleware/users/verifyMail.middleware';
 import sanitizePagesMiddleware from '../middleware/users/sanitizePages.middleware';
 //Schemas
