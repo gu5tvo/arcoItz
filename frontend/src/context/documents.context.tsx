@@ -34,7 +34,9 @@ export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
     api.defaults.headers.Authorization = `Bearer ${token}`
 
     const registerDocument = useCallback( async (data: iDocuments) => {
-        // const token = retrieveToken()
+        const token = retrieveToken()
+        console.log(token);
+        
         try{
             const {data: document} = await api.post('/document', data, {
                 headers: {
