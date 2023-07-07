@@ -6,6 +6,8 @@ export interface iDisplayAllProps{
     id: string;
     isBanned: string;
     isActive: string;
+    title: string;
+    area: string;
 }
 
 export interface iEditAdmin {

@@ -234,10 +234,10 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
     },[token, admins])
 
     // page: number, amount: number, city: string, name: string, id?: string
-    const adminListUsers = useCallback(async ({ page = 1, amount = 10, city = "", name = "", id = "", isBanned = false, isActive = true } : iListUsers) => {
+    const adminListUsers = useCallback(async ({ page = 1, amount = 10, city = "", name = "", id = "", isBanned = false, isActive = true, area = '', title = '' } : iListUsers) => {
         try {
             
-          const query = `?page=${page}&amount=${amount}&city=${city}&name=${name}&id=${id}&isBanned=${isBanned}&isActive=${isActive}`
+          const query = `?page=${page}&amount=${amount}&city=${city}&name=${name}&id=${id}&isBanned=${isBanned}&isActive=${isActive}&area=${area}&title=${title}`
           const token = retrieveToken()
           const response = await api.get(`/admin/users${query}`, {
             headers: {
@@ -258,7 +258,7 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
 
       const adminBanUsers = useCallback(async (id: string) => {
         try{
-            
+            const token = retrieveToken()
             const response = await api.put(`/admin/ban/${id}`, null, {
                 headers: {
                     'Authorization': `Bearer ${token}`

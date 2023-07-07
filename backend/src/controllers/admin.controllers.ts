@@ -117,7 +117,7 @@ export async function deleteProfileController(req: Request, res: Response){
 }
 
 export async function displayAllUsersController(req: Request, res: Response): Promise<Response> {
-    const query = req.query as { page: string, amount: string, city: string, name: string, id: string, isBanned: string, isActive: string }
+    const query = req.query as { page: string, amount: string, city: string, name: string, id: string, isBanned: string, isActive: string, title: string, area: string }
 
     const response = await displayAllUsersService({ ...query });
     return res.status(200).json(response);

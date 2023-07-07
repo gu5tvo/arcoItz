@@ -4,7 +4,7 @@ interface IconProps {
     className?: string;
     size?: string;
     color?: string;
-    onClick: React.MouseEventHandler<SVGSVGElement>
+    onClick?: (...args: any[]) => void
 }
 
 export function PenIcon({ className, size, color, onClick }: IconProps) {
@@ -38,5 +38,25 @@ export function BanIcon({ className, size, color, onClick }: IconProps) {
                 </clipPath>
             </defs>
         </svg>
+    )
+}
+
+export function EyeIcon({ className, size, color, onClick }: IconProps) {
+
+    return (
+        <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width={size? size : "24"} onClick={onClick} className={className ? className : ''} height={size? size : "24"} viewBox="0 0 96.000000 96.000000" preserveAspectRatio="xMidYMid meet">
+
+            <g transform="translate(0.000000,96.000000) scale(0.100000,-0.100000)" stroke="none">
+            <path d="M361 764 c-119 -32 -243 -129 -295 -232 l-26 -52 26 -52 c33 -64 122
+            -154 190 -190 141 -76 307 -76 448 0 68 36 157 126 190 190 l26 52 -26 52
+            c-33 64 -122 154 -190 190 -104 56 -233 72 -343 42z m229 -118 c59 -39 85 -89
+            85 -166 0 -78 -26 -127 -88 -168 -56 -37 -153 -39 -210 -3 -76 47 -111 140
+            -88 229 14 51 75 117 123 131 53 16 135 6 178 -23z"/>
+            <path d="M435 591 c-45 -20 -70 -60 -70 -112 0 -42 5 -53 33 -81 28 -28 39
+            -33 82 -33 43 0 54 5 82 33 28 28 33 39 33 82 0 42 -5 54 -31 81 -33 33 -92
+            46 -129 30z"/>
+            </g>
+    </svg>
+
     )
 }

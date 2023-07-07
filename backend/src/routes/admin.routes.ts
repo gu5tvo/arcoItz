@@ -48,7 +48,6 @@ adminRouter.patch('/users/:id', verifyShape(updateSchema),checkUserMiddleware, c
 adminRouter.delete('/users/:id', checkUserMiddleware, checkAdminTokenMiddleware, deleteProfileController) 
 // Retorna uma página de usuários
 adminRouter.get('/users', checkAdminTokenMiddleware, displayAllUsersController)
-//
 
 //Deleta um documento de um usuário
 adminRouter.delete('/documents/:id', checkAdminTokenMiddleware, checkDocumentMiddleware, deleteDocumentController) //
@@ -66,9 +65,6 @@ adminRouter.delete('/courses/:id', checkAdminTokenMiddleware, checkCourseMiddlew
 adminRouter.get('', checkAdminTokenMiddleware, listAdminController)
 //Retorna o admin logado
 adminRouter.get('/authenticate', checkAdminTokenMiddleware, getAdmin)
-
-
-// checkAdminTokenMiddleware
 
 //Cadastra um admin
 adminRouter.post('', verifyShape(registerAdmin), checkAdminTokenMiddleware, registerAdminController)

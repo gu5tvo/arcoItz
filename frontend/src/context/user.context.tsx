@@ -31,7 +31,7 @@ export const UserContext = createContext<{
   displayProfile: (id: string) => Promise<iUserSimple>;
   updateProfile: (data: iUserSimple) => void;
   deleteSelf: () => void;
-  listUsersPage: (page: string | number, amount: string | number, city: string) => void;
+  listUsersPage: (page: string | number, amount: string | number, city: string, area: string, title: string) => void;
   forgotPassword: (email: string) => void;
   resetPassword: (token: string, password: string) => void;
   setUsersList: React.Dispatch<React.SetStateAction<iUserSimple[]>>;
@@ -234,9 +234,10 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
     }
   }, []);
 
-  const listUsersPage = useCallback(async (page: number = 1, amount: number = 10, city: string) => {
+  const listUsersPage = useCallback(async (page: number = 1, amount: number = 10, city: string = "", area: string = "", title: string = "") => {
     try {
-      const query = city ? `?page=${page}&amount=${amount}&city=${city}` : `?page=${page}&amount=${amount}`;
+
+      const query = `?page=${page}&amount=${amount}&city=${city}&area=${area}&title=${title}`
       const response = await api.get(`/users/all${query}`);
       setUsersList(response.data.content);
     } catch (err: AxiosError | unknown) {

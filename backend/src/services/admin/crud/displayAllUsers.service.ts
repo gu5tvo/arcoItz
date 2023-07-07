@@ -14,7 +14,7 @@ function randomizaUsuários(array) {
     return array;
   }
 
-export default async function displayAllUsersService({ page, amount, city, id, name, isBanned, isActive }: iDisplayAllProps): Promise<iDisplayAll> {
+export default async function displayAllUsersService({ page, amount, city, id, name, isBanned, isActive, title, area }: iDisplayAllProps): Promise<iDisplayAll> {
     const pageNumberNumber = parseInt(page);
     const pageSizeNumber = parseInt(amount);
 
@@ -29,11 +29,13 @@ export default async function displayAllUsersService({ page, amount, city, id, n
     const query = {
       isBanned: (isBanned.toLowerCase() === 'true'),
       isActive: (isActive.toLowerCase() === 'true')
-    } as { isBanned?: boolean, isActive?: boolean, name?: RegExp, id?: RegExp, city?: RegExp };
+    } as { isBanned?: boolean, isActive?: boolean, name?: RegExp, id?: RegExp, city?: RegExp; area: string, title: RegExp };
 
     if (name) query.name = new RegExp(name, 'i')
     if (id) query.id = new RegExp(id, 'i')
     if (city) query.city = new RegExp(city, 'i')
+    if (area) query.area = area
+    if (title) query.title = new RegExp(title, 'i')
 
     const users = await User.find(query).select('-password').skip(skip).limit(pageSizeNumber);
 

@@ -4,6 +4,7 @@ import displayProfileService from '../services/users/displayProfile.service';
 import deleteProfileService from '../services/users/deleteProfile.service';
 import updateProfileService from '../services/users/updateProfile.service';
 import displayAllUsersService from '../services/users/displayAll.service';
+import { iDisplayAllProps } from '../interfaces/user.interface';
 
 export async function registerUserController(req: Request, res: Response): Promise<Response> {
     const { name, email, password } = req.body;
@@ -36,8 +37,9 @@ export async function updateProfileController(req: Request, res: Response): Prom
 }
 
 export async function displayAllUsersController(req: Request, res: Response): Promise<Response> {
-    const { page, amount, city } = req.query as { page: string, amount: string, city: string}
-    const response = await displayAllUsersService(page, amount, city);
+    const query = req.query as { page: string, amount: string, city: string, title: string, area: string }
+
+    const response = await displayAllUsersService({ ...query });
     return res.status(200).json(response);
 }
 

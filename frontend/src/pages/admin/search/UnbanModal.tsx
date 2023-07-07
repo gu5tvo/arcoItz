@@ -27,7 +27,7 @@ export default function UnbanUserModal({ name, id }: UnbanUserModalProps) {
 
     return (
         <ModalContainer>
-            <h1>Banir Usuário</h1>
+            <h1>Desbnir Usuário</h1>
             <p>Você tem certeza que deseja desbanir <strong>{name}</strong>?</p>
 
             <button className="confirm-btn" onClick={unbanUser}>Confirmar</button>

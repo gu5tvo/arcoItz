@@ -64,6 +64,14 @@ export interface iDisplayAll{
     content: Array<iUserReturn>;
 }
 
+export interface iDisplayAllProps{
+    page: string;
+    amount: string;
+    city: string;
+    title: string;
+    area: string;
+}
+
 export interface iDocument {
     id: string;
     name: string;

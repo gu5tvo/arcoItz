@@ -1,40 +1,66 @@
 import React, {useState, useEffect} from 'react'
-import { ProfilePreview } from './ProfilePreview'
 import DinamicHeader from '../../../components/header'
-import { useUser, useAdmin } from '../../../hooks/contexts'
-import { SearchContainer, SearchForm, SearchView } from './style'
+import { useAdmin } from '../../../hooks/contexts'
+import { SearchContainer } from './style'
+import pfp from '../../assets/profile-picture.svg'
+import { titles, pages } from '../../../utils/search'
+import Select from 'react-select'
+import { useNavigate } from 'react-router-dom'
+
 import Modal from '../../../components/Modal'
 import DeleteUserModal from './DeleteModal'
 import BanUserModal from './BanModal'
 import UnbanUserModal from './UnbanModal'
+import { TrashIcon, PenIcon, BanIcon } from '../../../components/Icons'
 
 type ModalOptions =  'edit' | 'delete' | 'ban' | null
 
 export default function SearchPage(){
-
+    const navigate = useNavigate()
     document.title = "Buscar currículos | DiversiTrampos"
 
     const { cities, listCities, adminListUsers, usersList } = useAdmin();
+    
+    const [city, setCity] = useState('');
+    const [area, setArea] = useState('');
+    const [title, setTitle] = useState('');
+    const [page, setPage] = useState(1);
+    const [amount, setAmount] = useState(10);
+    const [options, setOptions] = useState<Array<{ value: string, label: string }>>([])
+    const [isHovering, setIsHovering] = useState(false)
+    const [name, setName] = useState("")
+    const [id, setId] = useState("")
 
     const [showModal, setShowModal] = useState(false)
     const [modalChoice, setModalChoice] = useState<ModalOptions>(null)
 
-    const [city, setCity] = useState("");
-    const [page, setPage] = useState(1);
-    const [amount, setAmount] = useState(10);
-    const [name, setName] = useState("")
-    const [id, setId] = useState("")
-    const [search, setSearch] = useState(false)
-    const [showBanned, setShowBanned] = useState(false)
-    const [active, setActive] = useState(true)
+    function listiUsers(){
+        adminListUsers({ page, amount, city, name, id, isBanned: showBanned, isActive: active })
+    }
+
+    const increasePage = ()=> {
+        setPage(page + 1)
+        listiUsers()
+    }
+
+    const decreasePage = ()=> {
+        setPage(page > 1 ? page - 1 : 1)
+        listiUsers
+    }
+
+    useEffect(()=>{
+        listiUsers();
+        listCities();
+        setOptions(cities.map((city)=> {
+            return { value: city.id, label: city.name }
+        }))
+    },[ page ])
 
     const [userName, setUserName] = useState("")
     const [userId, setUserId] = useState("")
-    const [banned, setBanned] = useState(false)
-
-    function listUsers(){
-        adminListUsers({ page, amount, city, name, id, isBanned: showBanned, isActive: active })
-    }
+    const [banned, setBanned] = useState(false)    
+    const [showBanned, setShowBanned] = useState(false)
+    const [active, setActive] = useState(true)
 
     const toggleShowBanned = ()=> {
         setShowBanned(!showBanned)
@@ -43,20 +69,6 @@ export default function SearchPage(){
     const toggleShowInactive = ()=> {
         setActive(!active)
     }
-
-    const toggleModal = (choice: 'edit' | 'delete' | 'ban')=> {
-        setShowModal(!showModal)
-        setModalChoice(choice)
-    }
-
-    const onSearch = ()=> {
-            setSearch(!search)
-    }
-
-    useEffect(()=>{
-        listUsers();
-        listCities();
-    },[ search ])
 
     const onBan = (e: React.MouseEvent<SVGSVGElement, MouseEvent>, name: string, id: string, isBanned: boolean)=> {
         toggleModal('ban')
@@ -78,8 +90,13 @@ export default function SearchPage(){
 
         setUserName(name)
         setUserId(id)
-    }
+    }    
 
+    const toggleModal = (choice: 'edit' | 'delete' | 'ban')=> {
+        setShowModal(!showModal)
+        setModalChoice(choice)
+    }
+    
     const displayModal = ()=>{
         if (modalChoice === 'edit') {
 
@@ -90,88 +107,93 @@ export default function SearchPage(){
         }
     }
     
-    return (
-        <>
-            <DinamicHeader 
-                startBtn={true}
-                loginBtn={true}
-                registerBtn={true}
-            />
 
-                <SearchContainer>
-                    <SearchForm onSubmit={(e)=>e.preventDefault()}>
-                        <h3>Filtrar resultados</h3>
-                        <label>Perfis por página:</label>
-                        <select onChange={(e) => setAmount(Number(e.target.value))}>
-                            <option value="10">10 Perfís</option>
-                            <option value="15">15 Perfís</option>
-                            <option value="20">20 Perfís</option>
-                            <option value="25">25 Perfís</option>
-                            <option value="30">30 Perfís</option>
-                        </select>
-                        <label>Cidade:</label>
-                        <select onChange={(e) => setCity(e.target.value)}>
-                            <option value="">Todas as cidades</option>
-                            {cities.map((city) => (
-                                <option key={city.id} value={city.name}>{city.name}</option>
-                            ))}
-                        </select>
-                        <div style={{margin: '0 auto' }}>
-                            <input type="checkbox" onClick={toggleShowInactive} />
-                            <label>Mostrar usuários inativos</label>
-                        </div>
-                        <div style={{margin: '0 auto', marginBottom: '1em'}}>
-                            <input type="checkbox" onClick={toggleShowBanned} />
-                            <label>Mostrar usuários banidos</label>
-                        </div>
-                        <label>Filtrar por nome</label>
-                        <input type="text" className="filter-input" value={name} onChange={(e) => setName(e.target.value)}/>
-                        <label>Filtrar por id</label>
-                        <input type="text" className="filter-input" value={id} onChange={(e) => setId(e.target.value)}/>
-                        <label className='label-pagina'>Página atual</label>
-                        <nav>
-                            <button onClick={() => {
-                                if(page > 1){
-                                    setPage(page-1)
-                                    listUsers();
-                                }
-                            }}>{'<'}</button>
-                            <input type="number" value={page} onChange={(e) => setPage(Number(e.target.value))}/>
-                            <button onClick={() => {
-                                setPage(page+1)
-                                listUsers();
-                            }}>{'>'}</button>
-                        </nav>
+    return (<>
+        <DinamicHeader startBtn loginBtn logoutBtn/>
+        <SearchContainer>
+            <h1>Buscar currículos</h1>
+            <main>
+                <section>
+                    <div className='search'>
+                        <p>Buscar por título</p>
+                        <input placeholder={`Ex: ${titles[Math.floor(Math.random() * titles.length)]}`} onChange={(e)=>setTitle(e.target.value)}/>
+                        <button className={isHovering ? 'onHover' : ''} onMouseLeave={()=>setIsHovering(false)} onMouseEnter={()=>setIsHovering(true)}>Buscar</button>
+                    </div>
+                    
 
-                        <button onClick={onSearch}>Aplicar filtros</button>
-                    </SearchForm>
-                    <SearchView>
-                                {
-                                    usersList.map((user, index) => { 
-                                        if (user)
-                                        return <ProfilePreview
-                                            key={index}
-                                            id={user.id}
-                                            image={user.avatar}
-                                            name={user.name}
-                                            area={user.area}
-                                            gender={user.gender}
-                                            pronouns={user.pronnouns}
-                                            onEdit={(e)=>onEdit(e)}
-                                            onDelete={(e)=>onDelete(e, user.name, user.id)}
-                                            onBan={(e)=>onBan(e, user.name, user.id, user.isBanned)}
-                                            banned={user.isBanned}
-                                        />
+                {usersList.map((user, index)=>{
+                    const image = user.avatar ? user.avatar : pfp;
+                    const splitName = user.name.split(' ');
+                    const firstName = splitName[0];
+                    const lastName = splitName[splitName.length - 1]
 
-                                    })
-                                }
-                    </SearchView> 
-                </SearchContainer>
-                <Modal modalIsOpen={showModal} toggleModal={toggleModal}>
-                {
-                    showModal && displayModal()
-                }
-            </Modal> 
+                    const names = (firstName === lastName) ? firstName : firstName + ' ' + lastName;
+
+                    return (
+                        <article onClick={()=>navigate(`/profile/${user.id}`)} className='cv-card' key={index}>
+                            <img src={image}/>
+                            <div className="basic-infos">
+                                <span>
+                                    <h2>{names}</h2>
+                                    <p>{user.pronnouns}</p>
+                                </span>
+                                <p>{user.title}</p>
+                                {user.area && <p>Área: {user.area}</p>}
+                            </div>
+
+                            <div className='action-icons'>
+                                <TrashIcon className="trash-icon" onClick={(e)=>onDelete(e, user.name, user.id)} />
+                                <PenIcon className="pen-icon" onClick={(e)=>onEdit(e)} />
+                                <BanIcon className={`ban-icon ${user.isBanned ? 'banned' : ''}`} onClick={(e)=>onBan(e, user.name, user.id, user.isBanned)} />
+                            </div>
+                            
+                        </article>
+                    )
+                })}
+
+                </section>
+
+                <aside>
+                    <h2>Filtrar buscas</h2>
+                    <span>
+                        <label>Buscar por cidade</label>
+                        <Select onChange={(el)=>setCity(el.value.toLowerCase())} options={options} placeholder="Escolher cidade"/>
+                    </span>
+                    <span>
+                        <label>Buscar por área</label>
+                        <Select onChange={(el)=>setArea(el.value.toLowerCase())} options={options} placeholder="Escolher área"/>
+                    </span>
+
+                    <span>
+                        <label>Número de perfis por página</label>
+                        <Select onChange={(el)=>setAmount(Number(el.value))} options={pages} placeholder="Número de perfis"/>
+                    </span>
+
+                    <span className="checkbox" >
+                        <input className="checkbox" type="checkbox" onChange={(e)=>setActive(e.target.checked)} />
+                        <label>Mostrar usuários inativos</label>
+                    </span>
+                    <span className="checkbox" >
+                        <input type="checkbox" onChange={(e)=> setShowBanned(e.target.checked)} />
+                        <label>Mostrar usuários banidos</label>
+                    </span>
+
+                    <button className={isHovering ? 'onHover' : ''} onMouseLeave={()=>setIsHovering(false)} onMouseEnter={()=>setIsHovering(true)} onClick={listiUsers}>Aplicar filtros</button>
+
+                    <nav>
+                        <button onClick={decreasePage}>{'<'}</button>
+                        <input className="page-number" type="number" value={page} onChange={(e) => setPage(Number(e.target.value))}/>
+                        <button onClick={increasePage}>{'>'}</button>
+                    </nav>
+                </aside>
+            </main>
+        </SearchContainer>
+
+        <Modal modalIsOpen={showModal} toggleModal={toggleModal}>
+            {
+                showModal && displayModal()
+            }
+        </Modal> 
         </>
     )
 }

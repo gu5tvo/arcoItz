@@ -46,5 +46,7 @@ export interface iListUsers {
     name?: string;
     id?: string;
     isBanned?: boolean;
-    isActive?: boolean
+    isActive?: boolean;
+    area?: string;
+    title?: string
 }
