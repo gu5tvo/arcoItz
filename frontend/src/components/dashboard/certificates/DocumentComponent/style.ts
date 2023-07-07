@@ -34,10 +34,11 @@ export const DocumentComponentStyle = styled.div`
       height: 100%;
       border-radius: 7px;
       color: #C5EFF8;
-
+      transition: 0.4s;
 
       &:focus{
         outline: none;
+        background-color: #0087A3;
       }
     }
 
@@ -46,6 +47,7 @@ export const DocumentComponentStyle = styled.div`
       padding: 0;
       background-color: transparent;
       border: none;
+
     }
 
     .salve-button {
@@ -55,6 +57,11 @@ export const DocumentComponentStyle = styled.div`
       background: #48a7ff;
       color: white;
       padding: 7.5px;
+      transition: 0.4s;
+
+      &:hover{
+        background-color: #00417D;
+      }
     }
 
     img.remove {

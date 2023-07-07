@@ -20,7 +20,11 @@ export const CertificatesScreenStyle = styled.div`
         color: white;
         border-radius: 10px;
         font-size: clamp(0.7rem, 0.9rem, 1.2rem);
-
+        transition: 0.4s;
+        
+        &:hover{
+        background-color: #00417D;
+       }
     }
 `;
 

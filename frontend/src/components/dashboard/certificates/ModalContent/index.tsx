@@ -1,10 +1,8 @@
+//ModalContent.tsx
 import React from "react";
 import { ModalContentStyle } from "./style";
-import { useDocuments } from "../../../../hooks/contexts";
-import { iDocuments } from "../../../../interfaces/users";
 
 export default function ModalContent() {
-  const { registerDocument } = useDocuments();
 
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -16,14 +14,8 @@ export default function ModalContent() {
     event.preventDefault();
   };
 
-  const handleUpload = async (file: File) => {
-    const document: iDocuments = {
-      id: "someId",
-      name: file.name,
-      description: "someDescription",
-      document: file.name,
-    };
-    registerDocument(document);
+  const handleUpload = (file: File) => {
+    //newDocumentComponent(file) pass the file to the function of index.tsx
   };
 
   return (

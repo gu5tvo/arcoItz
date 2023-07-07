@@ -5,13 +5,23 @@ import { useDocuments } from "../../../hooks/contexts";
 import { DocumentsContext } from "../../../context/documents.context";
 import DocumentComponent from "./DocumentComponent";
 
+
 export default function CertificatesScreen(): JSX.Element {
 
-
+  const [documentComponentNumber, setDocumentComponentNumber] = useState(1);
   const { setModalDisplay } = useContext(DocumentsContext);
-  function onRegisterDocument(){
-     setModalDisplay(true);
+ 
+  function newDocumentComponent(file){
+    // update the graduationComponents with a new DocumentComponent that include the file
   }
+
+  function displayModalDocument(){
+     setModalDisplay(true);//just make a modal with the ModalContent.tsx body 
+  }
+
+  const graduationComponents = Array.from({ length: documentComponentNumber }, (_, index) => (
+    <DocumentComponent key={index} />
+  ));
 
   return (
     <>
@@ -19,19 +29,15 @@ export default function CertificatesScreen(): JSX.Element {
       
         <div className="major-div">
           <Label>Certificações e Documentos</Label>
-          <button onClick={onRegisterDocument} className="file-button">
+          <button onClick={displayModalDocument} className="file-button">
            Adicionar Certificado
           </button>
         </div>
 
+        {graduationComponents}
          
-         
-         <DocumentComponent/>
-         <DocumentComponent/>
       </CertificatesScreenStyle>
 
     </>
   );
 }
-
-
