@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Label } from "../styles";
+import { IconsDivStyle, Label } from "../styles";
 import { CertificatesScreenStyle } from "./style";
 import { useDocuments } from "../../../hooks/contexts";
 import { DocumentsContext } from "../../../context/documents.context";
@@ -17,11 +17,16 @@ export default function CertificatesScreen(): JSX.Element {
     <>
       <CertificatesScreenStyle>
       
-         <Label>Certificações e Documentos</Label>
-         <button onClick={onRegisterDocument}>
-           Adicionar Certificado/Documento
-         </button>
+        <div className="major-div">
+          <Label>Certificações e Documentos</Label>
+          <button onClick={onRegisterDocument} className="file-button">
+           Adicionar Certificado
+          </button>
+        </div>
+
          
+         
+         <DocumentComponent/>
          <DocumentComponent/>
       </CertificatesScreenStyle>
 

@@ -172,6 +172,7 @@ export const IconsDivStyle = styled.div`
   }
 
   img.remove {
+
     transform: rotate(45deg);
     transition: transform 0.5s;
 
