@@ -2,7 +2,7 @@ import React, { useState, useCallback, createContext, useEffect } from 'react';
 import { toast } from"react-toastify";
 import { useNavigate } from 'react-router-dom';
 import { 
-  iUserComplete, iUserSimple, iLogin, iRegister, iCourses, iDocuments, iExperiences, iSkills
+  iUserComplete, iUserSimple, iLogin, iRegister, iCourses, iDocuments, iExperiences, iSkills, iUsersPage
 } from '../interfaces/users';
 import api from '../utils/axios';
 import { AxiosError } from 'axios';
@@ -31,7 +31,7 @@ export const UserContext = createContext<{
   displayProfile: (id: string) => Promise<iUserSimple>;
   updateProfile: (data: iUserSimple) => void;
   deleteSelf: () => void;
-  listUsersPage: (page: string | number, amount: string | number, city: string, area: string, title: string) => void;
+  listUsersPage: ({ page, amount, area, title, city }: iUsersPage) => void;
   forgotPassword: (email: string) => void;
   resetPassword: (token: string, password: string) => void;
   setUsersList: React.Dispatch<React.SetStateAction<iUserSimple[]>>;
@@ -234,7 +234,7 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
     }
   }, []);
 
-  const listUsersPage = useCallback(async (page: number = 1, amount: number = 10, city: string = "", area: string = "", title: string = "") => {
+  const listUsersPage = useCallback(async ({ page, amount, area, city, title }: iUsersPage) => {
     try {
 
       const query = `?page=${page}&amount=${amount}&city=${city}&area=${area}&title=${title}`

@@ -2,12 +2,16 @@ import { ModalContainer } from './style'
 import React, { useState } from 'react'
 import { useAdmin } from "../../../hooks/contexts";
 
+type ModalOptions =  'edit' | 'delete' | 'ban' | null
+
 interface UnbanUserModalProps {
     name: string;
     id: string;
+    resetChoice: React.Dispatch<React.SetStateAction<ModalOptions>>
+    showModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export default function UnbanUserModal({ name, id }: UnbanUserModalProps) {
+export default function UnbanUserModal({ name, id, resetChoice, showModal }: UnbanUserModalProps) {
 
     const { adminBanUsers } = useAdmin()
     const [userUnbanned, setUserUnbanned] = useState(false)
@@ -18,11 +22,8 @@ export default function UnbanUserModal({ name, id }: UnbanUserModalProps) {
     }
 
     if (userUnbanned) {
-        return (
-            <ModalContainer>
-                <h1>Usuário desbanido com sucesso!</h1>
-            </ModalContainer>
-        )
+        resetChoice(null)
+        showModal(false)
     }
 
     return (

@@ -33,6 +33,14 @@ export interface iUserSimple{
     updatedAt?: Date;
 }
 
+export interface iUsersPage {
+    page?: string | number, 
+    amount?: string | number, 
+    city?: string, 
+    area?: string, 
+    title?: string
+}
+
 export interface iDocuments {
     id: string;
     name: string;

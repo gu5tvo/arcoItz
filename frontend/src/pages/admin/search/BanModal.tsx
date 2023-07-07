@@ -2,12 +2,16 @@ import { ModalContainer } from './style'
 import React, { useState } from 'react'
 import { useAdmin } from "../../../hooks/contexts";
 
+type ModalOptions =  'edit' | 'delete' | 'ban' | null
+
 interface BanUserModalProps {
     name: string;
     id: string;
+    resetChoice: React.Dispatch<React.SetStateAction<ModalOptions>>
+    showModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export default function BanUserModal({ name, id }: BanUserModalProps) {
+export default function BanUserModal({ name, id, resetChoice, showModal }: BanUserModalProps) {
 
     const { adminBanUsers } = useAdmin()
     const [userBanned, setUserBanned] = useState(false)
@@ -18,11 +22,8 @@ export default function BanUserModal({ name, id }: BanUserModalProps) {
     }
 
     if (userBanned) {
-        return (
-            <ModalContainer>
-                <h1>Usuário banido com sucesso!</h1>
-            </ModalContainer>
-        )
+        resetChoice(null)
+        showModal(false)
     }
 
     return (

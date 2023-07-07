@@ -11,14 +11,6 @@ export const SearchContainer = styled.main`
     
     font-size: min(1rem, 3vw, 1.4rem) !important;
 
-    .aoba:hover + .epa {
-        background-color: red;
-    }
-
-    .epa:hover + .aoba {
-        background-color: yellow;
-    }
-
     div, main, section, aside, article {
         font-size: min(1rem, 3vw, 1.4rem) !important;
     }
@@ -62,7 +54,7 @@ export const SearchContainer = styled.main`
         gap: 30px;
 
         .search {
-
+            background-color: #f2f2f2;
             width: 100%;
             display: grid;
             grid-template-columns: auto 1fr auto;
@@ -101,8 +93,9 @@ export const SearchContainer = styled.main`
                 text-align: center;
 
                 &:hover {
-
-                    
+                    background-color:  #2812F3;
+                    border-color: white;
+                    color: white;
                 }
             }
 
@@ -111,12 +104,6 @@ export const SearchContainer = styled.main`
                 font-size: 1.1em
             }
         }
-    }
-
-    .onHover {
-        background-color:  #2812F3 !important;
-        border-color: white !important;
-        color: white !important;
     }
 
     aside {
@@ -133,6 +120,7 @@ export const SearchContainer = styled.main`
         justify-content: space-evenly;
         padding: min(40px, 8vw);
         border-radius: min(30px, 6vw);
+        background-color: #f2f2f2;
 
         span {
             display: flex;
@@ -149,6 +137,14 @@ export const SearchContainer = styled.main`
                 margin: 0;
                 border: 1px solid gray;
                 font-size: 1.1em;
+            }
+
+            input[type = text] {
+                padding: min(7px, 1.7vw);
+                border: none;
+                border: 1px solid lightgray;
+                border-radius: min(4px, 1.2vw);
+                font-size: 1em;
             }
         }
 
@@ -171,8 +167,9 @@ export const SearchContainer = styled.main`
             font-size: 1;
             font-weight: bold;
             &:hover {
+                background-color:  #2812F3;
+                border-color: white;
                 color: white;
-                background-color: #4736DE;
             }
         }
 
@@ -200,7 +197,7 @@ export const SearchContainer = styled.main`
         gap: min(15px, 3vw);
         padding: min(20px, 5vw);
         border-radius: min(25px, 7vw);
-
+        background-color: #f2f2f2;
         &:hover {
             scale: 1.05;
             cursor: pointer;

@@ -15,12 +15,23 @@ import { TrashIcon, PenIcon, BanIcon } from '../../../components/Icons'
 
 type ModalOptions =  'edit' | 'delete' | 'ban' | null
 
+interface SearchContent {
+    city: string,
+    area: string,
+    title: string,
+    page: number,
+    amount: number,
+    isBanned: boolean,
+    isInactive: boolean,
+    id: string,
+    name: string
+}
+
 export default function SearchPage(){
     const navigate = useNavigate()
     document.title = "Buscar currículos | DiversiTrampos"
 
     const { cities, listCities, sectors, listSectors, adminListUsers, usersList } = useAdmin();
-    
     const [city, setCity] = useState('');
     const [area, setArea] = useState('');
     const [title, setTitle] = useState('');
@@ -28,29 +39,50 @@ export default function SearchPage(){
     const [amount, setAmount] = useState(10);
     const [cityOptions, setCityOptions] = useState<Array<{ value: string, label: string }>>([])
     const [areaOptions, setAreaOptions] = useState<Array<{ value: string, label: string }>>([])
-    const [isHovering, setIsHovering] = useState(false)
     const [name, setName] = useState("")
     const [id, setId] = useState("")
     const [random, setRandom] = useState(0)
     const [showModal, setShowModal] = useState(false)
     const [modalChoice, setModalChoice] = useState<ModalOptions>(null)
 
-    function listiUsers(){
-        adminListUsers({ page, amount, city, name, id, isBanned: showBanned, isActive: active })
+    const [userName, setUserName] = useState("")
+    const [userId, setUserId] = useState("")
+    const [banned, setBanned] = useState(false)    
+    const [isBanned, setIsBanned] = useState(false)
+    const [isActive, setIsActive] = useState(true)
+
+    const [query, setQuery] = useState<SearchContent>({ city, area, title, page, name, amount, id, isBanned, isInactive: isActive });
+
+    const listiUsersInput = ()=> {
+        setPage(1)
+        const newQuery = { ...query, page, title }
+        setQuery(newQuery)
+        adminListUsers(newQuery)
+    }
+
+    function listiUsersForm(){
+        setPage(1)
+        const newQuery = { ...query, page, amount, city, area, name, id, isBanned, isActive }
+        setQuery(newQuery)
+        adminListUsers(newQuery)
     }
 
     const increasePage = ()=> {
         setPage(page + 1)
-        listiUsers()
+        const newQuery = { ...query, page: (page + 1) }
+        setQuery(newQuery)
+        adminListUsers(newQuery)
     }
 
     const decreasePage = ()=> {
         setPage(page > 1 ? page - 1 : 1)
-        listiUsers
+        const newQuery = { ...query, page: (page > 1 ? page - 1 : 1) }
+        setQuery(newQuery)
+        adminListUsers(newQuery)
     }
 
     useEffect(()=>{
-        listiUsers();
+        adminListUsers(query);
         listCities()
         listSectors()
     },[ page ])
@@ -68,12 +100,6 @@ export default function SearchPage(){
 
         setRandom(Math.floor(Math.random() * titles.length))
       }, [cities, sectors]);
-
-    const [userName, setUserName] = useState("")
-    const [userId, setUserId] = useState("")
-    const [banned, setBanned] = useState(false)    
-    const [showBanned, setShowBanned] = useState(false)
-    const [active, setActive] = useState(true)
 
     const onBan = (e: React.MouseEvent<SVGSVGElement, MouseEvent>, name: string, id: string, isBanned: boolean)=> {
         toggleModal('ban')
@@ -106,7 +132,7 @@ export default function SearchPage(){
         if (modalChoice === 'edit') {
 
         } else if (modalChoice === 'ban') {
-            return (banned) ? <UnbanUserModal name={userName} id={userId} /> : <BanUserModal name={userName} id={userId}/>
+            return (banned) ? <UnbanUserModal resetChoice={setModalChoice} showModal={setShowModal} name={userName} id={userId} /> : <BanUserModal resetChoice={setModalChoice} showModal={setShowModal} name={userName} id={userId}/>
         } else if (modalChoice === 'delete') {
             return <DeleteUserModal name={userName} id={userId} />
         }
@@ -122,7 +148,7 @@ export default function SearchPage(){
                     <div className='search'>
                         <p>Buscar por título</p>
                         <input placeholder={`Ex: ${titles[random]}`} onChange={(e)=>setTitle(e.target.value)}/>
-                        <button className={isHovering ? 'onHover' : ''} onMouseLeave={()=>setIsHovering(false)} onMouseEnter={()=>setIsHovering(true)}>Buscar</button>
+                        <button onClick={listiUsersInput}>Buscar</button>
                     </div>
                     
 
@@ -174,16 +200,26 @@ export default function SearchPage(){
                         <Select onChange={(el)=>setAmount(Number(el.value))} options={pages} placeholder="Número de perfis"/>
                     </span>
 
+                    <span>
+                        <label>Nome da pessoa</label>
+                        <input type="text" onChange={(el)=>setName(el.target.value)} placeholder="Nome da pessoa"/>
+                    </span>
+
+                    <span>
+                        <label>Id da pessoa</label>
+                        <input type="text" onChange={(el)=>setId(el.target.value)} placeholder="Id da pessoa"/>
+                    </span>
+
                     <span className="checkbox" >
-                        <input className="checkbox" type="checkbox" onChange={(e)=>setActive(e.target.checked)} />
+                        <input className="checkbox" type="checkbox" onChange={(e)=>setIsActive(!e.target.checked)} />
                         <label>Mostrar usuários inativos</label>
                     </span>
                     <span className="checkbox" >
-                        <input type="checkbox" onChange={(e)=> setShowBanned(e.target.checked)} />
+                        <input type="checkbox" onChange={(e)=> setIsBanned(e.target.checked)} />
                         <label>Mostrar usuários banidos</label>
                     </span>
 
-                    <button className={isHovering ? 'onHover' : ''} onMouseLeave={()=>setIsHovering(false)} onMouseEnter={()=>setIsHovering(true)} onClick={listiUsers}>Aplicar filtros</button>
+                    <button onClick={listiUsersForm}>Aplicar filtros</button>
 
                     <nav>
                         <button onClick={decreasePage}>{'<'}</button>

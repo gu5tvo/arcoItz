@@ -7,38 +7,60 @@ import { titles, pages } from '../../utils/search'
 import Select from 'react-select'
 import { useNavigate } from 'react-router-dom'
 
+interface SearchContent {
+    city?: string,
+    area?: string,
+    title?: string,
+    page?: number,
+    amount?: number
+}
+
 export default function SearchPage(){
     const navigate = useNavigate()
     document.title = "Buscar currículos | DiversiTrampos"
 
     const { listUsersPage, usersList } = useUser();
     const { cities, listCities, sectors, listSectors } = useAdmin();
-    
     const [city, setCity] = useState('');
     const [area, setArea] = useState('');
     const [title, setTitle] = useState('');
     const [page, setPage] = useState(1);
     const [amount, setAmount] = useState(10);
+    const [query, setQuery] = useState<SearchContent>({ page: 1, amount: 10, title: "", city: "", area: "" })
     const [cityOptions, setCityOptions] = useState<Array<{ value: string, label: string }>>([])
     const [areaOptions, setAreaOptions] = useState<Array<{ value: string, label: string }>>([])
-    const [isHovering, setIsHovering] = useState(false)
     const [random, setRandom] = useState(0)
 
-    function listiUsers(){
-        listUsersPage(page, amount, city, area, title)
+    const listiUsersInput = ()=> {
+        setPage(1)
+        const newQuery = { ...query, page, title }
+        setQuery(newQuery)
+        listUsersPage(newQuery)
+    }
+
+    function listiUsersForm(){
+        setPage(1)
+        const newQuery = { ...query, page, amount, city, area }
+        setQuery(newQuery)
+        listUsersPage(newQuery)
     }
 
     const increasePage = ()=> {
         setPage(page + 1)
-        listiUsers()
+        const newQuery = { ...query, page: (page + 1) }
+        setQuery(newQuery)
+        listUsersPage(newQuery)
     }
 
     const decreasePage = ()=> {
         setPage(page > 1 ? page - 1 : 1)
-        listiUsers
+        const newQuery = { ...query, page: (page > 1 ? page - 1 : 1) }
+        setQuery(newQuery)
+        listUsersPage(newQuery)
     }
+    
     useEffect(()=>{
-        listiUsers();
+        listUsersPage(query)
         listCities()
         listSectors
     },[ page ])
@@ -66,7 +88,7 @@ export default function SearchPage(){
                     <div className='search'>
                         <p>Buscar por título</p>
                         <input placeholder={`Ex: ${titles[random]}`} onChange={(e)=>setTitle(e.target.value)}/>
-                        <button className={isHovering ? 'onHover' : ''} onMouseLeave={()=>setIsHovering(false)} onMouseEnter={()=>setIsHovering(true)}>Buscar</button>
+                        <button onClick={listiUsersInput}>Buscar</button>
                     </div>
                     
 
@@ -105,7 +127,7 @@ export default function SearchPage(){
                         <Select onChange={(el)=>setAmount(Number(el.value))} options={pages} placeholder="Número de perfis"/>
                     </span>
 
-                    <button className={isHovering ? 'onHover' : ''} onMouseLeave={()=>setIsHovering(false)} onMouseEnter={()=>setIsHovering(true)} onClick={listiUsers}>Aplicar filtros</button>
+                    <button onClick={listiUsersForm}>Aplicar filtros</button>
 
                     <nav>
                         <button onClick={decreasePage}>{'<'}</button>
