@@ -19,18 +19,19 @@ export default function SearchPage(){
     const navigate = useNavigate()
     document.title = "Buscar currículos | DiversiTrampos"
 
-    const { cities, listCities, adminListUsers, usersList } = useAdmin();
+    const { cities, listCities, sectors, listSectors, adminListUsers, usersList } = useAdmin();
     
     const [city, setCity] = useState('');
     const [area, setArea] = useState('');
     const [title, setTitle] = useState('');
     const [page, setPage] = useState(1);
     const [amount, setAmount] = useState(10);
-    const [options, setOptions] = useState<Array<{ value: string, label: string }>>([])
+    const [cityOptions, setCityOptions] = useState<Array<{ value: string, label: string }>>([])
+    const [areaOptions, setAreaOptions] = useState<Array<{ value: string, label: string }>>([])
     const [isHovering, setIsHovering] = useState(false)
     const [name, setName] = useState("")
     const [id, setId] = useState("")
-
+    const [random, setRandom] = useState(0)
     const [showModal, setShowModal] = useState(false)
     const [modalChoice, setModalChoice] = useState<ModalOptions>(null)
 
@@ -50,25 +51,29 @@ export default function SearchPage(){
 
     useEffect(()=>{
         listiUsers();
-        listCities();
-        setOptions(cities.map((city)=> {
-            return { value: city.id, label: city.name }
-        }))
+        listCities()
+        listSectors()
     },[ page ])
+
+    useEffect(() => {
+        setCityOptions([{ value: '', label: "Todas as cidades "}, ...cities.map((city) => {
+            return { value: city.id, label: city.name };
+          })]
+        );
+
+        setAreaOptions([{ value: '', label: "Todos os setores "}, ...sectors.map((sector) => {
+            return { value: sector.id, label: sector.name };
+          })]
+        );        
+
+        setRandom(Math.floor(Math.random() * titles.length))
+      }, [cities, sectors]);
 
     const [userName, setUserName] = useState("")
     const [userId, setUserId] = useState("")
     const [banned, setBanned] = useState(false)    
     const [showBanned, setShowBanned] = useState(false)
     const [active, setActive] = useState(true)
-
-    const toggleShowBanned = ()=> {
-        setShowBanned(!showBanned)
-    }
-
-    const toggleShowInactive = ()=> {
-        setActive(!active)
-    }
 
     const onBan = (e: React.MouseEvent<SVGSVGElement, MouseEvent>, name: string, id: string, isBanned: boolean)=> {
         toggleModal('ban')
@@ -116,7 +121,7 @@ export default function SearchPage(){
                 <section>
                     <div className='search'>
                         <p>Buscar por título</p>
-                        <input placeholder={`Ex: ${titles[Math.floor(Math.random() * titles.length)]}`} onChange={(e)=>setTitle(e.target.value)}/>
+                        <input placeholder={`Ex: ${titles[random]}`} onChange={(e)=>setTitle(e.target.value)}/>
                         <button className={isHovering ? 'onHover' : ''} onMouseLeave={()=>setIsHovering(false)} onMouseEnter={()=>setIsHovering(true)}>Buscar</button>
                     </div>
                     
@@ -157,11 +162,11 @@ export default function SearchPage(){
                     <h2>Filtrar buscas</h2>
                     <span>
                         <label>Buscar por cidade</label>
-                        <Select onChange={(el)=>setCity(el.value.toLowerCase())} options={options} placeholder="Escolher cidade"/>
+                        <Select onChange={(el)=>setCity(el.value.toLowerCase())} options={cityOptions} placeholder="Escolher cidade"/>
                     </span>
                     <span>
                         <label>Buscar por área</label>
-                        <Select onChange={(el)=>setArea(el.value.toLowerCase())} options={options} placeholder="Escolher área"/>
+                        <Select onChange={(el)=>setArea(el.value.toLowerCase())} options={areaOptions} placeholder="Escolher área"/>
                     </span>
 
                     <span>
