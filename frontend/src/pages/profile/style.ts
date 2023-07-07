@@ -6,34 +6,41 @@ export const ContainerProfile = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content:center;
+  justify-content: center;
   background-color: #777;
   color: #36393E;
 
   .content {
-    display: flex;
+    display: grid;
+    width: min(100%, 2200px);
+    height: 100%;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    height: 100%;
-    
+    padding: min(100px, 10vw);
+    grid-template-columns: 400px 1fr;
   }
 `
 
 export const UserGradient = styled.div`
   height: 100%;
-  width: 370px;
-  border-radius: 370px 370px 0 0;
+  min-width: 370px;
+
   background: linear-gradient(180deg, #0077B6 0%, #36393E 100%);
-  border-style: solid;
-  border-width: 10px;
-  border-image:linear-gradient(to bottom, #0077B6, rgba(0, 0, 0, 0)) 1 100%;
+
+  border: double 10px transparent;
+  border-radius: 370px 370px 0 0;
+  background-origin: border-box;
+  background-clip: border-box;
+  
   padding: 90px 20px 20px 20px;
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
+  &::before {
+    border-radius: 50% 50% 0 0;
+  }
   .profile-header{
     .profile-description {
       filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
@@ -77,13 +84,12 @@ export const UserGradient = styled.div`
     }
   }
 
-  img{
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 100%;
-    background-color: #fff;
-  }
+  img {
+      aspect-ratio: 1;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 100%;
+    }
 
 
 

@@ -45,6 +45,18 @@ export default function Profile() {
           </div>
 
         </UserGradient>
+        <section>
+          <span>
+            <h1>Super nome</h1>
+            <p>Social media</p>
+          </span>
+
+          <span>
+            <h2>Informações pessoais</h2>
+            <hr/>
+            <textarea/>
+          </span>
+        </section>
       </div>
     </ContainerProfile>
   )
