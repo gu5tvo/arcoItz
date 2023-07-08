@@ -15,7 +15,7 @@ export const ModalFog = styled.div`
 
 export const ModalContainer = styled.div`
     background-color: #fff;
-    padding: 2rem;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     border-radius: 0.5rem;
@@ -23,28 +23,86 @@ export const ModalContainer = styled.div`
 `
 
 export const ModalHeader = styled.div`
-    display: flex;
+    display: inline-flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
 
-    h3{
-        margin: 0;
-        font-size: 1.5rem;
+    .remove-button{
+      align-self: end;
+      margin: 0;
+      padding: 0;
+      background-color: transparent;
+      border: none;
     }
 
-    i{
-        color: #000;
-        font-size: 1.5rem;
-        cursor: pointer;
+    img.remove {
+      transform: rotate(45deg);
+      transition: transform 0.5s;
+
+
+      &:hover {
+        transform: rotate(-135deg);
+      }
     }
 `
 
 export const ModalBody = styled.div`
+
+    padding-left: min(4vw, 100px);
+    padding-right: min(4vw, 100px);
+    padding-bottom: min(5vh, 100px);
+    padding-top: 0rem ;
+    margin-top: 7%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: .5rem;
+    gap: .9rem;
+
+
+
+    text{
+        font-size: 1.2rem;
+    }
+
+    input[type="file"] {
+    display: none;
+    }
+    
+    label{
+        font-size: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        background-color: #9AE7F8;
+        border-radius: 1.25rem;
+        width: 70%;
+        padding-top: 3%;
+        padding-bottom: 2.5%;
+
+
+        cursor: pointer;
+        transition: 0.4s;
+
+        &:hover{
+            background-color: #059ABB;
+            color: white;
+        }
+    }
+
+    button{
+        width: 30%;
+        padding-top: 3%;
+        padding-bottom: 3%;
+        font-weight: 600;
+        border-radius: 0.625rem;
+        background: #48A7FF;
+        color: white;
+        border: none;
+    }
+    
 `
 
 export const ModalDiv = styled.div`
@@ -64,4 +122,25 @@ export const ModalDiv = styled.div`
         border: 1px solid #549e4a;
     }
 
+`
+
+export const Image = styled.img`
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-width: 100px;
+    max-height: 100px;
+    border-radius: 50%;
+
+    transition: 0.3s all ease-in-out;
+    aspect-ratio: 1;
+    &:hover{
+        opacity: 0.8;
+        scale: 1.1;
+    }
+
+    @media (min-width: 768px){
+        max-width: 150px;
+        max-height: 150px;
+    }
 `

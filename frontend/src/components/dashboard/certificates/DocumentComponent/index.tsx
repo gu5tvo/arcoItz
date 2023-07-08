@@ -4,17 +4,21 @@ import { DocumentComponentStyle } from "./style";
 import removeIconFormation from "../../../../assets/removeIconFormation.svg";
 
 
-export default function DocumentComponent(){
+export default function DocumentComponent( { name , description}){
     return(
     <>
         <DocumentComponentStyle>
             <div className="document-name">
-                NomeDoArquivo.pdf{/* should be file.name*/}
+                {name}
             </div>
             <div className="description-div">
 
-                <textarea name="" id="" placeholder="Descrição"></textarea>
+                <textarea name="" id="" placeholder="Descrição">
+                    {(description === "..." ? "" : description)}
+                </textarea>
+
                 <button className="salve-button">Salvar</button>
+
                 <button >
                  <img
                    src={removeIconFormation}

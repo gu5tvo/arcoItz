@@ -27,7 +27,11 @@ export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
     const [ modalDisplay, setModalDisplay] = useState(false);
     
 
-    const toggleModal = () => {setModalDisplay(!modalDisplay)}
+    const toggleModal = () => {
+        setModalDisplay(false)
+        console.log(modalDisplay);
+        
+    }
 
 
     const { token, documents, setDocuments } = useUser()
@@ -35,7 +39,9 @@ export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
 
     const registerDocument = useCallback( async (data: iDocuments) => {
         const token = retrieveToken()
+        console.log(data);
         console.log(token);
+
         
         try{
             const {data: document} = await api.post('/document', data, {
