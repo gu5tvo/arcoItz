@@ -14,9 +14,11 @@ export default function Profile() {
 
   const [openAccordionList, setOpenAccordionList] = useState<Array<string>>([])
   
-  const handleAccordionClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, id: string)=> {
-    const target = e.target
-    console.log(target)
+  const handleAccordionClick = (id: string)=> {
+    openAccordionList.includes(id) ?
+      setOpenAccordionList(openAccordionList.filter((el)=> el !== id)) :
+      setOpenAccordionList([...openAccordionList, id])
+
   }
 
   useEffect(() => {
@@ -34,11 +36,13 @@ export default function Profile() {
           <div className='profile-header'>
             <img src={user?.avatar ? user?.avatar : DefaultPicture } alt={`imagem de ${user?.name}`} />
             <div className='profile-description'>
-              <h3>{user?.pronnouns}</h3>
+              {/* <h3>{user?.pronnouns}</h3> */}
+              <h3>Elu/Delu</h3>
               <hr />
               <div className='profile-info'>
                 <h1>{user?.name}</h1>
-                <h3>{user?.title}</h3>
+                {/* <h3>{user?.title}</h3> */}
+                <h3>Social media</h3>
               </div>
             </div>
           </div>
@@ -48,7 +52,13 @@ export default function Profile() {
             <hr />
             <div className='profile-info'>
               <h3>{user?.email}</h3>
-              <h3>{user?.number}</h3>
+              <h3>(99) 9 9162-6175</h3>
+              { user?.linkedin && <span>{user?.linkedin}</span> } 
+              { user?.portfolio && <span>{user?.portfolio}</span> } 
+              { user?.instagram && <span>{user?.instagram}</span> } 
+              <span>https://github.com/raspincel</span>
+              <span>https://github.com/raspincel</span>
+              <span>https://github.com/raspincel</span>
             </div>
           </div>
         </UserGradient>
@@ -63,30 +73,35 @@ export default function Profile() {
             <h2>Informações pessoais:</h2>
             <hr/>
             <div className='user-bio'>
-              <p>Oi</p>
+              <p>{user?.bio}</p>
             </div>
           </span>
 
           <span className="infos-section">
             <h2>Experiência profissional:</h2>
             <hr/>
-            <div onClick={(e)=>handleAccordionClick(e, "dasda")} className={`experience ${openAccordionList.includes("dasda") ? "open" : ''}`}>
+            <div className="experience">
               <h3>Técnica de Automação Industrial <span>06/2018 — 10/2021</span></h3>
-              <span className="wrapper">
+              <span className={`wrapper ${openAccordionList.includes("dasda") ? 'open' : ''}`}>
                 <div className="details">
                   <h4>Companhia: <span>Empresa do Manu</span></h4>
                   <p>Atuei nesta empresa como Técnica em automação industrial e todas as demais da função, eu também pude ter experiências com Automação eletromecânica e etc...</p>
                 </div>
               </span>
-              <span className="clicker"/>
+              <span onClick={()=>handleAccordionClick("dasda")} className="clicker">+</span>
             </div>                      
                                         
             {
               user?.experiences.map((experience) => (
                 <div key={experience.id} className="experience">
-                  <h3>{experience.title}</h3>
-                  <p>{experience.to}</p>
-                  
+                <h3>{experience.title}<span>{experience.from} — {experience.to}</span></h3>
+                <span className={`wrapper ${openAccordionList.includes(experience.id) ? 'open' : ''}`}>
+                  <div className="details">
+                    <h4>Companhia: <span>{experience.company}</span></h4>
+                    <p>{experience.description}</p>
+                  </div>
+                  </span>
+                  <span onClick={()=>handleAccordionClick(experience.id)} className="clicker">+</span>
                 </div>
               ))
             }
@@ -95,19 +110,33 @@ export default function Profile() {
           <span className="infos-section">
             <h2>Formações Acadêmicas:</h2>
             <hr/>
-            <div>
-              <h3>Técnica de Automação Industrial</h3>
-              <p>Atuei nesta empresa como Técnica em automação industrial e todas as demais da função, eu também pude ter experiências com Automação eletromecânica e etc...</p>
-              {
-                user?.courses.map((course) => (
-                  <div key={course.id}>
-                    <h3>{course.name}</h3>
+            <div className="experience">
+              <h3>Técnica de Automação Industrial <span>06/2018 — 10/2021</span></h3>
+              <span className={`wrapper ${openAccordionList.includes("fafa") ? 'open' : ''}`}>
+                <div className="details">
+                  <h4>Companhia: <span>Empresa do Manu</span></h4>
+                  <p>Atuei nesta empresa como Técnica em automação industrial e todas as demais da função, eu também pude ter experiências com Automação eletromecânica e etc...</p>
+                </div>
+              </span>
+              <span onClick={()=>handleAccordionClick("fafa")} className="clicker">+</span>
+            </div>
+
+            {
+              user?.courses.map((course) => (
+                <div key={course.id} className="course">
+                <h3>{course.name}<span>{course.from} — {course.to}</span></h3>
+                <span className={`wrapper ${openAccordionList.includes(course.id) ? 'open' : ''}`}>
+                  <div className="details">
+                    <h4>Instituição: <span>{course.institution}</span></h4>
                     <p>{course.description}</p>
                   </div>
-                ))
-              }
-            </div>
+                  </span>
+                  <span onClick={()=>handleAccordionClick(course.id)} className="clicker">+</span>
+                </div>
+              ))
+            }
           </span>
+
           <span className="infos-section">
             <h2>Habilidades e competências:</h2>
             <hr/>

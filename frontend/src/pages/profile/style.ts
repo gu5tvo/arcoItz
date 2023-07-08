@@ -21,6 +21,12 @@ export const ContainerProfile = styled.main`
     grid-template-columns: 250px 1fr;
     gap: min(10vw, 40px);
     background-color: #f0f0f0;
+
+    @media (max-width: 899px) {
+      display: flex;
+      flex-direction: column;
+      height: auto;
+    }
   }
 `
 
@@ -36,19 +42,26 @@ export const UserGradient = styled.div`
   color: white;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: min(40px, 20vh);
 
   &::before {
     border-radius: 50% 50% 0 0;
   }
 
+
+  hr {
+    width: 100%;
+    color: black;
+  }
+
   .profile-header{
+    display: flex;
+    flex-direction: column;
+    gap: min(15px, 5vh);
+
     .profile-description {
       filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
       
-      hr{
-        width: 100%;
-      }
 
       display: flex;
       flex-direction: column;
@@ -72,17 +85,37 @@ export const UserGradient = styled.div`
   } 
   .profile-contact{
 
-    hr{
-      width: 100%;
-    }
-
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 
     .profile-info{
       display: flex;
       flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: min(15px, 4vh);
+
+      span {
+        text-align: center;
+        font-size: clamp(0.6rem, 2vw, 0.8rem);
+        background-color: #fff;
+        color: black;
+        padding: min(8px, 2vw);
+        border-radius: min(14px, 4vw);
+        font-weight: bold;
+      }
+    }
+
+    h2 {
+      font-size: clamp(0.9rem, 3vw, 1.2rem);
+      font-weight: bold;
+    }
+
+    h3 {
+      text-align: center;
+      font-size: clamp(0.7rem, 2vw, 1rem);
     }
   }
 
@@ -91,7 +124,44 @@ export const UserGradient = styled.div`
       width: 100%;
       object-fit: cover;
       border-radius: 100%;
-    }  
+    }
+
+    /* 
+      background: linear-gradient(180deg, #0077B6 0%, #36393E 100%);
+  height: min(100%, 1200px);
+  border: double 10px transparent;
+  border-radius: 370px 370px 0 0;
+  background-origin: border-box;
+  background-clip: border-box;
+  
+  padding: 90px 20px 20px 20px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: min(40px, 20vh);
+    */
+
+  @media (max-width: 899px) {
+    width: 100vw; 
+    height: auto;
+    border: none;
+    background: none;
+    border-radius: 0;
+    background: linear-gradient(180deg, #0077B6 0%, #36393E 100%);
+    
+    .profile-header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+    .profile-info {
+      flex-direction: row;
+    }
+
+    img {
+      width: 30%;
+    }
+  }
 `
 export const UserInfos = styled.section`
   display: flex;
@@ -100,7 +170,7 @@ export const UserInfos = styled.section`
   align-items: center;
   gap: min(20px, 8vh);
   font-size: clamp(1rem, 1.4vw, 1.4rem);
-
+  padding-bottom: min(15vh, 40px);
   hr {
     width: 100%;
     color: black;
@@ -197,6 +267,7 @@ export const UserInfos = styled.section`
     border: 1px solid #000;
     text-align: center;
   }
+  
 
   .experience {
     display: grid;
@@ -204,36 +275,6 @@ export const UserInfos = styled.section`
     background-color: #fff;
     gap: min(6px, 3vh);
     position: relative;
-
-    .clicker {
-      position: absolute;
-      top: 0;
-      right: 0;
-    }
-
-    .clicker:after {
-      content: "+";
-      position: absolute;
-      width: 40px;
-      height: 40px;
-      background-color: #007bff;
-      border-bottom-left-radius: 20px;
-      color: #fff;
-      text-align: center;
-      line-height: 40px;
-      font-size: 24px; 
-      cursor: pointer;
-    }
-
-    &:hover > .wrapper {
-      grid-template-rows: 1fr;
-    }
-    
-    .wrapper {
-      display: grid;
-      grid-template-rows: 0fr;
-      transition: 0.15s linear;
-    }
 
     .details {
       overflow: hidden;
@@ -269,5 +310,31 @@ export const UserInfos = styled.section`
       text-align: justify;
       line-height: 1.2em;
     }
+  }
+
+  .clicker {
+      position: absolute;
+      top: 0;
+      right: 0;
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background-color: #007bff;
+      border-bottom-left-radius: 20px;
+      color: #fff;
+      text-align: center;
+      line-height: 40px;
+      font-size: 24px; 
+      cursor: pointer;
+    }
+
+    .wrapper {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: 0.15s linear;
+    }
+
+  .open {
+    grid-template-rows: 1fr;
   }
 `
