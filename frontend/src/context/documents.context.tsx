@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import retrieveToken from "../utils/user/retrieveToken";
 import Modal from "../components/Modal";
 import ModalContent from "../components/dashboard/certificates/ModalContent";
+import CertificateModal from "../components/CertificateModal";
 
 export const DocumentsContext = createContext<{
         registerDocument: (data: iDocuments) => Promise<void>,
@@ -27,11 +28,7 @@ export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
     const [ modalDisplay, setModalDisplay] = useState(false);
     
 
-    const toggleModal = () => {
-        setModalDisplay(false)
-        console.log(modalDisplay);
-        
-    }
+    const toggleModal = () => {setModalDisplay(!modalDisplay)}
 
 
     const { token, documents, setDocuments } = useUser()
@@ -39,9 +36,6 @@ export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
 
     const registerDocument = useCallback( async (data: iDocuments) => {
         const token = retrieveToken()
-        console.log(data);
-        console.log(token);
-
         
         try{
             const {data: document} = await api.post('/document', data, {
@@ -52,6 +46,7 @@ export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
             setDocuments([...documents, document])
         }catch(err: AxiosError | unknown){
             if(err instanceof AxiosError){
+                console.log(token);
                 toast.error(err.response?.data.message as string)
             }else{
                 toast.error('Erro do lado do cliente, tente novamente!')
@@ -91,11 +86,10 @@ export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
 
     return (
         <DocumentsContext.Provider value={{registerDocument, updateDocument, deleteDocument, modalDisplay, setModalDisplay}}>
-            <Modal modalIsOpen={modalDisplay} toggleModal={toggleModal}>
+            
             {
-                modalDisplay && <ModalContent/>
+                modalDisplay && <CertificateModal/>
             }
-            </Modal>
             {children}
         </DocumentsContext.Provider>
     )

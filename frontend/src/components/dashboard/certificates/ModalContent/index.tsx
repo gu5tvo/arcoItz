@@ -31,7 +31,7 @@ export default function ModalContent() {
         const data : iDocuments = {
           id: uuidv4(),
           name: file.name,
-          description: "...",
+          description: "......",
           document: res.data.secure_url,
         }
         

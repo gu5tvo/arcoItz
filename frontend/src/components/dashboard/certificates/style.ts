@@ -23,7 +23,7 @@ export const CertificatesScreenStyle = styled.div`
         transition: 0.4s;
         
         &:hover{
-        background-color: #00417D;
+        background-color: #3F8FCC;
        }
     }
 `;

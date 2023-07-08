@@ -13,12 +13,8 @@ export default function CertificatesScreen(): JSX.Element {
   const { setModalDisplay } = useDocuments();
   console.log(documents);
  
-  function newDocumentComponent(file){
-    // update the graduationComponents with a new DocumentComponent that include the file
-  }
-
   function displayModalDocument(){
-     setModalDisplay(true);//just make a modal with the ModalContent.tsx body 
+     setModalDisplay(true);
   }
 
 

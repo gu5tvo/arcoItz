@@ -7,7 +7,6 @@ export const DocumentComponentStyle = styled.div`
   gap: min(2vh, 10px);
   height: min(11vh, 100px);
 
-  //background-color: black;
 
   .document-name {
     height: 35%;

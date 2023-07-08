@@ -9,6 +9,8 @@ export const Container = styled.div`
     flex-wrap: wrap;
 `
 export const LeftContainer = styled.div`
+    align-self: flex-start;
+
     @media (max-width: 1229px) {
         padding: min(2rem, 20px);
         margin-top: min(10vh, 30px);
