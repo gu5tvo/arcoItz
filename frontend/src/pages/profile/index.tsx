@@ -38,7 +38,7 @@ export default function Profile() {
             <div className='profile-description'>
               {/* <h3>{user?.pronnouns}</h3> */}
               <h3>Elu/Delu</h3>
-              <hr />
+              <hr className="desktop-hr"/>
               <div className='profile-info'>
                 <h1>{user?.name}</h1>
                 {/* <h3>{user?.title}</h3> */}
@@ -46,10 +46,10 @@ export default function Profile() {
               </div>
             </div>
           </div>
-
+          <hr className="mobile-hr"/>
           <div className='profile-contact'>
             <h2>Contato</h2>
-            <hr />
+            <hr className="desktop-hr"/>
             <div className='profile-info'>
               <h3>{user?.email}</h3>
               <h3>(99) 9 9162-6175</h3>

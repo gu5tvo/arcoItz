@@ -21,13 +21,16 @@ export const ContainerProfile = styled.main`
     grid-template-columns: 250px 1fr;
     gap: min(10vw, 40px);
     background-color: #f0f0f0;
-
-    @media (max-width: 899px) {
-      display: flex;
-      flex-direction: column;
-      height: auto;
-    }
   }
+
+  @media (max-width: 899px) {
+    height: auto;  
+    .content {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+      }
+    }
 `
 
 export const UserGradient = styled.div`
@@ -51,13 +54,16 @@ export const UserGradient = styled.div`
 
   hr {
     width: 100%;
-    color: black;
+    color: white;
+    background-color: white;
+    border-color: white;
   }
 
   .profile-header{
     display: flex;
     flex-direction: column;
     gap: min(15px, 5vh);
+    position: relative;
 
     .profile-description {
       filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
@@ -67,22 +73,24 @@ export const UserGradient = styled.div`
       flex-direction: column;
       align-items: center;
       text-align: center;
-      h1{
+      h1 {
         font-size: clamp(1.5rem, 2.5vw, 1.75rem);
       }
-      h3{
+
+      h3 {
         font-size: clamp(1rem, 1vw, 1rem);
         font-weight: 400;
       }
-      
-      .profile-info{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
-      }
     }
-  } 
+      
+    .profile-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  }
+
   .profile-contact{
 
     display: flex;
@@ -126,40 +134,53 @@ export const UserGradient = styled.div`
       border-radius: 100%;
     }
 
-    /* 
-      background: linear-gradient(180deg, #0077B6 0%, #36393E 100%);
-  height: min(100%, 1200px);
-  border: double 10px transparent;
-  border-radius: 370px 370px 0 0;
-  background-origin: border-box;
-  background-clip: border-box;
-  
-  padding: 90px 20px 20px 20px;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  gap: min(40px, 20vh);
-    */
 
+  .mobile-hr {
+      display: none;
+  }
   @media (max-width: 899px) {
     width: 100vw; 
     height: auto;
     border: none;
     background: none;
+    padding-top: 0;
     border-radius: 0;
-    background: linear-gradient(180deg, #0077B6 0%, #36393E 100%);
+    color: #222;
+    
+    .mobile-hr {
+      display: block;
+    }
+
+    .desktop-hr {
+      display: none;
+    }
     
     .profile-header {
       display: flex;
       flex-direction: row;
       align-items: center;
+      justify-content: center;
+    }
+    
+    .profile-description {
+      gap: min(10px, 5vh);
     }
     .profile-info {
       flex-direction: row;
     }
 
+    .profile-contact {
+
+      .profile-info {
+        span {
+        color: white;
+        background-color: gray;
+        }
+      }
+    }
+
     img {
-      width: 30%;
+      width: min(20%, 100px);
     }
   }
 `
@@ -336,5 +357,16 @@ export const UserInfos = styled.section`
 
   .open {
     grid-template-rows: 1fr;
+  }
+
+  @media (max-width: 899px) {
+    .basic-presentation {
+      display: none;
+    }
+    .infos-section {
+      .document {
+        width: 100%;
+      }
+    }
   }
 `
