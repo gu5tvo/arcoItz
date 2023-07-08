@@ -158,26 +158,13 @@ export default function Profile() {
             <h2>Certificados e documentos:</h2>
             <hr/>
             <div className='documents'>
-              <div className='document'>
-                <div className='document-text'>
-                <h3>Descrição</h3>
-                <p>Certificado de conclusão de curso em Segurança do Trabalho</p>
-                </div>
-                <img src={pdfIcon} alt="" />
-              </div>
-              <div className='document'>
-                <div className='document-text'>
-                <h3>Descrição</h3>
-                <p>Certificado de conclusão de curso em Segurança do Trabalho</p>
-                </div>
-                <img src={pdfIcon} alt="" />
-              </div>
+              
               {
                 user?.documents.map((document) => (
                   <div className='document'>
                     <div className='document-text'>
                       <h3>Descrição</h3>
-                      <p>{document.description}</p>
+                      <p>{document.description !== '...' ? document.description : "Este documento não possui uma descrição"}</p>
                     </div>
                     <img src={pdfIcon} alt="imagem de um pdf" />
                   </div>

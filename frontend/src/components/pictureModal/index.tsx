@@ -31,10 +31,10 @@ export default function PictureModal(): JSX.Element {
     formData.append('upload_preset', preset_key);
     axios.post(`https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`, formData)
       .then((res) => {
+        setPicture(false);
 
         if (request.source === 'admin') {
           request.setPfp(res.data.secure_url);
-          setPicture(false);
         } else if (request.source === 'user') {
           updateProfile({ avatar: res.data.secure_url });
         }

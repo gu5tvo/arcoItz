@@ -178,7 +178,6 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
       setExperiences(response.data.experiences);
       setDocuments(response.data.documents);
       setIsAuthenticated(true)
-
     } catch (err: AxiosError | unknown) {
       if (err instanceof AxiosError) {
         toast.error(err.response?.data.message as string);

@@ -25,15 +25,12 @@ export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
 
     const [ modalDisplay, setModalDisplay] = useState(false);
 
-    const { token, documents, setDocuments } = useUser()
+    const { token, documents, setDocuments, profile } = useUser()
     
     api.defaults.headers.Authorization = `Bearer ${token}`
 
     const registerDocument = useCallback( async (data: iDocuments) => {
         const token = retrieveToken()
-        
-        console.log(token);
-        console.log(data);
         
         try{
             const {data: document} = await api.post('/document', data, {
@@ -41,7 +38,9 @@ export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
                     'Authorization': `Bearer ${token}`
                 }
             }) as {data: iDocuments}
-            setDocuments([...documents, document])
+            
+            await profile()
+
         }catch(err: AxiosError | unknown){
             if(err instanceof AxiosError){
                 toast.error(err.response?.data.message as string)
