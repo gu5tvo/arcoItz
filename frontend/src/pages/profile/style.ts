@@ -16,17 +16,17 @@ export const ContainerProfile = styled.main`
     height: 100%;
     align-items: center;
     justify-content: center;
-    padding: min(100px, 10vw);
-    grid-template-columns: 400px 1fr;
+    padding: min(10vh, 30px) min(100px, 10vw);
+    padding-bottom: 0;
+    grid-template-columns: 250px 1fr;
+    gap: min(10vw, 40px);
+    background-color: #f0f0f0;
   }
 `
 
 export const UserGradient = styled.div`
-  height: 100%;
-  min-width: 370px;
-
   background: linear-gradient(180deg, #0077B6 0%, #36393E 100%);
-
+  height: min(100%, 1200px);
   border: double 10px transparent;
   border-radius: 370px 370px 0 0;
   background-origin: border-box;
@@ -41,14 +41,15 @@ export const UserGradient = styled.div`
   &::before {
     border-radius: 50% 50% 0 0;
   }
+
   .profile-header{
     .profile-description {
       filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-      width: 270px;
-
+      
       hr{
         width: 100%;
       }
+
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -69,11 +70,11 @@ export const UserGradient = styled.div`
     }
   } 
   .profile-contact{
-    width: 270px;
 
     hr{
       width: 100%;
     }
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -89,9 +90,29 @@ export const UserGradient = styled.div`
       width: 100%;
       object-fit: cover;
       border-radius: 100%;
+    }  
+`
+export const UserInfos = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: min(20px, 8vh);
+  .basic-presentation {
+    font-size: clamp(1rem, 1.4vw, 1.4rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: min(10px, 4vh);
+    h1 {
+      font-size: 1.75em;
+      font-weight: bold;
     }
 
-
-
-  
+    p {
+      font-size: 1em;
+      align-self: flex-start;
+    }
+  }
 `
