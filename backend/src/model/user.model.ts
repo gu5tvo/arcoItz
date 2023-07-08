@@ -43,7 +43,7 @@ const userSchema = new mongoose.Schema({
         required: false,
         default: null
     },
-    number: {
+    phone: {
         type: String,
         required: false,
         default: null
@@ -53,7 +53,7 @@ const userSchema = new mongoose.Schema({
         required: false,
         default: null
     },
-    pronnouns: {
+    pronouns: {
         type: String,
         required: false,
         default: null

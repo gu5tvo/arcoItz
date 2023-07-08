@@ -14,8 +14,8 @@ export default async function updateProfileService(id: string, data: iUserUpdate
     if(data.bio) user.bio = data.bio;
     if(data.area) user.area = data.area;
     if(data.gender) user.gender = data.gender;
-    if(data.pronnouns) user.pronnouns = data.pronnouns;
-    if(data.number) user.number = data.number;
+    if(data.pronouns) user.pronouns = data.pronouns;
+    if(data.phone) user.phone = data.phone;
     if(data.address) user.address = data.address;
     if(data.title) user.title = data.title;
     if(data.isActive) user.isActive = data.isActive;

@@ -29,6 +29,8 @@ export default function Profile() {
     loadProfile();
   }, [displayProfile, id]);
 
+  console.log(user)
+  
   return (
     <ContainerProfile>
       <div className='content'>
@@ -36,13 +38,11 @@ export default function Profile() {
           <div className='profile-header'>
             <img src={user?.avatar ? user?.avatar : DefaultPicture } alt={`imagem de ${user?.name}`} />
             <div className='profile-description'>
-              {/* <h3>{user?.pronnouns}</h3> */}
-              <h3>Elu/Delu</h3>
+              <h3>{user?.pronouns}</h3>
               <hr className="desktop-hr"/>
               <div className='profile-info'>
                 <h1>{user?.name}</h1>
-                {/* <h3>{user?.title}</h3> */}
-                <h3>Social media</h3>
+                <h3>{user?.title}</h3>
               </div>
             </div>
           </div>
@@ -52,7 +52,7 @@ export default function Profile() {
             <hr className="desktop-hr"/>
             <div className='profile-info'>
               <h3>{user?.email}</h3>
-              <h3>(99) 9 9162-6175</h3>
+              <h3>{user?.phone}</h3>
               { user?.linkedin && <span>{user?.linkedin}</span> } 
               { user?.portfolio && <span>{user?.portfolio}</span> } 
               { user?.instagram && <span>{user?.instagram}</span> } 

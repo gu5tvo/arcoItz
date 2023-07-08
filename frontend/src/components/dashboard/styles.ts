@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import InputMask from 'react-text-mask'
 
 export const DivSpaceStyle = styled.div`
   display: flex;
@@ -24,6 +23,20 @@ export const FormStyle = styled.form`
      div > label.label-form {
       margin: 0;
       font-size: 0.8em;
+    }
+
+    .phone-input {
+      padding: 1em;
+      border: none;
+      border-radius: 0.5rem;
+      background-color: #eee;
+      transition: 0.3s all ease-in-out;
+
+      &:focus{
+          outline: none;
+          background-color: #9AE7F8;
+          color: #001C22;
+      }
     }
 `
 
@@ -117,20 +130,6 @@ export const Select = styled.select`
     &:focus{
         outline: none;
         cursor: pointer;
-        background-color: #9AE7F8;
-        color: #001C22;
-    }
-`
-
-export const MaskedInput = styled(InputMask)`
-    padding: 1em;
-    border: none;
-    border-radius: 0.5rem;
-    background-color: #eee;
-    transition: 0.3s all ease-in-out;
-
-    &:focus{
-        outline: none;
         background-color: #9AE7F8;
         color: #001C22;
     }

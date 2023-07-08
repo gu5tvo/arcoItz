@@ -221,7 +221,6 @@ export const UserInfos = styled.section`
 
     p {
       font-size: 1em;
-      align-self: flex-start;
     }
   }
 

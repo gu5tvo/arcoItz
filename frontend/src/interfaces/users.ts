@@ -19,9 +19,9 @@ export interface iUserSimple{
     area?: string | null;
     address?: string | null;
     title?: string | null;
-    number?: string | null;
+    phone?: string | null;
     gender?: string | null;
-    pronnouns?: string | null;
+    pronouns?: string | null;
     city?: string | null;
     isActive?: boolean;
     isVerified?: boolean;

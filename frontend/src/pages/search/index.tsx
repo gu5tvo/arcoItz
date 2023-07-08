@@ -100,7 +100,7 @@ export default function SearchPage(){
                             <div className="basic-infos">
                                 <span>
                                     <h2>{user.name}</h2>
-                                    <p>{user.pronnouns}</p>
+                                    <p>{user.pronouns}</p>
                                 </span>
                                 <p>{user.title}</p>
                                 {user.area && <p>Área: {user.area}</p>}

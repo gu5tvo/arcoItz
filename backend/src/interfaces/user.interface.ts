@@ -39,9 +39,9 @@ export interface iUserUpdate {
     password: string;
     avatar: string;
     gender: string;
-    pronnouns: string;
+    pronouns: string;
     city: string;
-    number: string;
+    phone: string;
     bio: string;
     area: string;
     address: string;
