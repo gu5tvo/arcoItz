@@ -5,8 +5,6 @@ import { iDocuments } from "../interfaces/users";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import retrieveToken from "../utils/user/retrieveToken";
-import Modal from "../components/Modal";
-import ModalContent from "../components/dashboard/certificates/ModalContent";
 import CertificateModal from "../components/CertificateModal";
 
 export const DocumentsContext = createContext<{
@@ -26,16 +24,16 @@ export const DocumentsContext = createContext<{
 export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
 
     const [ modalDisplay, setModalDisplay] = useState(false);
-    
-
-    const toggleModal = () => {setModalDisplay(!modalDisplay)}
-
 
     const { token, documents, setDocuments } = useUser()
+    
     api.defaults.headers.Authorization = `Bearer ${token}`
 
     const registerDocument = useCallback( async (data: iDocuments) => {
         const token = retrieveToken()
+        
+        console.log(token);
+        console.log(data);
         
         try{
             const {data: document} = await api.post('/document', data, {
@@ -46,7 +44,6 @@ export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
             setDocuments([...documents, document])
         }catch(err: AxiosError | unknown){
             if(err instanceof AxiosError){
-                console.log(token);
                 toast.error(err.response?.data.message as string)
             }else{
                 toast.error('Erro do lado do cliente, tente novamente!')
