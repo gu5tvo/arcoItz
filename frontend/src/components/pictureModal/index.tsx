@@ -9,7 +9,6 @@ export default function PictureModal(): JSX.Element {
   const { setPicture, request } = useModal();
   const { updateProfile } = useUser();
   const { adminUpdate } = useAdmin();
-  const [image, setImage] = useState<string>('');
   const [confirmScreen, setConfirmScreen] = useState<boolean>(false);
   const [fileLocal ,  setfileLocal] = useState<File>(null);  
 
@@ -32,8 +31,6 @@ export default function PictureModal(): JSX.Element {
     formData.append('upload_preset', preset_key);
     axios.post(`https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`, formData)
       .then((res) => {
-
-        setImage(res.data.secure_url);
 
         if (request.source === 'admin') {
           request.setPfp(res.data.secure_url);

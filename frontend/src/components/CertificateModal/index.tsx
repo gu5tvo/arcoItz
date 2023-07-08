@@ -9,8 +9,6 @@ import { iDocuments } from "../../../../frontend/src/interfaces/users";
 
 export default function PictureModal(): JSX.Element {
   const { setModalDisplay, registerDocument  } = useDocuments();
-  const { updateProfile } = useUser();
-  const { adminUpdate } = useAdmin();
   const [confirmScreen, setConfirmScreen] = useState<boolean>(false);
   const [fileLocal ,  setfileLocal] = useState<File>(null);  
 
@@ -40,8 +38,6 @@ export default function PictureModal(): JSX.Element {
           description: "...",
           document: res.data.secure_url,
         }
-
-        console.log(data);
         
         registerDocument(data)
       });
