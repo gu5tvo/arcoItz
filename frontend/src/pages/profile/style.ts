@@ -113,6 +113,7 @@ export const UserGradient = styled.div`
         padding: min(8px, 2vw);
         border-radius: min(14px, 4vw);
         font-weight: bold;
+        width: 100%
       }
     }
 

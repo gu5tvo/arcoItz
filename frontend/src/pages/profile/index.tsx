@@ -56,9 +56,6 @@ export default function Profile() {
               { user?.linkedin && <span>{user?.linkedin}</span> } 
               { user?.portfolio && <span>{user?.portfolio}</span> } 
               { user?.instagram && <span>{user?.instagram}</span> } 
-              <span>https://github.com/raspincel</span>
-              <span>https://github.com/raspincel</span>
-              <span>https://github.com/raspincel</span>
             </div>
           </div>
         </UserGradient>
