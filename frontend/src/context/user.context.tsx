@@ -2,7 +2,7 @@ import React, { useState, useCallback, createContext, useEffect } from 'react';
 import { toast } from"react-toastify";
 import { useNavigate } from 'react-router-dom';
 import { 
-  iUserComplete, iUserSimple, iLogin, iRegister, iCourses, iDocuments, iExperiences, iSkills, iUsersPage
+  iUserComplete, iUserSimple, iLogin, iRegister, iCourses, iDocuments, iExperiences, iSkills, iUsersPage, SetProfileOptions
 } from '../interfaces/users';
 import api from '../utils/axios';
 import { AxiosError } from 'axios';
@@ -27,7 +27,7 @@ export const UserContext = createContext<{
   login: (data: iLogin) => void;
   logout: () => void;
   registerUser: (data: iRegister) => void;
-  profile: () => Promise<void>;
+  profile: ({ userData, coursesData, documentsData, experiencesData, skillsData}: SetProfileOptions) => Promise<void>;
   displayProfile: (id: string) => Promise<iUserComplete>;
   updateProfile: (data: iUserSimple) => void;
   deleteSelf: () => void;
@@ -83,7 +83,7 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
       setToken(storedToken);
       setIsAuthenticated(true);
       api.defaults.headers.Authorization = `Bearer ${storedToken}`;
-      profile();
+      profile({ userData: true });
     }
   }, []);
 
@@ -104,7 +104,7 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
     }
     
       toast.success('Login realizado com sucesso!');
-      profile();
+      profile({ userData: true });
       navigate('/dashboard');
     } catch (err: any) {
       toast.error(err.response.data.message);
@@ -161,7 +161,7 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
     }
   }, []);
 
-  const profile = useCallback(async () => {
+  const profile = useCallback(async ({ userData, coursesData, documentsData, skillsData, experiencesData}: SetProfileOptions) => {
 
     try {
       const retrievedToken: string = retrieveToken()
@@ -172,11 +172,14 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
         }
       });
 
-      setUser(response.data);
-      setSkills(response.data.skills);
-      setCourses(response.data.courses);
-      setExperiences(response.data.experiences);
-      setDocuments(response.data.documents);
+      console.log(documentsData)
+      
+      if (userData) setUser(response.data);
+      if (skillsData) setSkills(response.data.skills);
+      if (coursesData) setCourses(response.data.courses);
+      if (experiencesData) setExperiences(response.data.experiences);
+      if (documentsData) setDocuments(response.data.documents);
+      
       setIsAuthenticated(true)
     } catch (err: AxiosError | unknown) {
       if (err instanceof AxiosError) {

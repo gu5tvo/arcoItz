@@ -3,6 +3,7 @@ import Document from "../../model/documents.model";
 export default async function editDocumentService(id, data){
     const document = await Document.findOne({id});
 
+    console.log(data)
     if(data.name) document.name = data.name;
     if(data.description) document.description = data.description;
 

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { ModalFog, ModalContainer, ModalHeader, ModalBody } from './style';
 import { useDocuments } from '../../hooks/contexts';
-import { useUser } from '../../hooks/contexts';
 import removeIconFormation from "../../assets/removeIconFormation.svg";
 import { v4 as uuidv4 } from 'uuid';
 import { iDocuments } from "../../../../frontend/src/interfaces/users";
@@ -11,7 +10,6 @@ export default function PictureModal(): JSX.Element {
   const { setModalDisplay, registerDocument  } = useDocuments();
   const [confirmScreen, setConfirmScreen] = useState<boolean>(false);
   const [fileLocal ,  setfileLocal] = useState<File>(null);  
-  const { user } = useUser()
 
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();

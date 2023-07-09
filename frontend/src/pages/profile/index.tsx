@@ -28,8 +28,6 @@ export default function Profile() {
     }
     loadProfile();
   }, [displayProfile, id]);
-
-  console.log(user)
   
   return (
     <ContainerProfile>
@@ -155,13 +153,13 @@ export default function Profile() {
             <h2>Certificados e documentos:</h2>
             <hr/>
             <div className='documents'>
-              
+
               {
                 user?.documents.map((document) => (
                   <div className='document'>
                     <div className='document-text'>
                       <h3>Descrição</h3>
-                      <p>{document.description !== '...' ? document.description : "Este documento não possui uma descrição"}</p>
+                      <p>{document.description}</p>
                     </div>
                     <img src={pdfIcon} alt="imagem de um pdf" />
                   </div>

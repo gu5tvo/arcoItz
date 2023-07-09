@@ -19,7 +19,7 @@ export default function ProtectedRoute({ isPrivate, redirectTo, element: Compone
     let isMounted = true;
 
     const fetchData = async () => {
-      await profile();
+      await profile({ userData: true });
       if (isMounted) {
         setLoaded(true);
       }

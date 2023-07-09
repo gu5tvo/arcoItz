@@ -6,26 +6,37 @@ import { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import retrieveToken from "../utils/user/retrieveToken";
 import CertificateModal from "../components/CertificateModal";
+import DeleteModalContent from "../components/dashboard/certificates/ModalContent/DeleteModal";
 
 export const DocumentsContext = createContext<{
         registerDocument: (data: iDocuments) => Promise<void>,
         updateDocument: (id: string, data: iDocuments) => Promise<void>,
         deleteDocument: (id: string) => Promise<void>,
         modalDisplay: boolean,
-        setModalDisplay: React.Dispatch<React.SetStateAction<boolean>>
+        setModalDisplay: React.Dispatch<React.SetStateAction<boolean>>,
+        confirmDeletion: boolean,
+        setConfirmDeletion: React.Dispatch<React.SetStateAction<boolean>>
+        shouldDelete: boolean,
+        setShouldDelete: React.Dispatch<React.SetStateAction<boolean>>
     }>({
     registerDocument: (data: iDocuments) => Promise.resolve(),
     updateDocument: (id: string, data: iDocuments) => Promise.resolve(),
     deleteDocument: (id: string) => Promise.resolve(),
     modalDisplay: false,
-    setModalDisplay: ()=>{}
+    setModalDisplay: ()=>{},
+    confirmDeletion: false,
+    setConfirmDeletion: ()=>{},
+    shouldDelete: false,
+    setShouldDelete: ()=>{}
 });
 
 export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
 
     const [ modalDisplay, setModalDisplay] = useState(false);
-
-    const { token, documents, setDocuments, profile } = useUser()
+    const [confirmDeletion, setConfirmDeletion] = useState(false)
+    const [shouldDelete, setShouldDelete] = useState(false)
+    
+    const { token, profile } = useUser()
     
     api.defaults.headers.Authorization = `Bearer ${token}`
 
@@ -39,7 +50,7 @@ export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
                 }
             }) as {data: iDocuments}
             
-            await profile()
+            await profile({ documentsData: true })
 
         }catch(err: AxiosError | unknown){
             if(err instanceof AxiosError){
@@ -52,10 +63,14 @@ export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
 
     const updateDocument = useCallback( async (id: string, data: iDocuments) => {
         try{
-            const {data:document} = await api.patch(`/document/${id}`, data) as {data: iDocuments}
-            const index = documents.findIndex(document => document.id === id)
-            documents[index] = document
-            setDocuments([...documents])
+            const token = retrieveToken()
+            await api.patch(`/document/${id}`, data, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            
+            await profile({ documentsData: true })
         }catch(err: AxiosError | unknown){
             if(err instanceof AxiosError){
                 toast.error(err.response?.data.message as string)
@@ -67,10 +82,15 @@ export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
 
     const deleteDocument = useCallback( async (id: string) => {
         try{
-            await api.delete(`/document/${id}`)
-            const index = documents.findIndex(document => document.id === id)
-            documents.splice(index, 1)
-            setDocuments([...documents])
+            const token = retrieveToken()
+            await api.delete(`/document/${id}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            
+            await profile({ documentsData: true })
+
         }catch(err: AxiosError | unknown){
             if(err instanceof AxiosError){
                 toast.error(err.response?.data.message as string)
@@ -81,11 +101,12 @@ export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
     },[])
 
     return (
-        <DocumentsContext.Provider value={{registerDocument, updateDocument, deleteDocument, modalDisplay, setModalDisplay}}>
+        <DocumentsContext.Provider value={{registerDocument, updateDocument, deleteDocument, modalDisplay, setModalDisplay, confirmDeletion, setConfirmDeletion, shouldDelete, setShouldDelete}}>
+
+            { confirmDeletion && <DeleteModalContent/> }
             
-            {
-                modalDisplay && <CertificateModal/>
-            }
+            { modalDisplay && <CertificateModal/> }
+
             {children}
         </DocumentsContext.Provider>
     )

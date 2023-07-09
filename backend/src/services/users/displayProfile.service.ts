@@ -37,7 +37,5 @@ export default async function displayProfileService(id: string){
         })
     }
 
-    console.log(response)
-
     return {...response, password: undefined, __v: undefined, _id: undefined }
 }
