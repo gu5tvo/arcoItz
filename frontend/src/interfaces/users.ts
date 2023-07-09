@@ -61,7 +61,8 @@ export interface iCourses{
     from: string;
     to: string;
     description: string;
-    type: string;
+    type: string,
+    status: string
 }
 
 export interface iExperiences{

@@ -6,6 +6,8 @@ export const GraduationStyle = styled.form`
     flex-direction: column;
     gap: min(20px, 8vh);
     align-items: center;
+    margin-bottom: min(30px, 15vh);
+    
     .inner-div{
         display: flex;
         flex-wrap: wrap;
@@ -61,6 +63,19 @@ export const GraduationStyle = styled.form`
         }
     }
 
+    .button-area {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: min(20px, 4vw);
+        flex-wrap: wrap;
+
+        button:nth-child(2) {
+            background-color: red;
+        }
+    }
+
     button {
         all: unset;
         background-color: #00B4D8;
@@ -72,7 +87,7 @@ export const GraduationStyle = styled.form`
         font-size: clamp(0.8rem, 2vw, 1rem);
         font-weight: bold;
         cursor: pointer;
-        
+        width: min(150px, 90vw);
         &:hover {
             filter: invert(1)
         }

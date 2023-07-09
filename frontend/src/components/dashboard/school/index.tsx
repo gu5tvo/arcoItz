@@ -33,8 +33,7 @@ export default function SchoolScreen(): JSX.Element {
       <div>
       {
         courses?.map((course, index)=> {
-          
-            return <Graduation key={index} />
+            return <Graduation key={index} description={course.description} doesExist from={course.from} id={course.id} institution={course.institution} name={course.name} status={course.status} to={course.to} type={course.type}/>
         })
       } 
 

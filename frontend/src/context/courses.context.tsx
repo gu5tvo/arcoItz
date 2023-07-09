@@ -20,8 +20,8 @@ export const CoursesProvider = ({ children } : {children: JSX.Element}) => {
     const registerCourse = useCallback( async (data: iCourses) => {
         try{
             const token = retrieveToken()
-            console.log(data)
-            const {data: course} = await api.post('/course', data, {
+
+            await api.post('/course', data, {
                 headers: { 
                     'Authorization': `Bearer ${token}` 
                 }
@@ -38,10 +38,14 @@ export const CoursesProvider = ({ children } : {children: JSX.Element}) => {
 
     const updateCourse = useCallback( async (id: string, data: iCourses) => {
         try{
-            const {data:course} = await api.put(`/course/${id}`, data) as {data: iCourses}
-            const index = courses.findIndex(course => course.id === id)
-            courses[index] = course
-            setCourses([...courses])
+            const token = retrieveToken()
+            await api.patch(`/course/${id}`, data, {
+                headers: { 
+                    'Authorization': `Bearer ${token}` 
+                }
+            }) as {data: iCourses}
+            
+            profile({ coursesData: true })
         }catch(err: AxiosError | unknown){
             if(err instanceof AxiosError){
                 toast.error(err.response?.data.message as string)
@@ -53,10 +57,14 @@ export const CoursesProvider = ({ children } : {children: JSX.Element}) => {
 
     const deleteCourse = useCallback( async (id: string) => {
         try{
-            await api.delete(`/course/${id}`)
-            const index = courses.findIndex(course => course.id === id)
-            courses.splice(index, 1)
-            setCourses([...courses])
+            const token = retrieveToken()
+            await api.delete(`/course/${id}`, {
+                headers: { 
+                    'Authorization': `Bearer ${token}` 
+                }
+            })
+            
+            profile({ coursesData: true })
         }catch(err: AxiosError | unknown){
             if(err instanceof AxiosError){
                 toast.error(err.response?.data.message as string)

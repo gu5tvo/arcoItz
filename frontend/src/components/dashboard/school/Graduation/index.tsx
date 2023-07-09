@@ -12,18 +12,31 @@ interface OnSubmitData {
     description: string;
     ownerId: string
     type: string;
+    status: string
 }
-export default function Graduation(): JSX.Element {
 
-    const { user } = useUser()
-    const { registerCourse } = useCourses()
-    const { register, handleSubmit } = useForm()
+interface CourseProps {
+    doesExist?: boolean,
+    id?: string,
+    type?: string,
+    name?: string,
+    institution?: string,
+    description?: string,
+    from?: string,
+    to?: string,
+    status?: string
+}
+
+export default function Graduation({ id, doesExist, description, from: originalFrom, institution, name, to: originalTo, type, status }: CourseProps): JSX.Element {
+    const { registerCourse, updateCourse, deleteCourse } = useCourses()
+    const { register, handleSubmit, reset } = useForm()
     const [courseFinished, setCourseFinished] = useState(true)
-    const [from, setFrom] = useState("")
-    const [to, setTo] = useState("")
+    const [deleted, setDeleted] = useState(false)
+    const [from, setFrom] = useState(originalFrom ? originalFrom : '')
+    const [to, setTo] = useState(originalTo ? originalTo : '')
 
     const onChangeStatus = (e)=> {
-        if (e.target.value === 'Interrompido') {
+        if (e.target.value === 'Andamento') {
             setCourseFinished(false)
             setTo("")
         } else { 
@@ -31,11 +44,24 @@ export default function Graduation(): JSX.Element {
         }
     }
 
-    const onSubmit = ({ name, institution, description, type }: OnSubmitData)=> {
-        console.log("dsds")
-        registerCourse({ name, institution, from, to, type, description })
-        console.log("dsdsasdasd")
+    const onSubmit = ({ name, institution, description, type, status }: OnSubmitData)=> {
+        if (doesExist){
+            updateCourse(id, { name, institution, from, to, type, description, status })
+        }
+        else {
+            registerCourse({ name, institution, from, to, type, description, status })
+            reset()
+            setTo("")
+            setFrom("")
+        }
     }
+
+    const onDelete = ()=> {
+        setDeleted(true)
+        deleteCourse(id)
+    }
+
+    if (deleted) return <></>
 
     return (
     <>  
@@ -44,8 +70,9 @@ export default function Graduation(): JSX.Element {
    
             
             <div className="inner-div">
-              <input type="text"  placeholder='Curso' {...register('name')}/>
-               <select name="" id="" {...register('type')}>
+                <input type="text"  placeholder='Curso' defaultValue={name}{...register('name')}/>
+
+                <select defaultValue={type ? type : ''} {...register('type')}>
                     <option value="">Tipo</option>
                     <option value="Técnico">Técnico</option>
                     <option value="Tecnólogo">Tecnólogo</option>
@@ -55,10 +82,11 @@ export default function Graduation(): JSX.Element {
                     <option value="Doutorado">Doutorado</option>
                     <option value="Especialização ou MBA">Especialização ou MBA</option>
                     <option value="Outro">Outro</option>
+                </select>
+                
+                <input type="text" defaultValue={institution ? institution : ''} placeholder='Instituição' {...register('institution')}/>
 
-               </select>
-                <input type="text" placeholder='Instituição' {...register('institution')}/>
-                 <select name="" id="" onChange={onChangeStatus} >
+                 <select name="uh" id="he"  {...register('status')} onChange={onChangeStatus} defaultValue={status ? status : ''} >
                       <option value="">Situação</option>
                       <option value="Concluído">Concluído</option>
                       <option value="Andamento">Andamento</option>
@@ -67,16 +95,22 @@ export default function Graduation(): JSX.Element {
                  </select>
 
                 <span onChange={(e: React.ChangeEvent<HTMLInputElement>)=>setFrom(e.target.value)}>
+
                     <MaskedInput mask={[/[0-9]/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]} type="text" placeholder="Início" value={from} className="input"  {...register('from')} />
+
                  </span>
+
                 <span onChange={(e: React.ChangeEvent<HTMLInputElement>)=>setTo(e.target.value)} >
                     <MaskedInput mask={[/[0-9]/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]} type="text" placeholder="Fim" value={to} className={`input ${courseFinished ?  '' : 'lock'}`}  {...register('to')} />
                  </span>
             </div>
             
-            <textarea placeholder="Descrição" className="description" {...register('description')}/>
+            <textarea placeholder="Descrição" className="description"  defaultValue={description} {...register('description')}/>
 
-            <button type='submit'>Salvar curso</button>
+            <span className="button-area">
+            <button type='submit'>{doesExist ? "Editar" : "Salvar"} curso</button>
+            { doesExist && <button onClick={onDelete}>Excluir curso</button>}
+            </span>
         </GraduationStyle>
 
     </>)
