@@ -4,17 +4,20 @@ export const CertificatesScreenStyle = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: min(3vw, 20px);
-
+    gap: min(4vw, 20px);
+    align-items: center;
+    
     .major-div{
         display: flex;
         flex-direction: column;
         gap: min(2vw, 10px);
+        align-items: center;
+        gap: min(10px, 2vh);
     }
 
     .file-button{
-        width: min(20vw, 200px);
-        padding: min(1vw, 8px);
+        min-width: min(20vw, 200px);
+        padding: min(1vw, 10px);
         border: none;
         background-color: #48a7ff;
         color: white;

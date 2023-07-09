@@ -5,11 +5,12 @@ export const DocumentComponentStyle = styled.div`
   display: flex;
   flex-direction: column;
   gap: min(2vh, 10px);
-  height: min(11vh, 100px);
-
+  justify-content: center;
+  align-items: center;
+  
 
   .document-name {
-    height: 35%;
+    padding: min(10px, 3vw);
     font-size: clamp(0.7rem, 0.85rem, 1rem);
     background-color: #9ae7f8;
     width: 100%;
@@ -21,12 +22,14 @@ export const DocumentComponentStyle = styled.div`
   }
 
   .description-div {
-    height: 70%;
     display: flex;
     align-items: center;
     gap: 2.5%;
+    width: 100%;
 
     textarea {
+      width: 100%;
+      padding: min(10px, 3vw);
       background-color: #00b4d8;
       flex-basis: 78%;
       border: none;
@@ -70,6 +73,18 @@ export const DocumentComponentStyle = styled.div`
       &:hover {
         transform: rotate(-135deg);
       }
+    }
+  }
+
+  @media (max-width: 699px) {
+    .description-div {
+
+      textarea {
+        width: 10
+      }
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
     }
   }
 `;

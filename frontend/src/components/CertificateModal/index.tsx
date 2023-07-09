@@ -27,10 +27,11 @@ export default function PictureModal(): JSX.Element {
     const formData = new FormData();
     formData.append('file', file);
     formData.append('upload_preset', preset_key);
-    axios.post(`https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`, formData)
+    setModalDisplay(false)
+
+    axios.post(`https://api.cloudinary.com/v1_1/${cloud_name}/auto/upload`, formData)
       .then((res) => {
 
-        setModalDisplay(false)
         const data : iDocuments = {
           id: uuidv4(),
           name: file.name,

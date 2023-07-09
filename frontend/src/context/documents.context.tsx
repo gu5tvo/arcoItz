@@ -14,27 +14,17 @@ export const DocumentsContext = createContext<{
         deleteDocument: (id: string) => Promise<void>,
         modalDisplay: boolean,
         setModalDisplay: React.Dispatch<React.SetStateAction<boolean>>,
-        confirmDeletion: boolean,
-        setConfirmDeletion: React.Dispatch<React.SetStateAction<boolean>>
-        shouldDelete: boolean,
-        setShouldDelete: React.Dispatch<React.SetStateAction<boolean>>
     }>({
     registerDocument: (data: iDocuments) => Promise.resolve(),
     updateDocument: (id: string, data: iDocuments) => Promise.resolve(),
     deleteDocument: (id: string) => Promise.resolve(),
     modalDisplay: false,
     setModalDisplay: ()=>{},
-    confirmDeletion: false,
-    setConfirmDeletion: ()=>{},
-    shouldDelete: false,
-    setShouldDelete: ()=>{}
 });
 
 export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
 
     const [ modalDisplay, setModalDisplay] = useState(false);
-    const [confirmDeletion, setConfirmDeletion] = useState(false)
-    const [shouldDelete, setShouldDelete] = useState(false)
     
     const { token, profile } = useUser()
     
@@ -101,9 +91,7 @@ export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
     },[])
 
     return (
-        <DocumentsContext.Provider value={{registerDocument, updateDocument, deleteDocument, modalDisplay, setModalDisplay, confirmDeletion, setConfirmDeletion, shouldDelete, setShouldDelete}}>
-
-            { confirmDeletion && <DeleteModalContent/> }
+        <DocumentsContext.Provider value={{registerDocument, updateDocument, deleteDocument, modalDisplay, setModalDisplay}}>
             
             { modalDisplay && <CertificateModal/> }
 

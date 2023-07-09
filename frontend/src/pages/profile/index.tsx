@@ -156,13 +156,15 @@ export default function Profile() {
 
               {
                 user?.documents.map((document) => (
-                  <div className='document'>
-                    <div className='document-text'>
-                      <h3>Descrição</h3>
-                      <p>{document.description}</p>
+                  <a href={document.document} target="_blank">
+                    <div className='document'>
+                      <div className='document-text'>
+                        <h3>{document.name}</h3>
+                        <p>{document.description}</p>
+                      </div>
+                      <img src={pdfIcon} alt="imagem de um pdf" />
                     </div>
-                    <img src={pdfIcon} alt="imagem de um pdf" />
-                  </div>
+                  </a>
                 ))
               }
             </div>

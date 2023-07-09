@@ -249,8 +249,13 @@ export const UserInfos = styled.section`
     width: 100%;
   }
 
+  a {
+    text-decoration: none;
+    color: inherit;
+    width: min(100%, 380px);
+  }
+
   .document{
-    min-width: min(100%, 380px);
     border-radius: min(40px, 2vw);
     padding: min(10vw, 2rem);
     display: flex;
