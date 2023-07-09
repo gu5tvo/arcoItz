@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom';
-import { useModal, useUser } from '../../../hooks/contexts';
+import { useAdmin, useModal, useUser } from '../../../hooks/contexts';
 import { useForm } from 'react-hook-form';
 import { Button, FormStyle, Input, Select, TextArea , Image, DivSpaceStyle} from '../styles';
 import DefaultPfp from '../../../assets/profile-picture.svg'
@@ -10,21 +10,25 @@ interface SubmitData {
   title: string;
   bio: string;
   gender: string;
+  name: string;
 }
 export default function ProfileScreen(): JSX.Element {
 
     const { updateProfile, user } = useUser();
+    const { listSectors, sectors } = useAdmin()
     const { register, handleSubmit } = useForm();
     const { setPicture, setRequest } = useModal();
     const navigate = useNavigate();
     const [isActive, setIsActive] = useState<boolean>(user.isActive)
-
-    console.log(isActive)
+    const [area, setArea] = useState(user.area)
     const [pfp, setPfp] = useState("");
+    
+
     useEffect(()=>{
-        if(!user){
-            navigate('/login')
-        }
+      if(!user){
+        navigate('/login')
+      }
+      listSectors()
     },[user])
 
     const onSetPicture = () => {
@@ -32,11 +36,11 @@ export default function ProfileScreen(): JSX.Element {
       setPicture(true)
     }
 
-    const onSubmit = ({pronouns, title, bio, gender}: SubmitData)=> {
-      updateProfile({ bio: (bio ? bio : undefined), gender: (gender ? gender : undefined), pronouns: (pronouns ? pronouns : undefined), title: (title ? title : undefined), isActive})
+    const onSubmit = ({pronouns, title, bio, gender, name}: SubmitData)=> {
+      updateProfile({ name, bio: (bio ? bio : undefined), gender: (gender ? gender : undefined), pronouns: (pronouns ? pronouns : undefined), title: (title ? title : undefined), isActive, area: area ? area : "none"})
     }
-
-
+    
+    
     return (
         <>
 
@@ -48,10 +52,27 @@ export default function ProfileScreen(): JSX.Element {
 
             <FormStyle onSubmit={handleSubmit(onSubmit)}>
                 <div>
+                  <label htmlFor="name" className='label-form'>Nome completo</label>
+                  <Input type="text" placeholder="Escreva seu nome completo" defaultValue={user.name} {...register('name')} />
+                </div>
+
+                <div>
                   <label htmlFor="pronouns" className='label-form'>Pronomes</label>
                   <Input type="text" placeholder="Escreva seu pronome - elu/delu" defaultValue={user.pronouns ? user.pronouns : ''} {...register('pronouns')} />
                 </div>
-                
+
+                <div>
+                  <label htmlFor="area" className='label-form'>Área:</label>
+                  <Select {...register('area')} defaultValue={user.area} value={area} onChange={(e)=>setArea(e.target.value)}>
+                    <option value=""></option>
+                    {
+                      sectors.map((area, index)=> {
+                        return <option key={index} value={area.name}>{area.name}</option>
+                      })
+                    }
+                  </Select>
+                </div>
+
                 <div>
                   <label htmlFor="isActive" className='label-form'>Exibição:</label>
                   <Select {...register('isActive')} defaultValue={isActive ? 'true' : 'false'} onChange={(e)=>setIsActive(e.target.value === 'true')}>

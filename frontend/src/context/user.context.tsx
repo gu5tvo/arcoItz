@@ -219,6 +219,7 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
   const updateProfile = useCallback(async (data: iUserSimple) => {
     try {
       const token = retrieveToken()
+
       const response = await api.patch('/users', data, {
         headers: {
           'Authorization': `Bearer ${token}`
