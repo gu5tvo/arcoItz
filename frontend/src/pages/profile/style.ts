@@ -104,7 +104,8 @@ export const UserGradient = styled.div`
       justify-content: center;
       align-items: center;
       gap: min(15px, 4vh);
-
+      width: 100%;
+      
       span {
         text-align: center;
         font-size: clamp(0.6rem, 2vw, 0.8rem);
@@ -113,6 +114,7 @@ export const UserGradient = styled.div`
         padding: min(8px, 2vw);
         border-radius: min(14px, 4vw);
         font-weight: bold;
+        width: 100%
       }
     }
 
@@ -244,10 +246,11 @@ export const UserInfos = styled.section`
     justify-content: center;
     gap: min(10px, 4vh);
     flex-wrap: wrap;
+    width: 100%;
   }
 
   .document{
-    width: min(100%, 380px);
+    min-width: min(100%, 380px);
     border-radius: min(40px, 2vw);
     padding: min(10vw, 2rem);
     display: flex;

@@ -13,9 +13,7 @@ export function ProfilePreview({ id, image , name, area, pronouns , gender}: iPr
     const lastName = splitName[splitName.length - 1]
 
     const names = (firstName === lastName) ? firstName : firstName + ' ' + lastName;
-
-    console.log(image)
-    // 
+    
     return( 
     <ProfilePreviewDiv onClick={()=> navigate(`/profile/${id}`)}>
         <div className="infos-container">

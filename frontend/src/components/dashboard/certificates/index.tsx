@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Label } from "../styles";
 import { CertificatesScreenStyle } from "./style";
 import { useDocuments, useUser } from "../../../hooks/contexts";
@@ -7,20 +7,19 @@ import DocumentComponent from "./DocumentComponent";
 export default function CertificatesScreen(): JSX.Element {
 
 
-  const { documents } = useUser();
+  const { documents, profile } = useUser();
   const { setModalDisplay } = useDocuments();
  
+  useEffect(()=>{
+      profile({ documentsData: true })
+  }, [])
+
   function displayModalDocument(){
      setModalDisplay(true);
   }
 
-  const graduationComponents = Array.from({ length: documents.length }, (_, index) => (
-    <DocumentComponent key={index} 
-    name={documents[index].name}
-    description={documents[index].description}
-     />
-  ));
-
+  if (!documents) return <></>
+  
   return (
     <>
       <CertificatesScreenStyle>
@@ -32,7 +31,15 @@ export default function CertificatesScreen(): JSX.Element {
           </button>
         </div>
 
-        {graduationComponents}
+        {  documents.map((document, index) => { 
+              return <DocumentComponent key={index} 
+              name={document.name}
+              description={document.description}
+              id={document.id}
+              document={document.document}
+          />
+          })
+        }
          
       </CertificatesScreenStyle>
 

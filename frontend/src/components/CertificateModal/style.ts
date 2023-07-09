@@ -20,6 +20,8 @@ export const ModalContainer = styled.div`
     flex-direction: column;
     border-radius: 0.5rem;
     box-shadow: 0 0 60px rgba(0, 0, 0, 0.09);
+    padding: min(3rem, 14vw);
+    position: relative;
 `
 
 export const ModalHeader = styled.div`
@@ -37,23 +39,20 @@ export const ModalHeader = styled.div`
     }
 
     img.remove {
-      transform: rotate(45deg);
-      transition: transform 0.5s;
+        transform: rotate(45deg);
+        transition: transform 0.5s;
+        position: absolute;
+        top: 10px;
+        right: 10px;
 
-
-      &:hover {
-        transform: rotate(-135deg);
-      }
+        &:hover {
+            transform: rotate(-135deg);
+        }
     }
 `
 
 export const ModalBody = styled.div`
 
-    padding-left: min(4vw, 100px);
-    padding-right: min(4vw, 100px);
-    padding-bottom: min(5vh, 100px);
-    padding-top: 0rem ;
-    margin-top: 7%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -93,7 +92,7 @@ export const ModalBody = styled.div`
     }
 
     button{
-        width: 30%;
+        min-width: 30%;
         padding-top: 3%;
         padding-bottom: 3%;
         font-weight: 600;
@@ -102,6 +101,7 @@ export const ModalBody = styled.div`
         color: white;
         border: none;
         transition: 0.5s;
+        padding: min(8px, 3vw);
 
         &:hover{
             background-color: #3F8FCC;

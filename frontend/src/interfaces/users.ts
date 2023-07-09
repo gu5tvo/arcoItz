@@ -79,3 +79,11 @@ export interface iUserComplete extends iUserSimple{
     experiences: iExperiences[];
     courses: iCourses[];
 }
+
+export interface SetProfileOptions {
+    userData?: boolean,
+    skillsData?: boolean,
+    coursesData?: boolean,
+    experiencesData?: boolean,
+    documentsData?: boolean
+}

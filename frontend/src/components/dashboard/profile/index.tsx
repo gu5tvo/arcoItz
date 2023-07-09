@@ -1,32 +1,34 @@
 import React, {useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom';
-import { useModal, useUser } from '../../../hooks/contexts';
+import { useAdmin, useModal, useUser } from '../../../hooks/contexts';
 import { useForm } from 'react-hook-form';
 import { Button, FormStyle, Input, Select, TextArea , Image, DivSpaceStyle} from '../styles';
 import DefaultPfp from '../../../assets/profile-picture.svg'
 
-import MaskedInput from 'react-text-mask'
-
 interface SubmitData {
   pronouns: string;
-  showCV: string;
   title: string;
   bio: string;
   gender: string;
+  name: string;
 }
 export default function ProfileScreen(): JSX.Element {
 
     const { updateProfile, user } = useUser();
+    const { listSectors, sectors } = useAdmin()
     const { register, handleSubmit } = useForm();
     const { setPicture, setRequest } = useModal();
     const navigate = useNavigate();
-    const [phone, setPhone] = useState("")
-    
+    const [isActive, setIsActive] = useState<boolean>(user.isActive)
+    const [area, setArea] = useState(user.area)
     const [pfp, setPfp] = useState("");
+    
+
     useEffect(()=>{
-        if(!user){
-            navigate('/login')
-        }
+      if(!user){
+        navigate('/login')
+      }
+      listSectors()
     },[user])
 
     const onSetPicture = () => {
@@ -34,12 +36,11 @@ export default function ProfileScreen(): JSX.Element {
       setPicture(true)
     }
 
-    const onSubmit = ({pronouns, title, showCV, bio, gender}: SubmitData)=> {
-
-      updateProfile({ bio: (bio ? bio : undefined), gender: (gender ? gender : undefined), pronouns: (pronouns ? pronouns : undefined), title: (title ? title : undefined), isActive: (showCV === 'true'), phone: (phone ? phone : undefined)}) 
+    const onSubmit = ({pronouns, title, bio, gender, name}: SubmitData)=> {
+      updateProfile({ name, bio: (bio ? bio : undefined), gender: (gender ? gender : undefined), pronouns: (pronouns ? pronouns : undefined), title: (title ? title : undefined), isActive, area: area ? area : "none"})
     }
-
-
+    
+    
     return (
         <>
 
@@ -51,18 +52,30 @@ export default function ProfileScreen(): JSX.Element {
 
             <FormStyle onSubmit={handleSubmit(onSubmit)}>
                 <div>
+                  <label htmlFor="name" className='label-form'>Nome completo</label>
+                  <Input type="text" placeholder="Escreva seu nome completo" defaultValue={user.name} {...register('name')} />
+                </div>
+
+                <div>
                   <label htmlFor="pronouns" className='label-form'>Pronomes</label>
                   <Input type="text" placeholder="Escreva seu pronome - elu/delu" defaultValue={user.pronouns ? user.pronouns : ''} {...register('pronouns')} />
                 </div>
-                
-                <div onChange={(e: React.ChangeEvent<HTMLInputElement>)=>setPhone(e.target.value)}>
-                  <label htmlFor="phone" className='label-form'>Número de telefone</label>
-                  <MaskedInput mask={['(', /[1-9]/, /\d/, ')', ' ', /\d/, ' ', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]} type="text" placeholder="Digite seu número de telefone" defaultValue={user.phone ? user.phone : ''} className="phone-input"  {...register('phone')} />
+
+                <div>
+                  <label htmlFor="area" className='label-form'>Área:</label>
+                  <Select {...register('area')} defaultValue={user.area} value={area} onChange={(e)=>setArea(e.target.value)}>
+                    <option value=""></option>
+                    {
+                      sectors.map((area, index)=> {
+                        return <option key={index} value={area.name}>{area.name}</option>
+                      })
+                    }
+                  </Select>
                 </div>
-                
+
                 <div>
                   <label htmlFor="isActive" className='label-form'>Exibição:</label>
-                  <Select {...register('isActive')}>
+                  <Select {...register('isActive')} defaultValue={isActive ? 'true' : 'false'} onChange={(e)=>setIsActive(e.target.value === 'true')}>
                     <option value="true">Exibir meu currículo em buscas</option>
                     <option value="false">Não exibir meu currículo em buscas</option>
                   </Select>
