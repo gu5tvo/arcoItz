@@ -10,7 +10,6 @@ interface OnSubmitData {
     from: string;
     to: string;
     description: string;
-    ownerId: string
     type: string;
     status: string
 }
@@ -105,7 +104,7 @@ export default function Graduation({ id, doesExist, description, from: originalF
                  </span>
             </div>
             
-            <textarea placeholder="Descrição" className="description"  defaultValue={description} {...register('description')}/>
+            <textarea spellCheck={false} placeholder="Descrição" className="description"  defaultValue={description} {...register('description')}/>
 
             <span className="button-area">
             <button type='submit'>{doesExist ? "Editar" : "Salvar"} curso</button>

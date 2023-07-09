@@ -97,18 +97,9 @@ export default function Profile() {
           </span>
 
           <span className="infos-section">
-            <h2>Experiência profissional:</h2>
+            <h2>Experiências profissionais:</h2>
             <hr/>
-            <div className="experience">
-              <h3>Técnica de Automação Industrial <span>06/2018 — 10/2021</span></h3>
-              <span className={`wrapper ${openAccordionList.includes("dasda") ? 'open' : ''}`}>
-                <div className="details">
-                  <h4>Companhia: <span>Empresa do Manu</span></h4>
-                  <p>Atuei nesta empresa como Técnica em automação industrial e todas as demais da função, eu também pude ter experiências com Automação eletromecânica e etc...</p>
-                </div>
-              </span>
-              <span onClick={()=>handleAccordionClick("dasda")} className="clicker">+</span>
-            </div>                      
+                 
                                         
             {
               user?.experiences.map((experience) => (

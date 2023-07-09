@@ -14,9 +14,9 @@ export const ContainerProfile = styled.main`
     display: grid;
     width: min(100%, 1800px);
     height: 100%;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
-    padding: min(10vh, 30px) min(100px, 10vw);
+    padding: min(20vh, 100px) min(100px, 10vw);
     padding-bottom: 0;
     grid-template-columns: 250px 1fr;
     gap: min(10vw, 40px);
@@ -35,7 +35,7 @@ export const ContainerProfile = styled.main`
 
 export const UserGradient = styled.div`
   background: linear-gradient(180deg, #0077B6 0%, #36393E 100%);
-  height: min(100%, 1200px);
+  height: 100%;
   border: double 10px transparent;
   border-radius: 370px 370px 0 0;
   background-origin: border-box;
@@ -191,7 +191,7 @@ export const UserInfos = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: min(20px, 8vh);
+  gap: min(30px, 12vh);
   font-size: clamp(1rem, 1.4vw, 1.4rem);
   padding-bottom: min(15vh, 40px);
   hr {

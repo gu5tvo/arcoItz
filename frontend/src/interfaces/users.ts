@@ -66,7 +66,7 @@ export interface iCourses{
 }
 
 export interface iExperiences{
-    id: string;
+    id?: string;
     title: string;
     company: string;
     location: string;

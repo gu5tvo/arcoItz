@@ -15,7 +15,7 @@ export const UserContext = createContext<{
   setSkills: React.Dispatch<React.SetStateAction<iSkills[] | undefined>>;
   courses: iCourses[];
   setCourses: React.Dispatch<React.SetStateAction<iCourses[] | undefined>>;
-  experiences: iExperiences[] | undefined;
+  experiences: iExperiences[];
   setExperiences: React.Dispatch<React.SetStateAction<iExperiences[] | undefined>>;
   documents: iDocuments[] | undefined;
   setDocuments: React.Dispatch<React.SetStateAction<iDocuments[] | undefined>>;
@@ -43,7 +43,7 @@ export const UserContext = createContext<{
   setSkills: () => {},
   courses: [],
   setCourses: () => {},
-  experiences: undefined,
+  experiences: [],
   setExperiences: () => {},
   documents: undefined,
   setDocuments: () => {},

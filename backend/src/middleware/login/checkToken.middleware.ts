@@ -4,7 +4,7 @@ import User from '../../model/user.model';
 import { verify } from 'jsonwebtoken'
 
 export default async function checkTokenMiddleware(req: Request, res: Response, next: NextFunction): Promise<void> {
-
+    console.log("sadjdsajidosajo")
     const { authorization } = req.headers;
     const [ , token ] = authorization.split(' ');
     console.log(token)
