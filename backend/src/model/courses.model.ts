@@ -29,6 +29,10 @@ const courseSchema = new mongoose.Schema({
     ownerId: {
         type: String,
         required: true
+    },
+    type: {
+        type: String,
+        required: true
     }
 })
 

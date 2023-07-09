@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useUser } from '../../../hooks/contexts';
 import { useForm } from 'react-hook-form';
 import Graduation from './Graduation';
@@ -8,7 +8,7 @@ import removeIconFormation from '../../../assets/removeIconFormation.svg';
 import { IconsDivStyle, Label } from '../styles';
 
 export default function SchoolScreen(): JSX.Element {
-  const { updateProfile } = useUser();
+  const { updateProfile, courses, profile } = useUser();
   const { register, handleSubmit } = useForm();
 
   const [graduationNumber, setGraduationNumber] = useState(1);
@@ -18,6 +18,10 @@ export default function SchoolScreen(): JSX.Element {
       setGraduationNumber(graduationNumber - 1);
   }
 
+  useEffect(()=> {
+    profile({ coursesData: true, userData: true })
+  }, [])
+
   const graduationComponents = Array.from({ length: graduationNumber }, (_, index) => (
     <Graduation key={index} />
   ));
@@ -26,7 +30,19 @@ export default function SchoolScreen(): JSX.Element {
     <SchoolScreenStyle>
       <Label>Formações</Label>
 
-      {graduationComponents}
+      <div>
+      {
+        courses?.map((course, index)=> {
+          
+            return <Graduation key={index} />
+        })
+      } 
+
+      {
+        graduationComponents
+      }
+
+      </div>
 
       <IconsDivStyle>
         <button onClick={() => setGraduationNumber(graduationNumber + 1)}>

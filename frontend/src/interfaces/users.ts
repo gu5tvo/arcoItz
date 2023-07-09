@@ -54,13 +54,14 @@ export interface iSkills{
 }
 
 export interface iCourses{
-    data: any;
-    id: string;
+    data?: any;
+    id?: string;
     name: string;
     institution: string;
     from: string;
     to: string;
     description: string;
+    type: string;
 }
 
 export interface iExperiences{

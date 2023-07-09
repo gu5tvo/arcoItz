@@ -138,7 +138,6 @@ export const Select = styled.select`
 `
 
 export const IconsDivStyle = styled.div`
-  margin-top: 0.5rem;
   display: flex;
   justify-content: space-between;
 
@@ -147,11 +146,9 @@ export const IconsDivStyle = styled.div`
     background-color: transparent;
     display: inline-flex;
     align-items: center;
+    gap: min(10px, 3vw);
 
     span {
-      padding-left: 0.4rem;
-      padding-right: 0.4rem;
-      display: inline-block;
       opacity: 0;
       overflow: hidden;
       transition:opacity 0.5s;

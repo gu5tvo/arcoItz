@@ -5,7 +5,8 @@ export const createCourseSchema = yup.object().shape({
     institution: yup.string().required(),
     from: yup.string().required(),
     to: yup.string(),
-    description: yup.string()
+    description: yup.string(),
+    type: yup.string().required()
 })
 
 export const editCourseSchema = yup.object().shape({

@@ -4,6 +4,7 @@ import api from "../utils/axios";
 import { iCourses } from "../interfaces/users";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
+import retrieveToken from "../utils/user/retrieveToken";
 
 export const CoursesContext = createContext({
     registerCourse: (data: iCourses) => {},
@@ -13,13 +14,19 @@ export const CoursesContext = createContext({
 
 export const CoursesProvider = ({ children } : {children: JSX.Element}) => {
 
-    const { token, courses, setCourses } = useUser()
+    const { token, courses, setCourses, profile } = useUser()
     api.defaults.headers.Authorization = `Bearer ${token}`
 
     const registerCourse = useCallback( async (data: iCourses) => {
         try{
-            const {data: course} = await api.post('/course', data) as {data: iCourses}
-            setCourses([...courses, course])
+            const token = retrieveToken()
+            console.log(data)
+            const {data: course} = await api.post('/course', data, {
+                headers: { 
+                    'Authorization': `Bearer ${token}` 
+                }
+            }) as {data: iCourses}
+            profile({ coursesData: true })
         }catch(err: AxiosError | unknown){
             if(err instanceof AxiosError){
                 toast.error(err.response?.data.message as string)

@@ -8,11 +8,12 @@ export const Container = styled.div`
     width: 100%;
     flex-wrap: wrap;
     gap: min(30px, 5vh);
+    padding-top: min(2rem, 10vh);
 `
 export const LeftContainer = styled.div`
     align-self: flex-start;
 
-    @media (max-width: 1229px) {
+    @media (max-width: 1249px) {
         padding: min(2rem, 20px);
         margin-top: min(10vh, 30px);
 
@@ -36,11 +37,11 @@ export const LeftContainer = styled.div`
         }
     }
 
-    @media (min-width: 1230px) {
+    @media (min-width: 1250px) {
         width: 420px;
         height: fit-content;
-        padding: 2em;
         display: flex;
+        padding: 2rem;
         flex-direction: column;
         gap: 1em;
     }
@@ -49,10 +50,11 @@ export const LeftContainer = styled.div`
 export const RightContainer = styled.div`
     width: min(90vw, 800px);
     height: fit-content;
-
     display: flex;
+    padding: 2rem;
     align-items: center;
     justify-content: center;
+    align-self: flex-start;
 `
 
 export const DisplayContainer = styled.div`
@@ -62,7 +64,7 @@ export const DisplayContainer = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 80%;
+    width: 100%;
     border-radius: 0.5rem;
     box-shadow: 0 0 60px rgba(0, 0, 0, 0.09);
     height: fit-content;

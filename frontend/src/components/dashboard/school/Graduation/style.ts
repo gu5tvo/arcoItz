@@ -1,60 +1,80 @@
 import styled from "styled-components";
 
-export const GraduationStyle = styled.div`
+export const GraduationStyle = styled.form`
     
-
-
+    display: flex;
+    flex-direction: column;
+    gap: min(20px, 8vh);
+    align-items: center;
     .inner-div{
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
         gap: 1rem;
-        margin-top: 1rem;
-        margin-bottom: 1rem;
 
-        input, select{
+        input, select, .input {
+            box-sizing: border-box;
             background-color: #9AE7F8;
             color: #001C22;
             border: none;
             border-radius: 1rem;
             transition: 0.4s;
-            
+            padding: min(10px, 4vw);
+            flex: 1;
+            min-width: 240px;
+
             &:focus{
                 outline: none;
                 background-color: #40C4E0;
             }
         }
 
-        input{
-        width: 48%;
-        height: 3rem;
-        padding-left: 0.3rem ;
+        .input {
+            width: 100%;
+        }
+        span {
+            flex: 1;
+            min-width: 240px;
         }
 
-        select{
-        width: 47%;
-        height: 3.14rem;
-
+        .lock {
+            pointer-events: none;
         }
-
     }
 
 
 
     .description{
-
+        box-sizing: border-box;
         background-color: #00B4D8;
         color: #C5EFF8;
         width: 99%;
         height: 7.5rem;
         border: none;
         border-radius: 1rem;
-        padding: 0.3rem ;
+        padding: min(2rem, 10vw);
         transition: 0.4s;
 
         &:focus{
             background-color: #0087A3;
             outline: none;
+        }
+    }
+
+    button {
+        all: unset;
+        background-color: #00B4D8;
+        transition: 0.2s linear;
+        padding: min(10px, 3vw);
+        border-radius: min(20px, 4vw);
+        text-align: center;
+        color: #fff;
+        font-size: clamp(0.8rem, 2vw, 1rem);
+        font-weight: bold;
+        cursor: pointer;
+        
+        &:hover {
+            filter: invert(1)
         }
     }
 `
