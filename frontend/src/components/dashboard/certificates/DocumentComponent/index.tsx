@@ -34,7 +34,7 @@ export default function DocumentComponent( { name , description, id, document }:
             </div>
             <div className="description-div">
 
-                <textarea name="" id="" onChange={(e)=>setNewDescription(e.target.value)} placeholder="Descrição" defaultValue={(description === "..." ? "" : description)}/> 
+                <textarea spellCheck={false} name="" id="" onChange={(e)=>setNewDescription(e.target.value)} placeholder="Descrição" defaultValue={(description === "..." ? "" : description)}/> 
 
                 <span>
                     <button className="salve-button" onClick={saveChanges}>Salvar</button>

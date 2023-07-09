@@ -17,7 +17,7 @@ export const CertificatesScreenStyle = styled.div`
 
     .file-button{
         min-width: min(20vw, 200px);
-        padding: min(1vw, 10px);
+        padding: min(2vw, 8px);
         border: none;
         background-color: #48a7ff;
         color: white;

@@ -267,13 +267,18 @@ export const UserInfos = styled.section`
       display: flex;
       flex-direction: column;
       gap: min(10px, 4vh);
+      
       h3{
         font-size: clamp(1rem, 1.4vw, 1.25rem);
       }
       p{
-        font-size: clamp(1rem, 1.4vw, 1rem);
+        font-size: clamp(0.6rem, 1.4vw, 0.8rem);
         font-weight: 700;
       }
+    }
+
+    img {
+      width: min(50px, 30%);
     }
   }
 

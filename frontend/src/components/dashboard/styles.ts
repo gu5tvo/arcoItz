@@ -65,7 +65,8 @@ export const Label = styled.label`
     margin-top: 0rem;
     font-size: 1rem;
     font-weight: 500;
-    white-space: nowrap;
+    text-align: center;
+    font-weight: bold;
 `
 
 export const Input = styled.input`

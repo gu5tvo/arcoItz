@@ -17,9 +17,7 @@ export default function CertificatesScreen(): JSX.Element {
   function displayModalDocument(){
      setModalDisplay(true);
   }
-
-  if (!documents) return <></>
-  
+    
   return (
     <>
       <CertificatesScreenStyle>
@@ -31,7 +29,7 @@ export default function CertificatesScreen(): JSX.Element {
           </button>
         </div>
 
-        {  documents.map((document, index) => { 
+        {  documents?.map((document, index) => { 
               return <DocumentComponent key={index} 
               name={document.name}
               description={document.description}

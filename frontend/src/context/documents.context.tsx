@@ -26,7 +26,7 @@ export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
 
     const [ modalDisplay, setModalDisplay] = useState(false);
     
-    const { token, profile } = useUser()
+    const { token, profile, documents } = useUser()
     
     api.defaults.headers.Authorization = `Bearer ${token}`
 
@@ -41,6 +41,8 @@ export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
             }) as {data: iDocuments}
             
             await profile({ documentsData: true })
+            
+            toast.success("Documento adicionado com sucesso")
 
         }catch(err: AxiosError | unknown){
             if(err instanceof AxiosError){

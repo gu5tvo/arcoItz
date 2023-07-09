@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useUser } from '../../hooks/contexts';
 import { ContainerProfile, UserGradient, UserInfos} from './style';
@@ -18,8 +18,32 @@ export default function Profile() {
     openAccordionList.includes(id) ?
       setOpenAccordionList(openAccordionList.filter((el)=> el !== id)) :
       setOpenAccordionList([...openAccordionList, id])
-
   }
+
+  const documentsRef = useRef([]);
+
+  useEffect(() => {
+    if (user && user.documents) {
+      const documentElements = documentsRef.current;
+      let maxHeight = 0;
+
+      documentElements.forEach((element) => {
+        const height = element.clientHeight;
+        if (height > maxHeight) {
+          maxHeight = height;
+        }
+      });
+
+      documentElements.forEach((element) => {
+        element.style.height = `${maxHeight}px`;
+      });
+    }
+  }, [user]);
+
+
+
+
+
 
   useEffect(() => {
     async function loadProfile() {
@@ -155,9 +179,9 @@ export default function Profile() {
             <div className='documents'>
 
               {
-                user?.documents.map((document) => (
+                user?.documents.map((document, index) => (
                   <a href={document.document} target="_blank">
-                    <div className='document'>
+                    <div className='document' ref={(el) => (documentsRef.current[index] = el)}>
                       <div className='document-text'>
                         <h3>{document.name}</h3>
                         <p>{document.description}</p>

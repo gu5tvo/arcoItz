@@ -11,7 +11,7 @@ export const DocumentComponentStyle = styled.div`
 
   .document-name {
     padding: min(10px, 3vw);
-    font-size: clamp(0.7rem, 0.85rem, 1rem);
+    font-size: clamp(0.8rem, 1vw, 1rem);
     background-color: #9ae7f8;
     width: 100%;
     border-radius: 5px;
@@ -24,24 +24,29 @@ export const DocumentComponentStyle = styled.div`
   .description-div {
     display: flex;
     align-items: center;
-    gap: 2.5%;
+    gap: min(13px, 3vw);
     width: 100%;
 
     textarea {
       width: 100%;
       padding: min(10px, 3vw);
       background-color: #00b4d8;
-      flex-basis: 78%;
       border: none;
-      height: 100%;
+      min-height: fit-content;
       border-radius: 7px;
       color: #C5EFF8;
       transition: 0.4s;
+      font-size: clamp(0.7rem, 1vw, 0.9rem);
 
       &:focus{
         outline: none;
         background-color: #0087A3;
       }
+    }
+
+    span {
+      display: flex;
+      gap: min(10px, 3vw);
     }
 
     button {
@@ -78,10 +83,6 @@ export const DocumentComponentStyle = styled.div`
 
   @media (max-width: 699px) {
     .description-div {
-
-      textarea {
-        width: 10
-      }
       flex-wrap: wrap;
       align-items: center;
       justify-content: center;

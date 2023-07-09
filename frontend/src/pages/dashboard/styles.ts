@@ -7,6 +7,7 @@ export const Container = styled.div`
     box-sizing: border-box;
     width: 100%;
     flex-wrap: wrap;
+    gap: min(30px, 5vh);
 `
 export const LeftContainer = styled.div`
     align-self: flex-start;
@@ -48,7 +49,10 @@ export const LeftContainer = styled.div`
 export const RightContainer = styled.div`
     width: min(90vw, 800px);
     height: fit-content;
-    padding: 2em;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `
 
 export const DisplayContainer = styled.div`
@@ -58,7 +62,6 @@ export const DisplayContainer = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 0 auto;
     width: 80%;
     border-radius: 0.5rem;
     box-shadow: 0 0 60px rgba(0, 0, 0, 0.09);
