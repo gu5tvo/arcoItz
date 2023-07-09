@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import DinamicHeader from '../../components/header'
 import { useUser, useAdmin } from '../../hooks/contexts'
-import { SearchContainer } from './styles'
+import { SearchContainer, customSelectStyles } from './styles'
 import pfp from '../../assets/profile-picture.svg'
 import { titles, pages } from '../../utils/search'
 import Select from 'react-select'
@@ -115,16 +115,16 @@ export default function SearchPage(){
                     <h2>Filtrar buscas</h2>
                     <span>
                         <label>Buscar por cidade</label>
-                        <Select onChange={(el)=>setCity(el.value.toLowerCase())} options={cityOptions} placeholder="Escolher cidade"/>
+                        <Select onChange={(el)=>setCity(el.value.toLowerCase())} options={cityOptions} placeholder="Escolher cidade" styles={customSelectStyles}/>
                     </span>
                     <span>
                         <label>Buscar por área</label>
-                        <Select onChange={(el)=>setArea(el.value.toLowerCase())} options={areaOptions} placeholder="Escolher área"/>
+                        <Select onChange={(el)=>setArea(el.value.toLowerCase())} options={areaOptions} placeholder="Escolher área" styles={customSelectStyles}/>
                     </span>
 
                     <span>
                         <label>Número de perfis por página</label>
-                        <Select onChange={(el)=>setAmount(Number(el.value))} options={pages} placeholder="Número de perfis"/>
+                        <Select onChange={(el)=>setAmount(Number(el.value))} options={pages} placeholder="Número de perfis" styles={customSelectStyles}/>
                     </span>
 
                     <button onClick={listiUsersForm}>Aplicar filtros</button>

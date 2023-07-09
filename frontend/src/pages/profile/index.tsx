@@ -29,7 +29,7 @@ export default function Profile() {
     loadProfile();
   }, [displayProfile, id]);
 
-  console.log(user)
+
   
   return (
     <ContainerProfile>
