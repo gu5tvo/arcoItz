@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { ModalFog, ModalContainer, ModalHeader, ModalBody } from './style';
-import { useAdmin, useDocuments, useModal, useUser } from '../../hooks/contexts';
-
+import { useDocuments } from '../../hooks/contexts';
+import { useUser } from '../../hooks/contexts';
 import removeIconFormation from "../../assets/removeIconFormation.svg";
 import { v4 as uuidv4 } from 'uuid';
 import { iDocuments } from "../../../../frontend/src/interfaces/users";
@@ -11,7 +11,7 @@ export default function PictureModal(): JSX.Element {
   const { setModalDisplay, registerDocument  } = useDocuments();
   const [confirmScreen, setConfirmScreen] = useState<boolean>(false);
   const [fileLocal ,  setfileLocal] = useState<File>(null);  
-
+  const { user } = useUser()
 
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -32,6 +32,7 @@ export default function PictureModal(): JSX.Element {
     axios.post(`https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`, formData)
       .then((res) => {
 
+        setModalDisplay(false)
         const data : iDocuments = {
           id: uuidv4(),
           name: file.name,
@@ -67,14 +68,14 @@ export default function PictureModal(): JSX.Element {
                 setfileLocal(event.target.files[0])
                 setConfirmScreen(true);
                 }} title=' ' id="file" />
-              <text>Ou arraste um arquivo pra esta área</text>
+              <p>Ou arraste um arquivo pra esta área</p>
             </>
           }
           { 
             confirmScreen &&
             <>
               <h3>Arquivo selecionado, deseja salvar?</h3>
-              <text>{fileLocal.name}</text>
+              <p>{fileLocal.name}</p>
               <button onClick={() => makeUpload(fileLocal)}>Salvar</button>
             </>
           }

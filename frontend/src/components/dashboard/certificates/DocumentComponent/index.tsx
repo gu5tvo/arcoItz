@@ -13,9 +13,7 @@ export default function DocumentComponent( { name , description}){
             </div>
             <div className="description-div">
 
-                <textarea name="" id="" placeholder="Descrição">
-                    {(description === "..." ? "" : description)}
-                </textarea>
+                <textarea name="" id="" placeholder="Descrição" defaultValue={(description === "..." ? "" : description)}/> 
 
                 <button className="salve-button">Salvar</button>
 

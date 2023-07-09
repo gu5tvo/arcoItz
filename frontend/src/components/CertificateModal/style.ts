@@ -62,7 +62,7 @@ export const ModalBody = styled.div`
 
 
 
-    text{
+    p{
         font-size: 1.2rem;
     }
 

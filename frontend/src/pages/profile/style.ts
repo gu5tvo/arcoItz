@@ -41,7 +41,7 @@ export const UserGradient = styled.div`
   background-origin: border-box;
   background-clip: border-box;
   
-  padding: 90px 20px 20px 20px;
+  padding: 30px 20px 20px 20px;
   color: white;
   display: flex;
   flex-direction: column;
@@ -242,6 +242,7 @@ export const UserInfos = styled.section`
 
   .documents{
     display: flex;
+    justify-content: center;
     gap: min(10px, 4vh);
     flex-wrap: wrap;
   }

@@ -1,22 +1,18 @@
-import React, { useContext, useState } from "react";
-import { IconsDivStyle, Label } from "../styles";
+import React from "react";
+import { Label } from "../styles";
 import { CertificatesScreenStyle } from "./style";
 import { useDocuments, useUser } from "../../../hooks/contexts";
-import { DocumentsContext } from "../../../context/documents.context";
 import DocumentComponent from "./DocumentComponent";
-
 
 export default function CertificatesScreen(): JSX.Element {
 
 
   const { documents } = useUser();
   const { setModalDisplay } = useDocuments();
-  console.log(documents);
  
   function displayModalDocument(){
      setModalDisplay(true);
   }
-
 
   const graduationComponents = Array.from({ length: documents.length }, (_, index) => (
     <DocumentComponent key={index} 
