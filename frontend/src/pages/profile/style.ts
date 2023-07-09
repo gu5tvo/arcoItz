@@ -360,6 +360,10 @@ export const UserInfos = styled.section`
       line-height: 40px;
       font-size: 24px; 
       cursor: pointer;
+      
+      &:hover {
+        filter: invert(1)
+      };
     }
 
     .wrapper {

@@ -129,22 +129,12 @@ export default function Profile() {
           <span className="infos-section">
             <h2>Formações Acadêmicas:</h2>
             <hr/>
-            <div className="experience">
-              <h3>Técnica de Automação Industrial <span>06/2018 — 10/2021</span></h3>
-              <span className={`wrapper ${openAccordionList.includes("fafa") ? 'open' : ''}`}>
-                <div className="details">
-                  <h4>Companhia: <span>Empresa do Manu</span></h4>
-                  <p>Atuei nesta empresa como Técnica em automação industrial e todas as demais da função, eu também pude ter experiências com Automação eletromecânica e etc...</p>
-                </div>
-              </span>
-              <span onClick={()=>handleAccordionClick("fafa")} className="clicker">+</span>
-            </div>
-
             {
-              user?.courses.map((course) => (
-                <div key={course.id} className="course">
-                <h3>{course.name}<span>{course.from} — {course.to}</span></h3>
-                <span className={`wrapper ${openAccordionList.includes(course.id) ? 'open' : ''}`}>
+              user?.courses.map((course) => {
+                
+                return <div key={course.id} className="experience">
+                  <h3>{course.name}<span>{course.from} { course.to && `— ${course.to}`}</span></h3>
+                  <span className={`wrapper ${openAccordionList.includes(course.id) ? 'open' : ''}`}>
                   <div className="details">
                     <h4>Instituição: <span>{course.institution}</span></h4>
                     <p>{course.description}</p>
@@ -152,7 +142,7 @@ export default function Profile() {
                   </span>
                   <span onClick={()=>handleAccordionClick(course.id)} className="clicker">+</span>
                 </div>
-              ))
+              })
             }
           </span>
 
