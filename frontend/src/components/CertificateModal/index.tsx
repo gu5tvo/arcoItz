@@ -22,6 +22,7 @@ export default function PictureModal(): JSX.Element {
   };
 
   const makeUpload = async (file: File) => {
+
     const preset_key = "ml_default";
     const cloud_name = "dtnsz5wcw";
     const formData = new FormData();

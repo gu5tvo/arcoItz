@@ -5,7 +5,7 @@ import { useUser, useAdmin } from "../../hooks/contexts";
 import menuIcon from '../../assets/ham-btn.svg'
 import  { Link, useNavigate }  from "react-router-dom";
 
-export default function DinamicHeader(
+export default function DynamicHeader(
     {startBtn = false, loginBtn = false, registerBtn = false,
      profileBtn = false, logoutBtn = false, adminLogoutBtn = false,
      searchBtn = false, adminPanel = false
@@ -13,7 +13,7 @@ export default function DinamicHeader(
 
     const navigate = useNavigate();
 
-    const { isAuthenticated: userAuthenticated, logout } = useUser();
+    const { isAuthenticated: userAuthenticated, logout, user } = useUser();
     const { isAuthenticated: adminAuthenticated, adminLogout } = useAdmin();
     const [showMenu, setShowMenu] = useState(false);
 
@@ -72,7 +72,7 @@ export default function DinamicHeader(
                     {startBtn && <UndecoratedLink to="/">Início</UndecoratedLink>}
                     {searchBtn && <UndecoratedLink to="/search">Buscar currículos</UndecoratedLink>}
                     {betterMenu()}
-                    {profileBtn && <UndecoratedLink to="/profile">Acessar meu perfil</UndecoratedLink>}
+                    {profileBtn && <UndecoratedLink to={`/profile/${user.id}`}>Acessar meu perfil</UndecoratedLink>}
                     {logoutBtn && <FilledBtn onClick={onLogout}>Desconectar</FilledBtn>}
                     {adminLogoutBtn && <FilledBtn onClick={onLogout}>Desconectar</FilledBtn>}
                 </nav>

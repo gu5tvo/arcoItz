@@ -171,8 +171,6 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
           'Authorization': `Bearer ${retrievedToken}`
         }
       });
-
-      console.log(documentsData)
       
       if (userData) setUser(response.data);
       if (skillsData) setSkills(response.data.skills);

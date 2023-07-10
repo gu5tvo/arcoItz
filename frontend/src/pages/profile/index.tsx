@@ -141,10 +141,6 @@ export default function Profile() {
             <h2>Habilidades e competências:</h2>
             <hr/>
             <div className='skills'>
-              <div className='skill'>Social Media</div>
-              <div className='skill'>NodeJS</div>
-              <div className='skill'>React.js</div>
-              <div className='skill'>Pacote Office Completo</div>
               {
                 user?.skills.map((skill) => (
                   <div key={skill.id} className='skill'>

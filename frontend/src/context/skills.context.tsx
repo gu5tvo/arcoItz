@@ -4,6 +4,7 @@ import api from "../utils/axios";
 import { iSkills } from "../interfaces/users";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
+import retrieveToken from "../utils/user/retrieveToken";
 
 export const SkillsContext = createContext({
     registerSkill: (data: iSkills) => {},
@@ -12,13 +13,20 @@ export const SkillsContext = createContext({
 
 export const SkillsProvider = ({ children } : {children: JSX.Element}) => {
 
-    const { token, skills, setSkills } = useUser()
+    const { token, skills, setSkills, profile } = useUser()
     api.defaults.headers.Authorization = `Bearer ${token}`
 
     const registerSkill = useCallback( async (data: iSkills) => {
         try{
-            const {data: skill} = await api.post('/skill', data) as {data: iSkills}
-            setSkills([...skills, skill])
+            const token = retrieveToken()
+            await api.post('/skill', data, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }) as {data: iSkills}
+            
+            profile({ skillsData: true })
+            toast.success("Habilidade adicionada com sucesso")
         }catch(err: AxiosError | unknown){
             if(err instanceof AxiosError){
                 toast.error(err.response?.data.message as string)
@@ -30,10 +38,16 @@ export const SkillsProvider = ({ children } : {children: JSX.Element}) => {
 
     const deleteSkill = useCallback( async (id: string) => {
         try{
-            await api.delete(`/skill/${id}`)
-            const index = skills.findIndex(skill => skill.id === id)
-            skills.splice(index, 1)
-            setSkills([...skills])
+            const token = retrieveToken()
+            await api.delete(`/skill/${id}`, {
+                headers: {
+                    'Authorization': `Beraer ${token}`
+                }
+            })
+            
+            profile({ skillsData: true })
+            toast.success("Habilidade deletada com sucesso")
+
         }catch(err: AxiosError | unknown){
             if(err instanceof AxiosError){
                 toast.error(err.response?.data.message as string)

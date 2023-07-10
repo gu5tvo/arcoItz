@@ -49,7 +49,7 @@ export interface iDocuments {
 }
 
 export interface iSkills{
-    id: string;
+    id?: string;
     name: string;
 }
 

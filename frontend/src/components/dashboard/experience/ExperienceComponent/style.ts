@@ -78,7 +78,7 @@ export const ExperienceStyle = styled.form`
 
     button {
         all: unset;
-        background-color: #00B4D8;
+        background-color: #00417D;
         transition: 0.2s linear;
         padding: min(10px, 3vw);
         border-radius: min(20px, 4vw);
