@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ContainerProfile = styled.main`
-  height: 100vh;
+  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -12,7 +12,7 @@ export const ContainerProfile = styled.main`
 
   .content {
     display: grid;
-    width: min(100%, 1800px);
+    width: 100%;
     height: 100%;
     align-items: flex-start;
     justify-content: center;
@@ -46,6 +46,7 @@ export const UserGradient = styled.div`
   display: flex;
   flex-direction: column;
   gap: min(40px, 20vh);
+  justify-content: space-between;
 
   &::before {
     border-radius: 50% 50% 0 0;
@@ -97,6 +98,7 @@ export const UserGradient = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-bottom: min(60px, 20vh);
 
     .profile-info{
       display: flex;
@@ -106,15 +108,17 @@ export const UserGradient = styled.div`
       gap: min(15px, 4vh);
       width: 100%;
       
-      span {
-        text-align: center;
-        font-size: clamp(0.6rem, 2vw, 0.8rem);
-        background-color: #fff;
-        color: black;
-        padding: min(8px, 2vw);
-        border-radius: min(14px, 4vw);
-        font-weight: bold;
-        width: 100%
+      .social-media{
+        display: flex;
+        gap: min(10px, 2vw);
+        justify-content: center;
+        align-items: center;
+
+        a{
+          img{
+            width: min(40px, 5vw);
+          }
+        }
       }
     }
 
@@ -141,7 +145,7 @@ export const UserGradient = styled.div`
       display: none;
   }
   @media (max-width: 899px) {
-    width: 100vw; 
+    width: 100%; 
     height: auto;
     border: none;
     background: none;
@@ -172,6 +176,7 @@ export const UserGradient = styled.div`
     }
 
     .profile-contact {
+      margin-bottom: 0;
 
       .profile-info {
         span {

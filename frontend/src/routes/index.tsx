@@ -27,7 +27,6 @@ export default function MakeRoutes(){
             <Route path="/login" element={<LoginPage/>} />
             <Route path="/register" element={<RegisterPage/>} />
             <Route path="/search" element={<SearchPage/>} />
-            <Route path="/l" element={<UserDashboardPage/>} />
             <Route path="/profile/:id" element={<Profile/>} />
             <Route path="/dashboard/*" element={<ProtectedRoute path="/dashboard" element={UserDashboardPage} isPrivate redirectTo="/login" />} />
             <Route path="/reset/*" element={<ResetPage/>}/>

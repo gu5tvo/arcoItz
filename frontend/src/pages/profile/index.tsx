@@ -5,6 +5,9 @@ import { ContainerProfile, UserGradient, UserInfos} from './style';
 import { iUserComplete } from '../../interfaces/users';
 import DefaultPicture from '../../assets/profile-picture.svg'
 import pdfIcon from '../../assets/icon_PDF.svg'
+import linkedinIcon from '../../assets/linkedin.svg'
+import instagramIcon from '../../assets/instagram.svg'
+import portifolioIcon from '../../assets/portifolio.svg'
 
 export default function Profile() {
   const { displayProfile } = useUser();
@@ -75,9 +78,11 @@ export default function Profile() {
             <div className='profile-info'>
               <h3>{user?.email}</h3>
               <h3>{user?.phone}</h3>
-              { user?.linkedin && <span>{user?.linkedin}</span> } 
-              { user?.portfolio && <span>{user?.portfolio}</span> } 
-              { user?.instagram && <span>{user?.instagram}</span> } 
+              <div className='social-media'>
+              { user?.linkedin && <a href={user?.linkedin}><img src={linkedinIcon}/></a> } 
+              { user?.portfolio && <a href={user?.portfolio}><img src={portifolioIcon}/></a> }
+              { user?.instagram && <a href={user?.instagram}><img src={instagramIcon}/></a>}
+              </div>
             </div>
           </div>
         </UserGradient>
