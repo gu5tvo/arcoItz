@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import DinamicHeader from "../../components/header";
 import {RegisterContainer, RegisterForm, ErrorText} from "./styles";
 import { useForm } from "react-hook-form";
@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import registerSchema from "../../schemas/register";
 import { useUser } from "../../hooks/contexts";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface RegisterData {
     name: string,
@@ -17,13 +18,19 @@ interface RegisterData {
 export default function RegisterPage(): JSX.Element{
 
     const { register, handleSubmit, trigger, formState: { errors } } = useForm({resolver: yupResolver(registerSchema)});
-    const { registerUser } = useUser();
+    const { registerUser, isAuthenticated, profile } = useUser();
     document.title = "Cadastre-se | DiversiTrampos";
+    const navigate = useNavigate()
 
     const onRegister = handleSubmit(async (formData: RegisterData) => {
         await trigger();
         registerUser(formData);
       })
+
+    useEffect(()=> {
+        profile({ showError: false })
+        if (isAuthenticated) navigate('/dashboard')
+    }, [isAuthenticated])
 
     return (
         <>

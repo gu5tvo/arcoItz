@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DinamicHeader from "../../components/header";
 import {LoginContainer, LoginForm, ErrorText} from "./styles";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import loginSchema from "../../schemas/login";
 import { useUser } from "../../hooks/contexts";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import LoginFooter from "./Footer";
+import Profile from "../profile";
 
 interface LoginData {
     email: string,
@@ -16,11 +17,17 @@ interface LoginData {
 
 export default function LoginPage(): JSX.Element{
 
-    const { login } = useUser()
+    const { login, isAuthenticated, profile } = useUser()
+    const navigate = useNavigate()
 
     const { register, trigger, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(loginSchema)
     });
+
+    useEffect(()=> {
+        profile({ showError: false })
+        if (isAuthenticated) navigate('/dashboard')
+    }, [isAuthenticated])
 
     const onLogin = handleSubmit(async (formData: LoginData) => {
         await trigger();
@@ -30,7 +37,7 @@ export default function LoginPage(): JSX.Element{
     document.title = "Entrar | DiversiTrampos";
     return (
         <>
-            <DinamicHeader startBtn={true} searchBtn={true} registerBtn={true}/>
+            <DinamicHeader startBtn searchBtn registerBtn/>
             <LoginContainer>
                 <LoginForm onSubmit={onLogin}>
                     <h2>Entrar</h2>

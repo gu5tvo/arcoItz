@@ -27,7 +27,7 @@ export const UserContext = createContext<{
   login: (data: iLogin) => void;
   logout: () => void;
   registerUser: (data: iRegister) => void;
-  profile: ({ userData, coursesData, documentsData, experiencesData, skillsData}: SetProfileOptions) => Promise<void>;
+  profile: ({ userData, coursesData, documentsData, experiencesData, skillsData, showError }: SetProfileOptions) => Promise<void>;
   displayProfile: (id: string) => Promise<iUserComplete>;
   updateProfile: (data: iUserSimple) => void;
   deleteSelf: () => void;
@@ -115,7 +115,8 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
     setToken('');
     setIsAuthenticated(false);
     api.defaults.headers.Authorization = '';
-    localStorage.removeItem('token');
+    localStorage.removeItem('@token');
+    sessionStorage.removeItem('@token');
     toast.success('Logout realizado com sucesso! Volte sempre!');
     navigate('/login');
   }, []);
@@ -161,7 +162,7 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
     }
   }, []);
 
-  const profile = useCallback(async ({ userData, coursesData, documentsData, skillsData, experiencesData}: SetProfileOptions) => {
+  const profile = useCallback(async ({ userData, coursesData, documentsData, skillsData, experiencesData, showError = true }: SetProfileOptions) => {
 
     try {
       const retrievedToken: string = retrieveToken()
@@ -180,6 +181,7 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
       
       setIsAuthenticated(true)
     } catch (err: AxiosError | unknown) {
+      if (!showError) return;
       if (err instanceof AxiosError) {
         toast.error(err.response?.data.message as string);
       } else {

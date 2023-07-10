@@ -80,7 +80,7 @@ export default function SearchPage(){
       }, [cities, sectors]);
     
     return (<>
-        <DinamicHeader startBtn loginBtn logoutBtn/>
+        <DinamicHeader startBtn loginBtn registerBtn/>
         <SearchContainer>
             <h1>Buscar currículos</h1>
             <main>

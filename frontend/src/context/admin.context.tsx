@@ -23,7 +23,7 @@ export const AdminContext = createContext<
         cities: iCity[],
         setCities: React.Dispatch<React.SetStateAction<iCity[]>>,
         adminLogin: (data: iAdminLogin) => Promise<void>,
-        adminSelf: () => Promise<void>,
+        adminSelf: (showError?: boolean) => Promise<void>,
         adminLogout: () => void,
         adminList: () => Promise<void>,
         adminRegister: (data: iAdminRegister) => Promise<void>,
@@ -83,7 +83,7 @@ export const AdminContext = createContext<
 export const AdminProvider = ({ children }: { children: JSX.Element }) => {
     const [token, setToken] = React.useState<string>('')
     
-    const adminSelf = useCallback(async () => {
+    const adminSelf = useCallback(async (showError: boolean = true) => {
         try{
             const retrievedToken: string = retrieveToken()
 
@@ -96,6 +96,8 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
             setAdmin(admin.data)
             setIsAuthenticated(true)
         }catch(err: AxiosError | unknown){
+            if (!showError) return
+
             if(err instanceof AxiosError){
                 toast.error(err.response?.data.message as string)
             }else{

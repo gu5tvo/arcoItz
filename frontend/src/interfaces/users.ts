@@ -87,5 +87,6 @@ export interface SetProfileOptions {
     skillsData?: boolean,
     coursesData?: boolean,
     experiencesData?: boolean,
-    documentsData?: boolean
+    documentsData?: boolean,
+    showError?: boolean
 }

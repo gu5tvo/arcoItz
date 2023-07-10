@@ -48,13 +48,11 @@ export const ButtonsContainer = styled.div`
 
     @media (min-width: 769px) {
       grid-template-columns: 1fr 1fr 1fr;
-
-      :nth-child(4) {
-        grid-column: 2 / span 1;
-      }
     }
     
-  
+  .last {
+    grid-column: 2 / span 1;
+  }
 
   
 ` 

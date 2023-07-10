@@ -110,11 +110,6 @@ export default function SearchPage(){
         setUserId(id)
     }
 
-    const onEdit = (e: React.MouseEvent<SVGSVGElement, MouseEvent>)=> {
-        toggleModal('edit')
-        e.stopPropagation()
-    }
-
     const onDelete = (e: React.MouseEvent<SVGSVGElement, MouseEvent>, name: string, id: string)=> {
         toggleModal('delete')
         e.stopPropagation()
@@ -166,7 +161,7 @@ export default function SearchPage(){
                             <div className="basic-infos">
                                 <span>
                                     <h2>{names}</h2>
-                                    <p>{user.pronnouns}</p>
+                                    <p>{user.pronouns}</p>
                                 </span>
                                 <p>{user.title}</p>
                                 {user.area && <p>Área: {user.area}</p>}
@@ -174,7 +169,6 @@ export default function SearchPage(){
 
                             <div className='action-icons'>
                                 <TrashIcon className="trash-icon" onClick={(e)=>onDelete(e, user.name, user.id)} />
-                                <PenIcon className="pen-icon" onClick={(e)=>onEdit(e)} />
                                 <BanIcon className={`ban-icon ${user.isBanned ? 'banned' : ''}`} onClick={(e)=>onBan(e, user.name, user.id, user.isBanned)} />
                             </div>
                             

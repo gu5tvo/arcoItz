@@ -7,7 +7,6 @@ import { useAdmin } from '../../../hooks/contexts';
 import DeleteCityModal from './DeleteModal';
 import CreateModal from './CreateModal';
 import AddIcon from '.././../../assets/add.svg'
-import { Navigate } from "react-router-dom";
 
 interface ModalOptions {
     choice: 'add' | 'delete' | null
@@ -47,7 +46,7 @@ export default function Cities() {
 
     return (
         <>
-         <DinamicHeader logoutBtn adminPanel/>
+         <DinamicHeader logoutBtn adminPanel />
              <CitiesContainer>
                 <h1>Cidades</h1>
                 <img className='plus-icon' src={AddIcon} onClick={onAdd}/>

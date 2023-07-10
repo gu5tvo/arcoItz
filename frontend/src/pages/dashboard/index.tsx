@@ -22,7 +22,7 @@ export default function UserDashboardPage(): JSX.Element {
 
     return (
         <>
-            <DinamicHeader startBtn={true} profileBtn={true} logoutBtn={true} />
+            <DinamicHeader startBtn profileBtn logoutBtn onDashboard />
             <Container>
                 <LeftContainer>
                     <Selections actual="profile" selected={display} onClick={()=> setDisplay('profile')}>
