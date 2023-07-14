@@ -25,5 +25,7 @@ app.use('/skill', skillRouter)
 app.use('/experience', experienceRouter)
 app.use('/course', coursesRouter)
 
+// linkdobackend.com/skill/
+
 app.use(errorHandler)
 export default app;
