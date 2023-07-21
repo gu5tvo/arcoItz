@@ -8,7 +8,6 @@ import removeIconFormation from "../../assets/removeIconFormation.svg";
 export default function PictureModal(): JSX.Element {
   const { setPicture, request } = useModal();
   const { updateProfile } = useUser();
-  const { adminUpdate } = useAdmin();
   const [confirmScreen, setConfirmScreen] = useState<boolean>(false);
   const [fileLocal ,  setfileLocal] = useState<File>(null);  
 

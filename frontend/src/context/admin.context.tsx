@@ -6,6 +6,17 @@ import { iAdmin, iAdminLogin, iAdminRegister, iSectors, iCity, iAdminEdit, iList
 import api from "../utils/axios";
 import retrieveToken from "../utils/admin/retrieveToken";
 
+/*
+    Contextos não utilizados:
+        adminUpdateUsers: (id: string, data: iUserSimple),
+        adminDeleteCourse: (id: string),
+        adminDeleteSkill: (id: string),
+        adminDeleteDocument: (id: string),
+        adminDeleteExperience: (id: string)
+
+    Motivo: administradores não serão capazes de modificar o perfil dos usuários dessa forma
+ */
+
 export const AdminContext = createContext<
     {
         token: string,
@@ -82,7 +93,7 @@ export const AdminContext = createContext<
 
 export const AdminProvider = ({ children }: { children: JSX.Element }) => {
     const [token, setToken] = React.useState<string>('')
-    
+
     const adminSelf = useCallback(async (showError: boolean = true) => {
         try{
             const retrievedToken: string = retrieveToken()
@@ -286,7 +297,7 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
       const adminUpdateUsers = useCallback(async (id: string, data: iUserSimple) => {
         try{
             const token = retrieveToken()
-            const response = await api.patch(`/users/${id}`, data, {
+            const response = await api.patch(`/admin/users/${id}`, data, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -354,7 +365,7 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
 
         const deleteSectors = useCallback(async (id: string) => {
             try{
-                await api.delete(`/sector/${id}`)
+                await api.delete(`/admin/sector/${id}`)
                 const updatedSectors: iSectors[] = sectors.filter(sector => sector.id !== id)
                 setSectors(updatedSectors)
             }catch(err: AxiosError | unknown){

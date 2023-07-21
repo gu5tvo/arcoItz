@@ -40,6 +40,7 @@ export async function displayAllUsersController(req: Request, res: Response): Pr
     const query = req.query as { page: string, amount: string, city: string, title: string, area: string }
 
     const response = await displayAllUsersService({ ...query });
+
     return res.status(200).json(response);
 }
 

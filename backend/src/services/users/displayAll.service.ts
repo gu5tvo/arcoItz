@@ -29,7 +29,7 @@ export default async function displayAllUsersService({ city, area, title, amount
     if (city) query.city = city
     if (area) query.area = area
     if (title) query.title = new RegExp(title, 'i')
-
+    
     const users = await User.find(query)
                             .select('-password').skip(skip).limit(pageSizeNumber);
 
