@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 const courseSchema = new mongoose.Schema({
     id:{
         type: String,
-        default: uuidv4()
+        default: uuidv4
     },
     name:{
         type: String,
@@ -22,11 +22,19 @@ const courseSchema = new mongoose.Schema({
         type: String,
         required: false
     },
-    description:{
+    status: {
+        type: String,
+        required: true
+    },
+    description: {
         type: String,
         required: false
     },
     ownerId: {
+        type: String,
+        required: true
+    },
+    type: {
         type: String,
         required: true
     }

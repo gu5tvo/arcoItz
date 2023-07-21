@@ -13,4 +13,8 @@ export const resetSchema = yup.object().shape({
     password: yup.string().required().matches(/^(?=.*[@!#$%&*])(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@!#$%&*]{8,}$/)
 })
 
+export const tokenValidationSchema = yup.object().shape({
+    token: yup.string().required()
+})
+
 export default loginSchema;

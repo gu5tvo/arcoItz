@@ -1,5 +1,5 @@
 import User from "../../model/user.model";
-import { iDisplayAll } from "../../interfaces/user.interface";
+import { iDisplayAll, iDisplayAllProps } from "../../interfaces/user.interface";
 
 //Algorítmo que faz a ordem de usuáros serem exibidos em ordem aleatória, 
 //para que não haja uma ordem de exibição padrão.
@@ -11,24 +11,25 @@ function randomizaUsuários(array) {
     return array;
   }
 
-export default async function displayAllUsersService(pageNumber: string, pageSize: string, city: string): Promise<iDisplayAll> {
-    const pageNumberNumber = parseInt(pageNumber);
-    const pageSizeNumber = parseInt(pageSize);
+export default async function displayAllUsersService({ city, area, title, amount, page}: iDisplayAllProps): Promise<iDisplayAll> {
+    const pageNumberNumber = parseInt(page);
+    const pageSizeNumber = parseInt(amount);
 
     //Algoritmo que gera uma 'seed' de paginação, mantendo consistência nos resultados.
     let actualPage, actualPageSize;
-    pageNumber ? actualPage = pageNumberNumber : actualPage = 1;
-    pageSize ? actualPageSize = pageSizeNumber : actualPageSize = 10;
+    page ? actualPage = pageNumberNumber : actualPage = 1;
+    amount ? actualPageSize = pageSizeNumber : actualPageSize = 10;
     const skip = (actualPage - 1) * actualPageSize;
 
     const query = {
         isBanned: false,
         isActive: true,
-        if(city) {
-            city: city
-        }
-    }
+    } as { isBanned: boolean, isActive: boolean, city: string, area: string, title: RegExp }
 
+    if (city) query.city = city
+    if (area) query.area = area
+    if (title) query.title = new RegExp(title, 'i')
+    
     const users = await User.find(query)
                             .select('-password').skip(skip).limit(pageSizeNumber);
 

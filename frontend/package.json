@@ -1,7 +1,9 @@
 {
   "name": "frontend",
   "version": "0.0.0",
-  "type": "module",
+  "author": "TechJr Ifma",
+  "license": "MIT",
+  "private": true,
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -9,28 +11,32 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.11.2",
-    "styled-components": "^6.0.0-rc.1",
+    "@ant-design/icons": "^5.1.4",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@hookform/resolvers": "^3.1.0",
     "axios": "^1.4.0",
+    "csstype": "^3.1.2",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
     "react-hook-form": "^7.43.9",
     "react-hot-toast": "^2.4.1",
+    "react-input-mask": "^2.0.4",
     "react-modal": "^3.16.1",
+    "react-router-dom": "^6.11.1",
+    "react-select": "^5.4.3",
+    "react-text-mask": "^5.5.0",
+    "react-toastify": "^9.1.3",
+    "styled-components": "^5.0.0",
+    "uuid": "^9.0.0",
     "yup": "^1.1.1"
   },
   "devDependencies": {
-    "@types/react": "^18.0.28",
-    "@types/react-dom": "^18.0.11",
-    "@typescript-eslint/eslint-plugin": "^5.57.1",
-    "@typescript-eslint/parser": "^5.57.1",
-    "@vitejs/plugin-react": "^4.0.0",
-    "eslint": "^8.38.0",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.3.4",
-    "typescript": "^5.0.2",
-    "vite": "^4.3.2",
-    "vite-plugin-react": "^4.0.0"
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "typescript": "^4.1.2",
+    "vite": "^1.0.0-rc.13",
+    "vite-plugin-react": "^4.0.0",
+    "yarn-upgrade-all": "^0.7.2"
   }
 }

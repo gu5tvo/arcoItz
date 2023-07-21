@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="add-icon" width="500" height="500" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g clip-path="url(#clip0_296_2)">
+            <rect width="500" height="500"/>
+            <circle cx="250" cy="250" r="235" stroke="#171616" stroke-width="30"/>
+            <rect x="235" y="100" width="30" height="300" rx="15" fill="black"/>
+            <rect x="100" y="265" width="30" height="300" rx="15" transform="rotate(-90 100 265)" fill="black"/>
+        </g>
+        <defs>
+            <clipPath id="clip0_296_2">
+            <rect width="500" height="500"/>
+            </clipPath>
+        </defs>
+    </symbol>
+
+</svg>

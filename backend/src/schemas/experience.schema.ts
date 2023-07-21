@@ -3,7 +3,7 @@ import * as yup from 'yup';
 export const registerExperience = yup.object().shape({
     title: yup.string().required(),
     company: yup.string().required(),
-    location: yup.string().required(),
+    location: yup.string(),
     from: yup.string().required(),
     to: yup.string(),
     description: yup.string(),

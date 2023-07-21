@@ -1,20 +1,21 @@
 import React, { useState, useCallback, createContext, useEffect } from 'react';
-import { toast } from 'react-hot-toast';
+import { toast } from"react-toastify";
 import { useNavigate } from 'react-router-dom';
 import { 
-  iUserComplete, iUserSimple, iLogin, iRegister, iCourses, iDocuments, iExperiences, iSkills
+  iUserComplete, iUserSimple, iLogin, iRegister, iCourses, iDocuments, iExperiences, iSkills, iUsersPage, SetProfileOptions
 } from '../interfaces/users';
 import api from '../utils/axios';
 import { AxiosError } from 'axios';
+import retrieveToken from '../utils/user/retrieveToken';
 
 export const UserContext = createContext<{
   user: iUserComplete | undefined;
   setUser: React.Dispatch<React.SetStateAction<iUserComplete | undefined>>;
   skills: iSkills[] | undefined;
   setSkills: React.Dispatch<React.SetStateAction<iSkills[] | undefined>>;
-  courses: iCourses[] | undefined;
+  courses: iCourses[];
   setCourses: React.Dispatch<React.SetStateAction<iCourses[] | undefined>>;
-  experiences: iExperiences[] | undefined;
+  experiences: iExperiences[];
   setExperiences: React.Dispatch<React.SetStateAction<iExperiences[] | undefined>>;
   documents: iDocuments[] | undefined;
   setDocuments: React.Dispatch<React.SetStateAction<iDocuments[] | undefined>>;
@@ -22,24 +23,27 @@ export const UserContext = createContext<{
   setToken: React.Dispatch<React.SetStateAction<string>>;
   isAuthenticated: boolean;
   setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
+  usersList: iUserSimple[];
   login: (data: iLogin) => void;
   logout: () => void;
-  register: (data: iRegister) => void;
-  profile: () => void;
-  displayProfile: (id: string) => void;
+  registerUser: (data: iRegister) => void;
+  profile: ({ userData, coursesData, documentsData, experiencesData, skillsData, showError }: SetProfileOptions) => Promise<void>;
+  displayProfile: (id: string) => Promise<iUserComplete>;
   updateProfile: (data: iUserSimple) => void;
   deleteSelf: () => void;
-  listUsersPage: (page: number, amount: number, city: string) => void;
+  listUsersPage: ({ page, amount, area, title, city }: iUsersPage) => void;
   forgotPassword: (email: string) => void;
   resetPassword: (token: string, password: string) => void;
+  setUsersList: React.Dispatch<React.SetStateAction<iUserSimple[]>>;
+  validateToken: (token: string) => Promise<void>
 }>({
   user: undefined,
   setUser: () => {},
   skills: undefined,
   setSkills: () => {},
-  courses: undefined,
+  courses: [],
   setCourses: () => {},
-  experiences: undefined,
+  experiences: [],
   setExperiences: () => {},
   documents: undefined,
   setDocuments: () => {},
@@ -47,16 +51,19 @@ export const UserContext = createContext<{
   setToken: () => {},
   isAuthenticated: false,
   setIsAuthenticated: () => {},
+  usersList: [],
+  setUsersList: () => {},
   login: () => {},
   logout: () => {},
-  register: () => {},
-  profile: () => {},
-  displayProfile: () => {},
+  registerUser: () => {},
+  profile: () => Promise.resolve(),
+  displayProfile: () => new Promise(() => []),
   updateProfile: () => {},
   deleteSelf: () => {},
-  listUsersPage: () => {},
+  listUsersPage: () => new Promise(() => []),
   forgotPassword: () => {},
-  resetPassword: () => {}
+  resetPassword: () => {},
+  validateToken: ()=> Promise.resolve(),
 });
 
 export const UserProvider = ({ children }: { children: JSX.Element }) => {
@@ -67,6 +74,7 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
   const [documents, setDocuments] = useState<iDocuments[] | undefined>(undefined);
   const [token, setToken] = useState<string>('');
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [usersList, setUsersList] = useState<iUserSimple[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -75,6 +83,7 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
       setToken(storedToken);
       setIsAuthenticated(true);
       api.defaults.headers.Authorization = `Bearer ${storedToken}`;
+      profile({ userData: true });
     }
   }, []);
 
@@ -85,9 +94,17 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
       setToken(token);
       setIsAuthenticated(true);
       api.defaults.headers.Authorization = `Bearer ${token}`;
-      localStorage.setItem('token', token);
+
+      if (!!data.remember) { 
+        localStorage.setItem('@token', response.data.token) 
+        sessionStorage.removeItem('@token')
+    } else {
+        sessionStorage.setItem('@token', response.data.token)
+        localStorage.removeItem('@token')
+    }
+    
       toast.success('Login realizado com sucesso!');
-      profile();
+      profile({ userData: true });
       navigate('/dashboard');
     } catch (err: any) {
       toast.error(err.response.data.message);
@@ -98,7 +115,8 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
     setToken('');
     setIsAuthenticated(false);
     api.defaults.headers.Authorization = '';
-    localStorage.removeItem('token');
+    localStorage.removeItem('@token');
+    sessionStorage.removeItem('@token');
     toast.success('Logout realizado com sucesso! Volte sempre!');
     navigate('/login');
   }, []);
@@ -130,11 +148,11 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
     }
   },[])
 
-  const register = useCallback(async (data: iRegister) => {
+  const registerUser = useCallback(async (data: iRegister) => {
     try {
-      await api.post('/register', data);
+      await api.post('/users', data);
       toast.success('Cadastro realizado com sucesso!');
-      login({ email: data.email, password: data.password });
+      login({ email: data.email, password: data.password, remember: true });
     } catch (err: AxiosError | unknown) {
       if (err instanceof AxiosError) {
         toast.error(err.response?.data.message as string);
@@ -144,15 +162,26 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
     }
   }, []);
 
-  const profile = useCallback(async () => {
+  const profile = useCallback(async ({ userData, coursesData, documentsData, skillsData, experiencesData, showError = true }: SetProfileOptions) => {
+
     try {
-      const response = await api.get('/users');
-      setUser(response.data);
-      setSkills(response.data.skills);
-      setCourses(response.data.courses);
-      setExperiences(response.data.experiences);
-      setDocuments(response.data.documents);
+      const retrievedToken: string = retrieveToken()
+
+      const response = await api.get('/users', {
+        headers: {
+          'Authorization': `Bearer ${retrievedToken}`
+        }
+      });
+      
+      if (userData) setUser(response.data);
+      if (skillsData) setSkills(response.data.skills);
+      if (coursesData) setCourses(response.data.courses);
+      if (experiencesData) setExperiences(response.data.experiences);
+      if (documentsData) setDocuments(response.data.documents);
+      
+      setIsAuthenticated(true)
     } catch (err: AxiosError | unknown) {
+      if (!showError) return;
       if (err instanceof AxiosError) {
         toast.error(err.response?.data.message as string);
       } else {
@@ -174,9 +203,30 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
     }
   }, []);
 
+
+  const validateToken = useCallback(async (token: string) => {
+    try {
+      const response = await api.get(`/login/${token}`);
+      setUser(response.data)
+
+    } catch (err: AxiosError | unknown) {
+      if (err instanceof AxiosError) {
+        toast.error(err.response?.data.message as string);
+      } else {
+        toast.error('Erro do lado do cliente, tente novamente!');
+      }
+    }
+  }, []);
+
   const updateProfile = useCallback(async (data: iUserSimple) => {
     try {
-      const response = await api.patch('/users', data);
+      const token = retrieveToken()
+
+      const response = await api.patch('/users', data, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       toast.success('Seu perfil foi atualizado!');
       setUser((prevUser) => prevUser ? { ...prevUser, ...response.data } : undefined);
     } catch (err: AxiosError | unknown) {
@@ -203,11 +253,12 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
     }
   }, []);
 
-  const listUsersPage = useCallback(async (page: number = 1, amount: number = 10, city: string) => {
+  const listUsersPage = useCallback(async ({ page, amount, area, city, title }: iUsersPage) => {
     try {
-      const query = city ? `?page=${page}&amount=${amount}&city=${city}` : `?page=${page}&amount=${amount}`;
-      const response = await api.get(`/users${query}`);
-      return response.data;
+
+      const query = `?page=${page}&amount=${amount}&city=${city}&area=${area}&title=${title}`
+      const response = await api.get(`/users/all${query}`);
+      setUsersList(response.data.content);
     } catch (err: AxiosError | unknown) {
       if (err instanceof AxiosError) {
         toast.error(err.response?.data.message as string);
@@ -236,14 +287,17 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
         setIsAuthenticated,
         login,
         logout,
-        register,
+        registerUser,
         profile,
         displayProfile,
         updateProfile,
         deleteSelf,
         listUsersPage,
         forgotPassword,
-        resetPassword
+        resetPassword,
+        usersList,
+        setUsersList,
+        validateToken
       }}
     >
       {children}

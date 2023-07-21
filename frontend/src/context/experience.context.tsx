@@ -3,7 +3,8 @@ import { useUser } from "../hooks/contexts";
 import api from "../utils/axios";
 import { iExperiences } from "../interfaces/users";
 import { AxiosError } from "axios";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
+import retrieveToken from "../utils/user/retrieveToken";
 
 export const ExperienceContext = createContext({
     registerExperience: (data: iExperiences) => {},
@@ -13,13 +14,20 @@ export const ExperienceContext = createContext({
 
 export const ExperienceProvider = ({ children } : {children: JSX.Element}) => {
 
-    const { token, experiences, setExperiences } = useUser()
+    const { token, experiences, setExperiences, profile } = useUser()
     api.defaults.headers.Authorization = `Bearer ${token}`
 
     const registerExperience = useCallback( async (data: iExperiences) => {
         try{
-            const {data: experience} = await api.post('/experience', data) as {data: iExperiences}
-            setExperiences([...experiences, experience])
+            const token = retrieveToken()
+
+            await api.post('/experience', data, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }) as {data: iExperiences}
+            
+            profile({ experiencesData: true })
         }catch(err: AxiosError | unknown){
             if(err instanceof AxiosError){
                 toast.error(err.response?.data.message as string)
@@ -31,10 +39,14 @@ export const ExperienceProvider = ({ children } : {children: JSX.Element}) => {
 
     const updateExperience = useCallback( async (id: string, data: iExperiences) => {
         try{
-            const {data:experience} = await api.patch(`/experience/${id}`, data) as {data: iExperiences}
-            const index = experiences.findIndex(experience => experience.id === id)
-            experiences[index] = experience
-            setExperiences([...experiences])
+            const token = retrieveToken()
+            await api.patch(`/experience/${id}`, data, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }) as {data: iExperiences}
+            
+            profile({ experiencesData: true })
         }catch(err: AxiosError | unknown){
             if(err instanceof AxiosError){
                 toast.error(err.response?.data.message as string)
@@ -46,10 +58,14 @@ export const ExperienceProvider = ({ children } : {children: JSX.Element}) => {
 
     const deleteExperience = useCallback( async (id: string) => {
         try{
-            await api.delete(`/experience/${id}`)
-            const index = experiences.findIndex(experience => experience.id === id)
-            experiences.splice(index, 1)
-            setExperiences([...experiences])
+            const token = retrieveToken()
+            await api.delete(`/experience/${id}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            
+            profile({ experiencesData: true })
         }catch(err: AxiosError | unknown){
             if(err instanceof AxiosError){
                 toast.error(err.response?.data.message as string)

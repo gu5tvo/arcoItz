@@ -4,11 +4,21 @@ import { v4 as uuidv4 } from 'uuid'
 const adminSchema = new mongoose.Schema({
     id: {
         type: String,
-        default: uuidv4()
+        default: uuidv4
+    },
+    avatar: {
+        type: String,
+        required: false
     },
     name: {
         type: String,
         required: true
+    },
+    phone: {
+        type: String,
+    },
+    city: {
+        type: String,
     },
     email: {
         type: String,
@@ -17,6 +27,10 @@ const adminSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    isSuper: {
+        type: Boolean,
+        default: false
     }
 })
 

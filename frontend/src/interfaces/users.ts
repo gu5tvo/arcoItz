@@ -1,6 +1,7 @@
 export interface iLogin {
     email: string;
     password: string;
+    remember: boolean;
 }
 
 export interface iRegister {
@@ -10,23 +11,34 @@ export interface iRegister {
 }
 
 export interface iUserSimple{
-    id: string;
-    avatar: string;
-    name: string;
-    email: string;
-    bio: string | null;
-    area: string | null;
-    address: string | null;
-    title: string | null;
-    number: string | null;
-    gender: string | null;
-    pronnouns: string | null;
-    city: string | null;
-    isActive: boolean;
-    isVerified: boolean;
-    isBanned: boolean;
-    createdAt: Date;
-    updatedAt: Date;
+    id?: string;
+    avatar?: string;
+    name?: string;
+    email?: string;
+    bio?: string | null;
+    area?: string | null;
+    address?: string | null;
+    title?: string | null;
+    phone?: string | null;
+    gender?: string | null;
+    pronouns?: string | null;
+    city?: string | null;
+    isActive?: boolean;
+    isVerified?: boolean;
+    isBanned?: boolean;
+    instagram?: string | null;
+    linkedin?: string | null;
+    portfolio?: string | null;
+    createdAt?: Date;
+    updatedAt?: Date;
+}
+
+export interface iUsersPage {
+    page?: string | number, 
+    amount?: string | number, 
+    city?: string, 
+    area?: string, 
+    title?: string
 }
 
 export interface iDocuments {
@@ -37,22 +49,24 @@ export interface iDocuments {
 }
 
 export interface iSkills{
-    id: string;
+    id?: string;
     name: string;
 }
 
 export interface iCourses{
-    data: any;
-    id: string;
+    data?: any;
+    id?: string;
     name: string;
     institution: string;
     from: string;
     to: string;
     description: string;
+    type: string,
+    status: string
 }
 
 export interface iExperiences{
-    id: string;
+    id?: string;
     title: string;
     company: string;
     location: string;
@@ -66,4 +80,13 @@ export interface iUserComplete extends iUserSimple{
     skills: iSkills[];
     experiences: iExperiences[];
     courses: iCourses[];
+}
+
+export interface SetProfileOptions {
+    userData?: boolean,
+    skillsData?: boolean,
+    coursesData?: boolean,
+    experiencesData?: boolean,
+    documentsData?: boolean,
+    showError?: boolean
 }

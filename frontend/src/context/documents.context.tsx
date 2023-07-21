@@ -1,25 +1,49 @@
-import React, { useCallback, createContext } from "react";
+import React, { useCallback, createContext, useState } from "react";
 import { useUser } from "../hooks/contexts";
 import api from "../utils/axios";
 import { iDocuments } from "../interfaces/users";
 import { AxiosError } from "axios";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
+import retrieveToken from "../utils/user/retrieveToken";
+import CertificateModal from "../components/CertificateModal";
+import DeleteModalContent from "../components/dashboard/certificates/ModalContent/DeleteModal";
 
-export const DocumentsContext = createContext({
-    registerDocument: (data: iDocuments) => {},
-    updateDocument: (id: string, data: iDocuments) => {},
-    deleteDocument: (id: string) => {}
+export const DocumentsContext = createContext<{
+        registerDocument: (data: iDocuments) => Promise<void>,
+        updateDocument: (id: string, data: iDocuments) => Promise<void>,
+        deleteDocument: (id: string) => Promise<void>,
+        modalDisplay: boolean,
+        setModalDisplay: React.Dispatch<React.SetStateAction<boolean>>,
+    }>({
+    registerDocument: (data: iDocuments) => Promise.resolve(),
+    updateDocument: (id: string, data: iDocuments) => Promise.resolve(),
+    deleteDocument: (id: string) => Promise.resolve(),
+    modalDisplay: false,
+    setModalDisplay: ()=>{},
 });
 
 export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
 
-    const { token, documents, setDocuments } = useUser()
+    const [ modalDisplay, setModalDisplay] = useState(false);
+    
+    const { token, profile, documents } = useUser()
+    
     api.defaults.headers.Authorization = `Bearer ${token}`
 
     const registerDocument = useCallback( async (data: iDocuments) => {
+        const token = retrieveToken()
+        
         try{
-            const {data: document} = await api.post('/document', data) as {data: iDocuments}
-            setDocuments([...documents, document])
+            const {data: document} = await api.post('/document', data, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }) as {data: iDocuments}
+            
+            await profile({ documentsData: true })
+            
+            toast.success("Documento adicionado com sucesso")
+
         }catch(err: AxiosError | unknown){
             if(err instanceof AxiosError){
                 toast.error(err.response?.data.message as string)
@@ -31,10 +55,14 @@ export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
 
     const updateDocument = useCallback( async (id: string, data: iDocuments) => {
         try{
-            const {data:document} = await api.patch(`/document/${id}`, data) as {data: iDocuments}
-            const index = documents.findIndex(document => document.id === id)
-            documents[index] = document
-            setDocuments([...documents])
+            const token = retrieveToken()
+            await api.patch(`/document/${id}`, data, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            
+            await profile({ documentsData: true })
         }catch(err: AxiosError | unknown){
             if(err instanceof AxiosError){
                 toast.error(err.response?.data.message as string)
@@ -46,10 +74,15 @@ export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
 
     const deleteDocument = useCallback( async (id: string) => {
         try{
-            await api.delete(`/document/${id}`)
-            const index = documents.findIndex(document => document.id === id)
-            documents.splice(index, 1)
-            setDocuments([...documents])
+            const token = retrieveToken()
+            await api.delete(`/document/${id}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            
+            await profile({ documentsData: true })
+
         }catch(err: AxiosError | unknown){
             if(err instanceof AxiosError){
                 toast.error(err.response?.data.message as string)
@@ -60,7 +93,10 @@ export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
     },[])
 
     return (
-        <DocumentsContext.Provider value={{registerDocument, updateDocument, deleteDocument}}>
+        <DocumentsContext.Provider value={{registerDocument, updateDocument, deleteDocument, modalDisplay, setModalDisplay}}>
+            
+            { modalDisplay && <CertificateModal/> }
+
             {children}
         </DocumentsContext.Provider>
     )

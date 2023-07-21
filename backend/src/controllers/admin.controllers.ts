@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 //Login
 import adminLoginService from '../services/admin/login/adminLogin.service';
+import verifyAdminService from '../services/admin/crud/verifyAdmin.service';
 //Cidades
 import listCityService from '../services/admin/city/listCity.service';
 import registerCityService from '../services/admin/city/registerCity.service';
@@ -27,12 +28,20 @@ import deleteExperienceService from '../services/experiences/deleteExperience.se
 import deleteCourseService from '../services/courses/deleteCourse.service';
 //Skills
 import deleteSkillService from '../services/skills/deleteSkill.service';
+import displayAllUsersService from '../services/admin/crud/displayAllUsers.service';
 
 
 export async function adminLoginController(req: Request, res: Response){
     const {id} = req.user;
     const token = await adminLoginService(id);
+
     return res.status(200).json({token});
+}
+
+export async function getAdmin(req: Request, res: Response){
+    const {id} = req.user;
+    const admin = await verifyAdminService(id);
+    return res.status(200).json(admin.toObject());
 }
 
 export async function listCityController(req: Request, res: Response){
@@ -105,6 +114,13 @@ export async function deleteProfileController(req: Request, res: Response){
     const { id } = req.params;
     await deleteProfileService(id);
     return res.status(204).send();
+}
+
+export async function displayAllUsersController(req: Request, res: Response): Promise<Response> {
+    const query = req.query as { page: string, amount: string, city: string, name: string, id: string, isBanned: string, isActive: string, title: string, area: string }
+
+    const response = await displayAllUsersService({ ...query });
+    return res.status(200).json(response);
 }
 
 export async function deleteDocumentController(req: Request, res: Response){

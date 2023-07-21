@@ -4,12 +4,11 @@ import { v4 as uuidv4 } from 'uuid'
 const userSchema = new mongoose.Schema({
     id: {
         type: String,
-        default: uuidv4()
+        default: uuidv4
     },
     avatar: {
         type: String,
-        required: false,
-        default: "https://res.cloudinary.com/dg5lakmem/image/upload/v1623686213/avatars/default-avatar.png"
+        required: false
     },
     name: {
         type: String,
@@ -44,7 +43,7 @@ const userSchema = new mongoose.Schema({
         required: false,
         default: null
     },
-    number: {
+    phone: {
         type: String,
         required: false,
         default: null
@@ -54,7 +53,7 @@ const userSchema = new mongoose.Schema({
         required: false,
         default: null
     },
-    pronnouns: {
+    pronouns: {
         type: String,
         required: false,
         default: null
@@ -93,11 +92,11 @@ const userSchema = new mongoose.Schema({
     },
     createdAt: {
         type: Date,
-        default: new Date()
+        default: new Date
     },
     updatedAt: {
         type: Date,
-        default: new Date()
+        default: new Date
     }
 })
 

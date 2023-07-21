@@ -22,7 +22,7 @@ import {
     deleteAreaController, banUserController, updateProfileController,
     deleteProfileController, deleteDocumentController, deleteExperienceController,
     deleteSkillController, deleteCourseController, listAdminController,
-    registerAdminController, editAdminController, deleteAdminController
+    registerAdminController, editAdminController, deleteAdminController, getAdmin, displayAllUsersController
 } from '../controllers/admin.controllers'
 
 
@@ -35,17 +35,19 @@ adminRouter.post('/city', verifyShape(city), checkAdminTokenMiddleware, register
 adminRouter.delete('/city/:id', checkAdminTokenMiddleware, checkCityMiddleware, deleteCityController) //
 
 //Adiciona, edita, lista e deleta áreas de serviço
-adminRouter.get('/area', listAreaController) //
-adminRouter.post('/area', verifyShape(serviceArea), checkAdminTokenMiddleware, registerAreaController) //
-adminRouter.delete('/area/:id', checkAdminTokenMiddleware, checkAreaMiddleware, deleteAreaController) //
+adminRouter.get('/sector', listAreaController) //
+adminRouter.post('/sector', verifyShape(serviceArea), checkAdminTokenMiddleware, registerAreaController) //
+adminRouter.delete('/sector/:id', checkAdminTokenMiddleware, checkAreaMiddleware, deleteAreaController) //
 
 //Bane/desbane contas
-adminRouter.put('/ban/:id', checkAdminTokenMiddleware,checkUserMiddleware, banUserController) //
+adminRouter.put('/ban/:id', checkAdminTokenMiddleware, checkUserMiddleware, banUserController) //
 
 //Edita um usuário
 adminRouter.patch('/users/:id', verifyShape(updateSchema),checkUserMiddleware, checkAdminTokenMiddleware, updateProfileController) //
 //Deleta um usuário
-adminRouter.delete('/users/:id', checkUserMiddleware, checkAdminTokenMiddleware, deleteProfileController) //
+adminRouter.delete('/users/:id', checkUserMiddleware, checkAdminTokenMiddleware, deleteProfileController) 
+// Retorna uma página de usuários
+adminRouter.get('/users', checkAdminTokenMiddleware, displayAllUsersController)
 
 //Deleta um documento de um usuário
 adminRouter.delete('/documents/:id', checkAdminTokenMiddleware, checkDocumentMiddleware, deleteDocumentController) //
@@ -61,6 +63,9 @@ adminRouter.delete('/courses/:id', checkAdminTokenMiddleware, checkCourseMiddlew
 
 //Lista todos admins
 adminRouter.get('', checkAdminTokenMiddleware, listAdminController)
+//Retorna o admin logado
+adminRouter.get('/authenticate', checkAdminTokenMiddleware, getAdmin)
+
 //Cadastra um admin
 adminRouter.post('', verifyShape(registerAdmin), checkAdminTokenMiddleware, registerAdminController)
 //Edita outro admin

@@ -1,28 +1,30 @@
-import  ProfilePreviewDiv from './style'
-import CardImage from '../../assets/images/vector.png'
+import React from "react"
+import iProfilePreview from "../../interfaces/profile.component"
+import { ProfilePreviewDiv } from "./styles"
+import { useNavigate } from "react-router-dom"
+import pfp from '../../assets/profile-picture.svg'
 
 
-interface ProfilePreviewInt{
-    image: string,
-    fullname: string,
-    area: string,
-    pronouns: string,
-    gender: string
-}
+export function ProfilePreview({ id, image , name, area, pronouns , gender}: iProfilePreview){
+    const navigate = useNavigate()
 
-export function ProfilePreview({image , fullname, area, pronouns , gender}: ProfilePreviewInt){
+    const splitName = name.split(' ');
+    const firstName = splitName[0];
+    const lastName = splitName[splitName.length - 1]
 
-    return(
-        <ProfilePreviewDiv>
-            <img src={image? image:CardImage} className="photo"/>
-            <div className="middle-div">
-              <p className="fullname-paragraph">{fullname}</p>
-              <p className="area-paragraph">{area}</p>
-              <p>{pronouns}</p>
-            </div>
-            <div className="middle-div">
-              <p className="final-paragraph">{gender}</p> 
-            </div>
-        </ProfilePreviewDiv>
+    const names = (firstName === lastName) ? firstName : firstName + ' ' + lastName;
+    
+    return( 
+    <ProfilePreviewDiv onClick={()=> navigate(`/profile/${id}`)}>
+        <div className="infos-container">
+            <img src={image ? image : pfp} alt={`foto de ${name}`} className="photo"/>
+          <div className="middle-div">
+            <p className="fullname-paragraph">{names}</p>
+            <p className="area-paragraph">{area}</p>
+            <p className="pronouns">{pronouns}</p>
+          </div>
+        </div>
+        <p className="final-paragraph">{gender}</p> 
+    </ProfilePreviewDiv>
     )
 }

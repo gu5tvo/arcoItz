@@ -1,11 +1,21 @@
 import { createGlobalStyle } from 'styled-components';
 
 //Reset CSS:
-export const GlobalStyle = createGlobalStyle`
-:root {
-    //pink
 
-    --PINK: #FFCCE4;
+// color: var(--PINK);
+
+export const GlobalStyle = createGlobalStyle`
+
+:root {
+ 
+	--WHITE: #fff;
+	--AQUABLUE: #3F8FCC;
+
+	--GRIZZLY: #eee;
+	--CYAN: #89DDFF;
+
+	--PALE-BLUE: #D7ECFF;
+   --PINK: #FFCCE4;
     --RED: #B70000;
 
     --GRAY: #F2F2F2;
@@ -16,8 +26,7 @@ export const GlobalStyle = createGlobalStyle`
 
     --GRADIENTE :linear-gradient(180deg, #0077B6 0%, rgba(0, 119, 182, 0) 100%);
 }
-
-    html, body, div, span, applet, object, iframe,
+   html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
@@ -48,6 +57,7 @@ body {
     font-family: 'Inter', sans-serif;
     font-size: clamp(0.8rem, 1vw, 2rem)
 }
+
 ol, ul {
 	list-style: none;
 }

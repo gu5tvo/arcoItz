@@ -39,9 +39,9 @@ export interface iUserUpdate {
     password: string;
     avatar: string;
     gender: string;
-    pronnouns: string;
+    pronouns: string;
     city: string;
-    number: string;
+    phone: string;
     bio: string;
     area: string;
     address: string;
@@ -62,6 +62,14 @@ export interface iDisplayAll{
     page: string;
     pageSize: string;
     content: Array<iUserReturn>;
+}
+
+export interface iDisplayAllProps{
+    page: string;
+    amount: string;
+    city: string;
+    title: string;
+    area: string;
 }
 
 export interface iDocument {

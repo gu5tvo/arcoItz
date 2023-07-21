@@ -1,14 +1,28 @@
 import React, { useCallback, createContext, useEffect } from "react";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { iUserSimple } from "../interfaces/users";
-import { iAdmin, iAdminLogin, iAdminRegister, iSectors, iCity } from "../interfaces/admin";
+import { iAdmin, iAdminLogin, iAdminRegister, iSectors, iCity, iAdminEdit, iListUsers } from "../interfaces/admin";
 import api from "../utils/axios";
+import retrieveToken from "../utils/admin/retrieveToken";
+
+/*
+    Contextos não utilizados:
+        adminUpdateUsers: (id: string, data: iUserSimple),
+        adminDeleteCourse: (id: string),
+        adminDeleteSkill: (id: string),
+        adminDeleteDocument: (id: string),
+        adminDeleteExperience: (id: string)
+
+    Motivo: administradores não serão capazes de modificar o perfil dos usuários dessa forma
+ */
 
 export const AdminContext = createContext<
     {
         token: string,
         setToken: React.Dispatch<React.SetStateAction<string>>,
+        admin: iAdmin,
+        setAdmin: React.Dispatch<React.SetStateAction<iAdmin>>,
         admins: iAdmin[],
         setAdmins: React.Dispatch<React.SetStateAction<iAdmin[]>>,
         isAuthenticated: boolean,
@@ -20,12 +34,13 @@ export const AdminContext = createContext<
         cities: iCity[],
         setCities: React.Dispatch<React.SetStateAction<iCity[]>>,
         adminLogin: (data: iAdminLogin) => Promise<void>,
+        adminSelf: (showError?: boolean) => Promise<void>,
         adminLogout: () => void,
         adminList: () => Promise<void>,
         adminRegister: (data: iAdminRegister) => Promise<void>,
-        adminUpdate: (id: string, data: iAdminRegister) => Promise<void>,
+        adminUpdate: (id: string, data: iAdminEdit) => Promise<void>,
         adminDelete: (id: string) => Promise<void>,
-        adminListUsers: (page: number, amount: number, city: string) => Promise<void>,
+        adminListUsers: (query: iListUsers) => Promise<void>,
         adminBanUsers: (id: string) => Promise<void>,
         adminUpdateUsers: (id: string, data: iUserSimple) => Promise<void>,
         adminDeleteUsers: (id: string) => Promise<void>,
@@ -42,6 +57,8 @@ export const AdminContext = createContext<
             token: '',
             setToken: () => {},
             admins: [],
+            admin: { id: '', name: '', email: '', avatar: '', city: '', phone: '', isSuper: false },
+            setAdmin: ()=>{},
             setAdmins: () => {},
             isAuthenticated: false,
             setIsAuthenticated: () => {},
@@ -52,6 +69,7 @@ export const AdminContext = createContext<
             cities: [],
             setCities: () => {},
             adminLogin: () => Promise.resolve(),
+            adminSelf: ()=> Promise.resolve(),
             adminLogout: () => {},
             adminList: () => Promise.resolve(),
             adminRegister: () => Promise.resolve(),
@@ -74,22 +92,47 @@ export const AdminContext = createContext<
         });
 
 export const AdminProvider = ({ children }: { children: JSX.Element }) => {
+    const [token, setToken] = React.useState<string>('')
+
+    const adminSelf = useCallback(async (showError: boolean = true) => {
+        try{
+            const retrievedToken: string = retrieveToken()
+
+            const admin = await api.get('/admin/authenticate', {
+                headers: {
+                    'Authorization': `Bearer ${retrievedToken}`
+                }
+            }) as { data: iAdmin }
+
+            setAdmin(admin.data)
+            setIsAuthenticated(true)
+        }catch(err: AxiosError | unknown){
+            if (!showError) return
+
+            if(err instanceof AxiosError){
+                toast.error(err.response?.data.message as string)
+            }else{
+                toast.error('Erro do lado do cliente, tente novamente!')
+            }
+        }
+    },[token])
 
     useEffect(() => {
-        const retrivedToken: string = localStorage.getItem('@adminToken')
-        if(retrivedToken){
-            setToken(retrivedToken)
-            api.defaults.headers.Authorization = `Bearer ${retrivedToken}`
-        }
-        //No caso de logout, o token é removido do localStorage
-        return () => {
-            localStorage.removeItem('@adminToken')
-        }
-    },[])
+        const retrievedLocalToken: string = localStorage.getItem('@adminToken');
+        const retrievedSessionToken: string = sessionStorage.getItem('@adminToken')
 
+        if (retrievedLocalToken) {
+            setToken(retrievedLocalToken);
+            adminSelf();
+        } else if (retrievedSessionToken) {
+            setToken(retrievedLocalToken);
+            adminSelf();
+        }
 
-    const [token, setToken] = React.useState<string>('')
+      }, [adminSelf]);
+      
     const [admins, setAdmins] = React.useState<iAdmin[]>([])
+    const [admin, setAdmin] = React.useState<iAdmin>({ id: '', name: '', email: '', phone: '', avatar: '', city: '', isSuper: false})
     const [isAuthenticated, setIsAuthenticated] = React.useState<boolean>(false)
     const [usersList, setUsersList] = React.useState<iUserSimple[]>([])
     const [sectors, setSectors] = React.useState<iSectors[]>([])
@@ -99,8 +142,16 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
         try {
             const response = await api.post('/admin/login', data) as { data: { token: string } }
             setToken(response.data.token)
-            api.defaults.headers.Authorization = `Bearer ${response.data.token}`
-            localStorage.setItem('@adminToken', response.data.token)
+            
+            if (!!data.remember) { 
+                localStorage.setItem('@adminToken', response.data.token) 
+                sessionStorage.removeItem('@dminToken')
+            } else {
+                sessionStorage.setItem('@adminToken', response.data.token)
+                localStorage.removeItem('@adminToken')
+            }
+
+            setIsAuthenticated(true)
         }catch(err: AxiosError | unknown){
             if(err instanceof AxiosError){
                 toast.error(err.response?.data.message as string)
@@ -114,11 +165,20 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
         setToken('')
         api.defaults.headers.Authorization = ''
         localStorage.removeItem('@adminToken')
+        sessionStorage.removeItem('@adminToken')
+        setIsAuthenticated(false)
+        setAdmin(null)
     },[])
 
     const adminList = useCallback(async () => {
         try{
-            const response = await api.get('/admin') as { data: iAdmin[] }
+            const token = retrieveToken()
+            const response = await api.get('/admin', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }) as { data: iAdmin[] }
+            
             setAdmins(response.data)
         }catch(err: AxiosError | unknown){
             if(err instanceof AxiosError){
@@ -127,11 +187,15 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
                 toast.error('Erro do lado do cliente, tente novamente!')
             }
         }
-    },[])
+    }, [token])
 
     const adminRegister = useCallback(async (data: iAdminRegister) => {
         try {
-            const response = await api.post('/admin', data) as { data: iAdmin }
+            const response = await api.post('/admin', data, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }) as { data: iAdmin }
             setAdmins([...admins, response.data])
         }catch(err: AxiosError | unknown){
             if(err instanceof AxiosError){
@@ -142,11 +206,19 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
         }
     },[admins])
 
-    const adminUpdate = useCallback(async (id: string, data: iAdminRegister) => {
+    const adminUpdate = useCallback(async (id: string, data: iAdminEdit) => {
         try{
-            const response = await api.patch(`/admin/${id}`, data) as { data: iAdmin }
-            const updatedAdmins = admins.map(admin => { if(admin.id === id){ return response.data } return admin})
-            setAdmins(updatedAdmins)
+            const token = retrieveToken()
+            const response = await api.patch(`/admin/${id}`, data, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }) as { data: iAdmin }
+            const updatedAdmins = admins.map(admin => { 
+                return (admin.id === id) ? response.data : admin
+            })
+        
+            setAdmins([...updatedAdmins])
         }catch(err: AxiosError | unknown){
             if(err instanceof AxiosError){
                 toast.error(err.response?.data.message as string)
@@ -154,11 +226,15 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
                 toast.error('Erro do lado do cliente, tente novamente!')
             }
         }
-    },[admins])
+    },[admins, token])
 
     const adminDelete = useCallback(async (id: string) => {
         try{
-            await api.delete(`/admin/${id}`)
+            await api.delete(`/admin/${id}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
             const updatedAdmins = admins.filter(admin => admin.id !== id)
             setAdmins(updatedAdmins)
         }catch(err: AxiosError | unknown){
@@ -168,13 +244,22 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
                 toast.error('Erro do lado do cliente, tente novamente!')
             }
         }
-    },[])
+    },[token, admins])
 
-    const adminListUsers = useCallback(async (page: number = 1, amount: number = 10, city: string) => {
+    // page: number, amount: number, city: string, name: string, id?: string
+    const adminListUsers = useCallback(async ({ page = 1, amount = 10, city = "", name = "", id = "", isBanned = false, isActive = true, area = '', title = '' } : iListUsers) => {
         try {
-          const query = city ? `?page=${page}&amount=${amount}&city=${city}` : `?page=${page}&amount=${amount}`;
-          const response = await api.get(`/users${query}`);
-          return response.data;
+            
+          const query = `?page=${page}&amount=${amount}&city=${city}&name=${name}&id=${id}&isBanned=${isBanned}&isActive=${isActive}&area=${area}&title=${title}`
+          const token = retrieveToken()
+          const response = await api.get(`/admin/users${query}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        
+          setUsersList(response.data.content)
+
         } catch (err: AxiosError | unknown) {
           if (err instanceof AxiosError) {
             toast.error(err.response?.data.message as string);
@@ -182,18 +267,23 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
             toast.error('Erro do lado do cliente, tente novamente!');
           }
         }
-      }, []);
+      }, [token]);
 
       const adminBanUsers = useCallback(async (id: string) => {
         try{
-            const response = await api.put(`/users/ban/${id}`);
-            toast.success(response.data.message as string);
-            const updatedUsers: iUserSimple[] = usersList.map(user => {
-                if(user.id === id){
-                    return {...user, isBanned: true}
+            const token = retrieveToken()
+            const response = await api.put(`/admin/ban/${id}`, null, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
                 }
-                return user
+            });
+            
+            toast.success(response.data.message as string);
+            
+            const updatedUsers: iUserSimple[] = usersList.filter((user) => {
+                return (user.id !== id)
             })
+
             setUsersList(updatedUsers)
         }catch(err: AxiosError | unknown){
             if(err instanceof AxiosError){
@@ -202,11 +292,16 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
                 toast.error('Erro do lado do cliente, tente novamente!')
             }
         }
-      },[])
+      },[token, usersList])
 
       const adminUpdateUsers = useCallback(async (id: string, data: iUserSimple) => {
         try{
-            const response = await api.patch(`/users/${id}`, data) as { data: iUserSimple }
+            const token = retrieveToken()
+            const response = await api.patch(`/admin/users/${id}`, data, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }) as { data: iUserSimple }
             const updatedUsers = usersList.map(user => { if(user.id === id){ return response.data } return user})
             setUsersList(updatedUsers)
         }catch(err: AxiosError | unknown){
@@ -220,7 +315,12 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
 
         const adminDeleteUsers = useCallback(async (id: string) => {
         try{
-            await api.delete(`/users/${id}`)
+            const token = retrieveToken()
+            await api.delete(`/admin/users/${id}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
             const updatedUsers = usersList.filter(user => user.id !== id)
             setUsersList(updatedUsers)
         }catch(err: AxiosError | unknown){
@@ -230,11 +330,11 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
                 toast.error('Erro do lado do cliente, tente novamente!')
             }
         }
-        },[])
+        },[token, usersList])
 
         const listSectors = useCallback(async () => {
             try{
-                const response = await api.get('/sectors')
+                const response = await api.get('/admin/sector')
                 setSectors(response.data)
             }catch(err: AxiosError | unknown){
                 if(err instanceof AxiosError){
@@ -247,7 +347,12 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
 
         const registerSectors = useCallback(async (data: { name: string}) => {
             try{
-                const response = await api.post('/sectors', data)
+                const response = await api.post('/admin/sector', data, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+
                 setSectors([...sectors, response.data])
             }catch(err: AxiosError | unknown){
                 if(err instanceof AxiosError){
@@ -256,11 +361,11 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
                     toast.error('Erro do lado do cliente, tente novamente!')
                 }
             }
-        },[])
+        },[token, sectors])
 
         const deleteSectors = useCallback(async (id: string) => {
             try{
-                await api.delete(`/sectors/${id}`)
+                await api.delete(`/admin/sector/${id}`)
                 const updatedSectors: iSectors[] = sectors.filter(sector => sector.id !== id)
                 setSectors(updatedSectors)
             }catch(err: AxiosError | unknown){
@@ -287,7 +392,12 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
 
         const registerCities = useCallback(async (data: { name: string}) => {
             try{
-                const response = await api.post('/admin/city', data)
+                const token = retrieveToken()
+                const response = await api.post('/admin/city', data, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
                 setCities([...cities, response.data])
             }catch(err: AxiosError | unknown){
                 if(err instanceof AxiosError){
@@ -296,12 +406,22 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
                     toast.error('Erro do lado do cliente, tente novamente!')
                 }
             }
-        },[])
+        },[token, cities])
 
         const deleteCities = useCallback(async (id: string) => {
             try{
-                await api.delete(`/admin/city/${id}`)
-                const updatedCities: iCity[] = cities.filter(city => city.id !== id)
+                await api.delete(`/admin/city/${id}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+
+
+                const updatedCities: iCity[] = cities.filter((city) => { 
+                    return city.id !== id
+                } )
+
+                
                 setCities(updatedCities)
             }catch(err: AxiosError | unknown){
                 if(err instanceof AxiosError){
@@ -310,7 +430,7 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
                     toast.error('Erro do lado do cliente, tente novamente!')
                 }
             }
-        },[])
+        },[token, cities])
 
         const adminDeleteCourse = useCallback(async (id: string) => {
             try{
@@ -367,12 +487,13 @@ export const AdminProvider = ({ children }: { children: JSX.Element }) => {
             <AdminContext.Provider value={{
                 token, setToken,
                 admins, setAdmins,
+                admin, setAdmin,
                 isAuthenticated, setIsAuthenticated,
                 usersList, setUsersList,
                 sectors, setSectors,
                 cities, setCities,
-                adminLogin, adminLogout,
-                adminList, adminRegister,
+                adminLogin, adminSelf,
+                adminLogout,adminList, adminRegister,
                 adminUpdate, adminDelete,
                 adminListUsers, adminBanUsers,
                 adminUpdateUsers, adminDeleteUsers,

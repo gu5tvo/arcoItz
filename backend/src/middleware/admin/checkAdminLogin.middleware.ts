@@ -5,18 +5,16 @@ import {compare} from 'bcryptjs';
 
 export default async function checkAdminLoginMiddleware(req: Request, res: Response, next: NextFunction): Promise<void> {
     const { email, password } = req.body;
-
+    
     const admin = await Admin.findOne({ email });
 
     if (!admin) {
-        console.log('Email')
         throw new AppError('Email ou senha incorretos', 401);
     }
 
-    const passwordMatch = await compare(password, admin.password);
-
+    const passwordMatch = compare(password, admin.password)
+    
     if (!passwordMatch) {
-        console.log('Senha')
         throw new AppError('Email ou senha incorretos', 401);
     }
 

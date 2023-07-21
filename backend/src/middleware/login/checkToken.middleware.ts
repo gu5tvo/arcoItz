@@ -1,33 +1,32 @@
 import { Request, Response, NextFunction } from 'express';
 import AppError from '../../errors';
 import User from '../../model/user.model';
-import jwt from 'jsonwebtoken';
+import { verify } from 'jsonwebtoken'
 
 export default async function checkTokenMiddleware(req: Request, res: Response, next: NextFunction): Promise<void> {
-    //Verifica se há token enviado na requisição.
+    console.log("sadjdsajidosajo")
     const { authorization } = req.headers;
-    if(!authorization) throw new AppError('Token não encontrado', 401);
+    const [ , token ] = authorization.split(' ');
+    console.log(token)
+    
+    if(!token) throw new AppError("Token não informado", 401);
+    
+    try {
+        
+        const {id} = verify(token, process.env.SECRET_KEY) as {id: string};
+        
+        const user = await User.findOne({ id });
 
-    //Verifica se o token é válido.
-    const [, token] = authorization.split(' ');
-    if(token.length < 14) throw new AppError('Token inválido', 401);
-    const { id } = jwt.verify(token, process.env.SECRET_KEY) as { id: string };
-    if(!id) throw new AppError('Token inválido', 401);
+        req.user = {
+            id: id,
+            email: user.email,
+            name: user.name
+        }
+    
+        return next();
 
-    //Verifica se o usuário existe.
-    const user = await User.findOne({id})
-    if(!user) throw new AppError('Token inválido', 401);
-
-    //Verifica se o usuário está ativo.
-    if(!user.isActive) throw new AppError('Usuário inativo, contate um administrador.', 403);
-
-    //Se tudo estiver correto, adiciona o id do usuário na requisição.
-    req.user = {
-        id: user.id,
-        name: user.name,
-        email: user.email,
+    } catch(err) {
+        throw new AppError("Token inválido", 404);
     }
-
-    return next();
 
 }

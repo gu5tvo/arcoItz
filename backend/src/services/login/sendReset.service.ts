@@ -15,9 +15,9 @@ export default async function sendResetService(email, ip){
         <p>Recebemos uma solicitação de recuperação de senha para sua conta no diversiTrampos.</p>
         <p>Caso não tenha sido você, ignore este e-mail.</p>
         <p>Caso tenha sido você, clique no link abaixo para redefinir sua senha:</p>
+        <a href="${process.env.WEBSITE_URL}/reset/${token}">Clique aqui para resetar sua senha</a>
         <p>A solicitação partiu deste endereço de IP: ${ip}</p>
         <p>Este link só estará disponível durante 5 horas.</p>
-        <a href="http://localhost:4001/reset/${token}">
         `
     }, (err, info) => {
         if(err){
