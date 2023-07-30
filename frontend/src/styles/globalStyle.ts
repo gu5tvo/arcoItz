@@ -25,6 +25,14 @@ export const GlobalStyle = createGlobalStyle`
     --BLUE-DARK: #0A2A5E;
 
     --GRADIENTE :linear-gradient(180deg, #0077B6 0%, rgba(0, 119, 182, 0) 100%);
+
+	--MODERATE-BLACK: #1E1E1E;
+	--TEXT-GRAY:  #5F6D7E;
+	--TEXT-GRAY:  #5F6D7E;
+	--PRIMARY-BLUE:  #00CFFC;
+	--PRIMARY-PINK:  #FFADBB;
+
+
 }
    html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
