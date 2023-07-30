@@ -30,7 +30,7 @@ export const TextSection = styled.section`
     flex-direction: column;
     flex: 1;
     justify-content: center;
-    gap: 1.9vh;
+    gap: 7.2vh;
 
     @media (max-width: 480px) {
         & > ${ButtonCollection} {
@@ -38,6 +38,17 @@ export const TextSection = styled.section`
         }
     }
 `
+
+export const TextCollection = styled.section`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.9vh;
+
+`
+
+
+
 
 export const ImageSection = styled.section`
 
@@ -106,6 +117,12 @@ export const SignButton = styled.button`
     padding: 0.75rem 1rem ;
     font-weight: bold;
     font-size: 0.9rem;
+    transition: 0.5s;
+
+    &:hover{
+        background-color: var(--PRIMARY-PINK-HOVER);
+    }
+
 
 `
 
@@ -117,5 +134,10 @@ export const SearchButton = styled.button`
     padding: 0.75rem 1rem ;
     font-weight: bold;
     font-size: 0.9rem;
+    transition: 0.5s;
+
+    &:hover{
+        background-color: var(--PRIMARY-BLUE-HOVER);
+    }
 
 `

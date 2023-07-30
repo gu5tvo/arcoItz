@@ -30,9 +30,9 @@ export const GlobalStyle = createGlobalStyle`
 	--TEXT-GRAY:  #5F6D7E;
 	--TEXT-GRAY:  #5F6D7E;
 	--PRIMARY-BLUE:  #00CFFC;
+	--PRIMARY-BLUE-HOVER:#0066FF;
 	--PRIMARY-PINK:  #FFADBB;
-
-
+	--PRIMARY-PINK-HOVER:#FF3356;
 }
    html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,

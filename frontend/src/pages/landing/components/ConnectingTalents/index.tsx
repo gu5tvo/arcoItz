@@ -1,6 +1,6 @@
 //index.tsx
 import React from "react";
-import { Headline, ImageSection, MainSectionStyle, Subheading, TextSection , Image, ButtonCollection, SignButton, SearchButton} from "./style";
+import { Headline, ImageSection, MainSectionStyle, Subheading, TextSection , Image, ButtonCollection, SignButton, SearchButton, TextCollection} from "./style";
 import  LandingMainPhoto  from "./../../../../assets/LandingMainPhoto.svg";
 
 export default function SectionConnectingTalents(): JSX.Element{
@@ -9,13 +9,15 @@ export default function SectionConnectingTalents(): JSX.Element{
         <>
             <MainSectionStyle>
                 <TextSection>
-                    <Headline>
-                        Conectando talentos e empresas inclusivas.
-                    </Headline>
-                    <Subheading>
-                        Encontre talentos diversos para sua empresa ou envie seu currículo para explorar novas oportunidades. 
-                        Aqui, oportunidades profissionais encontram a diversidade!
-                    </Subheading>
+                    <TextCollection>
+                        <Headline>
+                            Conectando talentos e empresas inclusivas.
+                        </Headline>
+                        <Subheading>
+                            Encontre talentos diversos para sua empresa ou envie seu currículo para explorar novas oportunidades. 
+                            Aqui, oportunidades profissionais encontram a diversidade!
+                        </Subheading>
+                    </TextCollection>
                     <ButtonCollection>
                         <SignButton>
                             Cadastrar Currículo
