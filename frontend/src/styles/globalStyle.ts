@@ -28,7 +28,6 @@ export const GlobalStyle = createGlobalStyle`
 
 	--MODERATE-BLACK: #1E1E1E;
 	--TEXT-GRAY:  #5F6D7E;
-	--TEXT-GRAY:  #5F6D7E;
 	--PRIMARY-BLUE:  #00CFFC;
 	--PRIMARY-BLUE-HOVER:#0066FF;
 	--PRIMARY-PINK:  #FFADBB;

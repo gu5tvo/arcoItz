@@ -1,4 +1,3 @@
-//style.ts
 import styled from 'styled-components';
 
 export const MainSectionStyle = styled.section`
@@ -69,7 +68,23 @@ export const ImageSection = styled.section`
     }
 `
 
-export const MainImage = styled.img `
+export const MainImageCollection = styled.div`
+    background-image: url(${props => props.imageUrl});
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    
+    @media (max-width: 480px) {
+        width: 100%;
+    }
+`
+
+export const MainImage = styled.img`
+
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    
     @media (max-width: 480px) {
         width: 100%;
     }
@@ -141,7 +156,8 @@ export const SearchButton = styled.button`
 
 export const UploadDiv = styled.div`
     display: inline-flex;
-    padding: 1.2rem 0.9rem;
+    padding: 3.74% 2.68%;
+
     justify-content: center;
     align-items: center;
     gap: 0.68344rem;
@@ -149,6 +165,10 @@ export const UploadDiv = styled.div`
     background: var(--WHITE);
     box-shadow: -3.28px 4.37px 9.84px 0px rgba(0, 0, 0, 0.25);
     gap:0.9rem;
+    
+    position: absolute;
+    top: -2%; 
+    right: 10%;     
     
     `
 
@@ -162,11 +182,17 @@ export const Text = styled.p`
 
 export const MaranhaoFlagDiv = styled.div`
     display: inline-flex;
-    padding: 0 0.4rem;
     border-radius: 0.5rem;
     background: var(--WHITE);
     box-shadow: 1px 4px 6px 0px rgba(0, 0, 0, 0.25);
     align-items: center;
+    justify-content: center;
+    
+    position: absolute;
+    bottom: 1%; 
+    right: 12%;   
+    
+
     `
 
 export const  ResumesCountDiv= styled.div`
@@ -176,13 +202,17 @@ export const  ResumesCountDiv= styled.div`
     padding-bottom: 0.5rem;
     background: var(--WHITE);
     box-shadow: 0px 4.37px 9.84px 0px rgba(0, 0, 0, 0.25);
-    border-radius: 1.0935rem;
+    border-radius: 0.6rem;
 
     flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
-    `
+   
+    position: absolute;
+    bottom: 10%; 
+    left: -7%;
+   `
 
 export const TextDiv = styled.div`
     font-family: Poppins;
@@ -202,11 +232,26 @@ export const TopText = styled.p`
 
 export const BottomText = styled.p`
     font-family: Poppins;
-    color: var(--BLACK);
+    color: var(--TEXT-GRAY);
     text-align: center;
     font-size: clamp(0.6rem, 0.9vw, 0.9rem);
 `
 
 export const Image = styled.img`
     display: inline;
+`
+
+export const FlagImage = styled.img`
+    width: 110%;
+    @media (max-width: 480px) {
+        width: 80%;
+    }   
+`
+
+export const DocImage = styled.img`
+    display: inline;
+
+    @media (max-width: 480px) {
+        width: 36%;
+    }
 `
