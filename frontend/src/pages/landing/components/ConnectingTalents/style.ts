@@ -48,8 +48,6 @@ export const TextCollection = styled.section`
 `
 
 
-
-
 export const ImageSection = styled.section`
 
     display: flex;
@@ -71,11 +69,12 @@ export const ImageSection = styled.section`
     }
 `
 
-export const Image = styled.img`
+export const MainImage = styled.img `
     @media (max-width: 480px) {
         width: 100%;
     }
 `
+
 
 export const Headline = styled.p`
     display: flex;
@@ -105,9 +104,7 @@ export const Subheading = styled.p`
         width: 90%;
         align-self: center;
     }
-`
-
-
+    `
 
 export const SignButton = styled.button`
     background-color: var(--PRIMARY-PINK);
@@ -118,13 +115,13 @@ export const SignButton = styled.button`
     font-weight: bold;
     font-size: 0.9rem;
     transition: 0.5s;
-
+    
     &:hover{
         background-color: var(--PRIMARY-PINK-HOVER);
     }
+    
 
-
-`
+    `
 
 export const SearchButton = styled.button`
     background-color: var(--PRIMARY-BLUE);
@@ -135,9 +132,81 @@ export const SearchButton = styled.button`
     font-weight: bold;
     font-size: 0.9rem;
     transition: 0.5s;
-
+    
     &:hover{
         background-color: var(--PRIMARY-BLUE-HOVER);
     }
+    
+    `
 
+export const UploadDiv = styled.div`
+    display: inline-flex;
+    padding: 1.2rem 0.9rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.68344rem;
+    border-radius: 1.0935rem;
+    background: var(--WHITE);
+    box-shadow: -3.28px 4.37px 9.84px 0px rgba(0, 0, 0, 0.25);
+    gap:0.9rem;
+    
+    `
+
+export const Text = styled.p`
+    font-family: Poppins;
+    display: flex;
+    font-size: clamp(0.6rem, 0.78vw, 0.9rem);
+    color: var(--BLACK);
+
+    `
+
+export const MaranhaoFlagDiv = styled.div`
+    display: inline-flex;
+    padding: 0 0.4rem;
+    border-radius: 0.5rem;
+    background: var(--WHITE);
+    box-shadow: 1px 4px 6px 0px rgba(0, 0, 0, 0.25);
+    align-items: center;
+    `
+
+export const  ResumesCountDiv= styled.div`
+    display: flex;
+    font-family: Poppins;
+    padding: 0.6rem;
+    padding-bottom: 0.5rem;
+    background: var(--WHITE);
+    box-shadow: 0px 4.37px 9.84px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 1.0935rem;
+
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    `
+
+export const TextDiv = styled.div`
+    font-family: Poppins;
+    color: var(--BLACK);
+    display: flex;
+    flex-direction: column;
+    gap: 0.48rem;
+    
+`
+
+export const TopText = styled.p`
+    font-family: Poppins;
+    color: var(--BLACK);
+    text-align: center;
+    font-size: 1.34rem;
+`
+
+export const BottomText = styled.p`
+    font-family: Poppins;
+    color: var(--BLACK);
+    text-align: center;
+    font-size: clamp(0.6rem, 0.9vw, 0.9rem);
+`
+
+export const Image = styled.img`
+    display: inline;
 `
