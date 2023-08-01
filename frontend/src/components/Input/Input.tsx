@@ -1,4 +1,4 @@
-import { InputContainer } from "./style"
+import InputContainer from "./style"
 
 interface InputProps {
     placeholder: string,

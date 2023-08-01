@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import DinamicHeader from '../../../components/header'
 import { useAdmin } from '../../../hooks/contexts'
 import { SearchContainer } from './style'
-import pfp from '../../assets/profile-picture.svg'
+import pfp from '../../../assets/profile-picture.svg'
 import { titles, pages } from '../../../utils/search'
 import Select from 'react-select'
 import { useNavigate } from 'react-router-dom'
@@ -11,7 +11,7 @@ import Modal from '../../../components/Modal'
 import DeleteUserModal from './DeleteModal'
 import BanUserModal from './BanModal'
 import UnbanUserModal from './UnbanModal'
-import { TrashIcon, PenIcon, BanIcon } from '../../../components/Icons'
+import { TrashIcon, BanIcon } from '../../../components/Icons'
 
 type ModalOptions =  'edit' | 'delete' | 'ban' | null
 

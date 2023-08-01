@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { ModalFog, ModalContainer, ModalHeader, ModalBody } from './styles';
-import { useAdmin, useModal, useUser } from '../../hooks/contexts';
+import { ModalFog, ModalContainer, ModalBody, CloseIcon } from './styles';
+import { useModal, useUser } from '../../hooks/contexts';
 import { Image } from './styles';
-import removeIconFormation from "../../assets/removeIconFormation.svg";
+// import removeIconFormation from "../../assets/removeIconFormation.svg";
+// import { GrClose } from "react-icons/gr";
 
 export default function PictureModal(): JSX.Element {
   const { setPicture, request } = useModal();
@@ -46,15 +47,7 @@ export default function PictureModal(): JSX.Element {
         onDrop={handleDrop}
         onDragOver={handleDragOver}
       >
-        <ModalHeader>
-          <button className='remove-button' onClick={() => setPicture(false)}>
-            <img
-              src={removeIconFormation}
-              alt="Remove Icon Formation"
-              className="remove"
-            />
-          </button>
-        </ModalHeader>
+            <CloseIcon onClick={() => setPicture(false)}/>
         <ModalBody>
           {!confirmScreen && 
             <>

@@ -1,18 +1,20 @@
 import { Link } from 'react-router-dom'
-import { FooterContainer } from './styles'
-import Modal from '../../components/Modal';
-import { useUser } from '../../hooks/contexts';
+import { FormFooter } from '../style';
+import Modal from '../../../components/Modal';
+import { useUser } from '../../../hooks/contexts';
 import { useState } from 'react';
-import Button from '../../components/Button';
-import Input, { BorderStyle } from '../../components/Input';
+import { Button } from '../../../components/Button';
+import Input, { BorderStyle } from '../../../components/Input';
 
 import React from 'react'
 
-import { forgotSchema } from '../../schemas/login';
-import { Form } from './styles';
+import { forgotSchema } from '../../../schemas/login';
+import { Form } from '../style';
 
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+
+
 
 type InputChange = React.ChangeEvent<HTMLInputElement>
 type SubmitForm = React.FormEvent<HTMLFormElement>
@@ -54,7 +56,7 @@ function LoginFooter() {
     }
 
     return (
-        <FooterContainer>
+        <FormFooter>
             <span>Não possui uma conta? <Link to="/register" className="link">Cadastre-se</Link>.</span>
             <span>Esqueceu sua senha? <span onClick={toggleModal} className="link">Clique aqui</span>.</span>
 
@@ -69,7 +71,7 @@ function LoginFooter() {
 
                 <Form onSubmit={handleSubmit(sendEmail)}>
 
-                    <Input register={register} placeholder="Insira seu e-mail" name={"email"} value={email} onChange={changeEmail} style={BorderStyle.SolidBorder} />
+                    <Input register={register} placeholder="Insira seu e-mail" name="email" value={ email } onChange={changeEmail} style={BorderStyle.SolidBorder} />
             
                     { errors.email?.message && <p className="error-message"><>{ errors.email.message }</></p>}
                     
@@ -81,7 +83,7 @@ function LoginFooter() {
 
             </Modal>
             
-        </FooterContainer>
+        </FormFooter>
     )
 }
 

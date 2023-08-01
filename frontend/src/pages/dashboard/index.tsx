@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import DinamicHeader from "../../components/header";
+import DynamicHeader from "../../components/header";
 import { DisplayContainer, LeftContainer, RightContainer, Selections, Container } from './styles'
 import SchoolScreen from "../../components/dashboard/school";
 import ProfileScreen from "../../components/dashboard/profile";
@@ -11,7 +11,8 @@ import SkillsScreen from "../../components/dashboard/skills";
 export default function UserDashboardPage(): JSX.Element {
 
     const [display, setDisplay] = useState('profile')
-    function renderDisplay() : JSX.Element{
+    
+    function renderDisplay() {
         if(display === 'profile') return <ProfileScreen />
         if(display === 'school') return <SchoolScreen />
         if(display === 'contact') return <ContactScreen />
@@ -22,7 +23,7 @@ export default function UserDashboardPage(): JSX.Element {
 
     return (
         <>
-            <DinamicHeader startBtn profileBtn logoutBtn onDashboard />
+            <DynamicHeader startBtn profileBtn logoutBtn onDashboard />
             <Container>
                 <LeftContainer>
                     <Selections actual="profile" selected={display} onClick={()=> setDisplay('profile')}>

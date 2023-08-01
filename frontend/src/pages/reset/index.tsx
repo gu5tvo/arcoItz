@@ -6,7 +6,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { resetSchema } from "../../schemas/login";
 import { useUser } from "../../hooks/contexts";
 import { useLocation, useNavigate } from "react-router-dom";
-import { iUserComplete } from "../../interfaces/users";
 
 interface ResetData {
     password: string,

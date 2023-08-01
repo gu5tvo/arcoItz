@@ -15,9 +15,10 @@ export interface iAdminLogin {
 }
 
 export interface iAdminRegister {
-    name: string;
-    email: string;
-    password: string;
+    name: string
+    email: string
+    password: string
+    confirmPassword: string
 }
 
 export interface iAdminEdit {

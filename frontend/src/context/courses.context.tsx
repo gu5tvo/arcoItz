@@ -14,7 +14,7 @@ export const CoursesContext = createContext({
 
 export const CoursesProvider = ({ children } : {children: JSX.Element}) => {
 
-    const { token, courses, setCourses, profile } = useUser()
+    const { token, profile } = useUser()
     api.defaults.headers.Authorization = `Bearer ${token}`
 
     const registerCourse = useCallback( async (data: iCourses) => {

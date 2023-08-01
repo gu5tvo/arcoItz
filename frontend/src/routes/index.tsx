@@ -1,8 +1,12 @@
 import { Routes, Route } from 'react-router-dom';
 import LandingPage from '../pages/landing';
-import LoginPage from '../pages/login';
-import RegisterPage from '../pages/register';
-import UserDashboardPage from '../pages/dashboard';
+import LoginPage from '../pages/SignInPage';
+
+import SignUpPage from '../pages/SignUpPage';
+import AdminSignUpPage from '../pages/AdminSignUpPage';
+import AdminSignInPage from '../pages/AdminSignInPage';
+
+import DashboardPage from '../pages/Dashboard';
 import SearchPage from '../pages/search';
 import ProtectedRoute from '../components/ProtectedRouteUser';
 import AdminProtectedRoute from '../components/ProtectedRouterAdmin';
@@ -10,13 +14,13 @@ import Profile from '../pages/profile';
 import { Painel } from '../pages/admin/painel';
 import City from '../pages/admin/city/'
 import ManageAdmins from '../pages/admin/manageAdmins';
-import AdminRegisterPage from '../pages/admin/register';
 import SectorPage from '../pages/admin/sector';
 import AdminSearchPage from '../pages/admin/search';
 
-import AdminLogin from '../pages/admin/login/';
 import EditAdminProfile from '../pages/admin/editProfile';
 import ResetPage from '../pages/reset';
+
+import React from 'react'
 
 export default function MakeRoutes(){
 
@@ -24,21 +28,21 @@ export default function MakeRoutes(){
         <Routes>
             <Route path="/" element={<LandingPage/>} />
             <Route path="/login" element={<LoginPage/>} />
-            <Route path="/register" element={<RegisterPage/>} />
+            <Route path="/cadastro" element={<SignUpPage/>} />
             <Route path="/search" element={<SearchPage/>} />
             <Route path="/profile/:id" element={<Profile/>} />
-            <Route path="/dashboard/*" element={<ProtectedRoute path="/dashboard" element={UserDashboardPage} isPrivate redirectTo="/login" />} />
+            <Route path="/dashboard/*" element={<ProtectedRoute path="/dashboard" element={DashboardPage} isPrivate redirectTo="/login" />} />
             <Route path="/reset/*" element={<ResetPage/>}/>
             {/* <AdminProtectedRoute path="/login" element={AdminLogin} isPrivate redirectTo="/admin/login" /> */}
-            <Route path="/admin/login/" element={<AdminLogin/>} />
+            <Route path="/admin/login/" element={<AdminSignInPage/>} />
 
-            <Route path="/admin/painel/*" element={<AdminProtectedRoute path="/admin/ainel" element={Painel} isPrivate redirectTo="/admin/login" />} />
-            <Route path="/admin/manage/*" element={<AdminProtectedRoute path="/admin/manage" element={ManageAdmins} isPrivate redirectTo="/admin/login" />} />
-            <Route path="/admin/register/*" element={<AdminProtectedRoute path="/admin/register" element={AdminRegisterPage} isPrivate redirectTo="/admin/login" />} />
-            <Route path="/admin/city/*" element={<AdminProtectedRoute path="/admin/city" element={City} isPrivate redirectTo="/admin/login" />} />
-            <Route path="/admin/sector/*" element={<AdminProtectedRoute path="/admin/sector" element={SectorPage} isPrivate redirectTo="/admin/login" />} />
-            <Route path="/admin/users/*" element={<AdminProtectedRoute path="/admin/users" element={AdminSearchPage} isPrivate redirectTo="/admin/login" />} />
-            <Route path="/admin/*" element={<AdminProtectedRoute path="/admin/login" element={EditAdminProfile} isPrivate redirectTo="/admin/login" />} />
+            <Route path="/admin/painel" element={<AdminProtectedRoute path="/admin/painel" element={Painel} isPrivate redirectTo="/admin/login" />} />
+            <Route path="/admin/manage" element={<AdminProtectedRoute path="/admin/manage" element={ManageAdmins} isPrivate redirectTo="/admin/login" />} />
+            <Route path="/admin/cadastro" element={<AdminProtectedRoute path="/admin/cadastro" element={AdminSignUpPage} isPrivate redirectTo="/admin/login" />} />
+            <Route path="/admin/city" element={<AdminProtectedRoute path="/admin/city" element={City} isPrivate redirectTo="/admin/login" />} />
+            <Route path="/admin/sector" element={<AdminProtectedRoute path="/admin/sector" element={SectorPage} isPrivate redirectTo="/admin/login" />} />
+            <Route path="/admin/users" element={<AdminProtectedRoute path="/admin/users" element={AdminSearchPage} isPrivate redirectTo="/admin/login" />} />
+            <Route path="/admin" element={<AdminProtectedRoute path="/admin" element={EditAdminProfile} isPrivate redirectTo="/admin/login" />} />
 
             
         </Routes>

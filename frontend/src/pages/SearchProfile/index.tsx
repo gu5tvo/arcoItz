@@ -59,10 +59,11 @@ export function SearchProfile() {
       <MainSearchProfileDiv>
         <EditResults/>
         <ProfilePreviewDivCollection>
-          {profiles?.map((profile) => (
+          {profiles?.map((profile, index) => (
             <ProfilePreview 
+            id={profile.fullname + index}
             image={profile.image} 
-            fullname={profile.fullname}
+            name={profile.fullname}
             area={profile.area} 
             pronouns={profile.pronouns} 
             gender={profile.gender}/>

@@ -58,7 +58,7 @@ export default function ManageAdmins() {
         setAddAdmin(true)
     }
 
-    if (addAdmin) return <Navigate to='/admin/register'/>
+    if (addAdmin) return <Navigate to='/admin/cadastro'/>
 
     return (
         <>

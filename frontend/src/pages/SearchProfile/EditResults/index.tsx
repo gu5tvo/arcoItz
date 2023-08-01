@@ -1,6 +1,7 @@
 import {EditResultsDiv} from './style'
 import leftArrowIcon from '../../../assets/images/leftArrow.png'
 import rightArrowIcon from '../../../assets/images/rightArrow.png'
+import React from 'react'
 
 export function EditResults(){
     return(

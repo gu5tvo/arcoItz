@@ -1,7 +1,7 @@
 import { EditModalContainer } from "./style"
 import React, { useEffect, useState } from 'react'
-import { useAdmin, useModal, useUser } from "../../../hooks/contexts";
-import { Image , Button } from "../../../components/dashboard/styles";
+import { useAdmin, useModal } from "../../../hooks/contexts";
+import {  Button } from "../../../components/dashboard/styles";
 import defaultImage from '../../../assets/profile-picture.svg'
 interface EditModalProps {
     id: string;
@@ -10,14 +10,13 @@ interface EditModalProps {
 }
 export default function EditModal({ id, avatar, name }: EditModalProps) {
     const { adminUpdate , admin, listCities, cities } = useAdmin()
-    const { setPicture, setRequest } = useModal() 
+    const { setPicture } = useModal() 
 
 
     const [updated, setUpdated] = useState(false)
     const [admName, setAdmName] = useState(name)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [pfp, setPfp] = useState("")
     const [phone, setPhone] = useState("")
     const [city, setCity] = useState("")
 
@@ -41,15 +40,14 @@ export default function EditModal({ id, avatar, name }: EditModalProps) {
     }
 
     const editAdmin = ()=> {
-        if (name || email || password || pfp) {
-            const avatar = pfp
-            adminUpdate(id, { name: admName, email, password, avatar, city, phone })
+        if (name || email || password) {
+            adminUpdate(id, { name: admName, email, password, city, phone })
             setUpdated(true)
         }
     }
 
     const onChangePicture = ()=> {
-        setRequest({ source: 'admin', id, setPfp })
+        // setRequest({ source: 'admin' })
         setPicture(true)
     }
 
@@ -64,7 +62,7 @@ export default function EditModal({ id, avatar, name }: EditModalProps) {
     return (
         <EditModalContainer>
             <h1>Editar o perfil de {name}</h1>
-            <img src={pfp ? pfp : avatar ? avatar : defaultImage} alt={"Foto de " + admin.name} />
+            <img src={avatar ?? defaultImage} alt={"Foto de " + admin.name} />
 
             <Button onClick={onChangePicture}>Alterar foto</Button>
             <input placeholder="Nome" type='text' onChange={onChangeName} />

@@ -106,7 +106,7 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
       toast.success('Login realizado com sucesso!');
       profile({ userData: true });
       navigate('/dashboard');
-    } catch (err: any) {
+    } catch (err) {
       toast.error(err.response.data.message);
     }
   }, []);

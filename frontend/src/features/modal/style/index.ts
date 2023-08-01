@@ -142,3 +142,29 @@ export const Image = styled.img`
         max-height: 150px;
     }
 `
+
+// ---------- Contêineres ----------
+
+export const ImageSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: min(2vh, 15px);
+  margin-bottom: min(2vh, 15px);
+`
+
+// ---------- UI elements ----------
+
+export const Button = styled.button`
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 0.5rem;
+    background-color: #48A7FF;
+    color: #fff;
+    transition: 0.3s all ease-in-out;
+
+    &:hover{
+        cursor: pointer;
+        background-color: #3F8FCC;
+    }
+`

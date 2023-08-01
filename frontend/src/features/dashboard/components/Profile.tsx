@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom';
-import { useAdmin, useModal, useUser } from '../../../hooks/contexts';
+import { useAdmin, useUser } from '../../../hooks/contexts';
 import { useForm } from 'react-hook-form';
-import { Button, FormStyle, Input, Select, TextArea , Image, DivSpaceStyle} from '../styles';
-import DefaultPfp from '../../../assets/profile-picture.svg'
+import { Button, FormStyle, Input, Select, TextArea } from '../style';
+import { PictureModal } from '../../../features';
 
 interface SubmitData {
   pronouns: string;
@@ -17,11 +17,10 @@ export default function ProfileScreen(): JSX.Element {
     const { updateProfile, user } = useUser();
     const { listSectors, sectors } = useAdmin()
     const { register, handleSubmit } = useForm();
-    const { setPicture, setRequest } = useModal();
+    
     const navigate = useNavigate();
     const [isActive, setIsActive] = useState<boolean>(user.isActive)
     const [area, setArea] = useState(user.area)
-    const [pfp, setPfp] = useState("");
     
 
     useEffect(()=>{
@@ -31,11 +30,6 @@ export default function ProfileScreen(): JSX.Element {
       listSectors()
     },[user])
 
-    const onSetPicture = () => {
-      setRequest({ source: 'user', id: user.id, setPfp })
-      setPicture(true)
-    }
-
     const onSubmit = ({pronouns, title, bio, gender, name}: SubmitData)=> {
       updateProfile({ name, bio: (bio ? bio : undefined), gender: (gender ? gender : undefined), pronouns: (pronouns ? pronouns : undefined), title: (title ? title : undefined), isActive, area: area ? area : "none"})
     }
@@ -43,12 +37,7 @@ export default function ProfileScreen(): JSX.Element {
     
     return (
         <>
-
-          <DivSpaceStyle>
-            <Image src={pfp ? pfp : user.avatar ? user.avatar : DefaultPfp} alt={"foto de " + user.name} />
-            <Button onClick={onSetPicture}>Alterar foto</Button>
-          </DivSpaceStyle>
-            
+          <PictureModal avatar={user.avatar} name={user.name} source="user"/>  
 
             <FormStyle onSubmit={handleSubmit(onSubmit)}>
                 <div>

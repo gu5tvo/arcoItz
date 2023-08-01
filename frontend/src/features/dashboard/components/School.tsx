@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useUser } from '../../../hooks/contexts';
 import Graduation from './Graduation';
-import {  SchoolScreenStyle } from './style';
+import { SchoolScreenStyle } from '../style';
 import addIconFormation from '../../../assets/addIconFormation.svg';
 import removeIconFormation from '../../../assets/removeIconFormation.svg';
-import { IconsDivStyle, Label } from '../styles';
+import { IconsDivStyle, Label } from '../style';
 
 export default function SchoolScreen(): JSX.Element {
   const { courses, profile } = useUser();

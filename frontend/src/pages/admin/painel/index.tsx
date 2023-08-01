@@ -1,8 +1,8 @@
 import DinamicHeader from "../../../components/header";
 import { Container, PainelSection, ButtonsContainer } from "./style";
-import CityIcon from '../../assets/../map-icon.svg'
+import CityIcon from '../../../assets/map-icon.svg'
 import ProfilePicture from '../../../assets/profile-picture.svg'
-import SectorIcon from '../../assets/sector-icon.svg'
+import SectorIcon from '../../../assets/sector-icon.svg'
 import ManagerIcon from '../../../assets/manager-icon.svg'
 import { useAdmin } from '../../../hooks/contexts';
 import React from 'react'

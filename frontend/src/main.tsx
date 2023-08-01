@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import App from './App'
 import { BrowserRouter } from 'react-router-dom'
 import { AdminProvider } from './context/admin.context'
@@ -8,9 +7,13 @@ import { CoursesProvider } from './context/courses.context'
 import { SkillsProvider } from './context/skills.context'
 import { ExperienceProvider } from './context/experience.context'
 import { DocumentsProvider } from './context/documents.context'
-import { ModalProvider } from './context/modal.context'
+import { ModalProvider } from './features'
 
-ReactDOM.render(
+import { createRoot } from 'react-dom/client'
+const container = document.getElementById('root')
+const root = createRoot(container)
+
+root.render(
   <React.StrictMode>
     <BrowserRouter>
       <AdminProvider>
@@ -20,7 +23,7 @@ ReactDOM.render(
               <ExperienceProvider>
                 <DocumentsProvider>
                   <ModalProvider>
-                    <App />
+                      <App />
                   </ModalProvider>
                 </DocumentsProvider>
               </ExperienceProvider>
@@ -29,6 +32,5 @@ ReactDOM.render(
         </UserProvider>
       </AdminProvider>
     </BrowserRouter>
-  </React.StrictMode>,
-  document.getElementById('root')
+  </React.StrictMode>
 )

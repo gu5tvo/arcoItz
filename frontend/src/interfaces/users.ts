@@ -5,9 +5,10 @@ export interface iLogin {
 }
 
 export interface iRegister {
-    name: string;
-    email: string;
-    password: string;
+    name: string
+    email: string
+    password: string
+    confirmPassword: string
 }
 
 export interface iUserSimple{
