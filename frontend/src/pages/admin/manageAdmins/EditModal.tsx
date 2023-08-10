@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useAdmin, useModal } from "../../../hooks/contexts";
 import {  Button } from "../../../components/dashboard/styles";
 import defaultImage from '../../../assets/profile-picture.svg'
+import { PictureModal } from "../../../features";
 interface EditModalProps {
     id: string;
     avatar: string;
@@ -64,7 +65,7 @@ export default function EditModal({ id, avatar, name }: EditModalProps) {
             <h1>Editar o perfil de {name}</h1>
             <img src={avatar ?? defaultImage} alt={"Foto de " + admin.name} />
 
-            <Button onClick={onChangePicture}>Alterar foto</Button>
+            <PictureModal avatar={avatar} name={name} source="admin" id={id}/>
             <input placeholder="Nome" type='text' onChange={onChangeName} />
             <input placeholder="Email" type='email' onChange={onChangeEmail} />
             <input placeholder="Senha" type='password' onChange={onChangePassword} />

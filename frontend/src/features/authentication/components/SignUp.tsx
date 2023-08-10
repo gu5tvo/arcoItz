@@ -2,8 +2,8 @@ import { FieldErrors, UseFormHandleSubmit, UseFormRegister, UseFormTrigger } fro
 import { Link } from "react-router-dom";
 import { iRegister } from "../../../interfaces/users";
 import { iAdminRegister } from "../../../interfaces/admin";
-import { BottomInfos, FieldName, Form, FormField, PageTitle, SubmitButton } from "../style";
-import AuthenticationTemplate from "..";
+import { BottomInfos, FieldName, FormField, PageTitle, SubmitButton } from "../style";
+import AuthenticationTemplate from ".";
 import ErrorMessage from "./ErrorMessage";
 import FormInput from "./FormInput";
 
@@ -28,7 +28,9 @@ interface Props {
 
 export default function SignUp({ signUp, handleSubmit, trigger, register, errors }: Props): JSX.Element{
 
+    //12345a!A
     const onSignUp = handleSubmit(async (formData: SignUpData) => {
+        console.log("dasds")
         await trigger();
         signUp(formData);
       })

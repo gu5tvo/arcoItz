@@ -10,7 +10,7 @@ type FormType = InferType<typeof loginSchema | typeof registerSchema>
 interface Props {
     type: string | any
     placeholder: string
-    register: UseFormRegister<InferType<typeof loginSchema>>
+    register: UseFormRegister<FormType>
     id?: string
 }
 

@@ -1,5 +1,5 @@
 import { FieldErrors, UseFormHandleSubmit, UseFormRegister, UseFormTrigger } from "react-hook-form";
-import AuthenticationTemplate from "..";
+import AuthenticationTemplate from "./";
 import { FormField, PageTitle, FieldName, FormSubmit, CheckboxElement, SubmitButton } from "../style";
 import FormInput from "./FormInput";
 import ErrorMessage from "./ErrorMessage";
@@ -27,6 +27,7 @@ interface Props {
 export default function SignIn({ signIn, handleSubmit, trigger, register, errors }: Props) {
 
     const onSignIn = handleSubmit(async (formData: SignInData) => {
+        console.log("ffsdf");
         await trigger();
         signIn(formData);
       })
