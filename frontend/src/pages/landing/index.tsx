@@ -1,5 +1,5 @@
 import React from "react";
-import DinamicHeader from "../../components/header";
+import DinamicHeader from "../../components/Header";
 import {PinkSection, DisclaimerSection, ActionSection, BlockArticle} from './styles'
 import { Link } from "react-router-dom";
 import splash from '../../assets/splash.svg'

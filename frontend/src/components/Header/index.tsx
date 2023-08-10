@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Header, FilledBtn, OutlinedLink, UndecoratedLink } from "./styles";
+import { StyledHeader, FilledBtn, UndecoratedLink, NavbarButtons, SignInButton, SignUpButton, DiversiLogo, Navbar, HeaderWrapper, NavbarWrapper, NavbarLinks, MenuIcon } from "./styles";
 import { iHeader } from "../../interfaces/header";
 import { useUser, useAdmin } from "../../hooks/contexts";
-import menuIcon from '../../assets/ham-btn.svg'
-import  { Link, useNavigate }  from "react-router-dom";
+import diversIcon from '../../assets/diversIcon.svg'
+import  { useNavigate }  from "react-router-dom";
 
 export default function DynamicHeader(
     {startBtn = false, loginBtn = false, registerBtn = false,
-     profileBtn = false, logoutBtn = false, adminLogoutBtn = false,
-     searchBtn = false, adminPanel = false, onDashboard = false, onPanel = false
+     profileBtn = false, logoutBtn = false,
+     searchBtn = false, onDashboard = false, onPanel = false
     }: iHeader){
 
     const navigate = useNavigate();
-
+    
     const { isAuthenticated: userAuthenticated, logout, user, profile } = useUser();
     const { isAuthenticated: adminAuthenticated, adminLogout, adminSelf } = useAdmin();
+
     const [showMenu, setShowMenu] = useState(false);
 
     useEffect(()=> {
@@ -43,8 +44,8 @@ export default function DynamicHeader(
             } else {
                 return (
                     <>
-                        {loginBtn && <UndecoratedLink to="/login">Entrar</UndecoratedLink>}
-                        {registerBtn && <OutlinedLink to="/register">Cadastre-se</OutlinedLink>}
+                        {registerBtn && <SignUpButton to="/register">Cadastre-se</SignUpButton>}
+                        {loginBtn && <SignInButton to="/login">Entrar</SignInButton>}
                     </>
                 )
             }
@@ -63,30 +64,27 @@ export default function DynamicHeader(
         }
     }
 
-    const [menuClass, setMenuClass] = useState("")
-
-    const toggleMenuState = () => {
-        setShowMenu(!showMenu);
-
-        if (showMenu)
-            setMenuClass("show")
-        else 
-            setMenuClass("")
-    }        
-
     return (
-        <Header>
-            <img src={menuIcon} onClick={toggleMenuState}/>
-            <Link to="/"><h1>DiversiTrampos</h1></Link>
-          
-            <span className={menuClass}>
-                <nav>
-                    {startBtn && <UndecoratedLink to="/">Início</UndecoratedLink>}
-                    {searchBtn && <UndecoratedLink to="/search">Buscar currículos</UndecoratedLink>}
-                    {profileBtn && <UndecoratedLink to={`/profile/${user.id}`}>Acessar meu perfil</UndecoratedLink>}
-                    {betterMenu()}
-                </nav>
-            </span>
-        </Header>
+        <HeaderWrapper>
+            <StyledHeader $showMenu={showMenu}>
+                <DiversiLogo src={diversIcon}/>
+                <NavbarWrapper $showMenu={showMenu}>
+                    <Navbar>
+                        <NavbarLinks>
+                            {startBtn && <UndecoratedLink to="/">Início</UndecoratedLink>}
+                            {searchBtn && <UndecoratedLink to="/search">Sobre nós</UndecoratedLink>}
+                            {profileBtn && <UndecoratedLink to={`/profile/${user.id}`}>Currículo</UndecoratedLink>}
+                            {<UndecoratedLink to="">Empresa</UndecoratedLink>}
+                            {<UndecoratedLink to="">Contato</UndecoratedLink>}
+                        </NavbarLinks>
+                        <NavbarButtons>
+                            { betterMenu() }
+                        </NavbarButtons>
+                    </Navbar>
+                </NavbarWrapper>
+            </StyledHeader>
+
+            <MenuIcon onClick={()=>setShowMenu(!showMenu)}/>
+        </HeaderWrapper>
     )
 }

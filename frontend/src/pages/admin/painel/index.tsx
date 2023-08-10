@@ -1,4 +1,4 @@
-import DinamicHeader from "../../../components/header";
+import DinamicHeader from "../../../components/Header";
 import { Container, PainelSection, ButtonsContainer } from "./style";
 import CityIcon from '../../../assets/map-icon.svg'
 import ProfilePicture from '../../../assets/profile-picture.svg'

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { GraduationStyle } from "./style"
 import MaskedInput from 'react-text-mask'
 import { useForm } from "react-hook-form"
-import { useCourses, useUser } from "../../../../hooks/contexts";
+import { useCourses } from "../../../../hooks/contexts";
 
 interface OnSubmitData {
     name: string;

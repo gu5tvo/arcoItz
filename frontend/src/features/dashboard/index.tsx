@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from './style'
+import { MainContainer } from './style'
 
 interface Props {
     children: JSX.Element | JSX.Element[] | string
@@ -8,8 +8,8 @@ interface Props {
 export default function UserDashboardPage({ children }: Props): JSX.Element {
 
     return (
-        <Container>
+        <MainContainer>
                 { children }
-        </Container>
+        </MainContainer>
     )
 }

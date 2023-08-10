@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import DynamicHeader from "../../components/header";
+import DynamicHeader from "../../components/Header";
 import { DisplayContainer, LeftContainer, RightContainer, Selections, Container } from './styles'
 import SchoolScreen from "../../components/dashboard/school";
 import ProfileScreen from "../../components/dashboard/profile";

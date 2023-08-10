@@ -1,6 +1,6 @@
 import { CitiesContainer } from './style'
 import React, { useEffect, useState } from 'react'
-import DinamicHeader from '../../../components/header'
+import DinamicHeader from '../../../components/Header'
 import Modal from '../../../components/Modal';
 import CityCard from '../../../components/CityCard';
 import { useAdmin } from '../../../hooks/contexts';

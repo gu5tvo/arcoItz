@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useAdmin, useUser } from '../../../hooks/contexts';
 import { useForm } from 'react-hook-form';
-import { Button, FormStyle, Input, Select, TextArea } from '../style';
+import { Button, FormStyle, Input, InputArea, Label, Select, TextArea } from '../style';
 import { PictureModal } from '../../../features';
 
 interface SubmitData {
@@ -12,6 +12,7 @@ interface SubmitData {
   gender: string;
   name: string;
 }
+
 export default function ProfileScreen(): JSX.Element {
 
     const { updateProfile, user } = useUser();
@@ -31,7 +32,16 @@ export default function ProfileScreen(): JSX.Element {
     },[user])
 
     const onSubmit = ({pronouns, title, bio, gender, name}: SubmitData)=> {
-      updateProfile({ name, bio: (bio ? bio : undefined), gender: (gender ? gender : undefined), pronouns: (pronouns ? pronouns : undefined), title: (title ? title : undefined), isActive, area: area ? area : "none"})
+
+      updateProfile({ 
+        name,
+        bio: bio ?? undefined,
+        gender: gender ?? undefined,
+        pronouns: pronouns ?? undefined,
+        title: title ?? undefined,
+        isActive,
+        area: area ?? "none"
+      })
     }
     
     
@@ -40,18 +50,18 @@ export default function ProfileScreen(): JSX.Element {
           <PictureModal avatar={user.avatar} name={user.name} source="user"/>  
 
             <FormStyle onSubmit={handleSubmit(onSubmit)}>
-                <div>
-                  <label htmlFor="name" className='label-form'>Nome completo</label>
+                <InputArea>
+                  <Label htmlFor="name">Nome completo</Label>
                   <Input type="text" placeholder="Escreva seu nome completo" defaultValue={user.name} {...register('name')} />
-                </div>
+                </InputArea>
 
-                <div>
-                  <label htmlFor="pronouns" className='label-form'>Pronomes</label>
+                <InputArea>
+                  <Label htmlFor="pronouns">Pronomes</Label>
                   <Input type="text" placeholder="Escreva seu pronome - elu/delu" defaultValue={user.pronouns ? user.pronouns : ''} {...register('pronouns')} />
-                </div>
+                </InputArea>
 
-                <div>
-                  <label htmlFor="area" className='label-form'>Área:</label>
+                <InputArea>
+                  <Label htmlFor="area">Área:</Label>
                   <Select {...register('area')} defaultValue={user.area} value={area} onChange={(e)=>setArea(e.target.value)}>
                     <option value=""></option>
                     {
@@ -60,30 +70,30 @@ export default function ProfileScreen(): JSX.Element {
                       })
                     }
                   </Select>
-                </div>
+                </InputArea>
 
-                <div>
-                  <label htmlFor="isActive" className='label-form'>Exibição:</label>
+                <InputArea>
+                  <Label htmlFor="isActive">Exibição:</Label>
                   <Select {...register('isActive')} defaultValue={isActive ? 'true' : 'false'} onChange={(e)=>setIsActive(e.target.value === 'true')}>
                     <option value="true">Exibir meu currículo em buscas</option>
                     <option value="false">Não exibir meu currículo em buscas</option>
                   </Select>
-                </div>
+                </InputArea>
 
-                <div>
-                  <label htmlFor='title' className='label-form'>Título</label>
+                <InputArea>
+                  <Label htmlFor='title'>Título</Label>
                   <Input type="text" placeholder="Ex: Vendedor externo" defaultValue={user.title ? user.title : ''} {...register('title')} />
-                </div>
+                </InputArea>
                
-                <div>
-                  <label htmlFor='bio' className='label-form'>Biografia</label>
+                <InputArea>
+                  <Label htmlFor='bio'>Biografia</Label>
                   <TextArea placeholder="Escreva um pouco sobre você" defaultValue={user.bio ? user.bio : ''} {...register('bio')} />
-                </div>
+                </InputArea>
              
-                <div>
-                  <label htmlFor='gender' className='label-form'>Gênero</label>
+                <InputArea>
+                  <Label htmlFor='gender'>Gênero</Label>
                   <Input type='text' placeholder="Ex: Mulher Trans" defaultValue={user.gender ? user.gender : ''} {...register('gender')} />
-                </div>
+                </InputArea>
                
                 <Button type="submit">Salvar alterações</Button>
             </FormStyle>

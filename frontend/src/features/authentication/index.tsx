@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import DinamicHeader from "../../components/header";
+import DinamicHeader from "../../components/Header";
 import { FormContainer, Form } from "./style";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";

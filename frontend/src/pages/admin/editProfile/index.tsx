@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useAdmin, useModal } from "../../../hooks/contexts";
 import { Image , Button } from "../../../components/dashboard/styles";
 import defaultImage from '../../../assets/profile-picture.svg'
-import DinamicHeader from '../../../components/header';
+import DinamicHeader from '../../../components/Header';
 import { Navigate } from 'react-router-dom';
 
 export default function EditAdminProfile() {

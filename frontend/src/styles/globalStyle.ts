@@ -9,7 +9,7 @@ export const GlobalStyle = createGlobalStyle`
 :root {
  
 	--WHITE: #fff;
-	--AQUABLUE: #3F8FCC;
+	--AQUABLUE: #00CFFC;
 
 	--GRIZZLY: #eee;
 	--CYAN: #89DDFF;
@@ -47,10 +47,12 @@ export const GlobalStyle = createGlobalStyle`
 		vertical-align: baseline;
 		box-sizing: border-box;
 	}
+
 	article, aside, details, figcaption, figure, 
 	footer, header, hgroup, menu, nav, section {
 		display: block;
 	}
+
 	body {
 		line-height: 1;
 		background-color: #F5F5F5;
@@ -61,14 +63,17 @@ export const GlobalStyle = createGlobalStyle`
 	ol, ul {
 		list-style: none;
 	}
+
 	blockquote, q {
 		quotes: none;
 	}
+
 	blockquote:before, blockquote:after,
 	q:before, q:after {
 		content: '';
 		content: none;
 	}
+
 	table {
 		border-collapse: collapse;
 		border-spacing: 0;

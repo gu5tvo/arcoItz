@@ -1,39 +1,64 @@
 import React from 'react'
-import { Navigation, Selections } from '../style'
+import { Navigation, Selections } from '../style/navigation'
 
 interface Props {
     display: string
     setDisplay: React.Dispatch<React.SetStateAction<string>>
 }
 
+interface Selection {
+    title: string
+    description: string
+    value: 'profile' | 'school' | 'experience' | 'skills' | 'certificates' | 'contact'
+}
+
 export default function DashboardNavigation({ display, setDisplay }: Props) {
 
+    const items: Selection[] = [
+        {
+            title: 'Perfil',
+            description: 'Nome, foto e dados pessoais',
+            value: 'profile'
+        },
+        {
+            title: 'Dados acadêmicos',
+            description: 'Cursos, graduações e outros',
+            value: 'school'
+        },
+        {
+            title: 'Experiências profissionais',
+            description: 'Trabalhos, estágios e afins',
+            value: 'experience'
+        },
+        {
+            title: 'Habilidades e competências',
+            description: 'Domínios, habilidades e soft skills',
+            value: 'skills'
+        },
+        {
+            title: 'Certificações e documentos',
+            description: 'Diplomas, certificações e documentos',
+            value: 'certificates'
+        },
+        {
+            title: 'Informações de contato',
+            description: 'Redes sociais, telefone e etc',
+            value: 'contact'
+        },
+    ]
+    
     return (
         <Navigation>
-            <Selections value="profile" selected={display} onClick={()=> setDisplay('profile')}>
-                <h4>Perfil</h4>
-                <p>Nome, foto e dados pessoais</p>
-            </Selections>
-            <Selections value="school" selected={display} onClick={()=> setDisplay('school')}>
-                <h4>Dados acadêmicos</h4>
-                <p>Cursos...</p>
-            </Selections>
-            <Selections value="experience" selected={display} onClick={()=> setDisplay('experience')}>
-                <h4>Experiências profissionais</h4>
-                <p>Trabalhos, estágios e afins...</p>
-            </Selections>
-            <Selections value="skills" selected={display} onClick={()=> setDisplay('skills')}>
-                <h4>Habilidades e competências</h4>
-                <p>Tecnologias, habilidades e softskils...</p>
-            </Selections>
-            <Selections value="certificates" selected={display} onClick={()=> setDisplay('certificates')}>
-                <h4>Certificações e documentos</h4>
-                <p>Documentos..</p>
-            </Selections>
-            <Selections value="contact" selected={display} onClick={()=> setDisplay('contact')}>
-                <h4>Contato</h4>
-                <p>Redes sociais, telefone e etc...</p>
-            </Selections>
+            {items.map(({ description, title, value })=> (
+                <Selections 
+                    value={value} 
+                    key={value}
+                    selected={display} 
+                    onClick={()=> setDisplay(value)}>
+                        <h4>{title}</h4>
+                        <p>{description}</p>
+                </Selections>
+                ))}
         </Navigation>
     )
 }

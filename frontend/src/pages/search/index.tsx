@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import DinamicHeader from '../../components/header'
+import DinamicHeader from '../../components/Header'
 import { useUser, useAdmin } from '../../hooks/contexts'
 import { SearchContainer, customSelectStyles } from './styles'
 import pfp from '../../assets/profile-picture.svg'

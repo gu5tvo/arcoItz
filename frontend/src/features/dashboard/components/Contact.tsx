@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useUser, useAdmin } from '../../../hooks/contexts'
 import { useForm } from 'react-hook-form'
-import { Input, Select, Button, FormStyle } from '../styles';
-import MaskedInput from 'react-text-mask'
+import { Input, Select, Button, FormStyle, InputArea, Label } from '../style';
+import { Phone } from '../style/contact';
 
 interface SubmitData {
     email: string,
@@ -12,7 +12,7 @@ interface SubmitData {
     portfolio: string
 }
 
-export default function ContactScreen(): JSX.Element {
+export default function ContactScreen() {
 
     const { user, updateProfile } = useUser();
     const { cities, listCities } = useAdmin();
@@ -36,37 +36,37 @@ export default function ContactScreen(): JSX.Element {
     return (
         <>
             <FormStyle onSubmit={handleSubmit(onSubmit)}>
-                <div>
-                    <label htmlFor="email" className='label-form'>E-mail</label>
+                <InputArea>
+                    <Label htmlFor="email">E-mail</Label>
                     <Input type="email" placeholder="Digite seu e-mail" {...register('email')} defaultValue={user.email}/>
-                </div>
+                </InputArea>
 
-                <div onChange={(e: React.ChangeEvent<HTMLInputElement>)=>setPhone(e.target.value)}>
-                  <label htmlFor="phone" className='label-form'>Número de telefone</label>
-                  <MaskedInput mask={['(', /[1-9]/, /\d/, ')', ' ', /\d/, ' ', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]} type="text" placeholder="Digite seu número de telefone" defaultValue={user.phone ? user.phone : ''} className="phone-input"  {...register('phone')} />
-                </div>
+                <InputArea onChange={(e: React.ChangeEvent<HTMLInputElement>)=>setPhone(e.target.value)}>
+                  <Label htmlFor="phone">Número de telefone</Label>
+                  <Phone mask={['(', /[1-9]/, /\d/, ')', ' ', /\d/, ' ', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]} type="text" placeholder="Digite seu número de telefone" defaultValue={user.phone ? user.phone : ''} className="phone-input"  {...register('phone')} />
+                </InputArea>
 
-                <div>
-                    <label htmlFor="city" className='label-form'>Cidade</label>
+                <InputArea>
+                    <Label htmlFor="city">Cidade</Label>
                     <Select {...register('city')}>
                         {cities.map(city => <option key={city.id} value={city.name}>{city.name}</option>)}
                     </Select>
-                </div>
+                </InputArea>
 
-                <div>
-                    <label htmlFor="instagram" className='label-form'>Instagram</label>
+                <InputArea>
+                    <Label htmlFor="instagram">Instagram</Label>
                     <Input type="text" placeholder="Digite seu Instagram" {...register('instagram')} defaultValue={user.instagram ? user.instagram : ''}/>
-                </div>
+                </InputArea>
 
-                <div>
-                    <label htmlFor="linkedin" className='label-form'>LinkedIn</label>
+                <InputArea>
+                    <Label htmlFor="linkedin">LinkedIn</Label>
                     <Input type="text" placeholder="Digite seu LinkedIn" {...register('linkedin')} defaultValue={user.linkedin ? user.linkedin : ''}/>
-                </div>
+                </InputArea>
 
-                <div>
-                    <label htmlFor="portfolio" className='label-form'>Portfolio</label>
+                <InputArea>
+                    <Label htmlFor="portfolio">Portfolio</Label>
                     <Input type="text" placeholder="Digite seu Portfolio" {...register('portfolio')} defaultValue={user.portfolio ? user.portfolio : ''}/>
-                </div>
+                </InputArea>
                 
                 <Button type="submit">Salvar alterações</Button>
             </FormStyle>
