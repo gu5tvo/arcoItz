@@ -12,11 +12,18 @@ export const MainSectionContainer = styled.div`
 
 export const MainSectionStyle = styled.section`
     display: flex;
-    padding: 8vh 5vw;
+    padding: 8vh min(60px, 5vw);
     position: relative;
+
+    @media (max-width: 480px) {
+        flex-direction: column;
+        padding: 4vh 5vw;
+        gap: 1.2rem;
+    }
     
-    ::before {
-        content: '';
+`
+
+export const BackgroundSVG = styled.div`
         background-image: url(${LinesDesktopSVG});  
         background-size: cover;
         background-repeat: no-repeat;
@@ -26,32 +33,14 @@ export const MainSectionStyle = styled.section`
         bottom: 0;
         right: 0;
         z-index: 0;
-    }
 
     @media (max-width: 480px) {
-        flex-direction: column;
-        padding: 4vh 5vw;
-        gap: 1.2rem;
-
-        ::before {
-            display: none;
-        }
-
-        ::after {
-            content: '';
-            background-image: url(${LinesMobileSVG});  
-            background-size: cover;
-            background-repeat: no-repeat;
-            position: absolute;
             width: 97%;
             top: 42%;
             left: 4%;
-            bottom: 0;
-            right: 0;
-            z-index: 0;
-        }
     }
-    `
+    
+`
 
 export const ButtonCollection = styled.div`
     display: flex;
@@ -111,7 +100,6 @@ export const ImageSection = styled.section`
 `
 
 export const MainImageCollection = styled.div`
-    background-image: url(${props => props.imageUrl});
     background-size: cover;
     background-position: center;
     position: relative;
@@ -140,7 +128,7 @@ export const MainImage = styled.img`
 export const Headline = styled.p`
     display: flex;
     color: var(--MODERATE-BLACK);
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', 'Inter', sans-serif;
     font-size: clamp(1.063rem, 3.2vw , 5rem);
     font-weight: bold;
     line-height: 3.753.2vw;
@@ -153,7 +141,7 @@ export const Headline = styled.p`
 
 `
 export const Subheading = styled.p`
-    font-family: Poppins;
+    font-family: 'Poppins', 'Inter', sans-serif;
     display: flex;
     font-size: clamp(0.6rem, 1.13vw, 1.3rem);
     color: var(--TEXT-GRAY);
@@ -230,7 +218,7 @@ export const UploadDiv = styled.div`
     `
 
 export const Text = styled.p`
-    font-family: Poppins;
+    font-family: 'Poppins', 'Inter', sans-serif;
     display: flex;
     font-size: clamp(0.6rem, 0.78vw, 0.9rem);
     color: var(--BLACK);
@@ -254,7 +242,7 @@ export const MaranhaoFlagDiv = styled.div`
 
 export const  ResumesCountDiv= styled.div`
     display: flex;
-    font-family: Poppins;
+    font-family: 'Poppins', 'Inter', sans-serif;
     /* padding: 0.6rem 0.6rem 0.5rem 0.6rem; */
     padding: 1.7% 1.7% 1.6% 1.7%;
 
@@ -278,7 +266,7 @@ export const  ResumesCountDiv= styled.div`
    `
 
 export const TextDiv = styled.div`
-    font-family: Poppins;
+    font-family: 'Poppins', 'Inter', sans-serif;
     color: var(--BLACK);
     display: flex;
     flex-direction: column;
@@ -287,7 +275,7 @@ export const TextDiv = styled.div`
 `
 
 export const TopText = styled.p`
-    font-family: Poppins;
+    font-family: 'Poppins', 'Inter', sans-serif;
     color: var(--BLACK);
     text-align: center;
     font-size: 1.34rem;
@@ -298,7 +286,7 @@ export const TopText = styled.p`
 `
 
 export const BottomText = styled.p`
-    font-family: Poppins;
+    font-family: 'Poppins', 'Inter', sans-serif;
     color: var(--TEXT-GRAY);
     text-align: center;
     font-size: clamp(0.6rem, 0.9vw, 0.9rem);

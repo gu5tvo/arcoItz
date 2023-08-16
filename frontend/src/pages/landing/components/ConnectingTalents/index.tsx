@@ -22,6 +22,7 @@ import {
   FlagImage,
   DocImage,
   MainSectionContainer,
+  BackgroundSVG,
 } from "./style";
 import LandingMainPhoto from "./../../../../assets/LandingMainPhoto.svg";
 import RightArrow from "./../../../../assets/RightArrow.svg";
@@ -33,6 +34,7 @@ export default function SectionConnectingTalents(): JSX.Element {
     <>
       <MainSectionContainer>
         <MainSectionStyle>
+          <BackgroundSVG />
           <TextSection>
             <TextCollection>
               <Headline>Conectando talentos e empresas inclusivas.</Headline>

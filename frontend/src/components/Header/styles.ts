@@ -14,11 +14,11 @@ export const StyledHeader = styled.header<{ $showMenu: boolean }>`
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: min(100vw, 2200px);
+    width: min(100vw, 2560px);
 
     background-color: #FFFFFF;
-    justify-content: space-evenly;
-    padding: min(20px, 6vh) min(30px, 3vw);
+    justify-content: space-between;
+    padding: min(20px, 6vh) min(60px, 5vw);
     gap: min(30px, 10vw);
 
     @media (max-width: 1000px){
@@ -70,9 +70,10 @@ export const FilledBtn = styled.button`
 `
 
 export const UndecoratedLink = styled(Link)`
+    font-family: 'Poppins', 'Inter', sans-serif;
     text-decoration: none;
     color: #1E1E1E;
-    font-size: 1.25rem;
+    font-size: clamp(0.6rem, 1.2vw, 1.3rem);
     transition: 0.2s all ease-in-out;
     white-space: nowrap;
     cursor: pointer;
@@ -80,17 +81,17 @@ export const UndecoratedLink = styled(Link)`
     border-style: hidden;
     border-radius: min(0.5rem, 3vw);
     &:hover{
-        scale: 1.1;
+        scale: 1.05;
     }
 `
 
 export const SignInButton = styled(UndecoratedLink)`
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.25rem;
+    font-family: 'Poppins', 'Inter', sans-serif;
+    font-size: clamp(0.6rem, 1.2vw, 1.3rem);
     background-color: var(--AQUABLUE);
     color: white;
     gap: 0.5rem;
-    transition: 0.15s;
+    transition: 0.35s;
 
     &:hover {
         background-color: var(--BLUE);
@@ -98,12 +99,12 @@ export const SignInButton = styled(UndecoratedLink)`
 `
 
 export const SignUpButton = styled(UndecoratedLink)`
+    font-family: 'Poppins', 'Inter', sans-serif;
     color: black;
     border-style: hidden;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.25rem;
-    transition: 0.15s;
-    outline: 1px solid var(--BLUE-DARK);
+    font-size: clamp(0.6rem, 1.2vw, 1.3rem);
+    transition: 0.45s;
+    outline: none solid var(--BLUE-DARK);
     
     &:hover {
         outline: none;
