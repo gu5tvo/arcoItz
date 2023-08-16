@@ -1,6 +1,5 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSkill, useUser } from '../../../hooks/contexts';
-import { useForm } from 'react-hook-form';
 import { Label } from '../styles';
 import { SkillComponentCollection, SkillsScreenStyle } from './style';
 import SkillComponent from './SkillComponent';
@@ -59,7 +58,7 @@ const onClick = ()=> {
         
         <SkillComponentCollection>
            {
-            skills?.map((skill, index)=> {
+            skills?.map((skill)=> {
               return <SkillComponent onDelete={onDelete(skill.id)} content={skill.name} id={skill.id} key={skill.id}/>
             })
            }

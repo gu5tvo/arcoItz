@@ -44,7 +44,7 @@ export default function DynamicHeader(
             } else {
                 return (
                     <>
-                        {registerBtn && <SignUpButton to="/register">Cadastre-se</SignUpButton>}
+                        {registerBtn && <SignUpButton to="/cadastro">Cadastre-se</SignUpButton>}
                         {loginBtn && <SignInButton to="/login">Entrar</SignInButton>}
                     </>
                 )

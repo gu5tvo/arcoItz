@@ -10,5 +10,5 @@ export { default as DashboardNavigation } from './dashboard/components/Navigatio
 export { default as DashboardContent } from './dashboard/components/Content'
 export { default as DashboardProfile } from './dashboard/components/Profile'
 export { default as DashboardContact } from './dashboard/components/Contact'
-
+export { default as DashboardAcademics } from './dashboard/components/School'
 // export { default as LoginFooter } from './authentication/components/Footer'

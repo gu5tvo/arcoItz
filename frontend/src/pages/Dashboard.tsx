@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 
-import SchoolScreen from "../components/dashboard/school";
 import CertificatesScreen from "../components/dashboard/certificates";
 import ExperienceScreen from "../components/dashboard/experience";
 import SkillsScreen from "../components/dashboard/skills";
 
-import { DashboardContact, DashboardProfile } from "../features";
+import { DashboardContact, DashboardProfile, DashboardAcademics } from "../features";
 
 import { Dashboard, DashboardContent, DashboardNavigation } from "../features";
 
@@ -15,7 +14,7 @@ export default function UserDashboardPage() {
     
     function renderDisplay() {
         if(display === 'profile') return <DashboardProfile />
-        if(display === 'school') return <SchoolScreen />
+        if(display === 'school') return <DashboardAcademics />
         if(display === 'contact') return <DashboardContact />
         if(display === 'skills') return <SkillsScreen />
         if(display === 'experience') return <ExperienceScreen />

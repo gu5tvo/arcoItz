@@ -37,6 +37,14 @@ export const DisplayContainer = styled.main`
     gap: min(4vh, 16px);
 `
 
+export const GenericContentStyle = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: min(4vw, 20px);
+    align-items: center;
+`
+
 export const FormStyle = styled.form`
     display: inline-flex;
     flex-direction: column;
