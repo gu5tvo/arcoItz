@@ -35,7 +35,6 @@ export default function MakeRoutes(){
             <Route path="/reset/*" element={<ResetPage/>}/>
             {/* <AdminProtectedRoute path="/login" element={AdminLogin} isPrivate redirectTo="/admin/login" /> */}
             <Route path="/admin/login/" element={<AdminSignInPage/>} />
-
             <Route path="/admin/painel" element={<AdminProtectedRoute path="/admin/painel" element={Painel} isPrivate redirectTo="/admin/login" />} />
             <Route path="/admin/manage" element={<AdminProtectedRoute path="/admin/manage" element={ManageAdmins} isPrivate redirectTo="/admin/login" />} />
             <Route path="/admin/cadastro" element={<AdminProtectedRoute path="/admin/cadastro" element={AdminSignUpPage} isPrivate redirectTo="/admin/login" />} />

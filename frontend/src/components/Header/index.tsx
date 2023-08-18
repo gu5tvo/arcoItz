@@ -72,7 +72,7 @@ export default function DynamicHeader(
                     <Navbar>
                         <NavbarLinks>
                             {startBtn && <UndecoratedLink to="/">Início</UndecoratedLink>}
-                            {searchBtn && <UndecoratedLink to="/search">Sobre nós</UndecoratedLink>}
+                            {searchBtn && <UndecoratedLink to="">Sobre nós</UndecoratedLink>}
                             {profileBtn && <UndecoratedLink to={`/profile/${user.id}`}>Currículo</UndecoratedLink>}
                             {<UndecoratedLink to="">Empresa</UndecoratedLink>}
                             {<UndecoratedLink to="">Contato</UndecoratedLink>}

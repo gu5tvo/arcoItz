@@ -28,8 +28,10 @@ import LandingMainPhoto from "./../../../../assets/LandingMainPhoto.svg";
 import RightArrow from "./../../../../assets/RightArrow.svg";
 import DocIcon from "./../../../../assets/DocIcon.svg";
 import MaranhaoFlag from "./../../../../assets/MaranhaoFlag.svg";
+import { useNavigate } from "react-router-dom";
 
 export default function SectionConnectingTalents(): JSX.Element {
+  const navigate = useNavigate();
   return (
     <>
       <MainSectionContainer>
@@ -45,8 +47,12 @@ export default function SectionConnectingTalents(): JSX.Element {
               </Subheading>
             </TextCollection>
             <ButtonCollection>
-              <SignButton>Cadastrar Currículo</SignButton>
-              <SearchButton>Buscar talentos</SearchButton>
+              <SignButton onClick={() => navigate("/cadastro")}>
+                Cadastrar Currículo
+              </SignButton>
+              <SearchButton onClick={() => navigate("/search")}>
+                Buscar talentos
+              </SearchButton>
             </ButtonCollection>
           </TextSection>
 
@@ -69,8 +75,12 @@ export default function SectionConnectingTalents(): JSX.Element {
               </ResumesCountDiv>
             </MainImageCollection>
             <ButtonCollection>
-              <SignButton>Cadastrar Currículo</SignButton>
-              <SearchButton>Buscar talentos</SearchButton>
+              <SignButton onClick={() => navigate("/cadastro")}>
+                Cadastrar Currículo
+              </SignButton>
+              <SearchButton onClick={() => navigate("/search")}>
+                Buscar talentos
+              </SearchButton>
             </ButtonCollection>
           </ImageSection>
         </MainSectionStyle>
