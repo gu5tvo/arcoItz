@@ -4,9 +4,11 @@ import DinamicHeader from '../../../components/Header'
 import Modal from '../../../components/Modal';
 import CityCard from '../../../components/CityCard';
 import { useAdmin } from '../../../hooks/contexts';
-import DeleteCityModal from './DeleteModal';
-import CreateModal from './CreateModal';
+
+
 import AddIcon from '.././../../assets/add.svg'
+import CreateModal from '../../../features/modal/components/CreateModal';
+import DeleteModal from '../../../features/modal/components/DeleteModal';
 
 interface ModalOptions {
     choice: 'add' | 'delete' | null
@@ -59,7 +61,9 @@ export default function SectorPage() {
             <Modal modalIsOpen={showModal} toggleModal={toggleModal}>
                 {
                     showModal &&
-                    (modalChoice.choice && modalChoice.choice === 'delete') ? <DeleteCityModal cityName={sectorName} cityId={sectorId}/> : <CreateModal/>
+                    (modalChoice.choice && modalChoice.choice === 'delete') 
+                    ? <DeleteModal elementName={sectorName} elementId={sectorId} elementType={"Setor"}/> 
+                    : <CreateModal elementType={"Setor"}/>
                 }
             </Modal> 
 

@@ -4,44 +4,43 @@ import DinamicHeader from '../../../components/Header'
 import Modal from '../../../components/Modal';
 import CityCard from '../../../components/CityCard';
 import { useAdmin } from '../../../hooks/contexts';
-import DeleteCityModal from './DeleteModal';
-import CreateModal from './CreateModal';
+
+
 import AddIcon from '.././../../assets/add.svg'
+import CreateModal from '../../../features/modal/components/CreateModal';
+import DeleteModal from '../../../features/modal/components/DeleteModal';
 
 interface ModalOptions {
     choice: 'add' | 'delete' | null
 }
 export default function Cities() {
 
-    const { listCities, cities } = useAdmin()
+    const { listCities, cities } = useAdmin();
 
-    const [modalChoice, setModalChoice] = useState<ModalOptions>({ choice: null })
-    const [showModal, setShowModal] = useState(false)
+    const [modalChoice, setModalChoice] = useState<ModalOptions>({ choice: null });
+    const [showModal, setShowModal] = useState(false);
 
-    const [cityId, setCityId] = useState("")
-    const [cityName, setCityName] = useState("")
+    const [cityId, setCityId] = useState("");
+    const [cityName, setCityName] = useState("");
 
-    useEffect(()=>{
-        listCities()
+    useEffect( () => {
+        listCities();
     }, [])
 
-    const toggleModal = ()=> {
-        setShowModal(!showModal)
-
+    const toggleModal = () => {
+        setShowModal(!showModal);
     }
 
-    const onAdd = ()=> {
-        setModalChoice({ choice: 'add'} )
-        toggleModal()
+    const onAdd = () => {
+        setModalChoice({ choice: 'add'} );
+        toggleModal();
     }
 
-    const onDelete = (id: string, name: string)=> {
-        setCityId(id)
-        setCityName(name)
-
+    const onDelete = (id: string, name: string) => {
+        setCityId(id);
+        setCityName(name);
         setModalChoice({ choice: 'delete' });
-
-        toggleModal()
+        toggleModal();
     }
 
     return (
@@ -52,14 +51,16 @@ export default function Cities() {
                 <img className='plus-icon' src={AddIcon} onClick={onAdd}/>
                 <div className="cities">
                     {cities.map((city, index)=> {
-                        return <CityCard key={index} cityName={city.name} onDelete={()=>onDelete(city.id, city.name)}/>
+                        return <CityCard key={index} cityName={city.name} onDelete={() => onDelete(city.id, city.name)}/>
                     })}
                 </div>
             </CitiesContainer>
             <Modal modalIsOpen={showModal} toggleModal={toggleModal}>
                 {
                     showModal &&
-                    (modalChoice.choice && modalChoice.choice === 'delete') ? <DeleteCityModal cityName={cityName} cityId={cityId}/> : <CreateModal/>
+                    (modalChoice.choice && modalChoice.choice === 'delete') 
+                    ? <DeleteModal elementName={cityName} elementId={cityId} elementType={"Cidade"}/> 
+                    : <CreateModal elementType={"Cidade"}/>
                 }
             </Modal> 
 
