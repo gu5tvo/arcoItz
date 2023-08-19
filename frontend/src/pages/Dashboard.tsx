@@ -2,11 +2,8 @@ import React, { useState } from "react";
 
 import CertificatesScreen from "../components/dashboard/certificates";
 import ExperienceScreen from "../components/dashboard/experience";
-import SkillsScreen from "../components/dashboard/skills";
 
-import { DashboardContact, DashboardProfile, DashboardAcademics } from "../features";
-
-import { Dashboard, DashboardContent, DashboardNavigation } from "../features";
+import { Dashboard, DashboardContent, DashboardNavigation, DashboardContact, DashboardProfile, DashboardAcademics, DashboardSkill } from "../features";
 
 export default function UserDashboardPage() {
 
@@ -16,7 +13,7 @@ export default function UserDashboardPage() {
         if(display === 'profile') return <DashboardProfile />
         if(display === 'school') return <DashboardAcademics />
         if(display === 'contact') return <DashboardContact />
-        if(display === 'skills') return <SkillsScreen />
+        if(display === 'skills') return <DashboardSkill />
         if(display === 'experience') return <ExperienceScreen />
         if(display === 'certificates') return <CertificatesScreen />
     }

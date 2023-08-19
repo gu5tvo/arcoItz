@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useSkill, useUser } from '../../../hooks/contexts';
-import { Label } from '../styles';
-import { SkillComponentCollection, SkillsScreenStyle } from './style';
-import SkillComponent from './SkillComponent';
+import { GenericContentStyle } from '../style';
 import { iSkills } from '../../../interfaces/users';
-export default function SkillsScreen(): JSX.Element {
+import { Input, SkillsCollection, SkillInputArea, AddSkillBtn, WrapperDiv } from '../style/skill';
+import SkillCard from './SkillCard';
+
+export default function Skills() {
 
   const { registerSkill, deleteSkill } = useSkill();
   const { skills, profile } = useUser()
@@ -42,29 +43,28 @@ const onClick = ()=> {
 
   return (
     <>
-      <SkillsScreenStyle>
-        <div className='major-div'>
-          <Label> Habilidades </Label>
-          <span>
-            <input
+      <GenericContentStyle>
+        <WrapperDiv>
+          <SkillInputArea>
+            <Input
               type='text'
               onChange={updateText}
               onKeyDown={handleEnter}
               value={name}
               placeholder='Digite habilidade e aperte enter'/>
-            <button className="tick-btn" onClick={onClick}>&#10004;</button>
-         </span>
-        </div>
-        
-        <SkillComponentCollection>
+            <AddSkillBtn onClick={onClick}>&#10004;</AddSkillBtn>
+         </SkillInputArea>
+        </WrapperDiv>
+       
+        <SkillsCollection>
            {
             skills?.map((skill)=> {
-              return <SkillComponent onDelete={onDelete(skill.id)} content={skill.name} id={skill.id} key={skill.id}/>
+              return <SkillCard onDelete={onDelete(skill.id)} content={skill.name} key={skill.id}/>
             })
            }
-        </SkillComponentCollection>
+        </SkillsCollection> 
 
-      </SkillsScreenStyle>
+      </GenericContentStyle>
     </>
   );
 }

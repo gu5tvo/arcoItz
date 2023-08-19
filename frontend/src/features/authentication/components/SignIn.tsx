@@ -27,7 +27,6 @@ interface Props {
 export default function SignIn({ signIn, handleSubmit, trigger, register, errors }: Props) {
 
     const onSignIn = handleSubmit(async (formData: SignInData) => {
-        console.log("ffsdf");
         await trigger();
         signIn(formData);
       })

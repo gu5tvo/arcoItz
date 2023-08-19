@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 // ---------- Containers ----------
-
 export const FormContainer = styled.main`
     padding: min(10vh, 50px) min(5vw, 30px);
     min-height: 80vh;

@@ -81,7 +81,6 @@ export const Image = styled.img`
 
 export const Label = styled.label`
     font-size: 0.9rem;
-    text-align: center;
 `
 
 export const Input = styled.input`
