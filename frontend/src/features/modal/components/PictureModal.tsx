@@ -31,7 +31,6 @@ export default function PictureModal({ avatar, name, id, source }: Props): JSX.E
     event.preventDefault();
   };
 
-
   const makeUpload = async (file: File) => {
     const preset_key = "ml_default";
     const cloud_name = "dtnsz5wcw";
