@@ -191,7 +191,7 @@ export const CreateModalContainer = styled.div`
     
 `
 
-export const EditModalContainer = styled.div<{small?: boolean}>`
+export const EditModalContainer = styled.form<{small?: boolean}>`
     display: flex;
     flex-direction: column;
 

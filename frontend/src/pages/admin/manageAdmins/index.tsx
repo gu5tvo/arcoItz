@@ -25,37 +25,35 @@ interface Admin {
 
 export default function ManageAdmins() {   
 
-    const { admins, adminList } = useAdmin()
+    const { admins, adminList } = useAdmin();
 
-    const [showModal, setShowModal] = useState(false)
-    const [modalChoice, setModalChoice] = useState<ModalOptions>({ choice: null })
-    const [adminInfos, setAdminInfos] = useState<Admin>( {id: ''} )
-    const [addAdmin, setAddAdmin] = useState(false)
+    const [showModal, setShowModal] = useState(false);
+    const [modalChoice, setModalChoice] = useState<ModalOptions>({ choice: null });
+    const [adminInfos, setAdminInfos] = useState<Admin>( {id: ''} );
+    const [addAdmin, setAddAdmin] = useState(false);
 
-    useEffect(()=>{
-        adminList()
+    useEffect( () => {
+        adminList();
     }, [])
 
-    const toggleModal = ()=> {
-        setShowModal(!showModal)
+    const toggleModal = () => {
+        setShowModal(!showModal);
     }
 
-    const onEdit = (name: string, id: string, avatar: string)=> {
-        setModalChoice({ choice: 'edit'} )
-        setAdminInfos({ name, id, avatar })
-        toggleModal()
+    const onEdit = (name: string, id: string, avatar: string) => {
+        setModalChoice({ choice: 'edit'} );
+        setAdminInfos({ name, id, avatar });
+        toggleModal();
     }
 
-    const onDelete = (name: string, id: string)=> {
-        setAdminInfos({ name, id })
-
+    const onDelete = (name: string, id: string) => {
+        setAdminInfos({ name, id });
         setModalChoice({ choice: 'delete' });
-
-        toggleModal()
+        toggleModal();
     }
 
-    const onAddAdmin = ()=> {
-        setAddAdmin(true)
+    const onAddAdmin = () => {
+        setAddAdmin(true);
     }
 
     if (addAdmin) return <Navigate to='/admin/cadastro'/>
@@ -67,13 +65,30 @@ export default function ManageAdmins() {
                 <h1>Administradores</h1>
                 <img src={AddIcon} onClick={onAddAdmin} className='plus-icon'/>
                 {admins.map((admin, index)=>{
-                    return <AdmCard name={admin.name}phone={admin.phone} city={admin.city} email={admin.email} avatar={admin.avatar} key={index} onEdit={()=>onEdit(admin.name, admin.id, admin.avatar)} onDelete={()=>onDelete(admin.name, admin.id)}/>
+                    const {name, phone, city, email, avatar, id } = admin;
+                    
+                    return <AdmCard 
+                      name={name}
+                      phone={phone} 
+                      city={city} 
+                      email={email} 
+                      avatar={avatar} 
+                      key={index} 
+                      onEdit={() => onEdit(name, id, avatar)} 
+                      onDelete={() => onDelete(name, id)}/>
                 })}
             </ManageAdminsContainer>
             <Modal modalIsOpen={showModal} toggleModal={toggleModal}>
                 {
                     showModal &&
-                    (modalChoice.choice && modalChoice.choice === 'delete') ? <DeleteAdminModal id={adminInfos.id} name={adminInfos.name}/> : <EditModal avatar={adminInfos.avatar} name={adminInfos.name} id={adminInfos.id}/>
+                    (modalChoice.choice && modalChoice.choice === 'delete') 
+                      ? <DeleteAdminModal 
+                           id={adminInfos.id} 
+                           name={adminInfos.name}/> 
+                      : <EditModal 
+                           avatar={adminInfos.avatar} 
+                           name={adminInfos.name} 
+                           id={adminInfos.id}/>
                 }
             </Modal> 
         </>

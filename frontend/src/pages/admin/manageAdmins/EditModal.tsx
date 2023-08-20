@@ -4,52 +4,44 @@ import { useAdmin, useModal } from "../../../hooks/contexts";
 import {  Button } from "../../../components/dashboard/styles";
 import defaultImage from '../../../assets/profile-picture.svg'
 import { PictureModal } from "../../../features";
+import { useForm } from "react-hook-form";
+
 interface EditModalProps {
     id: string;
     avatar: string;
     name: string;
 }
+
+interface EditModalInputs{
+    admName: string
+    email: string
+    password: string
+    phone: string
+}
+
 export default function EditModal({ id, avatar, name }: EditModalProps) {
-    const { adminUpdate , admin, listCities, cities } = useAdmin()
-    const { setPicture } = useModal() 
+    const { register , handleSubmit} = useForm();
+    const { adminUpdate , admin, listCities, cities } = useAdmin();
+    const { setPicture } = useModal() ;
 
-
-    const [updated, setUpdated] = useState(false)
-    const [admName, setAdmName] = useState(name)
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [phone, setPhone] = useState("")
-    const [city, setCity] = useState("")
+    const [updated, setUpdated] = useState(false);
+    const [city, setCity] = useState("");
 
     useEffect(()=> {
         listCities();
     }, [])
-    const onChangeName = (e: React.ChangeEvent<HTMLInputElement>)=> {
-        setAdmName(e.target.value)
-    }
-    
-    const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>)=> {
-        setEmail(e.target.value)
-    }
 
-    const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>)=> {
-        setPassword(e.target.value)
-    }
 
-    const onChangePhone = (e: React.ChangeEvent<HTMLInputElement>)=> {
-        setPhone(e.target.value)
-    }
-
-    const editAdmin = ()=> {
+    const editAdmin = ({admName, email, password, phone}:EditModalInputs) => {
         if (name || email || password) {
-            adminUpdate(id, { name: admName, email, password, city, phone })
-            setUpdated(true)
+            adminUpdate(id, { name: admName, email, password, city, phone });
+            setUpdated(true);
         }
     }
 
     const onChangePicture = ()=> {
-        // setRequest({ source: 'admin' })
-        setPicture(true)
+        // setRequest({ source: 'admin' });
+        setPicture(true);
     }
 
     if (updated) {
@@ -61,15 +53,16 @@ export default function EditModal({ id, avatar, name }: EditModalProps) {
     }
 
     return (
-        <EditModalContainer>
+        <EditModalContainer onSubmit={handleSubmit(editAdmin)}>
             <h1>Editar o perfil de {name}</h1>
             <img src={avatar ?? defaultImage} alt={"Foto de " + admin.name} />
 
             <PictureModal avatar={avatar} name={name} source="admin" id={id}/>
-            <input placeholder="Nome" type='text' onChange={onChangeName} />
-            <input placeholder="Email" type='email' onChange={onChangeEmail} />
-            <input placeholder="Senha" type='password' onChange={onChangePassword} />
-        <input placeholder="Número de telefone" type='text' onChange={onChangePhone} />
+            <input placeholder="Nome" type='text' {...register("admName")} />
+            <input placeholder="Email" type='email' {...register("email")} />
+            <input placeholder="Senha" type='password' {...register("password")} />
+            <input placeholder="Número de telefone" type='text' {...register("phone")} />
+           
             <select onChange={(e) => setCity(e.target.value)}>
                 <option value="">Todas as cidades</option>
                     {cities.map((city) => (
@@ -77,7 +70,7 @@ export default function EditModal({ id, avatar, name }: EditModalProps) {
             ))}
             </select>
 
-            <button className="confirm-btn" onClick={editAdmin}>Confirmar mudanças</button>
+            <button className="confirm-btn" type="submit">Confirmar mudanças</button>
         </EditModalContainer>
     )
 }
