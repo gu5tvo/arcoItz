@@ -1,7 +1,11 @@
 import React, { useState } from "react"
-import { BasicInfos, GraduationInfos, InputField, SelectCourseInfos, DateInput, DateInputContainer, CourseDescription, SubmitCourseArea, SubmitCourseButton } from "../style/School"
+import { BasicInfos, Description, StandardInput } from "../style/inputs"
 import { useForm } from "react-hook-form"
 import { useCourses } from "../../../hooks/contexts"
+import SelectInput from "./Inputs/Select";
+import DateInput from "./Inputs/Date";
+import { ExperienceInfos } from "../style/experience";
+import SubmitExperience from "./Inputs/SubmitExperience";
 
 interface OnSubmitData {
     name: string;
@@ -34,6 +38,7 @@ export default function Graduation({ id, doesExist, description, from: originalF
     const [to, setTo] = useState(originalTo ? originalTo : '')
 
     const onChangeStatus = (e)=> {
+        console.log(e.target.value)
         if (e.target.value === 'Andamento') {
             setCourseFinished(false)
             setTo("")
@@ -42,7 +47,7 @@ export default function Graduation({ id, doesExist, description, from: originalF
         }
     }
 
-    const onSubmit = ({ name, institution, description, type, status }: OnSubmitData)=> {        
+    const onSubmit = ({ name, institution, description, type, status }: OnSubmitData)=> {
         if (doesExist){
             updateCourse(id, { name, institution, from, to, type, description, status })
         }
@@ -68,47 +73,64 @@ export default function Graduation({ id, doesExist, description, from: originalF
    
             
             <BasicInfos>
-                <InputField type="text"  placeholder='Curso' defaultValue={name}{...register('name')}/>
+                <StandardInput 
+                    type="text"  
+                    placeholder='Curso' 
+                    defaultValue={name}
+                    {...register('name')}
+                />
 
-                <SelectCourseInfos defaultValue={type ? type : ''} {...register('type')}>
-                    <option value="">Tipo</option>
-                    <option value="Técnico">Técnico</option>
-                    <option value="Tecnólogo">Tecnólogo</option>
-                    <option value="Licenciatura">Licenciatura</option>
-                    <option value="Bacharelado">Bacharelado</option>
-                    <option value="Mestrado">Mestrado</option>
-                    <option value="Doutorado">Doutorado</option>
-                    <option value="Especialização ou MBA">Especialização ou MBA</option>
-                    <option value="Outro">Outro</option>
-                </SelectCourseInfos>
-                
-                <InputField type="text" defaultValue={institution ? institution : ''} placeholder='Instituição' {...register('institution')}/>
+                <SelectInput 
+                    register={register} 
+                    defaultValue={type} 
+                    selectName='type' 
+                    optionsNames={[
+                    "Técnico", "Tecnólogo", "Licenciatura", "Bacharelado", "Mestrado", "Doutorado", "Especialização ou MBA", "Outro"
+                ]}/>
 
-                 <SelectCourseInfos {...register('status')} onChange={onChangeStatus} defaultValue={status ? status : ''} >
-                      <option value="">Situação</option>
-                      <option value="Concluído">Concluído</option>
-                      <option value="Andamento">Andamento</option>
-                      <option value="Interrompido">Interrompido</option>
-                      <option value="Outra">Outra</option>
-                 </SelectCourseInfos>
+                <StandardInput
+                    type="text" 
+                    defaultValue={institution} 
+                    placeholder='Instituição' 
+                    {...register('institution')}
+                />
 
-                <DateInputContainer onChange={(e: React.ChangeEvent<HTMLInputElement>)=>setFrom(e.target.value)}>
+                <SelectInput 
+                    register={register} 
+                    defaultValue={status} 
+                    selectName='status' 
+                    onChange={onChangeStatus}
+                    optionsNames={[
+                    "Concluído", "Andamento", "Interrompido", "Outro"
+                ]}/>
 
-                    <DateInput mask={[/[0-9]/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]} type="text" placeholder="Início" value={from} {...register('from')} />
+                <DateInput 
+                    name='from' 
+                    placeholder="Início" 
+                    register={register} 
+                    setFunc={setFrom} 
+                    value={from}
+                />
 
-                 </DateInputContainer>
-
-                <DateInputContainer onChange={(e: React.ChangeEvent<HTMLInputElement>)=>setTo(e.target.value)} >
-                    <DateInput $courseFinished={courseFinished} mask={[/[0-9]/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]} type="text" placeholder="Fim" value={to}{...register('to')} />
-                 </DateInputContainer>
+                <DateInput 
+                    blockInput={!courseFinished} 
+                    name='to' 
+                    placeholder="Fim" 
+                    register={register} 
+                    setFunc={setTo} 
+                    value={to}
+                />
             </BasicInfos>
             
-            <CourseDescription spellCheck={false} placeholder="Descrição" defaultValue={description} {...register('description')}/>
+            <Description
+                spellCheck={false} 
+                placeholder="Descrição" 
+                defaultValue={description} 
+                {...register('description')}
+            />
 
-            <SubmitCourseArea className="button-area">
-                <SubmitCourseButton type='submit'>{doesExist ? "Editar" : "Salvar"} curso</SubmitCourseButton>
-                { doesExist && <SubmitCourseButton onClick={onDelete}>Excluir curso</SubmitCourseButton>}
-            </SubmitCourseArea>
+            <SubmitExperience doesExist={doesExist} name='curso' onDelete={onDelete}/>
+
         </GraduationInfos>
 
     </>)

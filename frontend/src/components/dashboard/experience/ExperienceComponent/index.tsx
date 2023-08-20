@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { ExperienceStyle } from "./style"
 import MaskedInput from 'react-text-mask'
 import { useForm } from "react-hook-form"
-import { useCourses, useExperience, useUser } from "../../../../hooks/contexts";
+import { useExperience } from "../../../../hooks/contexts";
 
 interface OnSubmitData {
     title: string;

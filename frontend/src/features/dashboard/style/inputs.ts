@@ -1,14 +1,6 @@
 import styled from 'styled-components'
 import MaskedInput from 'react-text-mask'
 
-export const GraduationInfos = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: min(20px, 8vh);
-    align-items: center;
-    margin-bottom: min(30px, 15vh);
-`
-
 export const BasicInfos = styled.div`
     display: flex;
     flex-wrap: wrap;
@@ -32,21 +24,21 @@ const basicInputTemplate = `
         background-color: #40C4E0;
     }
 `
-export const SelectCourseInfos = styled.select`${basicInputTemplate}`
+export const SelectInfos = styled.select`${basicInputTemplate}`
 
-export const InputField = styled.input`${basicInputTemplate}`
+export const StandardInput = styled.input`${basicInputTemplate}`
+
+export const Date = styled(MaskedInput)<{ $blockInput?: boolean }>`${basicInputTemplate}
+    width: 100%;
+    pointer-events: ${$props => $props.$blockInput ? 'none' : ''}
+`
 
 export const DateInputContainer = styled.span`
     flex: 1;
     min-width: 240px;
 `
 
-export const DateInput = styled(MaskedInput)<{ $courseFinished?: boolean }>`${basicInputTemplate}
-    width: 100%;
-    pointer-events: ${$props => $props.$courseFinished ? '' : 'none'}
-`
-
-export const CourseDescription = styled.textarea`
+export const Description = styled.textarea`
     box-sizing: border-box;
     background-color: #00B4D8;
     color: #C5EFF8;
@@ -63,7 +55,7 @@ export const CourseDescription = styled.textarea`
     }
 `
 
-export const SubmitCourseButton = styled.button`
+export const SubmitButton = styled.button`
     all: unset;
     background-color: #00417D;
     transition: 0.2s linear;
@@ -80,7 +72,7 @@ export const SubmitCourseButton = styled.button`
     }
 `
 
-export const SubmitCourseArea = styled.span`
+export const SubmitArea = styled.span`
     flex: 1;
     display: flex;
     align-items: center;
@@ -88,7 +80,7 @@ export const SubmitCourseArea = styled.span`
     gap: min(20px, 4vw);
     flex-wrap: wrap;
 
-    ${SubmitCourseButton}:nth-child(2) {
+    ${SubmitButton}:nth-child(2) {
         background-color: red;
     }
 `

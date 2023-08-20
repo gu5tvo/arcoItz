@@ -62,7 +62,7 @@ export default function ProfileScreen(): JSX.Element {
 
                 <InputArea>
                   <Label htmlFor="area">Área:</Label>
-                  <Select {...register('area')} defaultValue={user.area} value={area} onChange={(e)=>setArea(e.target.value)}>
+                  <Select {...register('area')} defaultValue={user.area} onChange={(e)=>setArea(e.target.value)}>
                     <option value=""></option>
                     {
                       sectors.map((area, index)=> {
