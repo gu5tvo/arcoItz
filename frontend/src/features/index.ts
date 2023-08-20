@@ -6,6 +6,8 @@ export { ModalProvider } from './modal/contexts/modal.context'
 export { default as PictureModal } from './modal/components/PictureModal'
 export { default as CreateModal } from './modal/components/CreateModal'
 export { default as DeleteModal } from './modal/components/DeleteModal'
+export { default as UserMetadata } from './modal/components/UserMetadata'
+
 
 export { default as Dashboard } from './dashboard'
 export { default as DashboardNavigation } from './dashboard/components/Navigation'

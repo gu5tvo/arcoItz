@@ -12,15 +12,15 @@ import ProtectedRoute from '../components/ProtectedRouteUser';
 import AdminProtectedRoute from '../components/ProtectedRouterAdmin';
 import Profile from '../pages/profile';
 import { Painel } from '../pages/admin/painel';
-import City from '../pages/admin/city/'
 import ManageAdmins from '../pages/admin/manageAdmins';
-import SectorPage from '../pages/admin/sector';
 import AdminSearchPage from '../pages/admin/search';
 
 import EditAdminProfile from '../pages/admin/editProfile';
 import ResetPage from '../pages/reset';
 
 import React from 'react'
+import AdminCities from '../pages/AdminCities';
+import AdminSectors from '../pages/AdminSectors';
 
 export default function MakeRoutes(){
 
@@ -38,8 +38,8 @@ export default function MakeRoutes(){
             <Route path="/admin/painel" element={<AdminProtectedRoute path="/admin/painel" element={Painel} isPrivate redirectTo="/admin/login" />} />
             <Route path="/admin/manage" element={<AdminProtectedRoute path="/admin/manage" element={ManageAdmins} isPrivate redirectTo="/admin/login" />} />
             <Route path="/admin/cadastro" element={<AdminProtectedRoute path="/admin/cadastro" element={AdminSignUpPage} isPrivate redirectTo="/admin/login" />} />
-            <Route path="/admin/city" element={<AdminProtectedRoute path="/admin/city" element={City} isPrivate redirectTo="/admin/login" />} />
-            <Route path="/admin/sector" element={<AdminProtectedRoute path="/admin/sector" element={SectorPage} isPrivate redirectTo="/admin/login" />} />
+            <Route path="/admin/city" element={<AdminProtectedRoute path="/admin/city" element={AdminCities} isPrivate redirectTo="/admin/login" />} />
+            <Route path="/admin/sector" element={<AdminProtectedRoute path="/admin/sector" element={AdminSectors} isPrivate redirectTo="/admin/login" />} />
             <Route path="/admin/users" element={<AdminProtectedRoute path="/admin/users" element={AdminSearchPage} isPrivate redirectTo="/admin/login" />} />
             <Route path="/admin" element={<AdminProtectedRoute path="/admin" element={EditAdminProfile} isPrivate redirectTo="/admin/login" />} />
 

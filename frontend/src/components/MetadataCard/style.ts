@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const CityCardContainer = styled.div`
+export const MetadataCardContainer = styled.div`
     width: min(90vw, 450px);
     display: grid;
     grid-template-columns: 1fr 50px;
