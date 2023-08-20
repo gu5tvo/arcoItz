@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const EditProfileContainer = styled.div<{small?: boolean}>`
+export const EditProfileContainer = styled.form<{small?: boolean}>`
     display: flex;
     flex-direction: column;
 
