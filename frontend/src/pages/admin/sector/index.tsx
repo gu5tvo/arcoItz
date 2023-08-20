@@ -7,8 +7,7 @@ import { useAdmin } from '../../../hooks/contexts';
 
 
 import AddIcon from '.././../../assets/add.svg'
-import CreateModal from '../../../features/modal/components/CreateModal';
-import DeleteModal from '../../../features/modal/components/DeleteModal';
+import { CreateModal, DeleteModal } from '../../../features';
 
 interface ModalOptions {
     choice: 'add' | 'delete' | null
