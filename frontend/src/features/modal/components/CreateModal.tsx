@@ -1,47 +1,44 @@
 import React, { useState } from 'react'
-import { useAdmin } from "../../../hooks/contexts";
+import { useForm } from 'react-hook-form';
 import { CreateModalContainer } from '../style';
 
 interface CreateModalProps{
-    elementType: string
+    pageName: string;
+    addFunction: (data: { name: string}) => Promise<void>;
 }
 
-export default function CreateModal({elementType}:CreateModalProps ) {
-    const { registerSectors , registerCities } = useAdmin();
+export default function CreateModal({pageName, addFunction}:CreateModalProps ) {
+
+    const { register, handleSubmit} = useForm();
 
     const [elementCreated, setElementCreated] = useState(false);
-    const [name, setName] = useState("");
-
-    const identifier = {
-        "Setor": registerSectors,
-        "Cidade": registerCities,
-    }
-
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>)=> {
-        setName(e.target.value);
-    }
-
-    const createElement = () => {
-        if (name) {
-            const register = identifier[elementType];
-            register({ name: name });
-            setElementCreated(true);
+    
+    const createElement = (data: { name: string }) => {
+        if (data.name) {
+             addFunction(data);
+             setElementCreated(true);
         }
-    }
+    };
 
     if (elementCreated) {
         return (
             <CreateModalContainer>
-                <h1>{elementType} criado(a) com sucesso!</h1>
+                <h1>{pageName} criado(a) com sucesso!</h1>
             </CreateModalContainer>
         )
     }
 
     return (
-        <CreateModalContainer>
-            <h1>Criar {elementType}</h1>
-            <input placeholder={`Nome do(a) ${elementType}`} onChange={onChange} />
-            <button className="confirm-btn" onClick={createElement}>Confirmar</button>
-        </CreateModalContainer>
-    )
+      <CreateModalContainer onSubmit={handleSubmit(createElement)}>
+        <h1>Criar {pageName}</h1>
+        <input
+          placeholder={`Nome do(a) ${pageName}`}
+          {...register("name")}
+        />
+        <button className="confirm-btn" type="submit">
+          Confirmar
+        </button>
+      </CreateModalContainer>
+    );
 }
+

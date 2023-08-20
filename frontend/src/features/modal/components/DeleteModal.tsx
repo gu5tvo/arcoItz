@@ -1,25 +1,18 @@
 import React, { useState } from 'react'
-import { useAdmin } from "../../../hooks/contexts";
 import { DeleteModalContainer } from '../style';
 
 interface DeleteCityModalProps {
     elementName: string;
     elementId: string;
-    elementType: string;
+    pageName: string;
+    remove: (id: string) => Promise<void>;
 }
 
-export default function DeleteElementModal({ elementName, elementId , elementType}: DeleteCityModalProps) {
+export default function DeleteElementModal({ elementName, elementId , pageName , remove}: DeleteCityModalProps) {
 
-    const { deleteCities , deleteSectors } = useAdmin();
     const [elementDeleted, setElementDeleted] = useState(false);
 
-    const identifier = {
-        "Setor": deleteCities,
-        "Cidade": deleteSectors,
-    }
-
     const deleteElement = () => {
-        const remove = identifier[elementType];
         remove(elementId);
         setElementDeleted(true);
     }
@@ -27,7 +20,7 @@ export default function DeleteElementModal({ elementName, elementId , elementTyp
     if (elementDeleted) {
         return (
             <DeleteModalContainer>
-                <h1>Cidade excluída com sucesso!</h1>
+                <h1>{pageName} excluída(o) com sucesso!</h1>
             </DeleteModalContainer>
         )
     }

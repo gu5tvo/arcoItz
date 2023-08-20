@@ -15,7 +15,7 @@ interface ModalOptions {
 }
 export default function SectorPage() {
 
-    const { listSectors, sectors } = useAdmin()
+    const { listSectors, sectors , registerSectors , deleteSectors } = useAdmin();
 
     const [modalChoice, setModalChoice] = useState<ModalOptions>({ choice: null })
     const [showModal, setShowModal] = useState(false)
@@ -62,8 +62,14 @@ export default function SectorPage() {
                 {
                     showModal &&
                     (modalChoice.choice && modalChoice.choice === 'delete') 
-                    ? <DeleteModal elementName={sectorName} elementId={sectorId} elementType={"Setor"}/> 
-                    : <CreateModal elementType={"Setor"}/>
+                    ? <DeleteModal 
+                        elementName={sectorName} 
+                        elementId={sectorId}
+                        remove={deleteSectors} 
+                        pageName={"Setor"}/> 
+                    : <CreateModal 
+                        addFunction={registerSectors}  
+                        pageName={"Setor"}/>
                 }
             </Modal> 
 

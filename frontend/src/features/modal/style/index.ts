@@ -169,7 +169,7 @@ export const Button = styled.button`
     }
 `
 
-export const CreateModalContainer = styled.div`
+export const CreateModalContainer = styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;

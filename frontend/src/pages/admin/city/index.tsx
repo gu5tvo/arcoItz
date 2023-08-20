@@ -4,18 +4,16 @@ import DinamicHeader from '../../../components/Header'
 import Modal from '../../../components/Modal';
 import CityCard from '../../../components/CityCard';
 import { useAdmin } from '../../../hooks/contexts';
-
-
 import AddIcon from '.././../../assets/add.svg'
-import CreateModal from '../../../features/modal/components/CreateModal';
-import DeleteModal from '../../../features/modal/components/DeleteModal';
+import { CreateModal, DeleteModal } from '../../../features';
+
 
 interface ModalOptions {
     choice: 'add' | 'delete' | null
 }
 export default function Cities() {
 
-    const { listCities, cities } = useAdmin();
+    const { listCities, cities , deleteCities , registerCities } = useAdmin();
 
     const [modalChoice, setModalChoice] = useState<ModalOptions>({ choice: null });
     const [showModal, setShowModal] = useState(false);
@@ -59,8 +57,14 @@ export default function Cities() {
                 {
                     showModal &&
                     (modalChoice.choice && modalChoice.choice === 'delete') 
-                    ? <DeleteModal elementName={cityName} elementId={cityId} elementType={"Cidade"}/> 
-                    : <CreateModal elementType={"Cidade"}/>
+                    ? <DeleteModal 
+                        elementName={cityName} 
+                        elementId={cityId} 
+                        remove={deleteCities}
+                        pageName={"Cidade"}/> 
+                    : <CreateModal 
+                        addFunction={registerCities}
+                        pageName={"Cidade"}/>
                 }
             </Modal> 
 
