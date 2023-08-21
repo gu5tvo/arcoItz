@@ -1,19 +1,17 @@
 import styled from 'styled-components';
 
 export const FooterStyle = styled.footer`
-    display: flex;
-    max-width: 100vw;
+    box-sizing: border-box;
+    width: 100%;
+    display: inline-flex;
     padding: 20px;
-    display: flex;
     flex-direction: column;
     align-items: center;
-    width: min(100vw, 2560px);
+
     background-color: var(--MODERATE-BLACK);
     font-family: 'Poppins', 'Inter', sans-serif;
     color: var(--WHITE);
-    @media (min-width: 1680px){
-        max-width: 99.13vw;
-    }   
+
 `
 
 export const TopSection = styled.section`

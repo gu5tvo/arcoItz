@@ -11,11 +11,13 @@ export const HeaderWrapper = styled.div`
 `
 
 export const StyledHeader = styled.header<{ $showMenu: boolean }>`
+    box-sizing: border-box;
+    width: 100%;
     margin: 0;
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: min(100vw, 2560px);
+
 
     background-color: #FFFFFF;
     justify-content: space-between;
