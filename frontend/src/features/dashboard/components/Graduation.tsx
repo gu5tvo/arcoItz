@@ -38,7 +38,6 @@ export default function Graduation({ id, doesExist, description, from: originalF
     const [to, setTo] = useState(originalTo ? originalTo : '')
 
     const onChangeStatus = (e)=> {
-        console.log(e.target.value)
         if (e.target.value === 'Andamento') {
             setCourseFinished(false)
             setTo("")
@@ -69,7 +68,7 @@ export default function Graduation({ id, doesExist, description, from: originalF
     return (
     <>  
   
-        <GraduationInfos onSubmit={handleSubmit(onSubmit)}>
+        <ExperienceInfos onSubmit={handleSubmit(onSubmit)}>
    
             
             <BasicInfos>
@@ -131,7 +130,7 @@ export default function Graduation({ id, doesExist, description, from: originalF
 
             <SubmitExperience doesExist={doesExist} name='curso' onDelete={onDelete}/>
 
-        </GraduationInfos>
+        </ExperienceInfos>
 
     </>)
 }

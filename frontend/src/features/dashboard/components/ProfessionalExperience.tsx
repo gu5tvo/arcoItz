@@ -1,41 +1,49 @@
-import React, { useEffect, useState } from 'react';
-import { useUser } from '../../../hooks/contexts';
-import Graduation from './Graduation';
+import React, { useEffect, useState } from "react";
+import { useUser } from "../../../hooks/contexts";
 import { GenericContentStyle } from '../style';
 import ManageFieldsQuantity from './ManageFieldsQuantity';
+import Work from "./Work";
 
-export default function ProfessionalExperiene() {
-  const { courses, profile } = useUser();
+export default function ProfessionalExperience() {
+  const [experienceNumber, setExperienceNumber] = useState(1);
+  const { experiences, profile } = useUser();
 
-  const [graduationNumber, setGraduationNumber] = useState(1);
+  const decrementExperienceNumber = ()=>setExperienceNumber((cur)=> cur > 1 ? cur - 1 : 1);
+  const incrementExperienceNumber = ()=>setExperienceNumber((cur)=> cur + 1)
 
-  const decrementGraduationNumber = ()=> setGraduationNumber((cur)=> cur > 1 ? cur - 1 : 1)
+  useEffect(() => {
+    profile({ experiencesData: true });
+  }, []);
 
-  const incrementGraduationNumber = ()=> setGraduationNumber((cur)=> cur + 1)
-
-  useEffect(()=> {
-    profile({ coursesData: true, userData: true })
-  }, [])
-
-  const graduationComponents = Array.from({ length: graduationNumber }, (_, index) => (
-    <Graduation key={index} />
-  ));
-
+  const graduationComponents = Array.from(
+    { length: experienceNumber },
+    (_, index) => <Work key={index} />
+  );
   return (
-    <GenericContentStyle>
-      <div>
-      {
-        courses?.map((course, index)=> {
-            return <Graduation key={index} description={course.description} doesExist from={course.from} id={course.id} institution={course.institution} name={course.name} status={course.status} to={course.to} type={course.type}/>
-        })
-      } 
+    <>
+      <GenericContentStyle>
+        <div>
+          {experiences?.map((experience, index) => {
+            return (
+              <Work
+                key={index}
+                company={experience.company}
+                description={experience.description}
+                doesExist
+                from={experience.from}
+                to={experience.to}
+                id={experience.id}
+                location={experience.location}
+                title={experience.title}
+              />
+            );
+          })}
 
-      { graduationComponents }
-
-      </div>
-
-      <ManageFieldsQuantity incrementQuantity={incrementGraduationNumber} decrementQuantity={decrementGraduationNumber} type='formação'/>
-
-    </GenericContentStyle>
+          {graduationComponents}
+        </div>
+        
+        <ManageFieldsQuantity decrementQuantity={decrementExperienceNumber} incrementQuantity={incrementExperienceNumber} type="experiência"/>
+      </GenericContentStyle>
+    </>
   );
 }

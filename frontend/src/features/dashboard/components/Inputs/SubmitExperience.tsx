@@ -7,7 +7,7 @@ interface Props {
     onDelete: ()=>void
 }
 
-export default function SubmitExperience({ doesExist, name, onDelete}: Props) {
+export default function SubmitExperience({ doesExist, name, onDelete }: Props) {
 
     return (
         <SubmitArea>

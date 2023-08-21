@@ -1,8 +1,7 @@
-//DocumentComponent.tsx
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { DocumentComponentStyle } from "./style";
 import removeIconFormation from "../../../../assets/removeIconFormation.svg";
-import { useDocuments, useUser} from "../../../../hooks/contexts";
+import { useDocuments } from "../../../../hooks/contexts";
 import DeleteModalContent from "../ModalContent/DeleteModal";
 
 interface DocumentProps {

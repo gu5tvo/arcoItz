@@ -66,7 +66,7 @@ export const SubmitButton = styled.button`
     font-size: clamp(0.8rem, 2vw, 1rem);
     font-weight: bold;
     cursor: pointer;
-    width: min(150px, 90vw);
+    min-width: min(150px, 90vw);
     &:hover {
         filter: invert(1)
     }
