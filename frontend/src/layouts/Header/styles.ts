@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import { GiHamburgerMenu } from 'react-icons/gi'
 
 export const HeaderWrapper = styled.div`
-    width: 100vw;
+
     display: flex;
     justify-content: center;
     position: relative;
+    
 `
 
 export const StyledHeader = styled.header<{ $showMenu: boolean }>`

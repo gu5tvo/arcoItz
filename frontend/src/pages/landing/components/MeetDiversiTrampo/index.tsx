@@ -6,12 +6,12 @@ import {
   ImageSection,
   MainImage,
   MainSectionStyle,
-  SocialCollection,
   TextSection,
   TopText,
 } from "./style";
 import SectionImage from "./../../../../assets/section2-image.svg";
-import { FaInstagram, FaTwitter, FaLinkedinIn, FaFacebookF } from 'react-icons/fa';
+import SocialMediaCollection from "../../../../layouts/SocialMediaCollection";
+
 
 export default function SectionMeetDiversiTrampo(): JSX.Element {
   return (
@@ -38,12 +38,8 @@ export default function SectionMeetDiversiTrampo(): JSX.Element {
             emprego, promovendo assim a inclusão e a diversidade no mercado de
             trabalho no estado do Maranhão.
           </BodyText>
-          <SocialCollection>
-            <FaInstagram />
-            <FaTwitter />
-            <FaLinkedinIn  />
-            <FaFacebookF />
-          </SocialCollection>
+          <SocialMediaCollection />
+          `
         </TextSection>
       </MainSectionStyle>
     </>

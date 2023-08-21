@@ -90,25 +90,4 @@ export const BodyText = styled.p`
         width: 90%;
         align-self: center;
     }
-    `
-
-export const SocialCollection = styled.div`
-    display: flex;
-
-    flex-direction: row;
-    gap: 1.87rem;
-    align-self: center;
-
-    svg {
-    width:  clamp(1.1rem, 2vw, 2rem); 
-    height:  clamp(1.1rem, 2vw, 2rem);
-    }
-
-    @media (max-width: 480px) {
-        gap: 1.5rem;
-        svg {
-            width:  1.6rem;
-            height:  1.6rem;
-        }
-    }
 `

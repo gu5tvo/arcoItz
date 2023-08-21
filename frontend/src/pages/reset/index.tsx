@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import DinamicHeader from "../../components/Header";
+import DinamicHeader from "../../layouts/Header";
 import {LoginContainer, LoginForm, ErrorText} from "./styles";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";

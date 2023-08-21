@@ -1,6 +1,6 @@
 import React from 'react'
 import { useAdmin } from '../hooks/contexts';
-import DinamicHeader from '../components/Header'
+import DinamicHeader from '../layouts/Header'
 import { UserMetadata } from '../features';
 
 export default function AdminCities() {
