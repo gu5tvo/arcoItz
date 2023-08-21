@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 
-import CertificatesScreen from "../components/dashboard/certificates";
-
-import { Dashboard, DashboardContent, DashboardNavigation, DashboardContact, DashboardProfile, DashboardAcademics, DashboardSkill, DashboardProfessional } from "../features";
+import { Dashboard, DashboardContent, DashboardNavigation, DashboardContact, DashboardProfile, DashboardAcademics, DashboardSkill, DashboardProfessional, DashboardDocument } from "../features";
 
 export default function UserDashboardPage() {
 
@@ -14,7 +12,7 @@ export default function UserDashboardPage() {
         if(display === 'contact') return <DashboardContact />
         if(display === 'skills') return <DashboardSkill />
         if(display === 'experience') return <DashboardProfessional />
-        if(display === 'certificates') return <CertificatesScreen />
+        if(display === 'certificates') return <DashboardDocument />
     }
 
     return (

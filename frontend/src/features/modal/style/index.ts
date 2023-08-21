@@ -145,7 +145,7 @@ export const Image = styled.img`
 
 // ---------- Contêineres ----------
 
-export const ImageSection = styled.section`
+export const ClosedModalContent = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;

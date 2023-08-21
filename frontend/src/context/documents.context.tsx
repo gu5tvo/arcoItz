@@ -5,26 +5,18 @@ import { iDocuments } from "../interfaces/users";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import retrieveToken from "../utils/user/retrieveToken";
-import CertificateModal from "../components/CertificateModal";
-import DeleteModalContent from "../components/dashboard/certificates/ModalContent/DeleteModal";
 
 export const DocumentsContext = createContext<{
         registerDocument: (data: iDocuments) => Promise<void>,
         updateDocument: (id: string, data: iDocuments) => Promise<void>,
         deleteDocument: (id: string) => Promise<void>,
-        modalDisplay: boolean,
-        setModalDisplay: React.Dispatch<React.SetStateAction<boolean>>,
     }>({
     registerDocument: (data: iDocuments) => Promise.resolve(),
     updateDocument: (id: string, data: iDocuments) => Promise.resolve(),
-    deleteDocument: (id: string) => Promise.resolve(),
-    modalDisplay: false,
-    setModalDisplay: ()=>{},
+    deleteDocument: (id: string) => Promise.resolve()
 });
 
 export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
-
-    const [ modalDisplay, setModalDisplay] = useState(false);
     
     const { token, profile, documents } = useUser()
     
@@ -93,9 +85,7 @@ export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
     },[])
 
     return (
-        <DocumentsContext.Provider value={{registerDocument, updateDocument, deleteDocument, modalDisplay, setModalDisplay}}>
-            
-            { modalDisplay && <CertificateModal/> }
+        <DocumentsContext.Provider value={{registerDocument, updateDocument, deleteDocument}}>
 
             {children}
         </DocumentsContext.Provider>

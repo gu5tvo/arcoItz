@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { ModalFog, ModalContainer, ModalHeader, ModalBody } from './style';
-import { useDocuments } from '../../hooks/contexts';
-import removeIconFormation from "../../assets/removeIconFormation.svg";
+import { useDocuments } from '../../../hooks/contexts';
+import ModalTemplate from '..';
+import { useModal } from '../hooks/contexts';
+import { iDocuments } from '../../../interfaces/users';
 import { v4 as uuidv4 } from 'uuid';
-import { iDocuments } from "../../../../frontend/src/interfaces/users";
+import { Button, ClosedModalContent } from '../style';
 
-export default function PictureModal(): JSX.Element {
-  const { registerDocument  } = useDocuments();
+export default function DocumentModal() {
+  const { isModalVisible, setIsModalVisible } = useModal()
+
+  const { registerDocument } = useDocuments()
   const [confirmScreen, setConfirmScreen] = useState<boolean>(false);
-  const [fileLocal ,  setfileLocal] = useState<File>(null);  
+  const [fileLocal,  setfileLocal] = useState<File>(null);  
 
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -28,11 +31,10 @@ export default function PictureModal(): JSX.Element {
     const formData = new FormData();
     formData.append('file', file);
     formData.append('upload_preset', preset_key);
-    setModalDisplay(false)
 
     axios.post(`https://api.cloudinary.com/v1_1/${cloud_name}/auto/upload`, formData)
       .then((res) => {
-
+        setIsModalVisible(false)
         const data : iDocuments = {
           id: uuidv4(),
           name: file.name,
@@ -45,21 +47,14 @@ export default function PictureModal(): JSX.Element {
   };
 
   return (
-    <ModalFog>
-      <ModalContainer
-        onDrop={handleDrop}
-        onDragOver={handleDragOver}
-      >
-        <ModalHeader>
-          <button className='remove-button' onClick={() => setModalDisplay(false)}>
-            <img
-              src={removeIconFormation}
-              alt="Remove Icon Formation"
-              className="remove"
-            />
-          </button>
-        </ModalHeader>
-        <ModalBody>
+    <>
+      <ClosedModalContent>
+          <Button onClick={()=>setIsModalVisible(true)} className="file-button">
+           Adicionar Certificado
+          </Button>
+      </ClosedModalContent>
+
+      { isModalVisible && <ModalTemplate handleDragOver={handleDragOver} handleDrop={handleDrop}>
           {!confirmScreen && 
             <>
               <label htmlFor="file">Procurar arquivo</label>
@@ -79,8 +74,7 @@ export default function PictureModal(): JSX.Element {
               <button onClick={() => makeUpload(fileLocal)}>Salvar</button>
             </>
           }
-        </ModalBody>
-      </ModalContainer>
-    </ModalFog>
+      </ModalTemplate> }
+    </>
   );
 }

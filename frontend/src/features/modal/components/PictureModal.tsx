@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useAdmin, useUser } from '../../../hooks/contexts';
-import { Button, Image, ImageSection } from '../style';
+import { Button, Image, ClosedModalContent } from '../style';
 import ModalTemplate from '..';
 import { useModal } from '../hooks/contexts';
 import DefaultPfp from '../../../assets/profile-picture.svg'
@@ -13,6 +13,7 @@ interface Props {
   source: 'admin' | 'user'
   id?: string
 }
+
 export default function PictureModal({ avatar, name, id, source }: Props): JSX.Element {
   const { isModalVisible, setIsModalVisible } = useModal()
 
@@ -51,10 +52,10 @@ export default function PictureModal({ avatar, name, id, source }: Props): JSX.E
 
   return (
     <>
-      <ImageSection>
+      <ClosedModalContent>
           <Image src={ avatar ?? DefaultPfp } alt={"foto de " + name} />
           <Button onClick={()=>setIsModalVisible(true)}>Alterar foto</Button>
-      </ImageSection>
+      </ClosedModalContent>
     
       { isModalVisible && <ModalTemplate handleDragOver={handleDragOver} handleDrop={handleDrop}>
             {!confirmScreen && 
