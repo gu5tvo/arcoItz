@@ -1,4 +1,4 @@
-import DinamicHeader from "../../../components/Header";
+import DinamicHeader from "../../../layouts/Header";
 import React, { useEffect, useState } from 'react'
 import { ManageAdminsContainer } from "./style";
 import AddIcon from '../../../assets/add.svg'

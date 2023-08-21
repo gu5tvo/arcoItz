@@ -35,7 +35,7 @@ export const BackgroundSVG = styled.div`
         z-index: 0;
 
     @media (max-width: 480px) {
-            width: 97%;
+            width: 96%;
             top: 42%;
             left: 4%;
     }

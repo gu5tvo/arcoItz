@@ -3,18 +3,21 @@ import { Link } from 'react-router-dom';
 import { GiHamburgerMenu } from 'react-icons/gi'
 
 export const HeaderWrapper = styled.div`
-    width: 100vw;
+
     display: flex;
     justify-content: center;
     position: relative;
+    
 `
 
 export const StyledHeader = styled.header<{ $showMenu: boolean }>`
+    box-sizing: border-box;
+    width: 100%;
     margin: 0;
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: min(100vw, 2560px);
+
 
     background-color: #FFFFFF;
     justify-content: space-between;

@@ -1,5 +1,5 @@
 import React from "react";
-import DinamicHeader from "../../../components/Header";
+import DinamicHeader from "../../../layouts/Header";
 import { FormContainer, Form } from "../style";
 
 interface Props {

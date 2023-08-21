@@ -27,6 +27,7 @@ export const GlobalStyle = createGlobalStyle`
 
     --GRADIENTE :linear-gradient(180deg, #0077B6 0%, rgba(0, 119, 182, 0) 100%);
 
+	--BLACK: #000;
 	--MODERATE-BLACK: #1E1E1E;
 	--TEXT-GRAY:  #5F6D7E;
 	--PRIMARY-BLUE:  #00CFFC;
@@ -34,7 +35,6 @@ export const GlobalStyle = createGlobalStyle`
 	--PRIMARY-PINK:  #FFADBB;
 	--PRIMARY-PINK-HOVER:#FF3356;
 
-	--MODERATE-BLACK: #1E1E1E;
 	--TEXT-GRAY:  #5F6D7E;
 	--PRIMARY-BLUE:  #00CFFC;
 	--PRIMARY-BLUE-HOVER:#0066FF;
