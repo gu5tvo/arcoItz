@@ -1,6 +1,24 @@
-import { Button, Form, Headline, Input, MainSectionStyle, SubHeading, TextCollection } from "./style";
+import { useForm } from "react-hook-form";
+import { Button, Form, Headline, Input, MainSectionStyle, SameLineInputs, SubHeading, TextCollection } from "./style";
+
+interface TalkToUsInputs{
+  name: string
+  phone: string
+  email: string
+  message: string
+}
 
 export default function SectionTalkToUs(): JSX.Element {
+  const { register, handleSubmit} = useForm();
+
+
+  function sendForm({ name , phone , email, message}: TalkToUsInputs ){
+      if( !name || !phone || !email || !message) return;
+    
+      console.log({ name , phone , email, message});
+  }  
+
+
   return (
     <>
       <MainSectionStyle>
@@ -8,11 +26,14 @@ export default function SectionTalkToUs(): JSX.Element {
             <Headline>Fale conosco!</Headline>
             <SubHeading>Para tirar qualquer dúvida, solicitar suporte ou enviar sugestões.</SubHeading>
         </TextCollection>
-        <Form>
-          <Input type="text" placeholder="Nome completo*" />
-          <Input type="text" placeholder="Telefone*"/>
-          <Input type="email" placeholder="Email*"/>
-          <Input type="text" placeholder="Mensagem*"/>
+        
+        <Form onSubmit={handleSubmit(sendForm)}>
+          <SameLineInputs>
+            <Input type="text" placeholder="Nome completo*" {...register("name")}/>
+            <Input type="text" placeholder="Telefone*" {...register("phone")}/>            
+          </SameLineInputs>
+          <Input type="email" placeholder="Email*" {...register("email")}/>
+          <Input type="text" placeholder="Mensagem*" {...register("message")}/>
 
           <Button type="submit">Enviar</Button>
         </Form>

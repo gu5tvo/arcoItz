@@ -74,20 +74,42 @@ export const Button = styled.button`
     border-radius: 0.5rem;
     padding: 0.7rem 1.5rem;
     border:none;
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 1.1vw, 1.3rem);
     align-self: flex-end;
+    font-weight: 700;
+    transition: 0.5s;
+    
+    &:hover{
+        background-color: var(--PRIMARY-BLUE-HOVER);
+    }
+
     @media (max-width: 480px) {
         align-self: center;
     }
 `
+export const SameLineInputs = styled.div`
+    display: flex;
+    justify-content: space-between;
+    gap: 1vw;
+    @media (max-width: 480px) {
+        flex-direction: column;
+        gap: 3vh;
+    }
+
+`
 
 export const Input = styled.input`
+    flex: 1;
     color: var(--MODERATE-BLACK);
     background-color:  var(--WHITE);
-    border-radius: 0.5rem;
-    padding: 0.7rem 1.125rem;
+    border-radius: 0.8rem;
+    padding: 0.8rem;
     border:none;
-    font-size: 0.9375rem;
     outline: none;
+    
+    &::placeholder{
+        font-size: clamp(0.8rem, 1.1vw, 1.3rem);
+    } 
 
+      
 `
