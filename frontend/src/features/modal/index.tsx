@@ -6,13 +6,14 @@ interface Props {
   children: JSX.Element | JSX.Element[] | string
   handleDrop?: (event: React.DragEvent<HTMLDivElement>) => void
   handleDragOver?: (event: React.DragEvent<HTMLDivElement>) => void
+  id: string
 }
 
-export default function ModalTemplate({ children, handleDrop, handleDragOver }: Props) {
+export default function ModalTemplate({ children, handleDrop, handleDragOver, id }: Props) {
 
-  const { setIsModalVisible, isModalVisible } = useModal()
+  const { setIsModalVisible, isModalVisible, modalId } = useModal()
 
-  if (!isModalVisible) return <></>
+  if (!isModalVisible || modalId !== id) return <></>
   
   return (
     <ModalFog>

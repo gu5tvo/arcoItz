@@ -43,9 +43,9 @@ export interface iUsersPage {
 }
 
 export interface iDocuments {
-    id: string;
+    id?: string
     name: string;
-    description: string;
+    description?: string;
     document: string;
 }
 

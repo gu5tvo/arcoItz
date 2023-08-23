@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { GrClose } from "react-icons/gr";
 
 export const DocumentComponentStyle = styled.div`
   width: 100%;
@@ -7,25 +8,8 @@ export const DocumentComponentStyle = styled.div`
   gap: min(2vh, 10px);
   justify-content: center;
   align-items: center;
-  
-
-  .document-name {
-    padding: min(10px, 3vw);
-    font-size: clamp(0.8rem, 1vw, 1rem);
-    background-color: #9ae7f8;
-    width: 100%;
-    border-radius: 5px;
-    font-weight: 600;
-    padding-left: 2%;
-    display: flex;
-    align-items: center;
-  }
 
   .description-div {
-    display: flex;
-    align-items: center;
-    gap: min(13px, 3vw);
-    width: 100%;
 
     textarea {
       width: 100%;
@@ -89,3 +73,43 @@ export const DocumentComponentStyle = styled.div`
     }
   }
 `;
+
+export const DocumentName = styled.h3`
+  padding: min(10px, 3vw);
+  font-size: 0.9rem;
+  background-color: #9ae7f8;
+  width: 100%;
+  border-radius: 5px;
+  font-weight: 600;
+  padding-left: 2%;
+  display: flex;
+  align-items: center;
+`
+
+export const DocumentDescriptionCard = styled.div`
+    display: flex;
+    align-items: center;
+    gap: min(13px, 3vw);
+    width: 100%;
+`
+
+export const DeleteButton = styled(GrClose)`
+    align-self: end;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    width: min(22px, 15vw);
+    height: min(22px, 15vw);
+
+    * {
+        stroke: red;
+    }
+
+    transition: transform 0.5s;
+
+    &:hover {
+        transform: rotate(-135deg);
+    }
+`

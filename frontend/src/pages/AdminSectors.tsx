@@ -9,7 +9,8 @@ export default function AdminSectors() {
     return (
       <>
         <DinamicHeader logoutBtn adminPanel />
-        <UserMetadata 
+        <UserMetadata
+          pageName="Setor"
           listMetadata={listSectors} 
           Metadata={sectors} 
           registerMetadata={registerSectors} 

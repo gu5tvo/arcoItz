@@ -12,7 +12,7 @@ const documentSchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        required: true
+        required: false
     },
     document: {
         type: String,

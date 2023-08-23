@@ -15,7 +15,7 @@ interface Props {
 }
 
 export default function PictureModal({ avatar, name, id, source }: Props): JSX.Element {
-  const { isModalVisible, setIsModalVisible } = useModal()
+  const { isModalVisible, setIsModalVisible, setModalId } = useModal()
 
   const { updateProfile } = useUser();
   const { adminUpdate } = useAdmin()
@@ -50,14 +50,19 @@ export default function PictureModal({ avatar, name, id, source }: Props): JSX.E
       });
   };
 
+    const openModal = ()=> {
+        setIsModalVisible(true)
+        setModalId(id)
+    }
+
   return (
     <>
       <ClosedModalContent>
           <Image src={ avatar ?? DefaultPfp } alt={"foto de " + name} />
-          <Button onClick={()=>setIsModalVisible(true)}>Alterar foto</Button>
+          <Button onClick={openModal}>Alterar foto</Button>
       </ClosedModalContent>
     
-      { isModalVisible && <ModalTemplate handleDragOver={handleDragOver} handleDrop={handleDrop}>
+      { isModalVisible && <ModalTemplate id={id} handleDragOver={handleDragOver} handleDrop={handleDrop}>
             {!confirmScreen && 
               <>
                 <label htmlFor="file">Procurar arquivo</label>

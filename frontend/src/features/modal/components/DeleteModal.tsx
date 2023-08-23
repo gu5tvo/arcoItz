@@ -1,35 +1,35 @@
-import React, { useState } from 'react'
-import { DeleteModalContainer } from '../style';
+import React from 'react'
+import ModalTemplate from '..';
+import { useModal } from '../hooks/contexts';
+import { ClosedModalContent } from '../style';
 
 interface DeleteCityModalProps {
-    elementName: string;
     elementId: string;
     pageName: string;
-    remove: (id: string) => Promise<void>;
+    deleteFunc: (id: string) => Promise<void>;
+    closedModalContent: JSX.Element | JSX.Element[] | string
 }
 
-export default function DeleteElementModal({ elementName, elementId , pageName , remove}: DeleteCityModalProps) {
+export default function DeleteElementModal(
+    { pageName, elementId, deleteFunc, closedModalContent }: DeleteCityModalProps) {
 
-    const [elementDeleted, setElementDeleted] = useState(false);
+    const { setIsModalVisible } = useModal()
 
     const deleteElement = () => {
-        remove(elementId);
-        setElementDeleted(true);
-    }
-
-    if (elementDeleted) {
-        return (
-            <DeleteModalContainer>
-                <h1>{pageName} excluída(o) com sucesso!</h1>
-            </DeleteModalContainer>
-        )
+        deleteFunc(elementId);
+        setIsModalVisible(false)
     }
 
     return (
-        <DeleteModalContainer>
-            <h1>Apagar cidade</h1>
-            <p>Você tem certeza que deseja apagar <b>{elementName}</b> dos registros?</p>
-            <button className="confirm-btn" onClick={deleteElement}>Confirmar</button>
-        </DeleteModalContainer>
+        <>
+            <ClosedModalContent>
+                {closedModalContent}
+            </ClosedModalContent>
+
+            <ModalTemplate id={elementId}>
+                <button className="confirm-btn" onClick={deleteElement}>Excluir {pageName}</button>
+            </ModalTemplate>
+
+        </>
     )
 }

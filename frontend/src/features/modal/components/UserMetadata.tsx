@@ -15,15 +15,15 @@ interface UserMetadataProps {
     Metadata: iSectors[];
     registerMetadata: (data: {name: string}) => Promise<void>;
     deleteMetadata:(id: string) => Promise<void>;
+    pageName: string
 }
 
-export default function UserMetadata({ listMetadata, Metadata , registerMetadata, deleteMetadata }: UserMetadataProps) {
+export default function UserMetadata({ listMetadata, Metadata, registerMetadata, deleteMetadata, pageName }: UserMetadataProps) {
     
     const [modalChoice, setModalChoice] = useState<ModalOptions>({ choice: null })
     const [showModal, setShowModal] = useState(false)
     
     const [metadataId, setMetadataId] = useState("")
-    const [metadataName, setMetadataName] = useState("")
     
     useEffect(() => {
         listMetadata()
@@ -38,9 +38,8 @@ export default function UserMetadata({ listMetadata, Metadata , registerMetadata
         toggleModal()
     }
     
-    const onDelete = (id: string, name: string) => {
+    const onDelete = (id: string) => {
         setMetadataId(id)
-        setMetadataName(name)
         setModalChoice({ choice: 'delete' });
         toggleModal()
     }
@@ -48,11 +47,11 @@ export default function UserMetadata({ listMetadata, Metadata , registerMetadata
     return (
         <>
             <UserMetadataContainer>
-                <h1>Setores</h1>
+                <h1>{pageName}</h1>
                 <img className='plus-icon' src={AddIcon} onClick={onAdd} />
                 <div className="cities">
                     {Metadata.map((data, index) => {
-                        return <MetadataCard key={index} MetadataName={data.name} onDelete={() => onDelete(data.id, data.name)} />
+                        return <MetadataCard key={index} MetadataName={data.name} onDelete={() => onDelete(data.id)} />
                     })}
                 </div>
             </UserMetadataContainer>
@@ -61,13 +60,12 @@ export default function UserMetadata({ listMetadata, Metadata , registerMetadata
                     showModal &&
                         (modalChoice.choice && modalChoice.choice === 'delete')
                         ? <DeleteModal
-                            elementName={metadataName}
                             elementId={metadataId}
                             remove={deleteMetadata}
-                            pageName={"Setor"} />
+                            pageName={pageName} />
                         : <CreateModal
                             addFunction={registerMetadata}
-                            pageName={"Setor"} />
+                            pageName={pageName} />
                 }
             </Modal>
 

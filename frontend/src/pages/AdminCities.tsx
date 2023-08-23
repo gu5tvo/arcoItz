@@ -10,6 +10,7 @@ export default function AdminCities() {
       <>
         <DinamicHeader logoutBtn adminPanel />
         <UserMetadata 
+          pageName="Cidade"
           listMetadata={listCities} 
           Metadata={cities} 
           registerMetadata={registerCities} 

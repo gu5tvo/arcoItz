@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 
 import { useUser } from "../../../hooks/contexts";
-import DocumentComponent from "../../../components/dashboard/certificates/DocumentComponent";
 import { GenericContentStyle } from "../style";
 import DocumentModal from "../../modal/components/DocumentModal";
+import DocumentCard from "./DocumentCard";
 
 export default function CertificatesScreen(): JSX.Element {
 
@@ -21,7 +21,7 @@ export default function CertificatesScreen(): JSX.Element {
         <DocumentModal/>
 
         {  documents?.map((document, index) => { 
-              return <DocumentComponent key={index} 
+              return <DocumentCard key={index} 
               name={document.name}
               description={document.description}
               id={document.id}
