@@ -13,9 +13,9 @@ export const UserContext = createContext<{
   setUser: React.Dispatch<React.SetStateAction<iUserComplete | undefined>>;
   skills: iSkills[] | undefined;
   setSkills: React.Dispatch<React.SetStateAction<iSkills[] | undefined>>;
-  courses: iCourses[];
+  courses: iCourses[] | undefined;
   setCourses: React.Dispatch<React.SetStateAction<iCourses[] | undefined>>;
-  experiences: iExperiences[];
+  experiences: iExperiences[] | undefined;
   setExperiences: React.Dispatch<React.SetStateAction<iExperiences[] | undefined>>;
   documents: iDocuments[] | undefined;
   setDocuments: React.Dispatch<React.SetStateAction<iDocuments[] | undefined>>;
@@ -78,7 +78,7 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const storedToken: string | null = localStorage.getItem('token');
+    const storedToken: string | null = localStorage.getItem('@token');
     if (storedToken) {
       setToken(storedToken);
       setIsAuthenticated(true);
@@ -95,7 +95,7 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
       setIsAuthenticated(true);
       api.defaults.headers.Authorization = `Bearer ${token}`;
 
-      if (!!data.remember) { 
+      if (data.remember) { 
         localStorage.setItem('@token', response.data.token) 
         sessionStorage.removeItem('@token')
     } else {
@@ -165,8 +165,9 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
   const profile = useCallback(async ({ userData, coursesData, documentsData, skillsData, experiencesData, showError = true }: SetProfileOptions) => {
 
     try {
-      const retrievedToken: string = retrieveToken()
-
+      const retrievedToken = retrieveToken()
+      console.log(retrievedToken)
+      
       const response = await api.get('/users', {
         headers: {
           'Authorization': `Bearer ${retrievedToken}`
@@ -181,7 +182,7 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
       
       setIsAuthenticated(true)
     } catch (err: AxiosError | unknown) {
-      if (!showError) return;
+      if (!showError) { return }
       if (err instanceof AxiosError) {
         toast.error(err.response?.data.message as string);
       } else {

@@ -1,4 +1,4 @@
-import React, { useCallback, createContext, useState } from "react";
+import React, { useCallback, createContext } from "react";
 import { useUser } from "../hooks/contexts";
 import api from "../utils/axios";
 import { iDocuments } from "../interfaces/users";
@@ -18,7 +18,7 @@ export const DocumentsContext = createContext<{
 
 export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
     
-    const { token, profile, documents } = useUser()
+    const { token, profile } = useUser()
     
     api.defaults.headers.Authorization = `Bearer ${token}`
 
@@ -26,7 +26,7 @@ export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
         const token = retrieveToken()
         
         try{
-            const {data: document} = await api.post('/document', data, {
+            await api.post('/document', data, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

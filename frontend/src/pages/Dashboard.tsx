@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { Dashboard, DashboardContent, DashboardNavigation, DashboardContact, DashboardProfile, DashboardAcademics, DashboardSkill, DashboardProfessional, DashboardDocument } from "../features";
+import { useUser } from "../hooks/contexts";
 
 export default function UserDashboardPage() {
 
     const [display, setDisplay] = useState('profile')
-    
+    const { isAuthenticated } = useUser()
+    const navigate = useNavigate()
+
     function renderDisplay() {
         if(display === 'profile') return <DashboardProfile />
         if(display === 'school') return <DashboardAcademics />
@@ -14,6 +18,10 @@ export default function UserDashboardPage() {
         if(display === 'experience') return <DashboardProfessional />
         if(display === 'certificates') return <DashboardDocument />
     }
+
+    useEffect(()=> {
+        if (!isAuthenticated) navigate('/login')
+    }, [isAuthenticated])
 
     return (
         <Dashboard>

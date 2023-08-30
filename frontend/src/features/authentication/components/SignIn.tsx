@@ -7,26 +7,27 @@ import { iAdminLogin } from "../../../interfaces/admin";
 import { iLogin } from "../../../interfaces/users";
 
 import React from 'react'
+import loginSchema from "../../../schemas/login";
+import registerSchema from "../../../schemas/register";
+import { InferType } from "yup";
 
 type SignInData = iLogin | iAdminLogin
 
-interface RegisterUserData extends Partial<iLogin> {}
-interface RegisterAdminData extends Partial<iAdminLogin> {}
-type RegisterData = RegisterUserData | RegisterAdminData
+type FormType = InferType<typeof loginSchema | typeof registerSchema>
+type Register = UseFormRegister<FormType>
 
-type Register = UseFormRegister<RegisterData>
-
-interface Props {
-    signIn: (data: iLogin | iAdminLogin) => void
-    handleSubmit: UseFormHandleSubmit<iLogin | iAdminLogin, undefined>
-    trigger: UseFormTrigger<iLogin | iAdminLogin>
+export interface SignProps {
+    signIn: (data: SignInData) => void
+    handleSubmit: UseFormHandleSubmit<SignInData, undefined>
+    trigger: UseFormTrigger<iLogin> | UseFormTrigger<iAdminLogin>
     register: UseFormRegister<iLogin | iAdminLogin>
-    errors: FieldErrors<iLogin | iAdminLogin>
+    errors: FieldErrors<SignInData>
 }
 
-export default function SignIn({ signIn, handleSubmit, trigger, register, errors }: Props) {
+export default function SignIn({ signIn, handleSubmit, trigger, register, errors }: SignProps) {
 
     const onSignIn = handleSubmit(async (formData: SignInData) => {
+        console.log(formData)
         await trigger();
         signIn(formData);
       })
@@ -43,7 +44,7 @@ export default function SignIn({ signIn, handleSubmit, trigger, register, errors
                         register={register as Register} 
                         placeholder="Insira seu e-mail"
                     />
-                    <ErrorMessage field={errors.email}/>
+                    <ErrorMessage message={errors.email?.message}/>
                 </FormField>
 
                 <FormField>
@@ -53,7 +54,7 @@ export default function SignIn({ signIn, handleSubmit, trigger, register, errors
                         register={register as Register} 
                         placeholder="Insira sua senha"
                     />
-                    <ErrorMessage field={errors.password}/>
+                    <ErrorMessage message={errors.password?.message}/>
                 </FormField> 
 
                 <FormField>

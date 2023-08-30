@@ -2,14 +2,12 @@ import { ErrorText } from "../style"
 import React from 'react'
 
 interface Props {
-    field: {
-        message?: string
-    }
+    message?: string
 }
 
-export default function ErrorMessage({ field }: Props) {
+export default function ErrorMessage({ message }: Props) {
 
-    if (!field) return <></>
+    if (!message) return <></>
 
-    return <ErrorText>{field.message}</ErrorText>
+    return <ErrorText>{message}</ErrorText>
 }

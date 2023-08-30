@@ -11,13 +11,19 @@ export default async function checkTokenMiddleware(req: Request, res: Response, 
     //Verifica se o token é válido.
     const [, token] = authorization.split(' ');
     if(token.length < 14) throw new AppError('Token inválido', 401);
-    const { id } = jwt.verify(token, process.env.SECRET_KEY) as { id: string };
+
+    let id = ""
+    jwt.verify(token, process.env.SECRET_KEY as string, (err, id)=> {
+        if(err) throw new AppError('Token inválido', 401);
+        id = id
+    });
+
     if(!id) throw new AppError('Token inválido', 401);
 
     //Verifica se o usuário existe.
     const user = await User.findOne({id})
     if(!user) throw new AppError('Token inválido', 401);
-
+    
     //Se tudo estiver correto, adiciona o id do usuário na requisição.
     req.user = {
         id: user.id,
@@ -26,5 +32,4 @@ export default async function checkTokenMiddleware(req: Request, res: Response, 
     }
 
     return next();
-
 }

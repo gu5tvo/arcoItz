@@ -25,7 +25,6 @@ export default async function checkAdminTokenMiddleware(req: Request, res: Respo
 
         return next();
     }catch(err){
-        console.log(err);
         throw new AppError('Token inválido', 401);
     }
 

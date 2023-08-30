@@ -1,49 +1,57 @@
 import { Routes, Route } from 'react-router-dom';
-import LandingPage from '../pages/landing';
-import LoginPage from '../pages/SignInPage';
-
-import SignUpPage from '../pages/SignUpPage';
-import AdminSignUpPage from '../pages/AdminSignUpPage';
-import AdminSignInPage from '../pages/AdminSignInPage';
-
-import DashboardPage from '../pages/Dashboard';
-import SearchPage from '../pages/search';
-import ProtectedRoute from '../components/ProtectedRouteUser';
-import AdminProtectedRoute from '../components/ProtectedRouterAdmin';
-import Profile from '../pages/profile';
-import { Painel } from '../pages/admin/painel';
-import ManageAdmins from '../pages/admin/manageAdmins';
-import AdminSearchPage from '../pages/admin/search';
-
-import EditAdminProfile from '../pages/admin/editProfile';
-import ResetPage from '../pages/reset';
-
 import React from 'react'
-import AdminCities from '../pages/AdminCities';
-import AdminSectors from '../pages/AdminSectors';
+import { lazy, Suspense } from 'react';
+
+const Landing = lazy(() => import('../pages/landing'));
+const Login = lazy(() => import('../pages/SignInPage'));
+
+const SignUp = lazy(() => import('../pages/SignUpPage'));
+
+const Dashboard = lazy(() => import('../pages/Dashboard'));
+const SearchPage = lazy(() => import('../pages/search'));
+const ProtectedRoute = lazy(() => import('../components/ProtectedRouteUser'));
+const Profile = lazy(() => import('../pages/profile'));
+const Painel = lazy(() => import('../pages/admin/painel'));
+const ManageAdmins = lazy(() => import('../pages/admin/manageAdmins'));
+const AdminProtectedRoute = lazy(() => import('../components/ProtectedRouterAdmin'));
+
+const AdminSearch = lazy(() => import('../pages/admin/search'));
+const AdminSignIn = lazy(() => import('../pages/AdminSignInPage'));
+const AdminSignUp = lazy(() => import('../pages/AdminSignUpPage'));
+const AdminCities = lazy(() => import('../pages/AdminCities'));
+const AdminSectors = lazy(() => import('../pages/AdminSectors'));
+const AdminEditProfile = lazy(() => import('../pages/admin/editProfile'));
+
+const Reset = lazy(() => import('../pages/reset'));
+const Search = lazy(() => import('../pages/search'));
+
+// grep flag that excludes a directory from search:
+// grep -r --exclude-dir=docs "console.log" .
 
 export default function MakeRoutes(){
 
     return (
-        <Routes>
-            <Route path="/" element={<LandingPage/>} />
-            <Route path="/login" element={<LoginPage/>} />
-            <Route path="/cadastro" element={<SignUpPage/>} />
-            <Route path="/search" element={<SearchPage/>} />
-            <Route path="/profile/:id" element={<Profile/>} />
-            <Route path="/dashboard/*" element={<ProtectedRoute path="/dashboard" element={DashboardPage} isPrivate redirectTo="/login" />} />
-            <Route path="/reset/*" element={<ResetPage/>}/>
-            {/* <AdminProtectedRoute path="/login" element={AdminLogin} isPrivate redirectTo="/admin/login" /> */}
-            <Route path="/admin/login/" element={<AdminSignInPage/>} />
-            <Route path="/admin/painel" element={<AdminProtectedRoute path="/admin/painel" element={Painel} isPrivate redirectTo="/admin/login" />} />
-            <Route path="/admin/manage" element={<AdminProtectedRoute path="/admin/manage" element={ManageAdmins} isPrivate redirectTo="/admin/login" />} />
-            <Route path="/admin/cadastro" element={<AdminProtectedRoute path="/admin/cadastro" element={AdminSignUpPage} isPrivate redirectTo="/admin/login" />} />
-            <Route path="/admin/city" element={<AdminProtectedRoute path="/admin/city" element={AdminCities} isPrivate redirectTo="/admin/login" />} />
-            <Route path="/admin/sector" element={<AdminProtectedRoute path="/admin/sector" element={AdminSectors} isPrivate redirectTo="/admin/login" />} />
-            <Route path="/admin/users" element={<AdminProtectedRoute path="/admin/users" element={AdminSearchPage} isPrivate redirectTo="/admin/login" />} />
-            <Route path="/admin" element={<AdminProtectedRoute path="/admin" element={EditAdminProfile} isPrivate redirectTo="/admin/login" />} />
+            <Suspense fallback={<div>Loading...</div>}>
+                <Routes>
 
-            
-        </Routes>
+                <Route path="/" element={<Landing/>} />
+                <Route path="/login" element={<Login/>} />
+                <Route path="/cadastro" element={<SignUp/>} />
+                <Route path="/search" element={<Search/>} />
+                <Route path="/profile/:id" element={<Profile/>} />
+                <Route path="/dashboard/*" element={<ProtectedRoute path="/dashboard" element={Dashboard} isPrivate redirectTo="/login" />} />
+                <Route path="/reset/*" element={<Reset/>}/>
+                {/* <AdminProtectedRoute path="/login" element={AdminLogin} isPrivate redirectTo="/admin/login" /> */}
+                <Route path="/admin/login/" element={<AdminSignIn/>} />
+                <Route path="/admin/painel" element={<AdminProtectedRoute path="/admin/painel" element={Painel} isPrivate redirectTo="/admin/login" />} />
+                <Route path="/admin/manage" element={<AdminProtectedRoute path="/admin/manage" element={ManageAdmins} isPrivate redirectTo="/admin/login" />} />
+                <Route path="/admin/cadastro" element={<AdminProtectedRoute path="/admin/cadastro" element={ AdminSignUp } isPrivate redirectTo="/admin/login" />} />
+                <Route path="/admin/city" element={<AdminProtectedRoute path="/admin/city" element={AdminCities} isPrivate redirectTo="/admin/login" />} />
+                <Route path="/admin/sector" element={<AdminProtectedRoute path="/admin/sector" element={AdminSectors} isPrivate redirectTo="/admin/login" />} />
+                <Route path="/admin/users" element={<AdminProtectedRoute path="/admin/users" element={AdminSearch} isPrivate redirectTo="/admin/login" />} />
+                <Route path="/admin" element={<AdminProtectedRoute path="/admin" element={AdminEditProfile} isPrivate redirectTo="/admin/login" />} />
+            </Routes>
+                
+        </Suspense>
     )
 }

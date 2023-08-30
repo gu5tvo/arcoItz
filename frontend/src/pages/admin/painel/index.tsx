@@ -9,7 +9,7 @@ import React from 'react'
 
 import ManageButtons from '../../../components/ManageButtons';
 
-export function Painel () {
+export default function Painel () {
 
   const { admin } = useAdmin()
 

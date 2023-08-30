@@ -5,6 +5,7 @@ import Modal from '../../../components/Modal';
 import { CreateModal , DeleteModal} from '../..';
 import { iSectors } from '../../../interfaces/admin';
 import AddIcon from '.././../../assets/add.svg'
+import ModalTemplate from '..';
 
 interface ModalOptions {
     choice: 'add' | 'delete' | null
@@ -55,19 +56,16 @@ export default function UserMetadata({ listMetadata, Metadata, registerMetadata,
                     })}
                 </div>
             </UserMetadataContainer>
-            <Modal modalIsOpen={showModal} toggleModal={toggleModal}>
-                {
-                    showModal &&
-                        (modalChoice.choice && modalChoice.choice === 'delete')
-                        ? <DeleteModal
-                            elementId={metadataId}
-                            remove={deleteMetadata}
-                            pageName={pageName} />
-                        : <CreateModal
-                            addFunction={registerMetadata}
-                            pageName={pageName} />
-                }
-            </Modal>
+            <ModalTemplate id={modalChoice.choice + ''} >
+            {(modalChoice.choice && modalChoice.choice === 'delete')
+                    ? <DeleteModal
+                        elementId={metadataId}
+                        remove={deleteMetadata}
+                        pageName={pageName} />
+                    : <CreateModal
+                        addFunction={registerMetadata}
+                        pageName={pageName} />}
+            </ModalTemplate>
 
         </>
     )

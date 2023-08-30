@@ -3,12 +3,13 @@ import { InputElement } from '../style'
 import { UseFormRegister } from 'react-hook-form'
 import loginSchema from '../../../schemas/login'
 import registerSchema from '../../../schemas/register'
-import { InferType, TypeFromShape, SchemaObjectDescription } from 'yup'
+import { InferType } from 'yup'
 
 type FormType = InferType<typeof loginSchema | typeof registerSchema>
+type FieldNames = keyof FormType;
 
 interface Props {
-    type: string | any
+    type: FieldNames
     placeholder: string
     register: UseFormRegister<FormType>
     id?: string

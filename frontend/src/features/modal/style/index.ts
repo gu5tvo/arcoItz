@@ -47,10 +47,8 @@ export const ModalContainer = styled.div`
 
 export const ModalBody = styled.div`
 
-    padding-left: min(4vw, 100px);
-    padding-right: min(4vw, 100px);
-    padding-bottom: min(5vh, 100px);
-    padding-top: 0rem ;
+    padding: 0 min(4vw, 100px) min(5vh, 100px);
+
     margin-top: 7%;
     display: flex;
     flex-direction: column;

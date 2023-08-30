@@ -9,7 +9,7 @@ export default function UserDashboardPage({ children }: Props): JSX.Element {
 
     return (
         <MainContainer>
-                { children }
+            { children }
         </MainContainer>
     )
 }

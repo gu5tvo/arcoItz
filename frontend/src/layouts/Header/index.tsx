@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { StyledHeader, FilledBtn, UndecoratedLink, NavbarButtons, SignInButton, SignUpButton, DiversiLogo, Navbar, HeaderWrapper, NavbarWrapper, NavbarLinks, MenuIcon } from "./styles";
 import { iHeader } from "../../interfaces/header";
 import { useUser, useAdmin } from "../../hooks/contexts";
@@ -13,17 +13,10 @@ export default function DynamicHeader(
 
     const navigate = useNavigate();
     
-    const { isAuthenticated: userAuthenticated, logout, user, profile } = useUser();
+    const { isAuthenticated: userAuthenticated, logout, user } = useUser();
     const { isAuthenticated: adminAuthenticated, adminLogout, adminSelf } = useAdmin();
 
     const [showMenu, setShowMenu] = useState(false);
-
-    useEffect(()=> {
-        profile({ showError: false })
-        adminSelf(false)
-    }, [])
-
-
 
     function betterMenu(){
         if (adminAuthenticated) {
@@ -59,7 +52,6 @@ export default function DynamicHeader(
             navigate('/admin/login')
         } else if (userAuthenticated) {
             logout()
-            profile({ showError: false })
             navigate('/login');
         }
     }
