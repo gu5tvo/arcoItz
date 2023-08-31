@@ -11,14 +11,14 @@ export const DocumentsContext = createContext<{
         updateDocument: (id: string, data: iDocuments) => Promise<void>,
         deleteDocument: (id: string) => Promise<void>,
     }>({
-    registerDocument: (data: iDocuments) => Promise.resolve(),
-    updateDocument: (id: string, data: iDocuments) => Promise.resolve(),
-    deleteDocument: (id: string) => Promise.resolve()
+    registerDocument: () => Promise.resolve(),
+    updateDocument: () => Promise.resolve(),
+    deleteDocument: () => Promise.resolve()
 });
 
 export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
     
-    const { token, profile } = useUser()
+    const { token, profile, setDocuments } = useUser()
     
     api.defaults.headers.Authorization = `Bearer ${token}`
 
@@ -26,12 +26,17 @@ export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
         const token = retrieveToken()
         
         try{
-            await api.post('/document', data, {
+            const response = await api.post('/document', data, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
             }) as {data: iDocuments}
             
+            setDocuments((oldDocs)=> {
+                const newDocs = oldDocs.slice()
+                newDocs.push(response.data)
+                return newDocs
+            })
             await profile({ documentsData: true })
             
             toast.success("Documento adicionado com sucesso")
@@ -47,7 +52,6 @@ export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
 
     const updateDocument = useCallback( async (id: string, data: iDocuments) => {
         try{
-            const token = retrieveToken()
             await api.patch(`/document/${id}`, data, {
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -66,7 +70,6 @@ export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
 
     const deleteDocument = useCallback( async (id: string) => {
         try{
-            const token = retrieveToken()
             await api.delete(`/document/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
