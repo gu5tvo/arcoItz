@@ -12,7 +12,7 @@ import {createDocument, editDocument} from '../schemas/documents.schema'
 
 const documentsRouter = Router();
 //Cadastra um documento
-documentsRouter.post('', verifyShape(createDocument), verifyTokenMiddleware, insertDocumentController)
+documentsRouter.post('', verifyTokenMiddleware, insertDocumentController)
 //Edita um documento específico
 documentsRouter.patch('/:id', verifyShape(editDocument), verifyTokenMiddleware, checkPropertyMiddleware, editDocumentController)
 //Deleta um documento específico

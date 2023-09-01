@@ -2,9 +2,12 @@ import { Request, Response } from 'express';
 import insertDocumentService from "../services/documents/insertDocument.service";
 import deleteDocumentService from "../services/documents/deleteDocument.service";
 import editDocumentService from "../services/documents/editDocument.service";
+import createDocumentUrlService from '../services/documents/createDocumentUrl.service';
 
 export async function insertDocumentController(req: Request, res: Response): Promise<Response> {
     const { id } = req.user;
+    const documentUrl = await createDocumentUrlService(req.body)
+    console.log(documentUrl);
     const response = await insertDocumentService(req.body, id);
     return res.status(201).json(response);
 }

@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import retrieveToken from "../utils/user/retrieveToken";
 
 export const DocumentsContext = createContext<{
-        registerDocument: (data: iDocuments) => Promise<void>,
+        registerDocument: (file : File) => Promise<void>,
         updateDocument: (id: string, data: iDocuments) => Promise<void>,
         deleteDocument: (id: string) => Promise<void>,
     }>({
@@ -22,11 +22,11 @@ export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
     
     api.defaults.headers.Authorization = `Bearer ${token}`
 
-    const registerDocument = useCallback( async (data: iDocuments) => {
+    const registerDocument = useCallback( async ( file : File) => {
         const token = retrieveToken()
         
         try{
-            const response = await api.post('/document', data, {
+            const response = await api.post('/document', file, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

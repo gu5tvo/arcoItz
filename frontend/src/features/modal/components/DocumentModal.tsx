@@ -3,7 +3,6 @@ import axios from 'axios';
 import { useDocuments } from '../../../hooks/contexts';
 import ModalTemplate from '..';
 import { useModal } from '../hooks/contexts';
-import { iDocuments } from '../../../interfaces/users';
 import { Button, ClosedModalContent } from '../style';
 
 export default function DocumentModal() {
@@ -25,22 +24,22 @@ export default function DocumentModal() {
 
 	const makeUpload = async (file: File) => {
 		setIsModalVisible(false)
+		registerDocument(file)
+		// const preset_key = "ml_default";
+		// const cloud_name = "dtnsz5wcw";
+		// const formData = new FormData();
+		// formData.append('file', file);
+		// formData.append('upload_preset', preset_key);
 
-		const preset_key = "ml_default";
-		const cloud_name = "dtnsz5wcw";
-		const formData = new FormData();
-		formData.append('file', file);
-		formData.append('upload_preset', preset_key);
+		// axios.post(`https://api.cloudinary.com/v1_1/${cloud_name}/auto/upload`, formData)
+		// .then((res) => {
+		// 	const data : iDocuments = {
+		// 	name: file.name,
+		// 	document: res.data.secure_url,
+		// 	}
 
-		axios.post(`https://api.cloudinary.com/v1_1/${cloud_name}/auto/upload`, formData)
-		.then((res) => {
-			const data : iDocuments = {
-			name: file.name,
-			document: res.data.secure_url,
-			}
-
-			registerDocument(data)
-		});
+		// 	registerDocument(data)
+		// });
 	};
 
     const id = 'addDocument'
