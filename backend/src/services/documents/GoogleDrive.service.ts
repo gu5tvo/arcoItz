@@ -22,25 +22,38 @@ const drive = google.drive({
   auth: oauth2Client,
 });
 
-export default async function createDocumentUrlService(file: File){
-  console.log(file.name);
+
+export default async function createDocumentUrlService(file: Express.Multer.File){
   
   try {
-		const filePath = path.join(__dirname, file.name);
+
 		const response = await drive.files.create({
       requestBody: {
-        name: file.name, 
+        name: file.originalname, 
         mimeType: 'application/pdf',
       },
       media: {
         mimeType: 'application/pdf',
-        body: fs.createReadStream(filePath),
+        body: fs.createReadStream(file.path),
       },
     });
 
-	return response.data;
+    fs.unlinkSync(file.path);
+    console.log(response);
+    
+	  return `https://drive.google.com/file/d/${response.data.id}/view`;
   } catch (error) {
     console.log(error);
   }
 }
 
+export async function deleteFileFromDrive(googleId: string) {
+  try {
+    await drive.files.delete({
+      fileId: googleId,
+    });
+
+  } catch (error) {
+    console.error(`Erro ao excluir o arquivo`);
+  }
+}

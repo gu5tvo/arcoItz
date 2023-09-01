@@ -2,11 +2,12 @@ import { Request, Response, NextFunction } from 'express';
 import AppError from '../../errors';
 import User from '../../model/user.model';
 import { verify } from 'jsonwebtoken'
+import path from 'path';
 
 export default async function checkTokenMiddleware(req: Request, res: Response, next: NextFunction): Promise<void> {
     const { authorization } = req.headers;
     const [ , token ] = authorization.split(' ');
-    
+
     if(!token) throw new AppError("Token não informado", 401);
     
     try {

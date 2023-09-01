@@ -1,3 +1,6 @@
+//backend : documents.routes.ts
+
+
 import { Router } from 'express';
 //Controllers
 import {
@@ -9,13 +12,21 @@ import checkPropertyMiddleware from '../middleware/documents/checkProperty.middl
 //Serializers
 import verifyShape from '../schemas/verifyShape.middleware';
 import {createDocument, editDocument} from '../schemas/documents.schema'
+import multer from 'multer';
+import path from 'path';
 
 const documentsRouter = Router();
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, path.resolve(__dirname, "uploads")); 
+    },
+  });
+  const upload = multer({ storage: storage });
+  
 //Cadastra um documento
-documentsRouter.post('', verifyTokenMiddleware, insertDocumentController)
-//Edita um documento específico
-documentsRouter.patch('/:id', verifyShape(editDocument), verifyTokenMiddleware, checkPropertyMiddleware, editDocumentController)
-//Deleta um documento específico
-documentsRouter.delete('/:id', verifyTokenMiddleware, checkPropertyMiddleware, deleteDocumentController)
+documentsRouter.post('/', verifyTokenMiddleware, upload.single('file'), insertDocumentController);
+documentsRouter.patch('/:id', verifyShape(editDocument), verifyTokenMiddleware, checkPropertyMiddleware, upload.single('file'), editDocumentController);
+documentsRouter.delete('/:id', verifyTokenMiddleware, checkPropertyMiddleware, deleteDocumentController);
+
 
 export default documentsRouter;

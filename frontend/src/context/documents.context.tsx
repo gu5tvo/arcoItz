@@ -18,19 +18,22 @@ export const DocumentsContext = createContext<{
 
 export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
     
-    const { token, profile, setDocuments } = useUser()
-    
+    const { profile, setDocuments } = useUser()
+    const token = retrieveToken()
     api.defaults.headers.Authorization = `Bearer ${token}`
-
+    
     const registerDocument = useCallback( async ( file : File) => {
-        const token = retrieveToken()
         
         try{
-            const response = await api.post('/document', file, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            }) as {data: iDocuments}
+            const formData = new FormData();
+            formData.append('file', file); 
+        
+            const response = await api.post('/document', formData, {
+              headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'multipart/form-data', 
+              },
+            }) as { data: iDocuments };
             
             setDocuments((oldDocs)=> {
                 const newDocs = oldDocs.slice()
@@ -69,6 +72,7 @@ export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
     },[])
 
     const deleteDocument = useCallback( async (id: string) => {
+      
         try{
             await api.delete(`/document/${id}`, {
                 headers: {

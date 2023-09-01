@@ -1,3 +1,4 @@
+//backend: app.ts
 import { errorHandler } from './errors'
 import express from 'express'
 import 'express-async-errors'
