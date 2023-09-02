@@ -39,7 +39,6 @@ export default async function createDocumentUrlService(file: Express.Multer.File
     });
 
     fs.unlinkSync(file.path);
-    console.log(response);
     
 	  return `https://drive.google.com/file/d/${response.data.id}/view`;
   } catch (error) {

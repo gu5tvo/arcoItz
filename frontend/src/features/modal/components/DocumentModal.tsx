@@ -5,6 +5,7 @@ import { useDocuments } from '../../../hooks/contexts';
 import ModalTemplate from '..';
 import { useModal } from '../hooks/contexts';
 import { Button, ClosedModalContent } from '../style';
+import { toast } from 'react-toastify';
 
 export default function DocumentModal() {
 	const { setIsModalVisible, setModalId } = useModal()
@@ -24,6 +25,12 @@ export default function DocumentModal() {
 	};
 
 	const makeUpload = async (file: File) => {
+		if (file.size > (1024 * 1024)) {
+			toast.error("Apenas arquivos de até 1 MB podem ser enviados.");
+			setIsModalVisible(false);
+			return; 
+		  }
+		
 		setIsModalVisible(false);
 		registerDocument(file);
 	};
