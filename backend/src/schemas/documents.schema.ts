@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 
 export const createDocument = yup.object().shape({
-    file: yup.mixed().required(),
+    formData: yup.mixed(),
 })
 
 export const editDocument = yup.object().shape({

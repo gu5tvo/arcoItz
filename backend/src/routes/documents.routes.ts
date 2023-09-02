@@ -1,4 +1,3 @@
-//backend : documents.routes.ts
 
 import { Router } from 'express';
 //Controllers
@@ -23,7 +22,7 @@ const storage = multer.diskStorage({
   const upload = multer({ storage: storage });
   
 //Cadastra um documento
-documentsRouter.post('/', verifyTokenMiddleware, upload.single('file'), insertDocumentController);
+documentsRouter.post('/', verifyShape(createDocument), verifyTokenMiddleware, upload.single('file'), insertDocumentController);
 documentsRouter.patch('/:id', verifyShape(editDocument), verifyTokenMiddleware, checkPropertyMiddleware, editDocumentController);
 documentsRouter.delete('/:id', verifyTokenMiddleware, checkPropertyMiddleware, deleteDocumentController);
 
