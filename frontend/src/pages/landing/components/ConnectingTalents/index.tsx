@@ -74,7 +74,7 @@ export default function SectionConnectingTalents(): JSX.Element {
                 </TextDiv>
               </ResumesCountDiv>
             </MainImageCollection>
-            <ButtonCollection>
+            <ButtonCollection $mobile>
               <SignButton onClick={() => navigate("/cadastro")}>
                 Cadastrar Currículo
               </SignButton>

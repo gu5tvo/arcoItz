@@ -15,8 +15,6 @@ export default function SectionTalkToUs(): JSX.Element {
 
   function sendForm({ name , phone , email, message}: TalkToUsInputs ){
       if( !name || !phone || !email || !message) return;
-    
-      console.log({ name , phone , email, message});
   }  
 
 

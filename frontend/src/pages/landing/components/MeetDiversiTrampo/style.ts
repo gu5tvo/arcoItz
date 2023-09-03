@@ -7,7 +7,6 @@ export const MainSectionStyle = styled.section`
     background-color: var(--PINK-2);
     width: min(2200px, 100%);
     gap: min(54px, 9vw);
-    
 
     @media (max-width: 803px) {
         flex-direction: column;
@@ -38,7 +37,7 @@ export const TextSection = styled.section`
 `
 
 export const ImageSection = styled.section`
-    width: 41%;
+    width: min(41%, 600px);
     justify-content: right;
     align-items: flex-start;
 

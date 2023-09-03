@@ -15,7 +15,6 @@ export const MainContainer = styled.section`
 `
 
 export const InnerSection = styled.div`
-    min-width: 500px;
     flex: 1;
     display: flex;
     justify-content: center;
@@ -32,6 +31,7 @@ export const Content = styled.span`
 
     @media (max-width: 1099px) {
         gap: min(10vw, 60px);
+        flex-direction: column;
     }
 `
 
@@ -97,7 +97,7 @@ export const Bubble = styled.span`
 
     &:nth-child(3) {
         top: 50%;
-        right: -30%;
+        right: -25%;
         transform: translateY(15%);
         box-shadow: -2px 4.7px 8px 0px #00000040;
 
@@ -232,7 +232,6 @@ export const StepsBubble = styled.div`
 `
 
 export const BlueBody = styled.div`
-    width: 100%;
     height: 100%;
     background-color: #00CFFC;
     border-radius: min(10px, 4vw);
