@@ -3,15 +3,11 @@ import styled from 'styled-components';
 export const MainSectionStyle = styled.section`
     font-family: 'Poppins', 'Inter', sans-serif;
     display: flex;
-    padding: 8vh 12vw;
+    padding: 8vw;
     background-color: var(--PINK-2);
-    gap: 4vw;
-
-    @media (max-width: 480px) {
-        padding: 4vh 5vw;
-        flex-direction: column;
-    }
-
+    gap: min(4vw, 24px);
+    width: min(2200px, 100%);
+    flex-wrap: wrap;
 `
 export const TextCollection = styled.div`
     display: flex;
@@ -60,11 +56,9 @@ export const Form = styled.form`
     display: flex;
     flex-direction: column;
     flex: 1.2;
-    gap: 3vh;
+    gap: min(3vw, 18px);
 
-    @media (max-width: 480px) {
-        gap: 1.2rem;
-    }
+    min-width: 330px;
 
 `
 
@@ -90,12 +84,8 @@ export const Button = styled.button`
 export const SameLineInputs = styled.div`
     display: flex;
     justify-content: space-between;
-    gap: 1vw;
-    @media (max-width: 480px) {
-        flex-direction: column;
-        gap: 3vh;
-    }
-
+    flex-wrap: wrap;
+    gap: min(3vw, 18px);
 `
 
 export const Input = styled.input`
@@ -106,7 +96,8 @@ export const Input = styled.input`
     padding: 0.8rem;
     border:none;
     outline: none;
-    
+    min-width: 300px;
+
     &::placeholder{
         font-size: clamp(0.8rem, 1.1vw, 1.3rem);
     } 

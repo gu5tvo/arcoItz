@@ -1,3 +1,4 @@
+import React from 'react'
 import { useForm } from "react-hook-form";
 import { Button, Form, Headline, Input, MainSectionStyle, SameLineInputs, SubHeading, TextCollection } from "./style";
 

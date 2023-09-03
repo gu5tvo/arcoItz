@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 
+export const MainWrapper = styled.main`
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    align-items: center;
+`
+
 export const PinkSection = styled.section`
     display: flex;
     justify-content: center;

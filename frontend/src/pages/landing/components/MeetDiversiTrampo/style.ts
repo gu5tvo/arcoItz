@@ -2,69 +2,64 @@ import styled from 'styled-components';
 
 export const MainSectionStyle = styled.section`
     display: flex;
-    padding: 8vh 5vw 4vh 5vw;
+    flex-wrap: wrap;
+    padding: min(60px, 10vw);
     background-color: var(--PINK-2);
-    gap: 4vw;
+    width: min(2200px, 100%);
+    gap: min(54px, 9vw);
+    
 
-    @media (max-width: 480px) {
-        padding: 4vh 5vw;
+    @media (max-width: 803px) {
+        flex-direction: column;
+        align-items: center;
+
+        p {
+            flex-direction: column;
+            align-items: center;
+        }
     }
-
 `
 
 export const MainImage = styled.img`
     display: flex;
-    width: 44vw;
+    width: 100%;
+    aspect-ratio: 1;
 
-    @media (max-width: 480px) {
-        width: 98%;
-        margin: 0 auto;
+    @media (max-width: 803px) {
+        display: none;
     }
 `
 export const TextSection = styled.section`
     display: flex;
-    flex-direction: column;
+    flex-direction: column;;
+    gap: min(45px, 7.5vw);
+    min-width: 300px;
     flex: 1;
-    gap: 7.2vh;
-
-    & > ${MainImage} {
-        display: none;
-    }
-
-    @media (max-width: 480px) {
-        gap: 2rem;
-        & > ${MainImage} {
-        display: flex;
-        }
-    }
-
 `
 
 export const ImageSection = styled.section`
-    display: flex;
-    flex: 1;
+    width: 41%;
     justify-content: right;
-    @media (max-width: 480px) {
+    align-items: flex-start;
+
+    @media (max-width: 803px) {
         display: none;
     }
-
 `
 
 
 export const Headline = styled.div`
     display: flex;
     font-family: 'Poppins', sans-serif;
-    font-size: clamp(1.063rem, 3.2vw , 5rem);
+    font-size: 2.3rem;
     font-weight: bold;
     flex-direction: column;
-    line-height: 3.753vw;
+    line-height: 3rem;
 
-    @media (max-width: 480px) {
-        text-align: center; 
-        line-height: 2.1rem;
-        font-size: 2.063rem;
+    @media (max-width: 803px) {
+        
+        align-items: center;
     }
-
 `
 
 export const TopText = styled.p`
@@ -78,16 +73,21 @@ export const BottomText = styled.p`
 export const BodyText = styled.p`
     font-family: Poppins;
     display: flex;
-    font-size: clamp(0.6rem, 1.13vw, 1.3rem);
+    font-size: 1.1rem;
     color: var(--MODERATE-BLACK);
-    width: 55ch;
-    line-height: 152%;
+    line-height: 1.4rem;
+    
     text-align: left;
     text-align: justify;
 
-    @media (max-width: 480px) {
-        font-size: 1rem;
-        width: 90%;
-        align-self: center;
+    & > img {
+        display: none;
     }
+
+    @media (max-width: 803px) {
+        & > img {
+            display: flex;
+        }
+    }
+
 `
