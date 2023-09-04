@@ -1,21 +1,17 @@
 import axios from 'axios'
+import 'dotenv/config'
 
 const { google } = require('googleapis');
 const path = require('path');
 const fs = require('fs');
 
-const CLIENT_ID = '516987131192-fg253r3une74erqir9amn4ur8p4tmn9g.apps.googleusercontent.com';
-const CLIENT_SECRET = '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';
-const REDIRECT_URI = 'https://developers.google.com/oauthplayground';
-const REFRESH_TOKEN = '1//041gcx_MIyS1xCgYIARAAGAQSNgF-L9Ir__5i3iu0-u53Ge550YGMQZLRMdYSc8zXAgU8vSaaHjl_MbuHABqha0VgOSzEruUJXA';
-
 const oauth2Client = new google.auth.OAuth2(
-  CLIENT_ID,
-  CLIENT_SECRET,
-  REDIRECT_URI
+  process.env.CLIENT_ID,
+  process.env.CLIENT_SECRET,
+  process.env.REDIRECT_URI
 );
 
-oauth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
+oauth2Client.setCredentials({ refresh_token: process.env.REFRESH_TOKEN });
 
 const drive = google.drive({
   version: 'v3',
@@ -40,7 +36,22 @@ export default async function createDocumentUrlService(file: Express.Multer.File
 
     fs.unlinkSync(file.path);
     
-	  return `https://drive.google.com/file/d/${response.data.id}/view`;
+    await drive.permissions.create({
+      fileId: response.data.id,
+      requestBody: {
+        role: 'reader',
+        type: 'anyone',
+      },
+    });
+
+
+    const result = await drive.files.get({
+      fileId: response.data.id,
+      fields: 'webViewLink',
+    });
+
+  
+	  return result.data.webViewLink;
   } catch (error) {
     console.log(error);
   }
