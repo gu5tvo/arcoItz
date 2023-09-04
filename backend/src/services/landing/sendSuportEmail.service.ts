@@ -1,11 +1,18 @@
 import transporter from "../../utils/nodemailer";
 
-export default async function sendSupportEmailService({ name, email, phone, message }) {
+interface SupportEmailServiceProps{
+  name: string
+  phone: string
+  email: string
+  message: string
+}
+
+export default async function sendSupportEmailService({ name, email, phone, message }: SupportEmailServiceProps) {
 
   transporter.sendMail(
     {
       from: email,
-      to: process.env.RECIPIENT_EMAIL, 
+      to: 'diversitramposdrive@gmail.com', 
       subject: "Contato do Formulário - DiversiTrampos",
       html: `
         <p>Nome: <b>${name}</b></p>

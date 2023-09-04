@@ -6,7 +6,9 @@ import { DocumentsContext } from "../context/documents.context";
 import { ExperienceContext } from "../context/experience.context";
 import { AdminContext } from "../context/admin.context";
 import { SkillsContext } from "../context/skills.context";
+import { LandingContext } from "../context/landing.context";
 
+export const useLanding = () => useContext(LandingContext);
 export const useUser = () => useContext(UserContext);
 export const useModal = () => useContext(ModalContext);
 export const useCourses = () => useContext(CoursesContext);

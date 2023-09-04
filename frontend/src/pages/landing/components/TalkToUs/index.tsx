@@ -1,7 +1,8 @@
 import { useForm } from "react-hook-form";
 import { Button, Form, Headline, Input, MainSectionStyle, SameLineInputs, SubHeading, TextCollection } from "./style";
+import { useLanding } from "../../../../hooks/contexts";
 
-interface TalkToUsInputs{
+export interface TalkToUsInputs{
   name: string
   phone: string
   email: string
@@ -10,11 +11,17 @@ interface TalkToUsInputs{
 
 export default function SectionTalkToUs(): JSX.Element {
   const { register, handleSubmit} = useForm();
-
+  const {sendSuportMessage} = useLanding();
 
   function sendForm({ name , phone , email, message}: TalkToUsInputs ){
       if( !name || !phone || !email || !message) return;
-    
+      
+      sendSuportMessage({
+        name: name,
+        phone: phone, 
+        email: email,
+        message: message
+      })
       console.log({ name , phone , email, message});
   }  
 
