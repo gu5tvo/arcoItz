@@ -266,10 +266,14 @@ export const StepHeading = styled.h3`
 
 export const StepDescription = styled.p`
     color: white;
-    font-size: 0.7rem;
-    line-height: 0.9rem;
+    font-size: 1rem;
+    line-height: 1.2rem;
     text-align: center;
     width: 90%;
+
+    @media (min-width: 1100px) {
+        font-size: 0.8rem;
+    }
 `
 
 export const RegisterButton = styled.button`
