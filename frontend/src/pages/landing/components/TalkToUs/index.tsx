@@ -1,3 +1,4 @@
+import React from 'react'
 import { useForm } from "react-hook-form";
 import { Button, Form, Headline, Input, MainSectionStyle, SameLineInputs, SubHeading, TextCollection } from "./style";
 
@@ -14,8 +15,6 @@ export default function SectionTalkToUs(): JSX.Element {
 
   function sendForm({ name , phone , email, message}: TalkToUsInputs ){
       if( !name || !phone || !email || !message) return;
-    
-      console.log({ name , phone , email, message});
   }  
 
 

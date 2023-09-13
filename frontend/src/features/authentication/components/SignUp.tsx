@@ -28,9 +28,7 @@ interface Props {
 
 export default function SignUp({ signUp, handleSubmit, trigger, register, errors }: Props): JSX.Element{
 
-    //12345a!A
     const onSignUp = handleSubmit(async (formData: SignUpData) => {
-        console.log("dasds")
         await trigger();
         signUp(formData);
       })
@@ -42,29 +40,29 @@ export default function SignUp({ signUp, handleSubmit, trigger, register, errors
             <FormField>
                 <FieldName>Nome Completo</FieldName>
                 <FormInput type="name" register={register as Register} placeholder="Insira seu nome completo"/>
-                <ErrorMessage field={errors.name}/>
+                <ErrorMessage message={errors?.name?.message}/>
             </FormField>
 
             <FormField>
                 <FieldName htmlFor="email">Email</FieldName>
                 <FormInput type="email" register={register as Register} placeholder="Insira seu e-mail"/>
-                <ErrorMessage field={errors.email}/>
+                <ErrorMessage message={errors?.email?.message}/>
             </FormField>
 
             <FormField>
                 <FieldName htmlFor="password">Senha</FieldName>
                 <FormInput type="password" register={register as Register} placeholder="Insira sua senha"/>
-                <ErrorMessage field={errors.password}/>
+                <ErrorMessage message={errors?.password?.message}/>
             </FormField>
 
             <FormField>
                 <FieldName htmlFor="confirmPassword">Confirme sua senha</FieldName>
                 <FormInput type="password" id={"confirmPassword"} placeholder="Confirme sua senha" register={register as Register}/>
-                <ErrorMessage field={errors.confirmPassword}/>
+                <ErrorMessage message={errors?.confirmPassword?.message}/>
             </FormField>
 
             <FormField>
-                <SubmitButton>Cadastrar</SubmitButton>
+                <SubmitButton type='submit'>Cadastrar</SubmitButton>
                 
                 <BottomInfos>
                     Já possui uma conta? <Link to="/login">Faça login</Link>!

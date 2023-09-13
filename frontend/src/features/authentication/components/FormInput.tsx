@@ -12,10 +12,10 @@ interface Props {
     type: FieldNames
     placeholder: string
     register: UseFormRegister<FormType>
-    id?: string
+    id?: FieldNames
 }
 
 export default function FormInput({ type, placeholder, register, id }: Props) {
   
-  return <InputElement id={id ?? type} type={type} {...register(type)} placeholder={placeholder} />
+  return <InputElement id={id ?? type} type={type} placeholder={placeholder} {...register(id ? id : type)} />
 }

@@ -5,7 +5,7 @@ interface SocialMediaProps{
     iconColor: string
 }
 
-export default function SocialMediaCollection({ iconColor }:SocialMediaProps){
+export default function SocialMediaCollection({ iconColor = 'var(--BLACK)' }:SocialMediaProps){
 
     return (
       <SocialCollectionStyle>
