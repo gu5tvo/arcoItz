@@ -1,10 +1,10 @@
 import Document from "../../model/documents.model";
 
-export default async function insertDocumentService(data, id) {
+export default async function insertDocumentService( fileName: string , documentUrl : string, id : string) {
     const document = await Document.create({
-        name: data.name,
-        description: data.description,
-        document: data.document,
+        name: fileName,
+        description: '',
+        document: documentUrl,
         ownerId: id
     });
 
