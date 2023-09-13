@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { BlueBody, Bubble, BubbleSection, Content, ExampleCard, ExampleInfos, ExampleName, Headings, InnerLoadingBar, InnerSection, MainContainer, OuterLoadingBar, PinkShadow, Profession, ProfilePicture, Pronouns, RegisterButton, RightArrow, SectionHeading, SectionSubHeading, StepDescription, StepHeading, StepsBubble, UpdateButton } from "./style";
+import { BackgroundSVG, BlueBody, Bubble, BubbleSection, Content, ExampleCard, ExampleInfos, ExampleName, Headings, InnerLoadingBar, InnerSection, MainContainer, OuterLoadingBar, PinkShadow, Profession, ProfilePicture, Pronouns, RegisterButton, RightArrow, SectionHeading, SectionSubHeading, StepDescription, StepHeading, StepsBubble, UpdateButton } from "./style";
 
 export default function HowToUse() {
     const navigate = useNavigate()
@@ -12,6 +12,7 @@ export default function HowToUse() {
 
     return (
         <MainContainer>
+            <BackgroundSVG/>
             <Headings>
                 <SectionSubHeading>É um talento?</SectionSubHeading>
                 <SectionHeading>Saiba como se cadastrar</SectionHeading>

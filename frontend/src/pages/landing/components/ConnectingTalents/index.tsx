@@ -32,6 +32,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function SectionConnectingTalents(): JSX.Element {
   const navigate = useNavigate();
+  
   return (
     <>
       <MainSectionContainer>

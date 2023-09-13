@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import LinesDesktopSVG from "./../../../../assets/lines-section1-desktop.svg";
 import ConnectingTalentsBackground from "./../../../../assets/ConnectingTalentsBackground.svg";
 
-export const MainSectionContainer = styled.div`
+export const MainSectionContainer = styled.section`
     background-image: url(${ConnectingTalentsBackground});
     background-size: cover;
     background-repeat: no-repeat;
@@ -16,7 +16,9 @@ export const MainSectionStyle = styled.div`
     position: relative;    
     justify-content: space-evenly;
     flex-wrap: wrap;
-
+    overflow: hidden;
+    width: min(100%, 2200px);
+    
     @media (max-width: 1099px) {
         flex-direction: column;
         justify-content: flex-start;
@@ -32,14 +34,15 @@ export const BackgroundSVG = styled.div`
     position: absolute;
     top: 20%;
     left: 42%;
-    bottom: 0;
-    right: 0;
+    bottom: -5%;
+    right: -5%;
     z-index: 0;
+    opacity: 0.4;
 
     @media (max-width: 1099px) {
-        width: 96%;
-        top: 42%;
-        left: 4%;
+        width: 100%;
+        top: 30%;
+        right: 50%;
     }
     
 `

@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { IoIosArrowForward } from 'react-icons/io'
+import LinesDesktopSVG from "./strips.svg";
 
 export const MainContainer = styled.section`
     display: flex;
@@ -8,9 +9,30 @@ export const MainContainer = styled.section`
     flex-direction: column;
     gap: min(54px, 9vw);
     width: min(2200px, 100%);
+    position: relative;
+    overflow: hidden;
 
     * {
         font-family: Poppins, 'sans-serif'
+    }
+`
+
+export const BackgroundSVG = styled.div`
+    background-image: url(${LinesDesktopSVG});  
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0%;
+    left: 42%;
+    bottom: 20%;
+    right: 0;
+    z-index: 0;
+    opacity: 0.4;
+
+    @media (max-width: 1099px) {
+        width: 100%;
+        top: 30%;
+        right: 50%;
     }
 `
 
@@ -49,11 +71,13 @@ export const Headings = styled.span`
 
 export const SectionHeading = styled.h2`
     font-size: 1.7rem;
+    z-index: 2;
 `
 
 export const SectionSubHeading = styled.h3`
     color: #00CFFC;
     font-size: 1.4rem;
+    z-index: 2;
 `
 
 export const ExampleCard = styled.div`
@@ -65,6 +89,7 @@ export const ExampleCard = styled.div`
     width: min(312px, 51vw);
     box-shadow: -4px 1px 12px 2px #00000040;
     border-radius: min(15px, 5vw);
+    background-color: white;
 `
 
 export const Bubble = styled.span`
@@ -251,8 +276,8 @@ export const PinkShadow = styled.div`
     position: absolute;
     width: 100%;
     height: 100%;
-    top: -10px;
-    right: -10px;
+    top: -5px;
+    right: -5px;
     border-radius: min(10px, 4vw);
     background-color: #FFE3E8;
     z-index: 0;
