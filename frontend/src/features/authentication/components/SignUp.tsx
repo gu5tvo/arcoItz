@@ -29,7 +29,6 @@ interface Props {
 export default function SignUp({ signUp, handleSubmit, trigger, register, errors }: Props): JSX.Element{
 
     const onSignUp = handleSubmit(async (formData: SignUpData) => {
-        console.log("dasds")
         await trigger();
         signUp(formData);
       })
