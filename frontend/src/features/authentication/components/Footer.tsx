@@ -17,7 +17,6 @@ import { yupResolver } from '@hookform/resolvers/yup'
 
 
 type InputChange = React.ChangeEvent<HTMLInputElement>
-type SubmitForm = React.FormEvent<HTMLFormElement>
 
 function LoginFooter() {
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -30,7 +29,7 @@ function LoginFooter() {
         resolver: yupResolver(forgotSchema)
     });
 
-    const sendEmail = async (e: SubmitForm)=> {
+    const sendEmail = async ()=> {
         
         setEmailSent(true)
 
@@ -45,7 +44,7 @@ function LoginFooter() {
         await forgotPassword(formFields.email) 
     }
         
-    const changeEmail = (e: InputChange)=> { 
+    const changeEmail = ()=> { 
         setEmail(e.target.value)
     }
 
@@ -75,7 +74,7 @@ function LoginFooter() {
             
                     { errors.email?.message && <p className="error-message"><>{ errors.email.message }</></p>}
                     
-                    <Button content="Enviar" type="submit"/>
+                    <Button type="submit">Enviar</Button>
 
                 </Form></>) }
 
