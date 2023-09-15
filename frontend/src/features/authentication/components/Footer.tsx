@@ -25,27 +25,16 @@ function LoginFooter() {
 
     const [emailSent, setEmailSent] = useState(false);
 
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit, formState: { errors }, trigger } = useForm({
         resolver: yupResolver(forgotSchema)
     });
 
-    const sendEmail = async ()=> {
-        
+    const sendEmail = async (data: { email})=> {
+        trigger()
         setEmailSent(true)
 
-        const formFields = { 
-            email: email
-        }
-
-        const isValid = await forgotSchema.isValid(formFields);
-
-        if (!isValid) return;
     
-        await forgotPassword(formFields.email) 
-    }
-        
-    const changeEmail = ()=> { 
-        setEmail(e.target.value)
+        forgotPassword(email) 
     }
 
     const toggleModal = ()=> {
@@ -70,7 +59,7 @@ function LoginFooter() {
 
                 <Form onSubmit={handleSubmit(sendEmail)}>
 
-                    <Input register={register} placeholder="Insira seu e-mail" name="email" value={ email } onChange={changeEmail} style={BorderStyle.SolidBorder} />
+                    <Input register={register} placeholder="Insira seu e-mail" name="email" onChange={()=>{}} style={BorderStyle.SolidBorder} />
             
                     { errors.email?.message && <p className="error-message"><>{ errors.email.message }</></p>}
                     
