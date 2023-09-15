@@ -156,7 +156,7 @@ export default function SearchPage(){
                     const names = (firstName === lastName) ? firstName : firstName + ' ' + lastName;
 
                     return (
-                        <article onClick={()=>navigate(`/profile/${user.id}`)} className='cv-card' key={index}>
+                        <article onClick={()=>navigate(`/perfil/${user.id}`)} className='cv-card' key={index}>
                             <img src={image}/>
                             <div className="basic-infos">
                                 <span>

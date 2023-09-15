@@ -15,7 +15,7 @@ export function ProfilePreview({ id, image , name, area, pronouns , gender}: iPr
     const names = (firstName === lastName) ? firstName : firstName + ' ' + lastName;
     
     return( 
-    <ProfilePreviewDiv onClick={()=> navigate(`/profile/${id}`)}>
+    <ProfilePreviewDiv onClick={()=> navigate(`/perfil/${id}`)}>
         <div className="infos-container">
             <img src={image ? image : pfp} alt={`foto de ${name}`} className="photo"/>
           <div className="middle-div">

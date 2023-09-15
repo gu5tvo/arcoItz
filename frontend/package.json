@@ -22,6 +22,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.2",
     "react-hot-toast": "^2.4.1",
+    "react-html-parser": "^2.0.2",
     "react-icons": "^4.10.1",
     "react-input-mask": "^2.0.4",
     "react-modal": "^3.16.1",

@@ -1,4 +1,6 @@
 import React from 'react'
+import { ColoredBg, Content, ContentWrapper, LastUpdate, MainHeading, PoliciesContainer } from '../style'
+import parser from 'react-html-parser'
 
 interface Props {
   pageTitle: string
@@ -9,18 +11,14 @@ interface Props {
 
 export default function BasePolicy({ pageTitle, content, color, lastUpdate}: Props) {
   return (
-    <>
-      {/* nomes provisórios
-        <Container>
-          <ColoredBg $color={color}>
-            <h1>{pageTitle}</h1>
-            <LastUpdate>{lastUpdate}</LastUpdate>
-          </ColoredBg>
-          <Content>parser(content)</Content>
-        </Container>
-
-
-      */}
-    </>
+    <PoliciesContainer>
+      <ColoredBg $bgColor={color}>
+        <MainHeading>{pageTitle}</MainHeading>
+        <LastUpdate>Data da Última Atualização: {lastUpdate}</LastUpdate>
+      </ColoredBg>
+      <ContentWrapper>
+        <Content>{parser(content)}</Content>
+      </ContentWrapper>
+    </PoliciesContainer>
   )
 }
