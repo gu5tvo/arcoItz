@@ -3,3 +3,4 @@ node_modules/
 dist/
 errors.log
 ../.DS_Store
+src/routes/uploads
