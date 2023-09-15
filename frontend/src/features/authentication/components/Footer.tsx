@@ -34,7 +34,11 @@ function LoginFooter() {
         setEmailSent(true)
 
     
-        forgotPassword(email) 
+        await forgotPassword(formFields.email) 
+    }
+        
+    const changeEmail = (e)=> { 
+        setEmail(e.target.value)
     }
 
     const toggleModal = ()=> {
