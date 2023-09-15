@@ -13,7 +13,7 @@ export default function LandingPage(): JSX.Element{
     return (
         <>
         <DinamicHeader loginBtn={true} registerBtn={true} searchBtn={true}/>
-        <MainWrapper>
+        <MainWrapper id='inicio'>
             <SectionConnectingTalents />
             <SectionMeetDiversiTrampo />
             <HowToUse/>

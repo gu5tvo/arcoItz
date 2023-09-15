@@ -1,8 +1,8 @@
 /* eslint-disable react/react-in-jsx-scope */
 export default function LoadingPage() {
     return (
-        <div>
-            <h1>Loading</h1>
+        <div style={{ width: '100%', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'min(60px, 10vw)'}}>
+            <h1>Carregando</h1>
         </div>
     )
 }

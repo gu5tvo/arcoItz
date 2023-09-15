@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const FooterStyle = styled.footer`
@@ -71,9 +72,19 @@ export const ColumnTitle = styled.p`
     font-size: clamp(0.92rem, 1.05vw, 1.1rem);
 `
 
-export const Page = styled.p`
+export const Page = styled(Link)`
+    text-decoration: none;
+    color: white;
     font-size: clamp(0.8rem, 1vw, 1.05rem);
     display: flex;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    &:active {
+        transform: scale(1.05);
+    }
 `
 
 export const CopyrightNotice = styled.p`
