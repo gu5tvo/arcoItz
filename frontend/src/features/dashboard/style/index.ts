@@ -50,6 +50,7 @@ export const FormStyle = styled.form`
     flex-direction: column;
     gap: 1rem;
     font-size: clamp(1rem, 1.4vw, 1.4rem);
+    width: 70%
 `
 
 export const InputArea = styled.span`
