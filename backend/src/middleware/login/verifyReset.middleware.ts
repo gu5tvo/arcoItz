@@ -7,9 +7,11 @@ import 'dotenv/config';
 export default async function verifyResetMiddleware(req: Request, res: Response, next: NextFunction){
     const {token} = req.params;
 
+    
     if(!token) throw new AppError("Token não informado", 400);
 
     const {id} = verify(token, process.env.SECRET_KEY) as {id: string};
+
 
     const user = await User.findById(id);
 
