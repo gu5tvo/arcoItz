@@ -20,7 +20,7 @@ export const DocumentsProvider = ({ children } : {children: JSX.Element}) => {
     
     const { profile, setDocuments } = useUser()
     const token = retrieveToken()
-    api.defaults.headers.Authorization = `Bearer ${token}`
+    // api.defaults.headers.Authorization = `Bearer ${token}`
     
     const registerDocument = useCallback( async ( file : File) => {
         

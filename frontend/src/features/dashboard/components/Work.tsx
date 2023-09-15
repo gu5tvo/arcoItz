@@ -37,7 +37,6 @@ export default function Work({ id, doesExist, description, from: originalFrom, l
 
 
     const onSubmit = ({ title, location, description, company }: OnSubmitData)=> {
-        console.log("dsad")
         if (doesExist){
             updateExperience(id, { title, location, from, to, description, company })
         }

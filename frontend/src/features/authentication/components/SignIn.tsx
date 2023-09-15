@@ -27,7 +27,6 @@ export interface SignProps {
 export default function SignIn({ signIn, handleSubmit, trigger, register, errors }: SignProps) {
 
     const onSignIn = handleSubmit(async (formData: SignInData) => {
-        console.log(formData)
         await trigger();
         signIn(formData);
       })
