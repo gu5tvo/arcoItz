@@ -26,7 +26,7 @@ userRouter.post('', verifyShape(registerSchema), checkRegisterMiddleware, regist
 //Lista um perfil específico
 userRouter.get('/:id', checkExistenceMiddleware, displayProfileController)
 //Atualiza o próprio perfil
-userRouter.patch('', verifyShape(updateSchema), checkTokenMiddleware, verifyMailMiddleware, updateProfileController)
+userRouter.patch('', checkTokenMiddleware, verifyMailMiddleware, updateProfileController)
 //Remove o próprio usuário
 userRouter.delete('', checkTokenMiddleware, deleteProfileController)
 
