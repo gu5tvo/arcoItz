@@ -44,14 +44,13 @@ export const Selections = styled.div<{ value: string;
     justify-content: space-between;
     background-color: #fff;
     padding: 1rem;
-    gap: 1em;
+    gap: 1rem;
     outline: .5px solid #eee;
     border-radius: 0.5rem;
     box-shadow: 0 0 60px rgba(0, 0, 0, 0.09);
     background-color: ${props => props.value === props.selected ? '#B9DDFF' : '#fff'};
     transition: 0.3s all ease-in-out;
     
-    font-size: clamp(1rem, 2vw, 1.4rem);
 
     p, h4 {
         overflow: hidden;
@@ -60,12 +59,14 @@ export const Selections = styled.div<{ value: string;
     }
 
     h4{
-        font-size: 1.5eem;
-        font-weight: 600;
+        font-size: 1rem;
+        font-weight: bold;
+        color: rgba(0, 0, 0, 0.8);
     }
 
     p{
-        font-size: 1em;
+        font-size: 0.8rem;
+        line-height: 0.9rem;
     }
 
     &:hover{
