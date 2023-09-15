@@ -4,8 +4,12 @@ import styled from 'styled-components'
 export const PoliciesContainer = styled.main`
     width: 100%;
     display: grid;
-    grid-template-rows: 250px 1fr;
+    grid-template-rows: 240px 1fr;
     padding-bottom: min(3vw, 30px);
+
+    @media(max-width: 550px) {
+        grid-template-rows: 200px 1fr;
+    }
 `
 
 export const ColoredBg = styled.div<{ $bgColor: string }>`
