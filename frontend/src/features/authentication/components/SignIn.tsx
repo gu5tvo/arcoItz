@@ -10,6 +10,7 @@ import React from 'react'
 import loginSchema from "../../../schemas/login";
 import registerSchema from "../../../schemas/register";
 import { InferType } from "yup";
+import LoginFooter from "./Footer";
 
 type SignInData = iLogin | iAdminLogin
 
@@ -22,9 +23,10 @@ export interface SignProps {
     trigger: UseFormTrigger<iLogin> | UseFormTrigger<iAdminLogin>
     register: UseFormRegister<iLogin | iAdminLogin>
     errors: FieldErrors<SignInData>
+    showFooter?: boolean
 }
 
-export default function SignIn({ signIn, handleSubmit, trigger, register, errors }: SignProps) {
+export default function SignIn({ signIn, handleSubmit, trigger, register, errors, showFooter }: SignProps) {
 
     const onSignIn = handleSubmit(async (formData: SignInData) => {
         console.log(formData)
@@ -66,6 +68,7 @@ export default function SignIn({ signIn, handleSubmit, trigger, register, errors
                     <SubmitButton>Entrar</SubmitButton>
                 </FormField>
                 
+                { showFooter && <LoginFooter/>}
             </AuthenticationTemplate>
     )
 }

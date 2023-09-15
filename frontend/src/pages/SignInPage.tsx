@@ -23,5 +23,5 @@ export default function SignInPage() {
     
     const SignInData = { handleSubmit, signIn, trigger, register, errors }
     
-    return <SignIn {...SignInData}/>
+    return <SignIn {...SignInData} showFooter/>
 }

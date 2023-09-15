@@ -7,6 +7,7 @@ export const Button = styled.button`
   border: none;
   background-color: var(--BLUE);
   color: white;
+  font-size: 0.75rem;
 
   &:hover{
     filter: brightness(0.9);

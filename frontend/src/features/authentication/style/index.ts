@@ -43,13 +43,10 @@ export const FormFooter = styled.nav`
         cursor: pointer;
     }
 
-    span {
-        font-size: 0.75em;
+    * {
+        font-size: 0.75rem;
     }
 
-    span > span {
-        font-size: 1em
-    }
 `
 
 export const FormSubmit = styled.div`
