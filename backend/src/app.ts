@@ -12,11 +12,13 @@ import documentsRouter from './routes/documents.routes'
 import skillRouter from './routes/skills.routes'
 import experienceRouter from './routes/experience.routes'
 import coursesRouter from './routes/courses.routes'
+import landingRouter from './routes/landing.routes'
 
 const app = express()
 app.use(cors())
 app.use(express.json())
 
+app.use('/landing', landingRouter)
 app.use('/docs', express.static(path.join(__dirname, '/docs')))
 app.use('/login', loginRouter)
 app.use('/users', userRouter)
