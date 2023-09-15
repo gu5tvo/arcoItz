@@ -1,10 +1,11 @@
+//frontend : DocumentModal.tsx
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useDocuments } from '../../../hooks/contexts';
 import ModalTemplate from '..';
 import { useModal } from '../hooks/contexts';
-import { iDocuments } from '../../../interfaces/users';
 import { Button, ClosedModalContent } from '../style';
+import { toast } from 'react-toastify';
 
 export default function DocumentModal() {
 	const { setIsModalVisible, setModalId } = useModal()
@@ -24,23 +25,14 @@ export default function DocumentModal() {
 	};
 
 	const makeUpload = async (file: File) => {
-		setIsModalVisible(false)
-
-		const preset_key = "ml_default";
-		const cloud_name = "dtnsz5wcw";
-		const formData = new FormData();
-		formData.append('file', file);
-		formData.append('upload_preset', preset_key);
-
-		axios.post(`https://api.cloudinary.com/v1_1/${cloud_name}/auto/upload`, formData)
-		.then((res) => {
-			const data : iDocuments = {
-			name: file.name,
-			document: res.data.secure_url,
-			}
-
-			registerDocument(data)
-		});
+		if (file.size > (1024 * 1024)) {
+			toast.error("Apenas arquivos de até 1 MB podem ser enviados.");
+			setIsModalVisible(false);
+			return; 
+		  }
+		
+		setIsModalVisible(false);
+		registerDocument(file);
 	};
 
     const id = 'addDocument'
@@ -63,7 +55,7 @@ export default function DocumentModal() {
 			{!confirmScreen && 
 				<>
 				<label htmlFor="file">Procurar arquivo</label>
-				<input type='file' onChange={(event) => {
+				<input type='file' name='file' onChange={(event) => {
 
 					setfileLocal(event.target.files[0])
 					setConfirmScreen(true);

@@ -21,11 +21,13 @@ export default function CertificatesScreen(): JSX.Element {
         <DocumentModal/>
 
         {  documents?.map((document, index) => { 
+              const { id , name , description , document : content} = document ;
+              
               return <DocumentCard key={index} 
-              name={document.name}
-              description={document.description}
-              id={document.id}
-              document={document.document}
+              name={name}
+              description={description}
+              id={id}
+              document={content}
           />
           })
         }

@@ -1,21 +1,26 @@
 import React from "react";
 import SectionMeetDiversiTrampo from "./components/MeetDiversiTrampo";
 import DinamicHeader from "../../layouts/Header";
-import {PinkSection, DisclaimerSection, ActionSection, BlockArticle} from './styles'
-import { Link } from "react-router-dom";
 import SectionConnectingTalents from "./components/ConnectingTalents";
 import Footer from "../../layouts/Footer";
 import SectionTalkToUs from "./components/TalkToUs";
+import HowToUse from "./components/HowToUse";
+import { MainWrapper } from "./styles";
+import KnowHowToFind from "./components/KnowHowToFind";
 
 export default function LandingPage(): JSX.Element{
     document.title = "Página inicial | DiversiTrampos";
     return (
         <>
-            <DinamicHeader loginBtn={true} registerBtn={true} searchBtn={true}/>
+        <DinamicHeader loginBtn={true} registerBtn={true} searchBtn={true}/>
+        <MainWrapper>
             <SectionConnectingTalents />
             <SectionMeetDiversiTrampo />
+            <HowToUse/>
+            <KnowHowToFind/>
             <SectionTalkToUs />
             <Footer />
+        </MainWrapper>
         </>
     )
 }

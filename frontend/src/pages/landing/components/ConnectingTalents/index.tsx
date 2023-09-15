@@ -32,6 +32,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function SectionConnectingTalents(): JSX.Element {
   const navigate = useNavigate();
+  
   return (
     <>
       <MainSectionContainer>
@@ -74,7 +75,7 @@ export default function SectionConnectingTalents(): JSX.Element {
                 </TextDiv>
               </ResumesCountDiv>
             </MainImageCollection>
-            <ButtonCollection>
+            <ButtonCollection $mobile>
               <SignButton onClick={() => navigate("/cadastro")}>
                 Cadastrar Currículo
               </SignButton>

@@ -94,6 +94,9 @@ export const GlobalStyle = createGlobalStyle`
 		border-spacing: 0;
 	}
 
+	html {
+		font-size: clamp(14px, 1.5vw, 20px);
+	}
 button {
     cursor: pointer;
 }

@@ -25,8 +25,8 @@ export default function SectionMeetDiversiTrampo(): JSX.Element {
             <TopText>Conheça a</TopText>
             <BottomText>DiversiTrampo</BottomText>
           </Headline>
-          <MainImage src={SectionImage} />
           <BodyText>
+            <MainImage src={SectionImage} />
             DiversiTrampo é uma plataforma desenvolvida para colaborar no campo
             de empregabilidade de população trans e travesti residente no estado
             do Maranhão.
@@ -39,7 +39,6 @@ export default function SectionMeetDiversiTrampo(): JSX.Element {
             trabalho no estado do Maranhão.
           </BodyText>
           <SocialMediaCollection />
-          `
         </TextSection>
       </MainSectionStyle>
     </>
