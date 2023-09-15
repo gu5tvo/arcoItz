@@ -10,6 +10,7 @@ import { DocumentsProvider } from './context/documents.context'
 import { ModalProvider } from './features'
 
 import { createRoot } from 'react-dom/client'
+import { LandingProvider } from './context/landing.context'
 const container = document.getElementById('root')
 const root = createRoot(container)
 
@@ -19,6 +20,7 @@ root.render(
       <AdminProvider>
         <UserProvider>
           <CoursesProvider>
+            <LandingProvider>
             <SkillsProvider>
               <ExperienceProvider>
                 <DocumentsProvider>
@@ -28,6 +30,7 @@ root.render(
                 </DocumentsProvider>
               </ExperienceProvider>
             </SkillsProvider>
+            </LandingProvider>
           </CoursesProvider>
         </UserProvider>
       </AdminProvider>
