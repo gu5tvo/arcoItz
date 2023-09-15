@@ -64,10 +64,9 @@ export default function DynamicHeader(
                     <Navbar>
                         <NavbarLinks>
                             {startBtn && <UndecoratedLink to="/">Início</UndecoratedLink>}
+                            {searchBtn && <UndecoratedLink to="/search">Currículos</UndecoratedLink>}
                             {searchBtn && <UndecoratedLink to="">Sobre nós</UndecoratedLink>}
                             {profileBtn && <UndecoratedLink to={`/profile/${user.id}`}>Currículo</UndecoratedLink>}
-                            {<UndecoratedLink to="">Empresa</UndecoratedLink>}
-                            {<UndecoratedLink to="">Contato</UndecoratedLink>}
                         </NavbarLinks>
                         <NavbarButtons>
                             { betterMenu() }
