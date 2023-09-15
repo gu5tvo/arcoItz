@@ -57,7 +57,6 @@ function Svgs() {
         <img src={CirclePointed} alt="Ornament 3" />
       </CircleWrapper>
 
-
       <CircleWrapper style={{ top: '340px', left: '720px' }}>
         <img src={Ornament} alt="Ornament" />
       </CircleWrapper>
