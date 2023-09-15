@@ -63,7 +63,7 @@ export const SubmitButton = styled.button`
     border-radius: min(20px, 4vw);
     text-align: center;
     color: #fff;
-    font-size: clamp(0.8rem, 2vw, 1rem);
+    font-size: 0.8rem;
     font-weight: bold;
     cursor: pointer;
     min-width: min(150px, 90vw);

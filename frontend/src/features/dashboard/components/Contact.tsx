@@ -43,7 +43,7 @@ export default function ContactScreen() {
 
                 <InputArea onChange={(e: React.ChangeEvent<HTMLInputElement>)=>setPhone(e.target.value)}>
                   <Label htmlFor="phone">Número de telefone</Label>
-                  <Phone mask={['(', /[1-9]/, /\d/, ')', ' ', /\d/, ' ', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]} type="text" placeholder="Digite seu número de telefone" defaultValue={user.phone ? user.phone : ''} className="phone-input"  {...register('phone')} />
+                  <Phone mask={['(', /[1-9]/, /\d/, ')', ' ', /\d/, ' ', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]} type="text" placeholder="Digite seu número de telefone" defaultValue={user?.phone ? user.phone : ''} className="phone-input"  {...register('phone')} />
                 </InputArea>
 
                 <InputArea>

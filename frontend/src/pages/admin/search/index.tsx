@@ -149,7 +149,7 @@ export default function SearchPage(){
 
                 {usersList.map((user, index)=>{
                     const image = user.avatar ? user.avatar : pfp;
-                    const splitName = user.name.split(' ');
+                    const splitName = user?.name?.split(' ');
                     const firstName = splitName[0];
                     const lastName = splitName[splitName.length - 1]
 

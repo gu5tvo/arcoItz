@@ -49,7 +49,8 @@ export const FormStyle = styled.form`
     display: inline-flex;
     flex-direction: column;
     gap: 1rem;
-    font-size: clamp(1rem, 1.4vw, 1.4rem);
+    font-size: 1rem;
+    width: 80%;
 `
 
 export const InputArea = styled.span`
@@ -115,13 +116,13 @@ export const TextArea = styled.textarea`
 export const Button = styled.button`
 
     border: none;
-    padding: 0.5em 1em;
+    padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     background-color: #48A7FF;
     color: #fff;
     transition: 0.3s all ease-in-out;
-
-
+    width: min(270px, 100%);
+    align-self: center;
 
     &:hover{
         cursor: pointer;

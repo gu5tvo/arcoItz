@@ -1,14 +1,14 @@
 import React from 'react'
 import { BasePolicy } from '../features'
 import DynamicHeader from '../layouts/Header'
-import cookies from '../../policies/cookies.json'
+import usage from '../../policies/usage.json'
 import Footer from '../layouts/Footer'
 
-export default function CookiesPolicies() {
+export default function UsagePolicies() {
   return (
     <>
       <DynamicHeader registerBtn loginBtn searchBtn startBtn/>
-      <BasePolicy color='#F8B0D6' content={cookies.content} lastUpdate={cookies.lastUpdate} pageTitle='Políticas de Cookies'/>
+      <BasePolicy color='#8DD9F0' content={usage.content} lastUpdate={usage.lastUpdate} pageTitle='Políticas de Uso'/>
       <Footer/>
     </>
   )

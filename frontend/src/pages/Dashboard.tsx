@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { Dashboard, DashboardContent, DashboardNavigation, DashboardContact, DashboardProfile, DashboardAcademics, DashboardSkill, DashboardProfessional, DashboardDocument } from "../features";
 import { useUser } from "../hooks/contexts";
+import DynamicHeader from "../layouts/Header";
 
 export default function UserDashboardPage() {
 
@@ -24,11 +25,14 @@ export default function UserDashboardPage() {
     }, [isAuthenticated])
 
     return (
+    <>
+        <DynamicHeader startBtn logoutBtn profileBtn onDashboard/>
         <Dashboard>
             <DashboardNavigation display={display} setDisplay={setDisplay}/>
             <DashboardContent>
-                { renderDisplay() }
+                { renderDisplay()  as JSX.Element }
             </DashboardContent>
         </Dashboard>
+    </>
     )
 }

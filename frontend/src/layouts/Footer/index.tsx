@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import SocialMediaCollection from "../SocialMediaCollection";
 import { BottomSection, Column, ColumnTitle, CopyrightNotice, DiversiLogo, FooterStyle, Hr, LogoCollection, Page, TechJrLogo, TextCollection, TopSection } from "./style";
 import diversIcon from '../../assets/diversIconWhite.svg'
@@ -16,20 +17,19 @@ export default function Footer(){
             <TextCollection>
                 <Column>
                     <ColumnTitle>NAVEGUE POR AQUI</ColumnTitle>                 
-                    <Page>Início</Page>
-                    <Page>Sobre nós</Page>
-                    <Page>Currículo</Page>
-                    <Page>Empresa</Page>
+                    <Page to="/">Início</Page>
+                    <Page to="/">Sobre nós</Page>
+                    <Page to="/dashboard">Currículo</Page>
                 </Column>
                 <Column>
                     <ColumnTitle>INFORMAÇÕES</ColumnTitle>                
-                    <Page>Política de cookies</Page>
-                    <Page>Política de uso</Page>
+                    <Page to="/politicas-de-cookies#">Políticas de cookies</Page>
+                    <Page to="/politicas-de-uso#">Políticas de uso</Page>
                 </Column>
                 <Column>
                     <ColumnTitle>CONTATO</ColumnTitle>                
-                    <Page>email@gmail.com</Page>
-                    <Page>(XX) X XXXX-XXXX</Page>
+                    <Page to="">email@gmail.com</Page>
+                    <Page to="">(XX) X XXXX-XXXX</Page>
                 </Column>
             </TextCollection>
         </TopSection>
@@ -45,4 +45,4 @@ export default function Footer(){
       </FooterStyle>
     </>
   );
-};
+}

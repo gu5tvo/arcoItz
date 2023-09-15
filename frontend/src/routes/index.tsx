@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import React from 'react'
 import { lazy, Suspense } from 'react';
+import LoadingPage from '../pages/LoadingPage';
 
 const Landing = lazy(() => import('../pages/landing'));
 const Login = lazy(() => import('../pages/SignInPage'));
@@ -26,13 +27,13 @@ const Reset = lazy(() => import('../pages/reset'));
 const Search = lazy(() => import('../pages/search'));
 
 const CookiesPolicies = lazy(()=> import ('../pages/CookiesPolicies'))
-// grep flag that excludes a directory from search:
-// grep -r --exclude-dir=docs "console.log" .
+const UsagePolicies = lazy(()=> import ('../pages/UsagePolicies'))
+
 
 export default function MakeRoutes(){
 
     return (
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<LoadingPage/>}>
                 <Routes>
 
                 <Route path="/" element={<Landing/>} />
@@ -42,9 +43,8 @@ export default function MakeRoutes(){
                 <Route path="/perfil/:id" element={<Profile/>} />
                 <Route path="/dashboard/*" element={<ProtectedRoute path="/dashboard" element={Dashboard} isPrivate redirectTo="/login" />} />
                 <Route path="/reset/*" element={<Reset/>}/>
-                <Route path="/cookies" element={<CookiesPolicies/>}/>
-
-                {/* <AdminProtectedRoute path="/login" element={AdminLogin} isPrivate redirectTo="/admin/login" /> */}
+                <Route path="/politicas-de-cookies" element={<CookiesPolicies/>}/>
+                <Route path="/politicas-de-uso" element={<UsagePolicies/>}/>
                 <Route path="/admin/login/" element={<AdminSignIn/>} />
                 <Route path="/admin/painel" element={<AdminProtectedRoute path="/admin/painel" element={Painel} isPrivate redirectTo="/admin/login" />} />
                 <Route path="/admin/manage" element={<AdminProtectedRoute path="/admin/manage" element={ManageAdmins} isPrivate redirectTo="/admin/login" />} />
