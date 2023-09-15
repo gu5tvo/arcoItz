@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 //a lógica aqui é que o coloredBg vai se expandir em altura, mas isso não vai empurrar o conteúdo pra baixo pq o Container define a altura máxima dele
 export const PoliciesContainer = styled.main`
+    font-family: Poppins;
     width: 100%;
     display: grid;
     grid-template-rows: 240px 1fr;
@@ -24,10 +25,33 @@ export const ColoredBg = styled.div<{ $bgColor: string }>`
 `
 
 export const MainHeading = styled.h1`
-    font-size: 2rem;
+    font-size: 3rem;
     color: white;
     font-weight: bold;
+    position: relative;    
+
+    @media (max-width: 640px){
+        padding-top: 18%;
+        font-size: 2rem;
+    }
 `
+export const SvgWrapper = styled.div`
+  position: absolute;
+  z-index: 1;
+
+  @media (max-width: 900px){
+    display: none;
+}
+`;
+
+export const CircleWrapper = styled.div`
+  position: absolute;
+  z-index: 1;
+
+  @media (max-width: 1400px){
+    display: none;
+}
+`;
 
 export const LastUpdate = styled.p`
     font-size: 0.9rem;
@@ -54,12 +78,12 @@ export const Content = styled.div`
     gap: min(24px, 4vw);
 
     p {
-        font-size: 1rem;
+        font-size:  0.75rem;
         line-height: 1.3rem;
     }
 
     h4 {
-        font-size: 1.1rem;
+        font-size: 0.875rem;
         font-weight: bold;
         line-height: 1.4rem;
     }
@@ -67,9 +91,10 @@ export const Content = styled.div`
     ol {
         list-style-type: decimal;
         list-style-position: inside;
+
         
         li {
-            font-size: 0.9rem;
+            font-size: 0.78rem;
             line-height: 1.2rem;
         }
     }
