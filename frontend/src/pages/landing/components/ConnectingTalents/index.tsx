@@ -51,7 +51,7 @@ export default function SectionConnectingTalents(): JSX.Element {
               <SignButton onClick={() => navigate("/cadastro")}>
                 Cadastrar Currículo
               </SignButton>
-              <SearchButton onClick={() => navigate("/search")}>
+              <SearchButton onClick={() => navigate("/buscar")}>
                 Buscar talentos
               </SearchButton>
             </ButtonCollection>
@@ -79,7 +79,7 @@ export default function SectionConnectingTalents(): JSX.Element {
               <SignButton onClick={() => navigate("/cadastro")}>
                 Cadastrar Currículo
               </SignButton>
-              <SearchButton onClick={() => navigate("/search")}>
+              <SearchButton onClick={() => navigate("/buscar")}>
                 Buscar talentos
               </SearchButton>
             </ButtonCollection>

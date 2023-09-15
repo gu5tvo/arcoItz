@@ -7,8 +7,8 @@ import  { useNavigate }  from "react-router-dom";
 
 export default function DynamicHeader(
     {startBtn = false, loginBtn = false, registerBtn = false,
-     profileBtn = false, logoutBtn = false,
-     searchBtn = false, onDashboard = false, onPanel = false
+     profileBtn = false, logoutBtn = false, onDashboard = false, onPanel = false,
+     searchBtn = false
     }: iHeader){
 
     const navigate = useNavigate();
@@ -64,10 +64,8 @@ export default function DynamicHeader(
                     <Navbar>
                         <NavbarLinks>
                             {startBtn && <UndecoratedLink to="/">Início</UndecoratedLink>}
-                            {searchBtn && <UndecoratedLink to="">Sobre nós</UndecoratedLink>}
-                            {profileBtn && <UndecoratedLink to={`/profile/${user.id}`}>Currículo</UndecoratedLink>}
-                            {<UndecoratedLink to="">Empresa</UndecoratedLink>}
-                            {<UndecoratedLink to="">Contato</UndecoratedLink>}
+                            {searchBtn && <UndecoratedLink to="/buscar">Buscar perfis</UndecoratedLink>}
+                            {profileBtn && <UndecoratedLink to={`/perfil/${user?.id}`}>Currículo</UndecoratedLink>}
                         </NavbarLinks>
                         <NavbarButtons>
                             { betterMenu() }

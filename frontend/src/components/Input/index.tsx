@@ -16,7 +16,7 @@ export interface InputProps {
     placeholder: string,
     type?: string,
     style: BorderStyle,
-    value: string,
+    value?: string,
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
     name: string,
     register: UseFormRegister<{ email: string }>
@@ -31,7 +31,6 @@ export default function Input ({ placeholder, type, style, value, onChange, name
         onChange={onChange}
         placeholder={placeholder}
         style={{ border: borderStyle(style) }}
-        value={value}
         {...register('email')}
     />
   );

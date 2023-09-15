@@ -25,6 +25,7 @@ const AdminEditProfile = lazy(() => import('../pages/admin/editProfile'));
 const Reset = lazy(() => import('../pages/reset'));
 const Search = lazy(() => import('../pages/search'));
 
+const CookiesPolicies = lazy(()=> import ('../pages/CookiesPolicies'))
 // grep flag that excludes a directory from search:
 // grep -r --exclude-dir=docs "console.log" .
 
@@ -37,10 +38,12 @@ export default function MakeRoutes(){
                 <Route path="/" element={<Landing/>} />
                 <Route path="/login" element={<Login/>} />
                 <Route path="/cadastro" element={<SignUp/>} />
-                <Route path="/search" element={<Search/>} />
-                <Route path="/profile/:id" element={<Profile/>} />
+                <Route path="/buscar" element={<Search/>} />
+                <Route path="/perfil/:id" element={<Profile/>} />
                 <Route path="/dashboard/*" element={<ProtectedRoute path="/dashboard" element={Dashboard} isPrivate redirectTo="/login" />} />
                 <Route path="/reset/*" element={<Reset/>}/>
+                <Route path="/cookies" element={<CookiesPolicies/>}/>
+
                 {/* <AdminProtectedRoute path="/login" element={AdminLogin} isPrivate redirectTo="/admin/login" /> */}
                 <Route path="/admin/login/" element={<AdminSignIn/>} />
                 <Route path="/admin/painel" element={<AdminProtectedRoute path="/admin/painel" element={Painel} isPrivate redirectTo="/admin/login" />} />

@@ -95,7 +95,7 @@ export default function SearchPage(){
                 {usersList.map((user, index)=>{
                     const image = user.avatar ? user.avatar : pfp;
                     return (
-                        <article onClick={()=>navigate(`/profile/${user.id}`)} className='cv-card' key={index}>
+                        <article onClick={()=>navigate(`/perfil/${user.id}`)} className='cv-card' key={index}>
                             <img src={image}/>
                             <div className="basic-infos">
                                 <span>
