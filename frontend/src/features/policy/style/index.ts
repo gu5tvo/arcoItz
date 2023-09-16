@@ -44,11 +44,11 @@ export const SvgWrapper = styled.div`
 }
 `;
 
-export const CircleWrapper = styled.div`
+export const RightSvgs = styled.div`
   position: absolute;
   z-index: 1;
 
-  @media (max-width: 1400px){
+  @media (max-width: 1280px){
     display: none;
 }
 `;

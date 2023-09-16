@@ -1,5 +1,5 @@
 import React from 'react'
-import { CircleWrapper, ColoredBg, Content, ContentWrapper, LastUpdate, MainHeading, PoliciesContainer, SvgWrapper } from '../style'
+import { RightSvgs, ColoredBg, Content, ContentWrapper, LastUpdate, MainHeading, PoliciesContainer, SvgWrapper } from '../style'
 import parser from 'react-html-parser'
 import SolidCircle from './../../../assets/Ornament 2.svg'
 import Triangle from './../../../assets/Ornament 42.svg'
@@ -49,16 +49,16 @@ function Svgs() {
         <img src={Panel} alt="Ornament 4" />
       </SvgWrapper>
 
-      <CircleWrapper style={{ top: '-70px', left: '900px' }}>
+      <RightSvgs style={{ top: '-70px', left: '720px' }}>
         <img src={SolidCircle} alt="Ornament 1" />
-      </CircleWrapper>
+      </RightSvgs>
       
-      <CircleWrapper style={{ top: '-20px', left: '870px' }}>
+      <RightSvgs style={{ top: '-20px', left: '690px' }}>
         <img src={CirclePointed} alt="Ornament 3" />
-      </CircleWrapper>
+      </RightSvgs>
 
-      <CircleWrapper style={{ top: '340px', left: '720px' }}>
+      <RightSvgs style={{ top: '340px', left: '630px' }}>
         <img src={Ornament} alt="Ornament" />
-      </CircleWrapper>
+      </RightSvgs>
   </>
 }
