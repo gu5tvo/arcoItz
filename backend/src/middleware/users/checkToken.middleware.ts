@@ -15,7 +15,7 @@ export default async function checkTokenMiddleware(req: Request, res: Response, 
     let id = ""
     jwt.verify(token, process.env.SECRET_KEY as string, (err, payload)=> {
         if(err) throw new AppError('Token inválido', 401);
-        id = payload?.id as string
+        id = (payload as { id: string })?.id
     });
 
     if(!id) throw new AppError('Token inválido', 401);

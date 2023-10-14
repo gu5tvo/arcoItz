@@ -12,7 +12,7 @@ export default async function checkAdminTokenMiddleware(req: Request, res: Respo
     const [ , token ] = authorization.split(' ');
 
     try {
-        const decoded = jwt.verify(token, process.env.SECRET_KEY);
+        const decoded = jwt.verify(token, process.env.SECRET_KEY) as { id: string };
         const admin = await Admin.findOne({ id: decoded.id });
         
         if(!admin) throw new AppError('Admin não encontrado', 404);
