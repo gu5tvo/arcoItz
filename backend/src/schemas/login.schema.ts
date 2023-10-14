@@ -5,8 +5,9 @@ export const loginSchema = yup.object().shape({
     password: yup.string().required()
 })
 
-export const forgotSchema = yup.object().shape({
-    email: yup.string().email().required()
+export const emailSchema = yup.object().shape({
+    email: yup.string().email().required(),
+    type: yup.string().oneOf(['forgot', 'confirm']).required()
 })
 
 export const resetSchema = yup.object().shape({

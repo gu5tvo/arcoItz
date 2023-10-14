@@ -2,7 +2,7 @@ import User from "../../model/user.model";
 import jwt from "jsonwebtoken";
 import nodeMailer from 'nodemailer';
 import 'dotenv/config'
-const { google } = require('googleapis');
+import { google } from 'googleapis';
 
 const oAuth2Client = new google.auth.OAuth2(
     process.env.CLIENT_ID,
@@ -38,19 +38,19 @@ export default async function sendResetService(email, ip){
         to: email,
         subject: "Recuperação de senha - DiversiTrampos",
         html: `<p>Olá, <b>${user.name}</b>!</p>
-        <p>Recebemos uma solicitação de recuperação de senha para sua conta no diversiTrampos.</p>
+        <p>Recebemos uma solicitação de recuperação de senha para sua conta no DiversiTrampo.</p>
         <p>Caso não tenha sido você, ignore este e-mail.</p>
         <p>Caso tenha sido você, clique no link abaixo para redefinir sua senha:</p>
         <a href="${process.env.WEBSITE_URL}/reset/${token}">Clique aqui para resetar sua senha</a>
         <p>A solicitação partiu deste endereço de IP: ${ip}</p>
         <p>Este link só estará disponível durante 5 horas.</p>
         `
-    }, (err, info) => {
+    }, (err) => {
         if(err){
             console.log(err);
             return;
         }
     })
 
-    return {message: "E-mail enviado com sucesso!"}
+    return "E-mail enviado com sucesso!"
 }
