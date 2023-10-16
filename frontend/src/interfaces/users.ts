@@ -11,6 +11,10 @@ export interface iRegister {
     confirmPassword: string
 }
 
+export interface iValidateEmail {
+    confirmCode: string
+}
+
 export interface iUserSimple{
     id?: string;
     avatar?: string;

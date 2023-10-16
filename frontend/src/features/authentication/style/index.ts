@@ -56,6 +56,9 @@ export const FormSubmit = styled.div`
     margin: min(5px, 2vh) 0;
 
 `
+
+
+
 // ---------- Typography ----------
 
 export const PageTitle = styled.h1`
@@ -117,3 +120,4 @@ export const BottomInfos = styled.span`
         color: #48A7FF;
     }
 `
+

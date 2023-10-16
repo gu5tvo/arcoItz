@@ -4,7 +4,7 @@ import { FormContainer, Form } from "../style";
 
 interface Props {
     children: React.ReactNode
-    handleForm: ()=>void
+    handleForm: () => void
 }
 
 export default function AuthenticationTemplate({ children, handleForm }: Props): JSX.Element{

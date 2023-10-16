@@ -1,5 +1,6 @@
 export { default as SignIn } from './authentication/components/SignIn'
 export { default as SignUp } from './authentication/components/SignUp'
+export { default as EmailValidation } from '../components/BackgroundComponent'
 
 export { ModalProvider } from './modal/contexts/modal.context'
 
@@ -8,6 +9,8 @@ export { default as DocumentModal } from './modal/components/DocumentModal'
 export { default as CreateModal } from './modal/components/CreateModal'
 export { default as DeleteModal } from './modal/components/DeleteModal'
 export { default as UserMetadata } from './modal/components/UserMetadata'
+export { default as EmailConfirmationModal } from './authentication/components/EmailConfirmationModal'
+
 
 
 

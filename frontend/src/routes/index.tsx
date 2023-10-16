@@ -3,10 +3,13 @@ import React from 'react'
 import { lazy, Suspense } from 'react';
 import LoadingPage from '../pages/LoadingPage';
 
+
 const Landing = lazy(() => import('../pages/landing'));
 const Login = lazy(() => import('../pages/SignInPage'));
 
 const SignUp = lazy(() => import('../pages/SignUpPage'));
+const EmailConfirmation = lazy(()=> import ('../pages/EmailConfirmation'))
+
 
 const Dashboard = lazy(() => import('../pages/Dashboard'));
 const SearchPage = lazy(() => import('../pages/search'));
@@ -35,10 +38,10 @@ export default function MakeRoutes(){
     return (
             <Suspense fallback={<LoadingPage/>}>
                 <Routes>
-
                 <Route path="/" element={<Landing/>} />
                 <Route path="/login" element={<Login/>} />
                 <Route path="/cadastro" element={<SignUp/>} />
+                <Route path="/confirmacao-email" element={<EmailConfirmation/>} />
                 <Route path="/buscar" element={<Search/>} />
                 <Route path="/perfil/:id" element={<Profile/>} />
                 <Route path="/dashboard/*" element={<ProtectedRoute path="/dashboard" element={Dashboard} isPrivate redirectTo="/login" />} />
