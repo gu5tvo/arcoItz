@@ -20,7 +20,6 @@ export const Form = styled.form`
     box-shadow: 0 0 60px rgba(0, 0, 0, 0.09);
     font-size: clamp(1em, 2vw, 1.2rem);
     gap: min(20px, 6vh);
-
 `
 
 export const FormField = styled.section`
@@ -56,8 +55,6 @@ export const FormSubmit = styled.div`
     margin: min(5px, 2vh) 0;
 
 `
-
-
 
 // ---------- Typography ----------
 
@@ -121,3 +118,16 @@ export const BottomInfos = styled.span`
     }
 `
 
+// ---------- Email Elements ----------
+
+
+export const TopInfos = styled(BottomInfos)`
+    text-align: justify;    
+    padding-inline: 4px;
+    font-size: 0.82rem;
+    
+`
+
+export const BottomInfosSmaller = styled(BottomInfos)`
+    font-size: 0.7rem;
+`
