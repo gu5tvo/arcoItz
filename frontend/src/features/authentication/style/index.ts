@@ -131,3 +131,8 @@ export const TopInfos = styled(BottomInfos)`
 export const BottomInfosSmaller = styled(BottomInfos)`
     font-size: 0.7rem;
 `
+export const Image = styled.img`
+    display: flex;
+    align-self: center;
+    justify-self: center;
+`

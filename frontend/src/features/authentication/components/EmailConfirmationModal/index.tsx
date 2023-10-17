@@ -1,33 +1,36 @@
 //frontend : DocumentModal.tsx
-import React from "react";
-import * as S from "../../style";
-import AuthenticationTemplate from "..";
-import ErrorMessage from "../ErrorMessage";
+import React, { useState } from "react";
+import EmailForm from "./EmailForm";
+import Instructions from "./Instructions";
 import { iValidateEmail } from "../../../../interfaces/users";
 import {
   FieldErrors,
   UseFormHandleSubmit,
   UseFormRegister,
-  UseFormTrigger,
+  // UseFormTrigger,
 } from "react-hook-form";
-import EmailForm from "./EmailForm";
 
 export interface EmailConfirmationModalProps {
-  sendRequest: (data: iValidateEmail) => void;
   handleSubmit: UseFormHandleSubmit<iValidateEmail, undefined>;
-  trigger: UseFormTrigger<iValidateEmail>;
+  // trigger: UseFormTrigger<iValidateEmail>;
   register: UseFormRegister<iValidateEmail>;
   errors: FieldErrors<iValidateEmail>;
 }
 
+export const modals = [ 'Instructions' ,'EmailForm']
+
 export default function EmailConfirmationModal(props: EmailConfirmationModalProps) {
-  const onSubmit = props.handleSubmit(async (formData: iValidateEmail) => {});
+
+  const [ currentModal , setCurrentModal ] = useState(modals[0])
 
   return (
-    <AuthenticationTemplate handleForm={onSubmit}>
-      <EmailForm props={props} onSubmit={onSubmit}/>
-    </AuthenticationTemplate>
+    <>
+      {
+        currentModal === modals[0] 
+        ? <Instructions setCurrentModal={setCurrentModal} />
+        : <EmailForm {...props} setCurrentModal={setCurrentModal}/>
+      }
+    </>
   );
 }
 
-//npm i --save react-code-input
