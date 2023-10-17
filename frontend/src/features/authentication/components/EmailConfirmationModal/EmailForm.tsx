@@ -1,47 +1,81 @@
-import React from "react";
-import * as S from "./../../style"
-import MailIcon from "./../../../../assets/mail.svg"
-import { EmailConfirmationModalProps } from ".";
+import React, { Dispatch } from "react";
+import * as S from "./../../style";
+import { EmailConfirmationModalProps, modals } from ".";
+import ReactCodeInput from "react-code-input";
+import { useForm, Controller } from "react-hook-form";
+import AuthenticationTemplate from "..";
 import { iValidateEmail } from "../../../../interfaces/users";
 
-interface EmailFormProps extends EmailConfirmationModalProps {
-    onSubmit: () => Promise<void>;
-} 
-
-
 const EmailForm = ({
-    sendRequest,
-    handleSubmit,
-    register,
-    trigger,
-    errors,
-    onSubmit
-  }: EmailFormProps) => {
+  setCurrentModal,
+}: {
+  setCurrentModal: Dispatch<string>;
+}) => {
+  const { control, handleSubmit, formState } = useForm();
+  const { errors } = formState;
 
-    return (
-    <>
+  const onSubmit = (formData) => {
+    console.log(formData.confirmCode);
+  };
+
+  return (
+    <AuthenticationTemplate handleForm={handleSubmit(onSubmit)}>
       <S.PageTitle>Verificação de Email</S.PageTitle>
       <S.FormField>
-        <img src={MailIcon} alt="Mail Icon" width="100px" height="100px" />
-        <S.TopInfos>
-          Enviamos um código de verificação para o endereço de email fornecido.
-          Por favor, verifique a sua caixa de entrada.
-        </S.TopInfos>
-        <input type="number" {...register} />
-        {/* <ErrorMessage message={errors?.name?.message} /> */}
+        <Controller
+          name="confirmCode"
+          control={control}
+          defaultValue=""
+          render={({ field }) => (
+            <ReactCodeInput
+              type="number"
+              fields={6}
+              name="confirmCode"
+              inputMode="numeric"
+              value={field.value}
+              onChange={field.onChange}
+            />
+          )}
+        />
+        {errors.confirmCode && (
+          <span className="error-message">Campo obrigatório</span>
+        )}
       </S.FormField>
       <S.FormField>
         <S.SubmitButton type="submit">Validar Email</S.SubmitButton>
-
-        <S.BottomInfosSmaller>
-          Se você não encontrar o email em sua caixa de entrada, verifique sua
-          pasta de spam ou lixo eletrônico. Se precisar de ajuda, entre em
-          contato com o nosso suporte.
-        </S.BottomInfosSmaller>
       </S.FormField>
-    </>
+
+      <S.FormField>
+        <ArrowLeftSvg setCurrentModal={setCurrentModal} />
+      </S.FormField>
+    </AuthenticationTemplate>
   );
 };
 
-
 export default EmailForm;
+
+function ArrowLeftSvg({
+  setCurrentModal,
+}: {
+  setCurrentModal: Dispatch<string>;
+}) {
+  return (
+    <svg
+      onClick={() => setCurrentModal(modals[0])}
+      xmlns="http://www.w3.org/2000/svg"
+      width="30"
+      height="30"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="lucide lucide-arrow-left-circle"
+    >
+      <circle cx="12" cy="12" r="10" />
+      <path d="M16 12H8" />
+      <path d="m12 8-4 4 4 4" />
+    </svg>
+  );
+}

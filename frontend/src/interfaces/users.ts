@@ -12,7 +12,7 @@ export interface iRegister {
 }
 
 export interface iValidateEmail {
-    confirmCode: string
+    confirmCode: string | number
 }
 
 export interface iUserSimple{
