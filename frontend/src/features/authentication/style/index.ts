@@ -22,10 +22,15 @@ export const Form = styled.form`
     gap: min(20px, 6vh);
 `
 
-export const FormField = styled.section`
+interface FormFieldProps {
+    position?: string
+}
+
+export const FormField = styled.section<FormFieldProps>`
     display: flex;
     flex-direction: column;
     gap: min(6px, 3vh);
+    align-items: ${({position = "auto"}) => position};
 `
 
 export const FormFooter = styled.nav`
@@ -124,15 +129,23 @@ export const BottomInfos = styled.span`
 export const TopInfos = styled(BottomInfos)`
     text-align: justify;    
     padding-inline: 4px;
-    font-size: 0.82rem;
-    
+    font-size: 0.9rem;    
 `
 
 export const BottomInfosSmaller = styled(BottomInfos)`
-    font-size: 0.7rem;
+    font-size: 0.8rem;
+    text-align: justify;    
+
 `
 export const Image = styled.img`
     display: flex;
     align-self: center;
     justify-self: center;
+`
+
+export const GapDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: min(36px, 8vh);
+    padding: 20px 0;
 `
