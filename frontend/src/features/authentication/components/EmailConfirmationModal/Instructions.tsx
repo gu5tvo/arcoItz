@@ -3,6 +3,7 @@ import * as S from "./../../style";
 import MailIcon from "./../../../../assets/mail.svg";
 import AuthenticationTemplate from "..";
 import { modals } from ".";
+import { ArrowRightSvg } from "./Svgs";
 
 const Instructions = ({
   setCurrentModal,
@@ -26,37 +27,11 @@ const Instructions = ({
           contato com o nosso suporte.
         </S.BottomInfosSmaller>
       </S.FormField>
-      <S.FormField>
+      <S.FormField position="end">
         <ArrowRightSvg setCurrentModal={setCurrentModal} />
       </S.FormField>
     </AuthenticationTemplate>
   );
 };
-
-function ArrowRightSvg({
-  setCurrentModal,
-}: {
-  setCurrentModal: Dispatch<string>;
-}) {
-  return (
-    <svg
-      onClick={() => setCurrentModal(modals[1])}
-      xmlns="http://www.w3.org/2000/svg"
-      width="30"
-      height="30"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="lucide lucide-arrow-right-circle"
-    >
-      <circle cx="12" cy="12" r="10" />
-      <path d="M8 12h8" />
-      <path d="m12 16 4-4-4-4" />
-    </svg>
-  );
-}
 
 export default Instructions;
