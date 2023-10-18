@@ -4,6 +4,7 @@ import sendResetService from '../services/login/sendReset.service';
 import recoverPasswordService from '../services/login/recoverPassword.service';
 import getUserService from '../services/login/getUser.service';
 import generateCode from '../services/login/generateCode.service';
+import confirmEmail from '../services/login/confirmEmail.service';
 
 export default async function loginController(req: Request, res: Response) {
     const { id } = req.user;
@@ -48,10 +49,10 @@ export async function confirmEmailController(req: Request, res: Response) {
 
     switch (type) {
         case 'forgot':
-            response.message = await sendResetService(email, ip)
+            response.message = await confirmEmail(email, ip, code)
             break
         case 'confirm':
-            response.message = await sendResetService(email, ip)
+            response.message = await confirmEmail(email, ip, code)
             break
         default:
             response.message = 'Tipo de requisição inválido'

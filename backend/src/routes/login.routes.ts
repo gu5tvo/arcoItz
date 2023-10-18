@@ -6,6 +6,7 @@ import loginController, {confirmEmailController, recoverPasswordController, send
 import verifyMailMiddleware from '../middleware/login/verifyMail.middleware';
 import verifyResetMiddleware from '../middleware/login/verifyReset.middleware';
 import checkTokenMiddleware from '../middleware/login/checkToken.middleware'
+import checkRegisterMiddleware from '../middleware/users/checkRegister.middleware';
 const loginRouter = Router();
 
 //Login de usuários
@@ -17,5 +18,5 @@ loginRouter.post('/reset/:token', verifyShape(resetSchema), verifyResetMiddlewar
 // Validar token utilizado na recuperação de senha
 loginRouter.get('/:token', checkTokenMiddleware, validateTokenController)
 
-loginRouter.post('/confirmEmail', verifyShape(emailSchema), verifyMailMiddleware, confirmEmailController)
+loginRouter.post('/confirmEmail', verifyShape(emailSchema), checkRegisterMiddleware, confirmEmailController)
 export default loginRouter;
