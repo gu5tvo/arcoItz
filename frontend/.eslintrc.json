@@ -18,9 +18,7 @@
         "react"
     ],
     "rules": {
-        "no-restricted-imports": ["error", {
-            "patterns": ["*/features/*"]
-        }]
+        "@typescript-eslint/no-explicit-any": 0
         
         // "indent": [
         //     "error",

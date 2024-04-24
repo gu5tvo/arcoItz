@@ -1,11 +1,11 @@
 import { EditProfileContainer } from './style';
 import React, { useEffect, useState } from 'react'
 import { useAdmin, useModal } from "../../../hooks/contexts";
-import { Image , Button } from "../../../components/dashboard/styles";
 import defaultImage from '../../../assets/profile-picture.svg'
 import DinamicHeader from '../../../layouts/Header';
 import { Navigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { Button } from '../../../components/Button';
 
 interface EditProfileInputs{
     name: string

@@ -11,11 +11,8 @@ import { Form } from '../style';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-type InputChange = React.ChangeEvent<HTMLInputElement>;
-
 function LoginFooter() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [email, setEmail] = useState('');
   const { forgotPassword } = useUser();
   const [emailSent, setEmailSent] = useState(false);
 
@@ -28,26 +25,23 @@ function LoginFooter() {
     resolver: yupResolver(forgotSchema),
   });
 
-  const sendEmail = async (data: { email: string }) => {
+  const sendEmail = async ({ email }: { email: string }) => {
     trigger();
     setEmailSent(true);
 
-    console.log(data.email);
-
     // Make sure to use data.email instead of email
-    forgotPassword(data.email);
+    forgotPassword(email);
   };
 
   const toggleModal = () => {
     setModalIsOpen(!modalIsOpen);
     setEmailSent(false);
-    setEmail('');
   };
 
   return (
     <FormFooter>
       <span>
-        Não possui uma conta? <Link to="/register" className="link">
+        Não possui uma conta? <Link to="/cadastro" className="link">
           Cadastre-se
         </Link>
         .
@@ -72,7 +66,7 @@ function LoginFooter() {
 
             <Form onSubmit={handleSubmit(sendEmail)}>
               <Input
-                register={register}
+                register={register as any}
                 placeholder="Insira seu e-mail"
                 name="email"
                 onChange={() => {}}

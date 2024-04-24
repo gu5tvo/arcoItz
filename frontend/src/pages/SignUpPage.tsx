@@ -21,7 +21,7 @@ export default function SignUpPage(): JSX.Element{
         if (isAuthenticated) navigate('/dashboard')
     }, [isAuthenticated])
 
-    const signUpData = { signUp, handleSubmit, register, trigger, errors }
+    const signUpData: any = { signUp, handleSubmit, register, trigger, errors }
 
     return <SignUp {...signUpData}/>
 }

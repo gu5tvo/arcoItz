@@ -1,15 +1,15 @@
 import { GerenciarButtons } from "../../components/GerenciarButtons";
 import { useAdmin } from "../../hooks/contexts";
-import { Header } from "../../layouts/Header";
-import { PainelButtons } from "../../utils/HeaderButtons";
+import Header from "../../layouts/Header/index";
 import { Container, PainelSection } from "./style";
+import React from 'react'
 
 export function Painel () {
   const { admin } = useAdmin();
 
   return (
     <Container>
-      <Header header={PainelButtons}/>
+      <Header adminLogoutBtn startBtn />
       <PainelSection>
         <div className='TextPainel'>
             <h4>Olá, {admin.name}</h4>

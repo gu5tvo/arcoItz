@@ -141,4 +141,8 @@ export const Image = styled.img`
         max-width: 150px;
         max-height: 150px;
     }
+
+    p {
+        font-size: 12px;
+    }
 `

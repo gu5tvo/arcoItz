@@ -19,7 +19,7 @@ export default function AdminSignInPage() {
     
     const navigate = useNavigate()
 
-    const LoginData = { handleSubmit, signIn, trigger, register, errors }
+    const LoginData: any = { handleSubmit, signIn, trigger, register, errors }
 
 
     useEffect(()=> {

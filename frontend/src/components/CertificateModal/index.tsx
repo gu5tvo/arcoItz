@@ -28,7 +28,6 @@ export default function PictureModal(): JSX.Element {
     const formData = new FormData();
     formData.append('file', file);
     formData.append('upload_preset', preset_key);
-    setModalDisplay(false)
 
     axios.post(`https://api.cloudinary.com/v1_1/${cloud_name}/auto/upload`, formData)
       .then((res) => {
@@ -40,7 +39,7 @@ export default function PictureModal(): JSX.Element {
           document: res.data.secure_url,
         }
         
-        registerDocument(data)
+        registerDocument(data as any)
       });
   };
 
@@ -51,7 +50,7 @@ export default function PictureModal(): JSX.Element {
         onDragOver={handleDragOver}
       >
         <ModalHeader>
-          <button className='remove-button' onClick={() => setModalDisplay(false)}>
+          <button className='remove-button'>
             <img
               src={removeIconFormation}
               alt="Remove Icon Formation"

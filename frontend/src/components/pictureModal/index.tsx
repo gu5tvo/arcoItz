@@ -57,7 +57,7 @@ export default function PictureModal(): JSX.Element {
                 setfileLocal(event.target.files[0])
                 setConfirmScreen(true);
                 }} title=' ' id="file" />
-              <text>Ou arraste um arquivo pra esta área</text>
+              <p>Ou arraste um arquivo pra esta área</p>
             </>
           }
           { 

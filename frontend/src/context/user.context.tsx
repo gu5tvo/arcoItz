@@ -166,7 +166,6 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
 
     try {
       const retrievedToken = retrieveToken()
-      console.log(retrievedToken)
       
       const response = await api.get('/users', {
         headers: {

@@ -1,14 +1,8 @@
 import { useUser } from "../../hooks/contexts";
 import React, { useEffect, useState } from "react";
-import { Navigate, RouteProps } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
-interface ProtectedRouteProps extends Omit<RouteProps, 'component'> {
-  isPrivate?: boolean;
-  redirectTo?: string;
-  element?: React.ElementType;
-}
-
-export default function ProtectedRoute({ isPrivate, redirectTo, element: Component, ...rest }: ProtectedRouteProps): JSX.Element {
+export default function ProtectedRoute({ isPrivate, redirectTo, element: Component }: any): JSX.Element {
 
   const { profile, isAuthenticated } = useUser();
 

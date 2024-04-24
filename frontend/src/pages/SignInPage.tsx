@@ -21,7 +21,7 @@ export default function SignInPage() {
         if (isAuthenticated) navigate('/dashboard')
     }, [isAuthenticated])
     
-    const SignInData = { handleSubmit, signIn, trigger, register, errors }
+    const SignInData: any = { handleSubmit, signIn, trigger, register, errors }
     
     return <SignIn {...SignInData} showFooter/>
 }

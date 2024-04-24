@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import MetadataCard from '../../../components/MetadataCard';
 import { UserMetadataContainer } from '../style';
-import Modal from '../../../components/Modal';
 import { CreateModal , DeleteModal} from '../..';
 import { iSectors } from '../../../interfaces/admin';
 import AddIcon from '.././../../assets/add.svg'
@@ -59,8 +58,9 @@ export default function UserMetadata({ listMetadata, Metadata, registerMetadata,
             <ModalTemplate id={modalChoice.choice + ''} >
             {(modalChoice.choice && modalChoice.choice === 'delete')
                     ? <DeleteModal
+                        closedModalContent={<></>}
                         elementId={metadataId}
-                        remove={deleteMetadata}
+                        deleteFunc={deleteMetadata}
                         pageName={pageName} />
                     : <CreateModal
                         addFunction={registerMetadata}

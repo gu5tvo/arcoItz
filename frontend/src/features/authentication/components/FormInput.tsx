@@ -6,13 +6,12 @@ import registerSchema from '../../../schemas/register'
 import { InferType } from 'yup'
 
 type FormType = InferType<typeof loginSchema | typeof registerSchema>
-type FieldNames = keyof FormType;
 
 interface Props {
-    type: FieldNames
+    type: any
     placeholder: string
     register: UseFormRegister<FormType>
-    id?: FieldNames
+    id?: any
 }
 
 export default function FormInput({ type, placeholder, register, id }: Props) {

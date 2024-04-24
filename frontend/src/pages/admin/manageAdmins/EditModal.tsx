@@ -1,7 +1,6 @@
 import { EditModalContainer } from "./style"
 import React, { useEffect, useState } from 'react'
-import { useAdmin, useModal } from "../../../hooks/contexts";
-import {  Button } from "../../../components/dashboard/styles";
+import { useAdmin } from "../../../hooks/contexts";
 import defaultImage from '../../../assets/profile-picture.svg'
 import { PictureModal } from "../../../features";
 import { useForm } from "react-hook-form";
@@ -22,7 +21,6 @@ interface EditModalInputs{
 export default function EditModal({ id, avatar, name }: EditModalProps) {
     const { register , handleSubmit} = useForm();
     const { adminUpdate , admin, listCities, cities } = useAdmin();
-    const { setPicture } = useModal() ;
 
     const [updated, setUpdated] = useState(false);
     const [city, setCity] = useState("");
@@ -37,11 +35,6 @@ export default function EditModal({ id, avatar, name }: EditModalProps) {
             adminUpdate(id, { name: admName, email, password, city, phone });
             setUpdated(true);
         }
-    }
-
-    const onChangePicture = ()=> {
-        // setRequest({ source: 'admin' });
-        setPicture(true);
     }
 
     if (updated) {

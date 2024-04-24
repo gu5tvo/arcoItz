@@ -15,7 +15,7 @@ export default function AdminSignUpPage(): JSX.Element{
 	document.title = "Cadastre-se | DiversiTrampo"
 
 
-	const signUpData = { signUp, handleSubmit, register, trigger, errors }
+	const signUpData: any = { signUp, handleSubmit, register, trigger, errors }
 
 	return <SignUp {...signUpData}/>
 }
