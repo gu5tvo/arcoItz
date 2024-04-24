@@ -28,8 +28,8 @@ export default function Footer(){
                 </Column>
                 <Column>
                     <ColumnTitle>CONTATO</ColumnTitle>                
-                    <Page to="">email@gmail.com</Page>
-                    <Page to="">(XX) X XXXX-XXXX</Page>
+                    <a href="mailto:coletivoareat@gmail.com">coletivoareat@gmail.com</a>
+                    <span>(98) 99194-4242</span>
                 </Column>
             </TextCollection>
         </TopSection>

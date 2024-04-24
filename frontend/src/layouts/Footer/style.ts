@@ -63,6 +63,21 @@ export const Column = styled.div`
     display: flex;
     flex-direction: column;
     gap: 12px;
+
+    a {
+        text-decoration: none;
+        color: white;
+        font-size: clamp(0.8rem, 1vw, 1.05rem);
+        display: flex;
+    
+        &:hover {
+            transform: scale(1.05);
+        }
+    
+        &:active {
+            transform: scale(1.05);
+        }   
+    }
 `
 
 export const ColumnTitle = styled.p`

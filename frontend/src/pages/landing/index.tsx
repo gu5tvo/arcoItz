@@ -6,7 +6,7 @@ import Footer from "../../layouts/Footer";
 import SectionTalkToUs from "./components/TalkToUs";
 import HowToUse from "./components/HowToUse";
 import { MainWrapper } from "./styles";
-import KnowHowToFind from "./components/KnowHowToFind";
+// import KnowHowToFind from "./components/KnowHowToFind";
 
 export default function LandingPage(): JSX.Element{
     document.title = "Página inicial | DiversiTrampos";
@@ -17,7 +17,7 @@ export default function LandingPage(): JSX.Element{
             <SectionConnectingTalents />
             <SectionMeetDiversiTrampo />
             <HowToUse/>
-            <KnowHowToFind/>
+            {/* <KnowHowToFind/> */}
             <SectionTalkToUs />
             <Footer />
         </MainWrapper>
